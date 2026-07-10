@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 55">
+  <defs>
+    <linearGradient id="grad-icon-1" x1="4.93" y1="-2.4" x2="27.76" y2="44.39" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0064db"/>
+      <stop offset=".7" stop-color="#002a89"/>
+    </linearGradient>
+    <linearGradient id="grad-icon-2" x1="54.07" y1="-2.31" x2="30.43" y2="44.08" gradientUnits="userSpaceOnUse">
+      <stop offset=".08" stop-color="#0064db"/>
+      <stop offset=".5" stop-color="#00163a"/>
+      <stop offset="1" stop-color="#0053cc"/>
+    </linearGradient>
+    <linearGradient id="grad-a-cross" x1="206.73" y1="28.6" x2="206.73" y2="41.47" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0064db"/>
+      <stop offset=".5" stop-color="#0053cc"/>
+      <stop offset="1" stop-color="#002a89"/>
+    </linearGradient>
+    <linearGradient id="grad-o" x1="68.02" y1="8.89" x2="104.97" y2="45.84" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0064db"/>
+      <stop offset=".7" stop-color="#002a89"/>
+    </linearGradient>
+  </defs>
+
+  <!-- V 아이콘 -->
+  <path fill="#00163a" d="M35.07,46.45l-1.65,3.27c-.39.78-.98,1.41-1.7,1.85-.72.43-1.55.68-2.42.68-1.74,0-3.34-.98-4.13-2.53l-1.65-3.26,5.78-11.41,5.77,11.4Z"/>
+  <polygon fill="url(#grad-icon-1)" points="29.3 35.05 23.52 46.46 0 0 11.55 0 29.3 35.05"/>
+  <polygon fill="url(#grad-icon-2)" points="58.6 0 35.07 46.45 29.3 35.05 47.04 0 58.6 0"/>
+
+  <!-- O -->
+  <path fill="url(#grad-o)" d="M87.73,9.17c-9.36,0-16.95,7.59-16.95,16.96s7.59,16.95,16.95,16.95,16.96-7.59,16.96-16.95c0-1.52-.2-2.99-.57-4.39l8.84-2.38c.58,2.16.89,4.43.89,6.77,0,14.43-11.69,26.12-26.12,26.12s-26.12-11.69-26.12-26.12S73.3,0,87.73,0v9.17Z"/>
+
+  <!-- D -->
+  <path fill="#00163a" d="M149.21,0h-21.06c-2.21,0-4,1.79-4,4v5.67h25.14c8.79,0,16.36,6.75,16.77,15.53.44,9.38-7.03,17.14-16.31,17.14h-15.94v-25.77h-9.66v35.43h25.6c14.6,0,26.39-12.04,25.99-26.73S163.38,0,149.21,0Z"/>
+
+  <!-- O 내부 점 패턴 -->
+  <rect fill="#0064db" x="92.95" y="0" width="4.22" height="4.22"/>
+  <rect fill="#0064db" x="98.91" y="4.55" width="4.22" height="4.22"/>
+  <rect fill="#0064db" x="92.95" y="9.1" width="4.22" height="4.22"/>
+  <rect fill="#0064db" x="104.87" y="9.1" width="4.22" height="4.22"/>
+  <rect fill="#0064db" x="98.91" y="13.64" width="4.22" height="4.22"/>
+  <rect fill="#0064db" x="104.87" y="0" width="4.22" height="4.22"/>
+
+  <!-- A -->
+  <path fill="#00163a" d="M202.61,2.54l-25.17,49.71h11.55s17.74-35.04,17.74-35.04l17.74,35.04h11.55S210.86,2.54,210.86,2.54c-.79-1.56-2.38-2.54-4.13-2.54h0c-1.74,0-3.34.98-4.13,2.54Z"/>
+  <polygon fill="url(#grad-a-cross)" points="213.25 41.47 206.73 28.6 206.73 28.6 200.22 41.47 213.25 41.47"/>
+</svg>
