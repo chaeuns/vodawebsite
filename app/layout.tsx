@@ -28,11 +28,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="ko"
-      className={`${sora.variable} ${suit.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col font-suit">
+    <html lang="ko" className={`${sora.variable} ${suit.variable} antialiased`}>
+  <body className="flex flex-col font-suit">
         <Nav />
         <main className="flex-1">{children}</main>
         <Footer />
