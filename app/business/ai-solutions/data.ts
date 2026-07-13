@@ -2,8 +2,6 @@ export type Solution = {
   category: string;
   title: string;
   body: string;
-  linkLabel: string;
-  highlight?: boolean;
 };
 
 export const solutions: Solution[] = [
@@ -11,39 +9,31 @@ export const solutions: Solution[] = [
     category: "Enterprise AI",
     title: "기업 맞춤형 AI 챗봇",
     body: "업무 자동화, 고객 응대, 사내 지식 검색 등 기업 특화 AI 챗봇 서비스를 맞춤 개발합니다.",
-    linkLabel: "도입 문의 →",
   },
   {
     category: "Groupware",
     title: "AI 기반 그룹웨어",
     body: "AI가 내장된 차세대 협업 플랫폼. 일정 관리, 문서 자동화, 회의 요약 등 스마트 업무 환경을 구축합니다.",
-    linkLabel: "도입 문의 →",
   },
   {
     category: "sLLM",
     title: "보안 특화 sLLM 개발",
     body: "사내 보안을 위한 소형 언어 모델(sLLM) 개발. 데이터가 외부로 나가지 않는 온프레미스 AI 솔루션을 제공합니다.",
-    linkLabel: "도입 문의 →",
   },
   {
     category: "Physical AI",
     title: "Physical AI sLLM",
     body: "센서, 로봇, 엣지 디바이스와 결합하는 Physical AI용 sLLM 모델을 개발합니다. 스마트 팩토리·물류 자동화에 최적화되어 있습니다.",
-    linkLabel: "도입 문의 →",
   },
   {
     category: "EdTech",
     title: "AI 역량평가 시스템",
     body: "필기·음성 인식 기반 부정행위 방지, 학습자 역량 진단, 맞춤형 피드백을 제공하는 AI 평가 플랫폼입니다.",
-    linkLabel: "솔루션 보기 →",
-    highlight: true,
   },
   {
     category: "Platform",
     title: "교육 플랫폼 개발",
     body: "LMS, 메타버스 교육장, 출결 관리 시스템 등 교육 기관 맞춤형 통합 플랫폼을 구축합니다.",
-    linkLabel: "솔루션 보기 →",
-    highlight: true,
   },
 ];
 
