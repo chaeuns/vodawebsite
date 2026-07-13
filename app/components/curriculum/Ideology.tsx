@@ -4,7 +4,6 @@ import Image from "next/image";
 import { ideologies } from "./data";
 import { useScrollReveal } from "@/app/components/shared/useScrollReveal";
 import FillHeading from "@/app/components/shared/FillHeading";
-import FillText from "@/app/components/shared/FillText";
 
 const positions = [
   { left: "50%", top: "14%" }, // top vertex
@@ -31,7 +30,7 @@ export default function Ideology() {
         >
           EDUCATIONAL IDEOLOGY
         </p>
-        <FillHeading className="text-[32px] font-bold mt-2 leading-[1.3]">
+        <FillHeading loop className="text-[32px] font-bold mt-2 leading-[1.3]">
           교육 이념
         </FillHeading>
         <p className="text-[15px] text-[#6B7280] mt-2">
@@ -62,7 +61,7 @@ export default function Ideology() {
               }}
             />
             <Image
-              src="/images/voda-campus-logo.png"
+              src="/voda-logo-white.svg"
               alt="VODA Campus"
               width={1973}
               height={338}
@@ -92,13 +91,13 @@ export default function Ideology() {
               <p className="text-[15px] sm:text-[17px] lg:text-[22px] font-bold text-[#111827] leading-[1.3]">
                 {item.ko}
               </p>
-              <p className="text-[12px] sm:text-[13px] lg:text-[15px] text-[#6B7280] mt-2 lg:mt-3 leading-[1.6]">
+              <p className="text-[12px] sm:text-[13px] lg:text-[15px] text-[#6B7280] mt-2 lg:mt-3 leading-[1.6] whitespace-pre-line">
                 {(() => {
                   const [before, after] = item.body.split(item.highlight);
                   return (
                     <>
                       {before}
-                      <FillText>{item.highlight}</FillText>
+                      <span className="text-[#1D4ED8]">{item.highlight}</span>
                       {after}
                     </>
                   );
