@@ -21,9 +21,9 @@ const NAV_ITEMS: NavItem[] = [
     columns: 3,
     dropdown: [
       { label: "정부 교육 사업", href: "/business/curriculum" },
-      { label: "기업 교육", href: "/services/corporate" },
+      { label: "기업 교육", href: "/business/corporate-education" },
       { label: "AI 자격인증", href: "/services/certification" },
-      { label: "AI 솔루션", href: "/services/ai-solution" },
+      { label: "AI 솔루션", href: "/business/ai-solutions" },
       { label: "클라우드", href: "/services/cloud" },
       { label: "컨설팅", href: "/services/consulting" },
     ],
