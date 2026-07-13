@@ -1,16 +1,6 @@
 import Link from "next/link";
 
-export type Track = "정부 교육" | "기업 교육";
-
-export default function SubNav({
-  track,
-  onChange,
-}: {
-  track: Track;
-  onChange: (track: Track) => void;
-}) {
-  const tracks: Track[] = ["정부 교육", "기업 교육"];
-
+export default function SubNav() {
   return (
     <div className="bg-white border-b border-[#E5E7EB]">
       <div className="max-w-[1100px] mx-auto px-6 h-14 flex items-center justify-between">
@@ -23,19 +13,15 @@ export default function SubNav({
         </p>
 
         <div className="flex items-center gap-6">
-          {tracks.map((t) => (
-            <button
-              key={t}
-              onClick={() => onChange(t)}
-              className={`text-[14px] font-medium pb-1 border-b-2 transition-colors ${
-                track === t
-                  ? "text-[#2563EB] border-[#2563EB]"
-                  : "text-[#6B7280] border-transparent hover:text-[#111827]"
-              }`}
-            >
-              {t}
-            </button>
-          ))}
+          <span className="text-[14px] font-medium pb-1 border-b-2 text-[#2563EB] border-[#2563EB]">
+            정부 교육
+          </span>
+          <Link
+            href="/business/corporate-education"
+            className="text-[14px] font-medium pb-1 border-b-2 border-transparent text-[#6B7280] hover:text-[#111827] transition-colors"
+          >
+            기업 교육
+          </Link>
         </div>
       </div>
     </div>

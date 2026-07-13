@@ -7,11 +7,15 @@ export default function FillHeading({
   className = "",
   fillGradient = "linear-gradient(to right, #1D4ED8 0%, #0EA5E9 50%, #22D3EE 100%)",
   duration = "2.2s",
+  loop = false,
+  loopInterval = 4,
 }: {
   children: ReactNode;
   className?: string;
   fillGradient?: string;
   duration?: string;
+  loop?: boolean;
+  loopInterval?: number;
 }) {
   const ref = useRef<HTMLHeadingElement>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -24,7 +28,9 @@ export default function FillHeading({
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          observer.unobserve(el);
+          if (!loop) observer.unobserve(el);
+        } else if (loop) {
+          setIsVisible(false);
         }
       },
       { threshold: 0.4 }
@@ -32,7 +38,7 @@ export default function FillHeading({
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [loop]);
 
   return (
     <h2 ref={ref} className={`relative inline-block ${className}`}>
@@ -42,19 +48,43 @@ export default function FillHeading({
       <span
         aria-hidden="true"
         className="absolute inset-0"
-        style={{
-          backgroundImage: fillGradient,
-          WebkitBackgroundClip: "text",
-          backgroundClip: "text",
-          color: "transparent",
-          WebkitTextFillColor: "transparent",
-          clipPath: isVisible ? "inset(0 0 0 0)" : "inset(0 100% 0 0)",
-          transition: `clip-path ${duration} ease-out`,
-        }}
+        style={
+          loop
+            ? {
+                backgroundImage: fillGradient,
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                color: "transparent",
+                WebkitTextFillColor: "transparent",
+                clipPath: isVisible ? undefined : "inset(0 100% 0 0)",
+                animation: isVisible
+                  ? `fill-heading-loop ${loopInterval}s ease-in-out infinite`
+                  : "none",
+              }
+            : {
+                backgroundImage: fillGradient,
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                color: "transparent",
+                WebkitTextFillColor: "transparent",
+                clipPath: isVisible ? "inset(0 0 0 0)" : "inset(0 100% 0 0)",
+                transition: `clip-path ${duration} ease-out`,
+              }
+        }
       >
         {children}
       </span>
       <span className="sr-only">{children}</span>
+      {loop && (
+        <style>{`
+          @keyframes fill-heading-loop {
+            0% { clip-path: inset(0 100% 0 0); }
+            35% { clip-path: inset(0 0 0 0); }
+            65% { clip-path: inset(0 0 0 0); }
+            100% { clip-path: inset(0 100% 0 0); }
+          }
+        `}</style>
+      )}
     </h2>
   );
 }
