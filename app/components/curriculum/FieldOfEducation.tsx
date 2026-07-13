@@ -10,21 +10,21 @@ export default function FieldOfEducation() {
   return (
     <section
       ref={ref}
-      className="py-[80px] relative z-30 -mt-10 shadow-[0_-24px_48px_-12px_rgba(0,0,0,0.1)] transition-all duration-[900ms] ease-out"
+      className="py-[80px] min-h-[860px] flex flex-col justify-center relative z-30 -mt-10 shadow-[0_-24px_48px_-12px_rgba(37,99,235,0.25)] transition-all duration-[900ms] ease-out"
       style={{
         background: "linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 50%, #BFDBFE 100%)",
         transform: isVisible ? "translateY(0)" : "translateY(80px)",
         opacity: isVisible ? 1 : 0,
       }}
     >
-      <div className="max-w-[1100px] mx-auto px-6">
+      <div className="w-full max-w-[1100px] mx-auto px-6">
         <p
           style={{ letterSpacing: "1.5px" }}
           className="text-[12px] font-semibold text-[#2563EB] uppercase"
         >
           FIELD OF EDUCATION
         </p>
-        <FillHeading className="text-[32px] font-bold mt-2 leading-[1.3]">
+        <FillHeading loop className="text-[32px] font-bold mt-2 leading-[1.3]">
           핵심 기술 분야
         </FillHeading>
         <p className="text-[15px] text-[#6B7280] mt-2">
@@ -43,7 +43,7 @@ export default function FieldOfEducation() {
             {fields.map((field, i) => (
               <div
                 key={field.number}
-                className="ease-out"
+                className="ease-out h-full"
                 style={{
                   transitionProperty: "transform, opacity",
                   transitionDuration: "600ms",
@@ -52,7 +52,7 @@ export default function FieldOfEducation() {
                   opacity: isVisible ? 1 : 0,
                 }}
               >
-                <div className="bg-white border border-[#E5E7EB] rounded-xl p-8 text-center transition-all duration-300 hover:shadow-lg hover:border-[#2563EB]/30">
+                <div className="h-full flex flex-col items-center justify-center bg-white border border-[#E5E7EB] rounded-xl p-8 text-center transition-all duration-300 hover:shadow-lg hover:border-[#2563EB]/30">
                   <p className="text-[14px] font-bold text-[#2563EB]">{field.number}</p>
                   <p className="text-[18px] font-bold text-[#111827] mt-2">{field.title}</p>
                   <p className="text-[14px] text-[#6B7280] mt-2.5 leading-[1.7]">{field.body}</p>
