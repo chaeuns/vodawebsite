@@ -31,7 +31,7 @@ export default function RootLayout({
     <html lang="ko" className={`${sora.variable} ${suit.variable} antialiased`}>
   <body className="flex flex-col font-suit">
         <Nav />
-        <main className="flex-1">{children}</main>
+        <main>{children}</main>
         <Footer />
       </body>
     </html>
