@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { useScrollReveal } from "@/app/components/shared/useScrollReveal";
 import FillHeading from "@/app/components/shared/FillHeading";
 
@@ -8,6 +9,7 @@ const tabs = [
   {
     label: "Learning AI",
     title: "AI 맞춤형 학습",
+    image: "/images/curriculum/learning-ai.png",
     description: [
       "개인별 학습 수준을 정확히 분석하고",
       "맞춤형 학습 경로를 제공합니다.",
@@ -18,6 +20,7 @@ const tabs = [
   {
     label: "Practical Project",
     title: "실전 프로젝트 기반 교육",
+    image: "/images/curriculum/practical-project.png",
     description: [
       "현업에서 요구하는 실무 역량을 갖추기 위해",
       "실제 프로젝트를 수행하며",
@@ -28,6 +31,7 @@ const tabs = [
   {
     label: "Metaverse",
     title: "몰입형 메타버스 교육",
+    image: "/images/curriculum/metaverse.png",
     description: [
       "가상현실과 증강현실을 활용한 혁신적인 학습 환경에서",
       "실제와 동일한 몰입감을 경험하며",
@@ -190,8 +194,14 @@ export default function LearningMethod() {
           </FillHeading>
 
           <div style={contentStyle} className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10 items-center">
-            <div className="w-full aspect-[4/3] rounded-xl border border-dashed border-[#D1D5DB] bg-[#F3F4F6] flex items-center justify-center">
-              <span className="text-[13px] text-[#9CA3AF]">교육 현장 이미지 자리</span>
+            <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-[#F3F4F6]">
+              <Image
+                src={stage.image}
+                alt={stage.title}
+                fill
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="object-cover"
+              />
             </div>
 
             <div>
