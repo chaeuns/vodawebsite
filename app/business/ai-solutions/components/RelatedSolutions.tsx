@@ -30,22 +30,22 @@ export default function RelatedSolutions() {
           관련 솔루션 바로가기
         </FillHeading>
 
-        <div className="flex flex-col gap-4 mt-10">
+        <div className="flex flex-col gap-[9px] mt-[23px]">
           {relatedSolutions.map((item, i) => {
             const Icon = ICONS[i];
             return (
               <div
                 key={item.title}
-                className="border border-[#E5E7EB] rounded-2xl bg-white px-6 py-10 text-center"
+                className="border border-[#E5E7EB] rounded-2xl bg-white px-[14px] py-[23px] text-center"
               >
-                <div className="w-14 h-14 mx-auto rounded-full bg-[#EFF6FF] flex items-center justify-center">
-                  <Icon size={24} className="text-[#2563EB]" />
+                <div className="w-8 h-8 mx-auto rounded-full bg-[#EFF6FF] flex items-center justify-center">
+                  <Icon size={14} className="text-[#2563EB]" />
                 </div>
-                <span className="inline-block text-[12px] font-semibold text-[#2563EB] bg-[#EFF6FF] px-3 py-1 rounded-full mt-4">
+                <span className="inline-block text-[10px] font-semibold text-[#2563EB] bg-[#EFF6FF] px-[7px] py-[2px] rounded-full mt-[9px]">
                   {item.badge}
                 </span>
-                <p className="text-[20px] font-bold text-[#111827] mt-3">{item.title}</p>
-                <p className="text-[14px] text-[#6B7280] mt-2 leading-[1.7] max-w-[560px] mx-auto break-keep">
+                <p className="text-[15px] font-bold text-[#111827] mt-[7px]">{item.title}</p>
+                <p className="text-[12px] text-[#6B7280] mt-[5px] leading-[1.6] max-w-[420px] mx-auto break-keep">
                   {item.body}
                 </p>
               </div>
