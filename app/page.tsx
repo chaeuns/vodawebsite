@@ -313,7 +313,6 @@ export default function App() {
   return (
       <div
       className="min-h-screen bg-white text-[#0e1b52]"
-       style={{ fontFamily: "'Noto Sans KR', sans-serif" }}
       >   
       <style>{`
         /* VODA fill: #EDEDED → #3566E8, left → right */
@@ -459,7 +458,6 @@ export default function App() {
       <span
         className={`mw ${missionIn ? "mw-in" : "mw-out"} font-black leading-none ${MISSION_GRADIENTS[missionIdx]} bg-clip-text text-transparent`}
         style={{
-          fontFamily: "'Epilogue',sans-serif",
           fontSize: "5.83rem",
         }}
       >
@@ -503,7 +501,6 @@ export default function App() {
         <h2
           className="font-black text-[#0e1b52]"
           style={{
-            fontFamily: "'Epilogue',sans-serif",
             fontSize: "clamp(1.7rem,3.2vw,2.8rem)",
             letterSpacing: "-0.03em",
           }}
@@ -613,7 +610,6 @@ export default function App() {
                     <span
                       className="text-[11px] font-black tracking-[0.15em]"
                       style={{
-                        fontFamily: "'Epilogue',sans-serif",
                         color: active ? "rgba(255,255,255,0.5)" : "rgba(53,102,232,0.4)",
                       }}
                     >
@@ -656,7 +652,6 @@ export default function App() {
                   <h4
                     className="font-black leading-tight mb-3"
                     style={{
-                      fontFamily: "'Epilogue',sans-serif",
                       fontSize: "1.15rem",
                       letterSpacing: "-0.02em",
                       color: active ? "#ffffff" : "#0e1b52",
@@ -798,16 +793,12 @@ export default function App() {
                 <div>
                   <p
                     className="text-[11px] font-bold tracking-[0.2em] text-[#3566e8] uppercase mb-2"
-                    style={{
-                      fontFamily: "'Epilogue',sans-serif",
-                    }}
                   >
                     {tab.kicker}
                   </p>
                   <h3
                     className="font-black text-[#0e1b52] leading-snug mb-6"
                     style={{
-                      fontFamily: "'Epilogue',sans-serif",
                       fontSize: "clamp(1.4rem,2.4vw,1.9rem)",
                       letterSpacing: "-0.02em",
                     }}
@@ -854,7 +845,6 @@ export default function App() {
               <h2
                 className="font-black text-[#0e1b52]"
                 style={{
-                  fontFamily: "'Epilogue',sans-serif",
                   fontSize: "clamp(1.7rem,3.2vw,2.8rem)",
                   letterSpacing: "-0.03em",
                 }}
@@ -905,7 +895,6 @@ export default function App() {
                 <h3
                   className="font-black text-[#0e1b52] mb-1"
                   style={{
-                    fontFamily: "'Epilogue',sans-serif",
                     fontSize: "1.15rem",
                     letterSpacing: "-0.02em",
                   }}
@@ -945,7 +934,6 @@ export default function App() {
             <h2
               className="font-black text-[#0e1b52]"
               style={{
-                fontFamily: "'Epilogue',sans-serif",
                 fontSize: "clamp(1.7rem,3.2vw,2.8rem)",
                 letterSpacing: "-0.03em",
               }}
@@ -989,7 +977,6 @@ export default function App() {
                     <h3
                       className="font-black text-[#0e1b52] mb-1"
                       style={{
-                        fontFamily: "'Epilogue',sans-serif",
                         fontSize: "clamp(1.3rem,2.2vw,1.75rem)",
                         letterSpacing: "-0.02em",
                       }}
@@ -1019,7 +1006,6 @@ export default function App() {
                         <h3
                           className="sc-title font-black text-[#0e1b52] mb-1 leading-tight"
                           style={{
-                            fontFamily: "'Epilogue',sans-serif",
                             fontSize: "clamp(1rem,1.6vw,1.25rem)",
                             letterSpacing: "-0.02em",
                           }}
@@ -1053,7 +1039,6 @@ export default function App() {
           <h2
             className="font-black text-[#0e1b52] mb-10"
             style={{
-              fontFamily: "'Epilogue',sans-serif",
               fontSize: "clamp(1.7rem,3.2vw,2.8rem)",
               letterSpacing: "-0.03em",
             }}
@@ -1095,7 +1080,6 @@ export default function App() {
               <h2
                 className="font-black text-[#0e1b52]"
                 style={{
-                  fontFamily: "'Epilogue',sans-serif",
                   fontSize: "clamp(1.7rem,3.2vw,2.8rem)",
                   letterSpacing: "-0.03em",
                 }}
@@ -1129,9 +1113,6 @@ export default function App() {
                   <div className="flex items-center gap-2.5 mb-3">
                     <span
                       className="text-[10px] font-bold text-[#3566e8]"
-                      style={{
-                        fontFamily: "'Epilogue',sans-serif",
-                      }}
                     >
                       {n.tag}
                     </span>
