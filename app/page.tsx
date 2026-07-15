@@ -1,15 +1,9 @@
 "use client";
 
 import { useState, useEffect, useRef} from "react";
+import type { ReactNode } from "react";
 import Link from "next/link";
-import {
-  ChevronRight,
-  GraduationCap,
-  Cpu,
-  BadgeCheck,
-  Cloud,
-  Users2,
-} from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 
 /* ── Brand tokens ─────────────────────────────────────────
@@ -156,50 +150,91 @@ const WHY_VODA_TABS = [
   },
 ];
 
-const SERVICES = [
+/* 사업 영역 — 라인 아이콘 (currentColor 기반, lens dot 포인트 컬러 별도 주입) */
+const AREA_ICONS: Record<string, (dot: string) => ReactNode> = {
+  education: (dot) => (
+    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M24 14c-3.5-2.8-8.5-4-14-4v24c5.5 0 10.5 1.2 14 4 3.5-2.8 8.5-4 14-4V10c-5.5 0-10.5 1.2-14 4z" />
+      <path d="M24 14v24" />
+      <path d="M15 19c2.2.2 4.3.7 6 1.5M15 25c2.2.2 4.3.7 6 1.5" />
+      <circle cx="38" cy="10" r="3.5" fill={dot} stroke="none" />
+    </svg>
+  ),
+  ai: (dot) => (
+    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="24" cy="24" r="5" />
+      <circle cx="10" cy="12" r="3" />
+      <circle cx="38" cy="12" r="3" />
+      <circle cx="10" cy="36" r="3" />
+      <path d="M12.5 14 20 20.5M35.5 14 28 20.5M12.5 34 20 27.5" />
+      <path d="M28 27.5 34 33" />
+      <circle cx="37" cy="36" r="3.5" fill={dot} stroke="none" />
+    </svg>
+  ),
+  cert: (dot) => (
+    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M24 6l4.2 3 5.2-.4 1.9 4.9 4.4 2.8-1.3 5L41 26l-4.4 2.8-1.9 4.9-5.2-.4-4.2 3-4.2-3-5.2.4-1.9-4.9L9.6 26l1.3-4.7-1.3-5 4.4-2.8 1.9-4.9 5.2.4 4.2-3z" />
+      <path d="M18.5 23.5l4 4 7-8" />
+      <path d="M18 36l-3 8 9-4 9 4-3-8" />
+      <circle cx="24" cy="6" r="3" fill={dot} stroke="none" />
+    </svg>
+  ),
+  cloud: (dot) => (
+    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M14 32a8 8 0 0 1 1.2-15.9A10 10 0 0 1 34.6 18 7.5 7.5 0 0 1 34 32H14z" />
+      <path d="M17 38v3M24 38v5M31 38v3" />
+      <circle cx="39" cy="12" r="3.5" fill={dot} stroke="none" />
+    </svg>
+  ),
+  consulting: (dot) => (
+    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="24" cy="24" r="16" />
+      <path d="M30.5 17.5l-4 9-9 4 4-9 9-4z" />
+      <circle cx="24" cy="24" r="1.6" fill="currentColor" stroke="none" />
+      <circle cx="24" cy="4.5" r="3" fill={dot} stroke="none" />
+    </svg>
+  ),
+};
+
+const AREAS = [
   {
-    num: "01.",
-    icon: GraduationCap,
-    label: "Education",
+    eyebrow: "EDUCATION",
     title: "교육 사업",
+    icon: "education",
     desc: "정부와 기업이 필요로 하는 실무형 AI·데이터 인재를 양성합니다. 정부 지원 교육과정부터 기업 맞춤형 커리큘럼까지 운영합니다.",
-    items: ["정부교육", "기업교육"],
+    points: ["정부교육", "기업교육"],
     href: "/business/curriculum",
   },
   {
-    num: "02.",
-    icon: Cpu,
-    label: "AI Solutions",
+    eyebrow: "AI SOLUTIONS",
     title: "AI 솔루션",
+    icon: "ai",
     desc: "AI, 메타버스, 블록체인 기술을 기반으로 고객사의 요구에 맞는 웹·앱 플랫폼과 주문형 솔루션을 개발합니다.",
-    items: ["주문형 솔루션 개발", "웹·앱 플랫폼", "AI, 메타버스, 블록체인"],
+    points: ["주문형 솔루션 개발", "웹·앱 플랫폼", "AI, 메타버스, 블록체인"],
     href: "/business/ai-solutions",
   },
   {
-    num: "03.",
-    icon: BadgeCheck,
-    label: "AI Certification",
+    eyebrow: "AI CERTIFICATION",
     title: "AI 자격인증",
+    icon: "cert",
     desc: "AI 활용 역량을 객관적으로 평가하고 인증하는 통합 검증 체계를 구축해, 개인과 조직의 AI 역량을 데이터로 증명합니다.",
-    items: ["AI 활용 역량 자격인증", "AI 기반 역량평가", "통합 검증 체계"],
+    points: ["AI 활용 역량 자격인증", "AI 기반 역량평가", "통합 검증 체계"],
     href: "/business/ai-certification",
   },
   {
-    num: "04.",
-    icon: Cloud,
-    label: "Cloud",
+    eyebrow: "CLOUD",
     title: "클라우드",
+    icon: "cloud",
     desc: "안정적인 클라우드 전환과 지속적인 유지보수로 교육·비즈니스 인프라의 신뢰성을 지원합니다.",
-    items: ["클라우드 전환", "유지보수"],
+    points: ["클라우드 전환", "유지보수"],
     href: "/services/cloud",
   },
   {
-    num: "05.",
-    icon: Users2,
-    label: "Consulting",
+    eyebrow: "CONSULTING",
     title: "컨설팅",
+    icon: "consulting",
     desc: "조직의 AI·AX 전략 수립과 역량 진단을 통해 데이터 기반 의사결정 체계로의 전환을 돕습니다.",
-    items: ["AI·AX 전략 수립", "조직 역량 진단"],
+    points: ["AI·AX 전략 수립", "조직 역량 진단"],
     href: "/business/consulting",
   },
 ];
@@ -245,59 +280,43 @@ export default function App() {
   const [missionIn, setMissionIn] = useState(true);
   const [whyTab, setWhyTab] = useState("campus");
 
-  /* Services — scroll-driven vertical storytelling list */
-  const svcSectionRef = useRef<HTMLDivElement>(null);
-  const [svcRenderIndex, setSvcRenderIndex] = useState(0);
-  const svcTargetRef = useRef(0);
-  const svcSmoothRef = useRef(0);
-  const svcRafRef = useRef<number | null>(null);
+  /* 사업 영역 — 세로형 카드, 스크롤에 따라 활성 카드가 반전되는 스토리텔링 */
+  const areaWrapRef = useRef<HTMLDivElement>(null);
+  const [areaScrollIdx, setAreaScrollIdx] = useState(0);
+  const [areaHoverIdx, setAreaHoverIdx] = useState<number | null>(null);
+  const [isAreaMobile, setIsAreaMobile] = useState(false);
+  const areaActive = areaHoverIdx !== null ? areaHoverIdx : areaScrollIdx;
 
   useEffect(() => {
-    const tick = () => {
-      const target = svcTargetRef.current;
-      const current = svcSmoothRef.current;
-      const next = current + (target - current) * 0.09;
-      svcSmoothRef.current = next;
-      setSvcRenderIndex(next);
-      if (Math.abs(target - next) > 0.001) {
-        svcRafRef.current = requestAnimationFrame(tick);
-      } else {
-        svcSmoothRef.current = target;
-        setSvcRenderIndex(target);
-        svcRafRef.current = null;
-      }
-    };
-
-    const handleScroll = () => {
-      const el = svcSectionRef.current;
-      if (!el) return;
-      const rect = el.getBoundingClientRect();
-      const scrollable = rect.height - window.innerHeight;
-      if (scrollable <= 0) return;
-      const scrolled = Math.min(Math.max(-rect.top, 0), scrollable);
-      const progress = scrolled / scrollable;
-      svcTargetRef.current = progress * (SERVICES.length - 1);
-      if (svcRafRef.current == null) {
-        svcRafRef.current = requestAnimationFrame(tick);
-      }
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      if (svcRafRef.current) cancelAnimationFrame(svcRafRef.current);
-    };
+    const mq = window.matchMedia("(max-width: 860px)");
+    const setMq = () => setIsAreaMobile(mq.matches);
+    setMq();
+    mq.addEventListener("change", setMq);
+    return () => mq.removeEventListener("change", setMq);
   }, []);
 
-  const scrollToServiceIndex = (i: number) => {
-    const el = svcSectionRef.current;
-    if (!el) return;
-    const scrollable = el.offsetHeight - window.innerHeight;
-    const sectionTop = window.scrollY + el.getBoundingClientRect().top;
-    const target =
-      sectionTop + (i / (SERVICES.length - 1)) * scrollable;
-    window.scrollTo({ top: target, behavior: "smooth" });
-  };
+  useEffect(() => {
+    let raf: number | null = null;
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = null;
+        const el = areaWrapRef.current;
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        const total = el.offsetHeight - window.innerHeight;
+        if (total <= 0) return;
+        const p = Math.min(0.999, Math.max(0, -rect.top / total));
+        setAreaScrollIdx(Math.floor(p * AREAS.length));
+      });
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -426,24 +445,9 @@ export default function App() {
 
 .why-pill { transition: background .22s ease, border-color .22s ease, color .22s ease; }
 
-        /* ── Services — futuristic card carousel ─────────── */
-        @keyframes svcGridDrift {
-          from { background-position: 0 0; }
-          to   { background-position: 48px 48px; }
+        @media (prefers-reduced-motion: reduce) {
+          .biz-vcard, .biz-vcard * { transition: none !important; }
         }
-        .svc-grid-bg { animation: svcGridDrift 20s linear infinite; }
-
-        .svc-card {
-          transition: box-shadow .4s ease, border-color .4s ease, background .5s ease;
-        }
-
-        @keyframes svcPulse {
-          0%, 100% { opacity: 1; }
-          50%      { opacity: .3; }
-        }
-        .svc-pulse-dot { animation: svcPulse 1.6s ease-in-out infinite; }
-
-        .svc-dot { transition: width .3s ease, background .3s ease, opacity .3s ease; }
       `}</style>
 
       {/* ══════════════════════════════════════════════
@@ -484,7 +488,7 @@ export default function App() {
 </section>
 
       {/* ══════════════════════════════════════════════
-    Services — 스크롤 기반 수평 스토리텔링
+    사업 영역 — 세로형 카드, 스크롤에 따라 색상 반전
 ══════════════════════════════════════════════ */}
 <section className="border-b border-[rgba(14,27,82,0.07)]">
   <div className="max-w-[1440px] mx-auto px-10">
@@ -507,223 +511,195 @@ export default function App() {
   </div>
 
   <div
-    ref={svcSectionRef}
-    style={{ height: `${SERVICES.length * 30}vh`, position: "relative" }}
+    ref={areaWrapRef}
+    style={{ height: isAreaMobile ? "auto" : `${AREAS.length * 20}vh`, position: "relative" }}
   >
     <div
-      className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden"
-      style={{ background: "linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 100%)" }}
+      style={{
+        position: isAreaMobile ? "relative" : "sticky",
+        top: 0,
+        height: isAreaMobile ? "auto" : "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        padding: isAreaMobile ? "48px 24px" : "0 clamp(24px, 5vw, 80px)",
+        boxSizing: "border-box",
+        background: "linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 100%)",
+      }}
     >
-      {/* Futuristic grid backdrop */}
       <div
-        className="svc-grid-bg absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage:
-            "linear-gradient(rgba(53,102,232,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(53,102,232,0.06) 1px, transparent 1px)",
-          backgroundSize: "48px 48px",
-          maskImage:
-            "radial-gradient(ellipse 70% 55% at 50% 48%, black 30%, transparent 100%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse 70% 55% at 50% 48%, black 30%, transparent 100%)",
+          display: "flex",
+          flexDirection: isAreaMobile ? "column" : "row",
+          gap: 12,
+          alignItems: "stretch",
+          height: isAreaMobile ? "auto" : "min(62vh, 560px)",
         }}
-      />
-
-      {/* Card carousel stage — every area stays in one row; the active one is emphasized */}
-      <div
-        className="relative z-10 w-full flex-1 flex items-center justify-center px-6 md:px-10 overflow-x-auto"
-        style={{ perspective: "1400px" }}
+        onMouseLeave={() => setAreaHoverIdx(null)}
       >
-        <div className="flex flex-nowrap gap-3 md:gap-5 max-w-[1440px] w-full mx-auto">
-          {SERVICES.map((s, i) => {
-            const Icon = s.icon;
-            const diff = i - svcRenderIndex;
-            const absDiff = Math.abs(diff);
-            const active = absDiff < 0.5;
-            const emphasis = Math.max(0, 1 - absDiff); // 1 at active, fades over neighbors
-
-            const rotateY = Math.max(-26, Math.min(26, diff * 16));
-            const translateZ = -Math.min(absDiff, 2) * 40;
-            const scale = 1 + emphasis * 0.1 - Math.max(0, absDiff - 1) * 0.04;
-            const translateY = -emphasis * 22;
-            const zIndex = 10 + Math.round(emphasis * 10);
-
-            return (
-              <Link
-                key={s.num}
-                href={s.href}
-                className="svc-card group relative block rounded-[24px] overflow-hidden"
+        {AREAS.map((a, i) => {
+          const on = i === areaActive;
+          return (
+            <Link
+              key={a.eyebrow}
+              href={a.href}
+              className="biz-vcard group"
+              onMouseEnter={() => setAreaHoverIdx(i)}
+              onFocus={() => setAreaHoverIdx(i)}
+              onBlur={() => setAreaHoverIdx(null)}
+              style={{
+                boxSizing: "border-box",
+                textDecoration: "none",
+                color: "inherit",
+                cursor: "pointer",
+                position: "relative",
+                overflow: "hidden",
+                display: "flex",
+                flexDirection: "column",
+                flexGrow: isAreaMobile ? 0 : on ? 1.9 : 1,
+                flexBasis: 0,
+                minWidth: 0,
+                minHeight: isAreaMobile ? (on ? 340 : 120) : "auto",
+                padding: "26px 22px",
+                borderRadius: 20,
+                background: on
+                  ? "linear-gradient(160deg, #0E1B52 0%, #17245F 60%, #22307A 100%)"
+                  : "#FAFAFC",
+                border: `1px solid ${on ? "transparent" : "rgba(14,27,82,0.09)"}`,
+                transform: on ? "translateY(-4px)" : "translateY(0)",
+                boxShadow: on ? "0 24px 48px -20px rgba(14,27,82,0.45)" : "none",
+                transition:
+                  "flex-grow 0.65s cubic-bezier(0.32,0.72,0,1), min-height 0.5s cubic-bezier(0.32,0.72,0,1), background 0.45s ease, border-color 0.45s ease, transform 0.45s ease, box-shadow 0.45s ease",
+              }}
+            >
+              {/* lens glow (활성) */}
+              <span
+                aria-hidden
                 style={{
-                  flex: "1 0 clamp(150px, 18vw, 264px)",
-                  height: "clamp(340px, 32vw, 420px)",
-                  transform: `translateY(${translateY}px) translateZ(${translateZ}px) scale(${scale}) rotateY(${rotateY}deg)`,
-                  zIndex,
-                  background: active
-                    ? "linear-gradient(160deg, rgba(10,20,64,0.98) 0%, rgba(28,48,120,0.95) 100%)"
-                    : "rgba(255,255,255,0.65)",
-                  backdropFilter: "blur(14px)",
-                  WebkitBackdropFilter: "blur(14px)",
-                  border: active
-                    ? "1px solid rgba(130,170,255,0.45)"
-                    : "1px solid rgba(14,27,82,0.08)",
-                  boxShadow: active
-                    ? "0 28px 56px rgba(16,32,110,0.35), 0 0 36px rgba(80,130,255,0.18)"
-                    : "0 8px 24px rgba(14,27,82,0.05)",
+                  position: "absolute",
+                  top: -70,
+                  right: -70,
+                  width: 240,
+                  height: 240,
+                  borderRadius: "50%",
+                  background: "radial-gradient(circle, rgba(53,102,232,0.21) 0%, transparent 65%)",
+                  opacity: on ? 1 : 0,
+                  transition: "opacity 0.6s ease",
+                  pointerEvents: "none",
+                }}
+              />
+
+              {/* 아이콘 */}
+              <div
+                style={{
+                  width: on ? 56 : 44,
+                  height: on ? 56 : 44,
+                  color: on ? "#FFFFFF" : "#3A4258",
+                  transition: "width 0.45s ease, height 0.45s ease, color 0.4s ease",
+                  flexShrink: 0,
                 }}
               >
-                {/* HUD corner brackets */}
-                <span
-                  className="absolute top-4 left-4 w-3 h-3"
-                  style={{
-                    borderTop: `2px solid ${active ? "rgba(150,190,255,0.55)" : "rgba(53,102,232,0.25)"}`,
-                    borderLeft: `2px solid ${active ? "rgba(150,190,255,0.55)" : "rgba(53,102,232,0.25)"}`,
-                  }}
-                />
-                <span
-                  className="absolute top-4 right-4 w-3 h-3"
-                  style={{
-                    borderTop: `2px solid ${active ? "rgba(150,190,255,0.55)" : "rgba(53,102,232,0.25)"}`,
-                    borderRight: `2px solid ${active ? "rgba(150,190,255,0.55)" : "rgba(53,102,232,0.25)"}`,
-                  }}
-                />
-                <span
-                  className="absolute bottom-4 left-4 w-3 h-3"
-                  style={{
-                    borderBottom: `2px solid ${active ? "rgba(150,190,255,0.55)" : "rgba(53,102,232,0.25)"}`,
-                    borderLeft: `2px solid ${active ? "rgba(150,190,255,0.55)" : "rgba(53,102,232,0.25)"}`,
-                  }}
-                />
-                <span
-                  className="absolute bottom-4 right-4 w-3 h-3"
-                  style={{
-                    borderBottom: `2px solid ${active ? "rgba(150,190,255,0.55)" : "rgba(53,102,232,0.25)"}`,
-                    borderRight: `2px solid ${active ? "rgba(150,190,255,0.55)" : "rgba(53,102,232,0.25)"}`,
-                  }}
-                />
+                {AREA_ICONS[a.icon](on ? "#7C93FF" : "#3566E8")}
+              </div>
 
-                <div className="relative h-full flex flex-col p-5 md:p-6">
-                  <div className="flex items-center justify-between mb-5 md:mb-6">
-                    <span
-                      className="text-[11px] font-black font-sora tracking-[0.15em]"
-                      style={{
-                        color: active ? "rgba(255,255,255,0.5)" : "rgba(53,102,232,0.4)",
-                      }}
-                    >
-                      {s.num}
-                    </span>
-                    <div
-                      className="w-10 h-10 rounded-xl flex items-center justify-center"
-                      style={{
-                        background: active ? "rgba(255,255,255,0.12)" : "rgba(238,242,255,0.9)",
-                        border: active
-                          ? "1px solid rgba(255,255,255,0.22)"
-                          : "1px solid rgba(53,102,232,0.12)",
-                      }}
-                    >
-                      <Icon size={17} className={active ? "text-white" : "text-[#3566e8]"} />
-                    </div>
-                  </div>
+              <div style={{ flexGrow: 1 }} />
 
-                  {active && (
-                    <div className="flex items-center gap-1.5 mb-3">
-                      <span
-                        className="svc-pulse-dot w-1.5 h-1.5 rounded-full"
-                        style={{ background: "#7dd3fc" }}
-                      />
-                      <span
-                        className="text-[9px] font-bold font-sora tracking-[0.22em] uppercase"
-                        style={{ color: "rgba(180,205,255,0.85)" }}
-                      >
-                        Active
-                      </span>
-                    </div>
-                  )}
+              <span
+                className="font-sora"
+                style={{
+                  fontSize: 11.5,
+                  fontWeight: 600,
+                  letterSpacing: "0.18em",
+                  whiteSpace: "nowrap",
+                  color: on ? "#9DB0FF" : "#9AA1B5",
+                  transition: "color 0.4s ease",
+                  marginBottom: 8,
+                }}
+              >
+                {a.eyebrow}
+              </span>
 
-                  <span
-                    className="text-[10px] font-bold font-sora tracking-[0.2em] uppercase mb-2"
-                    style={{ color: active ? "rgba(150,180,255,0.9)" : "rgba(53,102,232,0.5)" }}
-                  >
-                    {s.label}
+              <div style={{ display: "flex", alignItems: "baseline", gap: 7, minWidth: 0 }}>
+                <h3
+                  className="font-suit"
+                  style={{
+                    margin: 0,
+                    fontSize: on ? (isAreaMobile ? 23 : 26) : isAreaMobile ? 18 : 19,
+                    fontWeight: 700,
+                    letterSpacing: "-0.02em",
+                    lineHeight: 1.25,
+                    whiteSpace: "nowrap",
+                    color: on ? "#FFFFFF" : "#0e1b52",
+                    transition: "font-size 0.45s ease, color 0.4s ease",
+                  }}
+                >
+                  {a.title}
+                </h3>
+                <span
+                  aria-hidden
+                  style={{
+                    width: on ? 8 : 0,
+                    height: on ? 8 : 0,
+                    borderRadius: "50%",
+                    background: "#3566E8",
+                    flexShrink: 0,
+                    transition: "width 0.35s ease 0.2s, height 0.35s ease 0.2s",
+                  }}
+                />
+              </div>
+
+              {/* 자세한 설명 + 핵심 포인트 (활성 시) */}
+              <div
+                style={{
+                  maxHeight: on ? 320 : 0,
+                  opacity: on ? 1 : 0,
+                  overflow: "hidden",
+                  transform: on ? "translateY(0)" : "translateY(10px)",
+                  transition:
+                    "max-height 0.6s cubic-bezier(0.32,0.72,0,1), opacity 0.4s ease 0.15s, transform 0.5s ease 0.1s",
+                }}
+              >
+                <p style={{ margin: "13px 0 0", fontSize: 13.5, lineHeight: 1.75, color: "rgba(255,255,255,0.78)" }}>
+                  {a.desc}
+                </p>
+                <ul style={{ margin: "16px 0 0", padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 8 }}>
+                  {a.points.map((p) => (
+                    <li key={p} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12.5, fontWeight: 500, color: "#C9D4FF" }}>
+                      <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#3566E8", flexShrink: 0 }} />
+                      {p}
+                    </li>
+                  ))}
+                </ul>
+                <div className="flex items-center gap-1.5 mt-4">
+                  <span className="text-[11px] font-bold tracking-wide" style={{ color: "rgba(255,255,255,0.85)" }}>
+                    자세히 보기
                   </span>
-                  <h4
-                    className="font-black font-suit leading-tight mb-3"
-                    style={{
-                      fontSize: "1.15rem",
-                      letterSpacing: "-0.02em",
-                      color: active ? "#ffffff" : "#0e1b52",
-                    }}
-                  >
-                    {s.title}
-                  </h4>
-                  <p
-                    className="text-[12.5px] leading-relaxed mb-5 line-clamp-4"
-                    style={{ color: active ? "rgba(255,255,255,0.72)" : "#5a6895" }}
-                  >
-                    {s.desc}
-                  </p>
-
-                  <ul className="mt-auto flex flex-wrap gap-1.5">
-                    {s.items.map((item) => (
-                      <li
-                        key={item}
-                        className="text-[10.5px] font-semibold rounded-full px-2.5 py-1"
-                        style={{
-                          color: active ? "rgba(255,255,255,0.92)" : "#3566e8",
-                          background: active ? "rgba(255,255,255,0.1)" : "#EEF2FF",
-                          border: active ? "1px solid rgba(255,255,255,0.15)" : "none",
-                        }}
-                      >
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="flex items-center gap-1.5 mt-4">
-                    <span
-                      className="text-[11px] font-bold tracking-wide"
-                      style={{ color: active ? "rgba(255,255,255,0.85)" : "rgba(53,102,232,0.7)" }}
-                    >
-                      자세히 보기
-                    </span>
-                    <ChevronRight
-                      size={13}
-                      className="transition-transform group-hover:translate-x-1"
-                      style={{ color: active ? "rgba(255,255,255,0.85)" : "rgba(53,102,232,0.7)" }}
-                    />
-                  </div>
-
-                  {active && (
-                    <span
-                      className="absolute bottom-0 left-6 right-6 h-[2px]"
-                      style={{
-                        background:
-                          "linear-gradient(90deg, transparent, rgba(120,170,255,0.9), transparent)",
-                      }}
-                    />
-                  )}
+                  <ChevronRight
+                    size={13}
+                    className="transition-transform group-hover:translate-x-1"
+                    style={{ color: "rgba(255,255,255,0.85)" }}
+                  />
                 </div>
-              </Link>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Progress dots */}
-      <div className="relative z-10 flex justify-center items-center gap-2.5 mt-8">
-        {SERVICES.map((s, i) => {
-          const isActive = Math.round(svcRenderIndex) === i;
-          return (
-            <button
-              key={s.num}
-              onClick={() => scrollToServiceIndex(i)}
-              aria-label={s.title}
-              className="svc-dot h-2 rounded-full"
-              style={{
-                width: isActive ? 28 : 8,
-                background: isActive ? "#3566e8" : "rgba(53,102,232,0.25)",
-              }}
-            />
+              </div>
+            </Link>
           );
         })}
+      </div>
+
+      {/* 진행 인디케이터 */}
+      <div style={{ display: "flex", gap: 8, marginTop: 26, justifyContent: "center" }}>
+        {AREAS.map((a, i) => (
+          <span
+            key={a.eyebrow}
+            style={{
+              width: i === areaActive ? 22 : 7,
+              height: 7,
+              borderRadius: 999,
+              background: i === areaActive ? "#3566E8" : "rgba(14,27,82,0.12)",
+              transition: "width 0.4s cubic-bezier(0.32,0.72,0,1), background 0.3s ease",
+            }}
+          />
+        ))}
       </div>
     </div>
   </div>
