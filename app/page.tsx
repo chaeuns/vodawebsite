@@ -311,10 +311,7 @@ export default function App() {
   }, []);
 
   return (
-      <div
-      className="min-h-screen bg-white text-[#0e1b52]"
-       style={{ fontFamily: "'Noto Sans KR', sans-serif" }}
-      >   
+      <div className="min-h-screen bg-white text-[#0e1b52]">
       <style>{`
         /* VODA fill: #EDEDED → #3566E8, left → right */
         @keyframes vodaFill {
@@ -457,9 +454,8 @@ export default function App() {
     {/* Rotating word + VODA logo */}
     <div className="flex items-center justify-center gap-6 flex-wrap mb-14">
       <span
-        className={`mw ${missionIn ? "mw-in" : "mw-out"} font-black leading-none ${MISSION_GRADIENTS[missionIdx]} bg-clip-text text-transparent`}
+        className={`mw ${missionIn ? "mw-in" : "mw-out"} font-suit font-extrabold leading-none ${MISSION_GRADIENTS[missionIdx]} bg-clip-text text-transparent`}
         style={{
-          fontFamily: "'Epilogue',sans-serif",
           fontSize: "5.83rem",
         }}
       >
@@ -494,16 +490,12 @@ export default function App() {
   <div className="max-w-[1440px] mx-auto px-10">
     <div className="flex items-end justify-between py-6 border-b border-[rgba(14,27,82,0.07)]">
       <div>
-        <p
-          className="text-[11px] font-bold tracking-[0.22em] text-[#3566e8] uppercase mb-1.5"
-          style={{ fontFamily: "'Epilogue',sans-serif" }}
-        >
+        <p className="text-[11px] font-bold font-sora tracking-[0.22em] text-[#3566e8] uppercase mb-1.5">
           What We Do
         </p>
         <h2
-          className="font-black text-[#0e1b52]"
+          className="font-black font-suit text-[#0e1b52]"
           style={{
-            fontFamily: "'Epilogue',sans-serif",
             fontSize: "clamp(1.7rem,3.2vw,2.8rem)",
             letterSpacing: "-0.03em",
           }}
@@ -611,9 +603,8 @@ export default function App() {
                 <div className="relative h-full flex flex-col p-5 md:p-6">
                   <div className="flex items-center justify-between mb-5 md:mb-6">
                     <span
-                      className="text-[11px] font-black tracking-[0.15em]"
+                      className="text-[11px] font-black font-sora tracking-[0.15em]"
                       style={{
-                        fontFamily: "'Epilogue',sans-serif",
                         color: active ? "rgba(255,255,255,0.5)" : "rgba(53,102,232,0.4)",
                       }}
                     >
@@ -639,7 +630,7 @@ export default function App() {
                         style={{ background: "#7dd3fc" }}
                       />
                       <span
-                        className="text-[9px] font-bold tracking-[0.22em] uppercase"
+                        className="text-[9px] font-bold font-sora tracking-[0.22em] uppercase"
                         style={{ color: "rgba(180,205,255,0.85)" }}
                       >
                         Active
@@ -648,15 +639,14 @@ export default function App() {
                   )}
 
                   <span
-                    className="text-[10px] font-bold tracking-[0.2em] uppercase mb-2"
+                    className="text-[10px] font-bold font-sora tracking-[0.2em] uppercase mb-2"
                     style={{ color: active ? "rgba(150,180,255,0.9)" : "rgba(53,102,232,0.5)" }}
                   >
                     {s.label}
                   </span>
                   <h4
-                    className="font-black leading-tight mb-3"
+                    className="font-black font-suit leading-tight mb-3"
                     style={{
-                      fontFamily: "'Epilogue',sans-serif",
                       fontSize: "1.15rem",
                       letterSpacing: "-0.02em",
                       color: active ? "#ffffff" : "#0e1b52",
@@ -751,9 +741,8 @@ export default function App() {
         <div className="max-w-[1440px] mx-auto px-10 py-14">
           {/* 브랜드 라벨 */}
           <p
-            className="text-center text-[30px] font-semibold text-[#3566e8] uppercase mb-6"
+            className="text-center text-[30px] font-semibold font-sora text-[#3566e8] uppercase mb-6"
             style={{
-              fontFamily: "'Sora', sans-serif",
               letterSpacing: "0.32em",
             }}
           >
@@ -766,12 +755,11 @@ export default function App() {
               <button
                 key={tab.id}
                 onClick={() => setWhyTab(tab.id)}
-                className={`why-pill rounded-full px-6 py-2.5 text-sm font-semibold border ${
+                className={`why-pill font-sora rounded-full px-6 py-2.5 text-sm font-semibold border ${
                   whyTab === tab.id
                     ? "bg-[#3566e8] border-[#3566e8] text-white"
                     : "bg-white border-[rgba(14,27,82,0.15)] text-[#5a6895] hover:border-[rgba(14,27,82,0.3)]"
                 }`}
-                style={{ fontFamily: "'Epilogue',sans-serif" }}
               >
                 {tab.label}
               </button>
@@ -796,18 +784,12 @@ export default function App() {
 
                 {/* 텍스트 */}
                 <div>
-                  <p
-                    className="text-[11px] font-bold tracking-[0.2em] text-[#3566e8] uppercase mb-2"
-                    style={{
-                      fontFamily: "'Epilogue',sans-serif",
-                    }}
-                  >
+                  <p className="text-[11px] font-bold font-sora tracking-[0.2em] text-[#3566e8] uppercase mb-2">
                     {tab.kicker}
                   </p>
                   <h3
-                    className="font-black text-[#0e1b52] leading-snug mb-6"
+                    className="font-black font-suit text-[#0e1b52] leading-snug mb-6"
                     style={{
-                      fontFamily: "'Epilogue',sans-serif",
                       fontSize: "clamp(1.4rem,2.4vw,1.9rem)",
                       letterSpacing: "-0.02em",
                     }}
@@ -845,16 +827,12 @@ export default function App() {
         <div className="max-w-[1440px] mx-auto px-10 py-12">
           <div className="flex items-end justify-between mb-8">
             <div>
-              <p
-                className="text-[11px] font-bold tracking-[0.22em] text-[#3566e8] uppercase mb-1.5"
-                style={{ fontFamily: "'Epilogue',sans-serif" }}
-              >
+              <p className="text-[11px] font-bold font-sora tracking-[0.22em] text-[#3566e8] uppercase mb-1.5">
                 Now Recruiting
               </p>
               <h2
-                className="font-black text-[#0e1b52]"
+                className="font-black font-suit text-[#0e1b52]"
                 style={{
-                  fontFamily: "'Epilogue',sans-serif",
                   fontSize: "clamp(1.7rem,3.2vw,2.8rem)",
                   letterSpacing: "-0.03em",
                 }}
@@ -903,9 +881,8 @@ export default function App() {
 
                 {/* 제목 + 메타 */}
                 <h3
-                  className="font-black text-[#0e1b52] mb-1"
+                  className="font-black font-suit text-[#0e1b52] mb-1"
                   style={{
-                    fontFamily: "'Epilogue',sans-serif",
                     fontSize: "1.15rem",
                     letterSpacing: "-0.02em",
                   }}
@@ -936,16 +913,12 @@ export default function App() {
       <section>
         <div className="max-w-[1440px] mx-auto px-10">
           <div className="py-12">
-            <p
-              className="text-[11px] font-bold tracking-[0.22em] text-[#3566e8] uppercase mb-1.5"
-              style={{ fontFamily: "'Epilogue',sans-serif" }}
-            >
+            <p className="text-[11px] font-bold font-sora tracking-[0.22em] text-[#3566e8] uppercase mb-1.5">
               Solutions
             </p>
             <h2
-              className="font-black text-[#0e1b52]"
+              className="font-black font-suit text-[#0e1b52]"
               style={{
-                fontFamily: "'Epilogue',sans-serif",
                 fontSize: "clamp(1.7rem,3.2vw,2.8rem)",
                 letterSpacing: "-0.03em",
               }}
@@ -987,9 +960,8 @@ export default function App() {
                   {/* 그룹 타이틀 */}
                   <div className="text-center mb-8">
                     <h3
-                      className="font-black text-[#0e1b52] mb-1"
+                      className="font-black font-suit text-[#0e1b52] mb-1"
                       style={{
-                        fontFamily: "'Epilogue',sans-serif",
                         fontSize: "clamp(1.3rem,2.2vw,1.75rem)",
                         letterSpacing: "-0.02em",
                       }}
@@ -1010,16 +982,12 @@ export default function App() {
                         key={s.num}
                         className="sc p-8 rounded-xl cursor-default"
                       >
-                        <span
-                          className="sc-num block text-[11px] font-bold tracking-widest text-[#0e1b52]/35 mb-4"
-                          style={{ fontFamily: "'Epilogue',sans-serif" }}
-                        >
+                        <span className="sc-num block text-[11px] font-bold font-sora tracking-widest text-[#0e1b52]/35 mb-4">
                           {s.num}
                         </span>
                         <h3
-                          className="sc-title font-black text-[#0e1b52] mb-1 leading-tight"
+                          className="sc-title font-black font-suit text-[#0e1b52] mb-1 leading-tight"
                           style={{
-                            fontFamily: "'Epilogue',sans-serif",
                             fontSize: "clamp(1rem,1.6vw,1.25rem)",
                             letterSpacing: "-0.02em",
                           }}
@@ -1044,16 +1012,12 @@ export default function App() {
       ══════════════════════════════════════════════ */}
       <section className="py-16 border-b border-[rgba(14,27,82,0.07)]">
         <div className="max-w-[1440px] mx-auto px-10">
-          <p
-            className="text-[11px] font-bold tracking-[0.22em] text-[#3566e8] uppercase mb-1.5"
-            style={{ fontFamily: "'Epilogue',sans-serif" }}
-          >
+          <p className="text-[11px] font-bold font-sora tracking-[0.22em] text-[#3566e8] uppercase mb-1.5">
             Partners
           </p>
           <h2
-            className="font-black text-[#0e1b52] mb-10"
+            className="font-black font-suit text-[#0e1b52] mb-10"
             style={{
-              fontFamily: "'Epilogue',sans-serif",
               fontSize: "clamp(1.7rem,3.2vw,2.8rem)",
               letterSpacing: "-0.03em",
             }}
@@ -1086,16 +1050,12 @@ export default function App() {
         <div className="max-w-[1440px] mx-auto px-10">
           <div className="flex items-end justify-between mb-10">
             <div>
-              <p
-                className="text-[11px] font-bold tracking-[0.22em] text-[#3566e8] uppercase mb-1.5"
-                style={{ fontFamily: "'Epilogue',sans-serif" }}
-              >
+              <p className="text-[11px] font-bold font-sora tracking-[0.22em] text-[#3566e8] uppercase mb-1.5">
                 News
               </p>
               <h2
-                className="font-black text-[#0e1b52]"
+                className="font-black font-suit text-[#0e1b52]"
                 style={{
-                  fontFamily: "'Epilogue',sans-serif",
                   fontSize: "clamp(1.7rem,3.2vw,2.8rem)",
                   letterSpacing: "-0.03em",
                 }}
@@ -1127,12 +1087,7 @@ export default function App() {
                 </div>
                 <div className="p-5">
                   <div className="flex items-center gap-2.5 mb-3">
-                    <span
-                      className="text-[10px] font-bold text-[#3566e8]"
-                      style={{
-                        fontFamily: "'Epilogue',sans-serif",
-                      }}
-                    >
+                    <span className="text-[10px] font-bold font-suit text-[#3566e8]">
                       {n.tag}
                     </span>
                     <span className="text-[10px] text-[#b8c3de]">
