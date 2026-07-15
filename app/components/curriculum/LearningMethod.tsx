@@ -202,6 +202,7 @@ export default function LearningMethod() {
                 sizes="(min-width: 768px) 50vw, 100vw"
                 className="object-cover"
               />
+
             </div>
 
             <div>
