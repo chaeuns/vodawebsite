@@ -7,7 +7,6 @@
 
 const INK = "#16181D";
 const BODY = "#5B6270";
-const MUTED = "#9AA1AF";
 const ACCENT = "#3D5AFE";
 const BORDER = "rgba(22,24,29,0.07)";
 const SURFACE = "#F8F9FC";
@@ -175,20 +174,23 @@ function GoalCard({
       </div>
 
       <div
-        className="mt-6 flex flex-col items-center gap-1 border-t pt-5 text-center"
+        className="mt-6 flex flex-col items-center gap-1.5 border-t pt-5 text-center"
         style={{ borderColor: BORDER }}
       >
         <span
-          className="text-2xl font-black"
+          className="text-4xl font-black"
           style={{
             color: ACCENT,
             fontFamily: "'Outfit', sans-serif",
-            letterSpacing: "-0.01em",
+            letterSpacing: "-0.02em",
           }}
         >
           {statNum}
         </span>
-        <span className="text-xs font-medium" style={{ color: MUTED }}>
+        <span
+          className="text-sm font-bold"
+          style={{ color: INK, letterSpacing: "-0.01em" }}
+        >
           {statLabel}
         </span>
       </div>
