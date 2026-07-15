@@ -7,7 +7,6 @@
 
 const INK = "#16181D";
 const BODY = "#5B6270";
-const MUTED = "#9AA1AF";
 const ACCENT = "#3D5AFE";
 const BORDER = "rgba(22,24,29,0.07)";
 const SURFACE = "#F8F9FC";
@@ -17,7 +16,7 @@ const CONTAINER = "mx-auto max-w-6xl";
 export default function OurGoals() {
   return (
     <section
-      className="bg-white py-28 px-6 sm:px-10 lg:px-24"
+      className="bg-white py-24 px-6 sm:px-10 lg:px-24"
       style={{ fontFamily: "'Noto Sans KR', 'Outfit', sans-serif" }}
     >
       <style>{`
@@ -175,20 +174,23 @@ function GoalCard({
       </div>
 
       <div
-        className="mt-6 flex flex-col items-center gap-1 border-t pt-5 text-center"
+        className="mt-6 flex flex-col items-center gap-1.5 border-t pt-5 text-center"
         style={{ borderColor: BORDER }}
       >
         <span
-          className="text-2xl font-black"
+          className="text-4xl font-black"
           style={{
             color: ACCENT,
             fontFamily: "'Outfit', sans-serif",
-            letterSpacing: "-0.01em",
+            letterSpacing: "-0.02em",
           }}
         >
           {statNum}
         </span>
-        <span className="text-xs font-medium" style={{ color: MUTED }}>
+        <span
+          className="text-sm font-bold"
+          style={{ color: INK, letterSpacing: "-0.01em" }}
+        >
           {statLabel}
         </span>
       </div>
