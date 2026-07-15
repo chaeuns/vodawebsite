@@ -1,72 +1,34 @@
+// components/Footer.tsx
+// VODA Works 푸터 — 화이트 배경, 얇은 구분선, 컴팩트 사이즈
 
-const FOOTER_LINKS = [
-  {
-    h: "회사",
-    links: ["캠퍼스소개", "사업영역", "솔루션", "사업문의"],
-  },
-  {
-    h: "Campus",
-    links: ["교육 과정", "수강 신청", "수료생 이야기", "FAQ"],
-  },
-  {
-    h: "뉴스",
-    links: ["공지사항", "보도자료", "블로그", "파트너십"],
-  },
-  {
-    h: "채용",
-    links: ["채용 공고", "채용 문화", "인재상", "지원하기"],
-  },
-];
+import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0e1b52] text-white">
-      <div className="max-w-[1440px] mx-auto px-10 py-14">
-        <div className="grid md:grid-cols-[220px_1fr] gap-14 mb-12">
-          {/* Logo on navy */}
-          <div>
-            <img
-              src="/voda-logo-color.svg"  
-              alt="VODA Works"
-              className="h-7 w-auto object-contain brightness-0 invert mb-5"
-            />
-            <p className="text-xs text-white/45 leading-relaxed">
-              AI와 교육이 만나는 곳.
-              <br />
-              데이터의 가치로 미래를 봅니다.
-            </p>
-          </div>
-
-          {/* 4-col links */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-10">
-            {FOOTER_LINKS.map(({ h, links }) => (
-              <div key={h}>
-                <h5 className="text-[10px] font-bold text-white/30 uppercase tracking-widest mb-4">
-                  {h}
-                </h5>
-                <ul className="space-y-2.5">
-                  {links.map((l) => (
-                    <li key={l}>
-                    <a  
-                        href="#"
-                        className="text-sm text-white/50 hover:text-white transition-colors"
-                      >
-                        {l}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
+    <footer className="border-t border-gray-200 bg-white px-6 py-10 sm:px-10 lg:px-24">
+      <div className="mx-auto max-w-6xl">
+        {/* 로고 + 멘트 */}
+        <div className="mb-6">
+          <Image
+            src="/voda-logo-color.svg"
+            alt="VODA Works"
+            width={140}
+            height={40}
+            className="h-5 w-auto sm:h-6"
+          />
+          <p className="mt-2 text-sm text-gray-500">
+            데이터의 가치로 미래를 봅니다.
+          </p>
         </div>
 
-        <div className="border-t border-white/10 pt-7 flex flex-col sm:flex-row justify-between gap-2">
-          <p className="text-xs text-white/25">
-            © 2026 VODA Works Inc. All rights reserved.
-          </p>
-          <p className="text-xs text-white/25">
-            서울특별시 중구 · contact@voda.works
+        {/* 구분선 */}
+        <div className="border-t border-gray-100" />
+
+        {/* 하단 정보 */}
+        <div className="mt-6 flex flex-col gap-2 text-xs text-gray-400 sm:flex-row sm:items-center sm:justify-between">
+          <p>© 2026 VODA Works Inc. All rights reserved.</p>
+          <p>
+            서울특별시 중구 · 02-0000-0000 · contact@voda.works
           </p>
         </div>
       </div>
