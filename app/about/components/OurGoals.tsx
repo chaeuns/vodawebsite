@@ -16,7 +16,7 @@ const CONTAINER = "mx-auto max-w-6xl";
 export default function OurGoals() {
   return (
     <section
-      className="bg-white py-28 px-6 sm:px-10 lg:px-24"
+      className="bg-white py-24 px-6 sm:px-10 lg:px-24"
       style={{ fontFamily: "'Noto Sans KR', 'Outfit', sans-serif" }}
     >
       <style>{`

@@ -3,6 +3,7 @@
 import { Bus, Car, Train } from "lucide-react";
 import OurGoals from "./components/OurGoals";
 import HeroScene from "./components/HeroScene";
+import FadeInSection from "./components/FadeInSection";
 
 const NAVY = "#1a3570";
 const BLUE = "#2d6bff";
@@ -15,6 +16,7 @@ export default function AboutPage() {
       <HeroScene />
 
       {/* ── 02. CEO GREETING ────────────────────────────── */}
+      <FadeInSection>
       <section className="py-24 bg-white px-6 sm:px-10 lg:px-24">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
@@ -37,7 +39,7 @@ export default function AboutPage() {
                 "고객과 함께 성장하는 VODA."
               </h2>
 
-              <div className="space-y-4 text-gray-600 leading-relaxed text-sm">
+              <div className="space-y-4 text-gray-600 leading-relaxed text-base">
                 <p>
                   안녕하세요, VODA 대표 OOO입니다. 우리는
                   데이터와 AI로 기업의 성장을 도와왔습니다.
@@ -54,7 +56,7 @@ export default function AboutPage() {
                 style={{ borderColor: "rgba(26,53,112,0.1)" }}
               >
                 <p
-                  className="font-bold text-sm"
+                  className="font-bold text-base"
                   style={{ color: NAVY }}
                 >
                   VODA 대표이사 OOO 배상
@@ -64,6 +66,7 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+      </FadeInSection>
 
       {/* Divider */}
       <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-24">
@@ -71,9 +74,17 @@ export default function AboutPage() {
       </div>
 
       {/* ── 03. OUR GOALS ──────────────────────────────── */}
-      <OurGoals />
+      <FadeInSection>
+        <OurGoals />
+      </FadeInSection>
+
+      {/* Divider */}
+      <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-24">
+        <hr style={{ borderColor: "rgba(26,53,112,0.08)" }} />
+      </div>
 
      {/* ── 04. DIRECTIONS ──────────────────────────────── */}
+     <FadeInSection>
 <section className="py-24 bg-white px-6 sm:px-10 lg:px-24">
   <div className="max-w-6xl mx-auto">
     <div className="mb-12">
@@ -157,6 +168,7 @@ export default function AboutPage() {
 </div>
   </div>
 </section>
+     </FadeInSection>
 
     </div>
   );
