@@ -82,13 +82,13 @@ export default function HeroScene() {
       const m = new THREE.MeshPhysicalMaterial({
         color: 0xffffff,
         metalness: 0,
-        roughness: 0.07,
+        roughness: 0.2,
         transmission: 1.0,
         thickness: 1.6,
         ior: 1.45,
         clearcoat: 1.0,
-        clearcoatRoughness: 0.06,
-        envMapIntensity: 1.5,
+        clearcoatRoughness: 0.1,
+        envMapIntensity: 1.2,
       });
       if (extra) Object.assign(m, extra);
       return m;
@@ -165,7 +165,7 @@ export default function HeroScene() {
       geo.center();
 
       const mesh = new THREE.Mesh(geo, glassMaterial({ thickness: 2.2 }));
-      mesh.scale.setScalar(1.38);
+      mesh.scale.setScalar(1.15);
       app.scene.add(mesh);
 
       app.update = (t: number) => {
@@ -259,7 +259,7 @@ export default function HeroScene() {
       });
       const sparkMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
 
-      function makeEye(sideX: number) {
+      function makeEye(sideX: number, pupilDir: any, spark1Dir: any, spark2Dir: any) {
         const eye = new THREE.Group();
         const rx = 0.74, ry = 1.0, rz = 0.74;
         const sclera = new THREE.Mesh(new THREE.SphereGeometry(1.0, 48, 48), scleraMat);
@@ -276,16 +276,29 @@ export default function HeroScene() {
           return m;
         }
 
-        eye.add(surfaceCap(1.012, 0.58, new THREE.Vector3(0.48, 0.06, 1), pupilMat));
-        eye.add(surfaceCap(1.022, 0.13, new THREE.Vector3(0.32, 0.28, 1), sparkMat));
-        eye.add(surfaceCap(1.022, 0.065, new THREE.Vector3(0.64, -0.1, 1), sparkMat));
+        eye.add(surfaceCap(1.012, 0.58, pupilDir, pupilMat));
+        eye.add(surfaceCap(1.022, 0.13, spark1Dir, sparkMat));
+        eye.add(surfaceCap(1.022, 0.065, spark2Dir, sparkMat));
 
         eye.position.x = sideX;
         return eye;
       }
 
-      group.add(makeEye(-0.82));
-      group.add(makeEye(0.82));
+      // 왼쪽 눈: 기존 좌표 그대로
+      group.add(makeEye(
+        -0.82,
+        new THREE.Vector3(0.48, 0.06, 1),
+        new THREE.Vector3(0.32, 0.28, 1),
+        new THREE.Vector3(0.64, -0.1, 1)
+      ));
+
+      // 오른쪽 눈: 검은자/안광 x값만 살짝 왼쪽으로 (0.48 → 0.30, 0.32 → 0.16, 0.64 → 0.46)
+      group.add(makeEye(
+        0.82,
+        new THREE.Vector3(0.30, 0.06, 1),
+        new THREE.Vector3(0.16, 0.28, 1),
+        new THREE.Vector3(0.46, -0.1, 1)
+      ));
       group.scale.setScalar(1.3);
       app.scene.add(group);
 
@@ -380,10 +393,10 @@ export default function HeroScene() {
               <span className="fallback">U</span>
             </span>
             RN DAT
-            <span className="obj-slot">
-              <canvas ref={canvasCompassRef} />
-              <span className="fallback">A</span>
-            </span>
+          <span className="obj-slot compass-slot">
+          <canvas ref={canvasCompassRef} />
+          <span className="fallback">A</span>
+        </span>
           </span>
           <span className="line">
             INTO VISI
@@ -429,6 +442,9 @@ export default function HeroScene() {
             margin: 0 0.02em;
           }
           .voda-hero-scene .obj-slot.wide { width: 1.78em; }
+          .voda-hero-scene .obj-slot.compass-slot {
+            margin-left: -0.14em;
+          }
           .voda-hero-scene .obj-slot canvas {
             position: absolute;
             inset: 0;
