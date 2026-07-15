@@ -592,9 +592,9 @@ export default function App() {
               {/* 아이콘 */}
               <div
                 style={{
-                  width: on ? 56 : 44,
-                  height: on ? 56 : 44,
-                  color: on ? "#FFFFFF" : "#3A4258",
+                  width: on ? 40 : 54,
+                  height: on ? 40 : 54,
+                  color: on ? "#FFFFFF" : "#B4BCD1",
                   transition: "width 0.45s ease, height 0.45s ease, color 0.4s ease",
                   flexShrink: 0,
                 }}
@@ -624,7 +624,7 @@ export default function App() {
                   className="font-suit"
                   style={{
                     margin: 0,
-                    fontSize: on ? (isAreaMobile ? 23 : 26) : isAreaMobile ? 18 : 19,
+                    fontSize: on ? (isAreaMobile ? 27 : 31) : isAreaMobile ? 20 : 22,
                     fontWeight: 700,
                     letterSpacing: "-0.02em",
                     lineHeight: 1.25,
@@ -670,17 +670,27 @@ export default function App() {
                     </li>
                   ))}
                 </ul>
-                <div className="flex items-center gap-1.5 mt-4">
-                  <span className="text-[11px] font-bold tracking-wide" style={{ color: "rgba(255,255,255,0.85)" }}>
-                    자세히 보기
-                  </span>
+                <span
+                  className="inline-flex items-center gap-1 rounded-full border transition-all duration-200 ease-out group-hover:bg-white group-hover:border-white active:scale-95 mt-4"
+                  style={{
+                    padding: "7px 14px",
+                    fontSize: 11.5,
+                    fontWeight: 700,
+                    letterSpacing: "0.02em",
+                    color: "#FFFFFF",
+                    background: "rgba(255,255,255,0.14)",
+                    borderColor: "rgba(255,255,255,0.28)",
+                  }}
+                >
+                  <span className="transition-colors duration-200 group-hover:text-[#0e1b52]">자세히 보기</span>
                   <ChevronRight
                     size={13}
-                    className="transition-transform group-hover:translate-x-1"
-                    style={{ color: "rgba(255,255,255,0.85)" }}
+                    className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-[#0e1b52]"
                   />
-                </div>
+                </span>
               </div>
+
+              <div style={{ flexGrow: on ? 1 : 0, transition: "flex-grow 0.5s ease" }} />
             </Link>
           );
         })}
