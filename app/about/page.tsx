@@ -1,130 +1,218 @@
 "use client";
 
-import { ArrowRight, MapPin, Phone, Train, ChevronRight } from "lucide-react";
-import { useState, useEffect, useRef } from "react";
+import { Bus, Car, Train } from "lucide-react";
+import { useRef } from "react";
+import OurGoals from "./components/OurGoals";
 
 const NAVY = "#1a3570";
 const BLUE = "#2d6bff";
 
+const RADAR_NODES = [
+  { angle: 24, r: 92, delay: 0 },
+  { angle: 108, r: 150, delay: 0.55 },
+  { angle: 196, r: 118, delay: 1.1 },
+  { angle: 262, r: 208, delay: 0.28 },
+  { angle: 338, r: 176, delay: 0.85 },
+  { angle: 64, r: 246, delay: 1.4 },
+];
+
 export default function AboutPage() {
+  const radarRef = useRef<HTMLDivElement>(null);
+
+  function handleHeroMouseMove(e: React.MouseEvent<HTMLElement>) {
+    const el = e.currentTarget;
+    const radar = radarRef.current;
+    if (!radar) return;
+    const rect = el.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    radar.style.transform = `translate(${x * 18}px, ${y * 18}px)`;
+  }
+
   return (
     <div className="min-h-screen bg-background text-foreground" style={{ fontFamily: "'Noto Sans KR', 'Outfit', sans-serif" }}>
-      
+
 {/* ── 01. COMPANY HERO ────────────────────────────── */}
       <section
-        className="pt-32 pb-24 relative overflow-hidden px-6 sm:px-10 lg:px-24"
-        style={{ background: "#fff" }}
+        className="relative flex min-h-[92vh] items-center overflow-hidden bg-white"
+        onMouseMove={handleHeroMouseMove}
       >
-        {/* Background decorative elements */}
+        {/* 배경 도트 그리드 (아주 옅게) */}
         <div
-          className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full opacity-5 pointer-events-none"
+          className="pointer-events-none absolute inset-0"
+          aria-hidden="true"
           style={{
-            background: `radial-gradient(circle, ${BLUE}, transparent)`,
-            transform: "translate(30%, -30%)",
-          }}
-        />
-        <div
-          className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full opacity-[0.04] pointer-events-none"
-          style={{
-            background: `radial-gradient(circle, ${NAVY}, transparent)`,
-            transform: "translate(-40%, 40%)",
+            backgroundImage: "radial-gradient(rgba(26,53,112,0.1) 1px, transparent 1px)",
+            backgroundSize: "34px 34px",
+            maskImage: "linear-gradient(180deg, black 0%, transparent 85%)",
+            WebkitMaskImage: "linear-gradient(180deg, black 0%, transparent 85%)",
           }}
         />
 
-        <div className="max-w-6xl mx-auto">
-          <div className="max-w-5xl">
-            <span
-              className="inline-block text-xs font-semibold tracking-widest uppercase mb-6 px-3 py-1.5 rounded-full"
-              style={{
-                color: BLUE,
-                background: "rgba(45,107,255,0.08)",
-                letterSpacing: "0.15em",
-              }}
-            >
-              About VODA CAMPUS
-            </span>
-
-            <h1
-              className="text-5xl md:text-6xl lg:text-7xl font-black mb-8 leading-[1.1]"
-              style={{
-                color: NAVY,
-                letterSpacing: "-0.03em",
-                fontFamily: "'Noto Sans KR', sans-serif",
-              }}
-            >
-              데이터의 가치
-              <span style={{ color: BLUE }}>
-                (Value Of Data)
+        <div className="relative w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+          <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr] items-center gap-y-16">
+            {/* 텍스트 — 최소화 */}
+            <div className="voda-reveal relative z-10 lg:pr-10">
+              <span
+                className="mb-8 inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-semibold uppercase"
+                style={{
+                  color: BLUE,
+                  background: "rgba(45,107,255,0.08)",
+                  border: "1px solid rgba(45,107,255,0.18)",
+                  letterSpacing: "0.15em",
+                }}
+              >
+                <span className="relative inline-flex h-1.5 w-1.5" aria-hidden="true">
+                  <span
+                    className="voda-tf absolute inset-0 rounded-full"
+                    style={{ border: `1.5px solid ${BLUE}`, animation: "voda-lens-ring 2.6s ease-out infinite" }}
+                  />
+                  <span
+                    className="absolute inset-0 rounded-full"
+                    style={{ background: BLUE, animation: "voda-lens-core 2.6s ease-in-out infinite" }}
+                  />
+                </span>
+                About VODA CAMPUS
               </span>
-              로<br />
-              지속 가능한 미래를 봅니다.
-            </h1>
 
-            <p className="text-lg text-gray-600 leading-relaxed mb-12 max-w-2xl font-light">
-              VODA는 AI 및 디지털 기술을 통해 기업의 혁신을 돕는
-              '보다웍스'와,
-              <br className="hidden sm:block" />
-              미래 인재를 양성하는 에듀테크 '보다캠퍼스'를 통해
-              세상의 성장을 연결합니다.
-            </p>
-
-            {/* Core Values */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-              {[
-                {
-                  label: "혁신 (Innovation)",
-                  desc: "AI 기술 중심의 문제 해결",
-                  num: "01",
-                },
-                {
-                  label: "성장 (Growth)",
-                  desc: "교육을 통한 인재 발굴",
-                  num: "02",
-                },
-                {
-                  label: "연결 (Connection)",
-                  desc: "기술과 사람의 시너지",
-                  num: "03",
-                },
-              ].map((v) => (
-                <div
-                  key={v.num}
-                  className="group p-6 rounded-2xl border transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 cursor-default"
-                  style={{
-                    borderColor: "rgba(26,53,112,0.1)",
-                    background: "#fafbff",
-                  }}
+              <h1
+                className="font-black leading-[1.14] whitespace-nowrap"
+                style={{
+                  color: NAVY,
+                  letterSpacing: "-0.045em",
+                  fontSize: "clamp(2.75rem, 7vw, 5.75rem)",
+                  fontFamily: "'Noto Sans KR', sans-serif",
+                }}
+              >
+                데이터의 가치를
+                <br />
+                증명합니다
+                {/* 마침표 = 렌즈 도트 (VODA, '보다') */}
+                <span
+                  className="voda-lens relative ml-3 inline-block align-baseline"
+                  style={{ width: "0.22em", height: "0.22em" }}
+                  aria-hidden="true"
                 >
                   <span
-                    className="text-xs font-black mb-4 block"
+                    className="voda-tf absolute inset-0 rounded-full"
                     style={{
-                      color: BLUE,
-                      fontFamily: "'Outfit', sans-serif",
-                      letterSpacing: "0.05em",
+                      border: `2px solid ${BLUE}`,
+                      animation: "voda-lens-ring 2.6s ease-out infinite",
                     }}
-                  >
-                    {v.num}
-                  </span>
-                  <p
-                    className="font-bold text-base mb-1"
-                    style={{ color: NAVY }}
-                  >
-                    {v.label}
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    {v.desc}
-                  </p>
-                </div>
-              ))}
+                  />
+                  <span
+                    className="absolute inset-0 rounded-full"
+                    style={{
+                      background: BLUE,
+                      animation: "voda-lens-core 2.6s ease-in-out infinite",
+                    }}
+                  />
+                </span>
+              </h1>
+            </div>
+
+            {/* 레이더 비주얼 — 데이터를 감지/연결하는 VODA('보다') */}
+            <div
+              ref={radarRef}
+              className="voda-reveal-delay relative mx-auto aspect-square w-full max-w-105 lg:max-w-none lg:justify-self-end"
+              style={{ transition: "transform 0.3s ease-out" }}
+              aria-hidden="true"
+            >
+              <div
+                className="absolute inset-0 rounded-full"
+                style={{
+                  background:
+                    "conic-gradient(from 0deg, transparent 0deg, rgba(45,107,255,0.22) 26deg, transparent 70deg)",
+                  animation: "voda-radar-spin 5s linear infinite",
+                }}
+              />
+              <svg viewBox="0 0 600 600" className="absolute inset-0 h-full w-full">
+                {[86, 150, 214, 278].map((r, i) => (
+                  <circle
+                    key={r}
+                    cx="300"
+                    cy="300"
+                    r={r}
+                    fill="none"
+                    stroke={NAVY}
+                    strokeWidth="1"
+                    opacity={0.22 - i * 0.045}
+                  />
+                ))}
+
+                {RADAR_NODES.map((n, i) => {
+                  const rad = (n.angle * Math.PI) / 180;
+                  const cx = 300 + n.r * Math.cos(rad);
+                  const cy = 300 + n.r * Math.sin(rad);
+                  return (
+                    <g key={i}>
+                      <line x1="300" y1="300" x2={cx} y2={cy} stroke={BLUE} strokeWidth="1" opacity="0.14" />
+                      <circle
+                        className="voda-tf"
+                        cx={cx}
+                        cy={cy}
+                        r="10"
+                        fill="none"
+                        stroke={BLUE}
+                        strokeWidth="1.5"
+                        style={{ animation: `voda-node-ring 3s ease-out ${n.delay}s infinite` }}
+                      />
+                      <circle cx={cx} cy={cy} r="4" fill={BLUE} />
+                    </g>
+                  );
+                })}
+
+                <circle cx="300" cy="300" r="34" fill="#ffffff" stroke={BLUE} strokeWidth="1.5" opacity="0.9" />
+                <circle
+                  className="voda-tf"
+                  cx="300"
+                  cy="300"
+                  r="34"
+                  fill="none"
+                  stroke={BLUE}
+                  strokeWidth="1.5"
+                  style={{ animation: "voda-lens-ring 2.6s ease-out infinite" }}
+                />
+                <circle cx="300" cy="300" r="9" fill={BLUE} style={{ animation: "voda-lens-core 2.6s ease-in-out infinite" }} className="voda-tf" />
+              </svg>
             </div>
           </div>
         </div>
-      </section>
 
-      {/* Divider */}
-      <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-24">
-        <hr style={{ borderColor: "rgba(26,53,112,0.08)" }} />
-      </div>
+        <style>{`
+          @keyframes voda-fade-up {
+            from { opacity: 0; transform: translateY(28px); }
+            to   { opacity: 1; transform: translateY(0); }
+          }
+          @keyframes voda-lens-ring {
+            0%   { transform: scale(0.6); opacity: 0.9; }
+            100% { transform: scale(1.9); opacity: 0; }
+          }
+          @keyframes voda-lens-core {
+            0%, 100% { transform: scale(1); }
+            50%      { transform: scale(0.82); }
+          }
+          @keyframes voda-radar-spin {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
+          }
+          @keyframes voda-node-ring {
+            0%   { transform: scale(0.5); opacity: 0.9; }
+            100% { transform: scale(1.8); opacity: 0; }
+          }
+
+          .voda-reveal { animation: voda-fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+          .voda-reveal-delay { animation: voda-fade-up 1s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both; }
+          .voda-tf { transform-box: fill-box; transform-origin: center; }
+
+          @media (prefers-reduced-motion: reduce) {
+            .voda-reveal, .voda-reveal-delay, .voda-lens, .voda-lens *,
+            [style*="voda-radar-spin"], .voda-tf {
+              animation: none !important;
+            }
+          }
+        `}</style>
+      </section>
 
       {/* ── 02. CEO GREETING ────────────────────────────── */}
       <section className="py-24 bg-white px-6 sm:px-10 lg:px-24">
@@ -140,7 +228,7 @@ export default function AboutPage() {
               </span>
 
               <h2
-                className="text-3xl md:text-4xl font-black leading-[1.25]"
+                className="text-3xl md:text-4xl font-black leading-tight"
                 style={{
                   color: NAVY,
                   letterSpacing: "-0.025em",
@@ -152,19 +240,13 @@ export default function AboutPage() {
               <div className="space-y-4 text-gray-600 leading-relaxed text-sm">
                 <p>
                   안녕하세요, VODA 대표 OOO입니다. 우리는
-                  데이터와 AI 기술의 가능성을 증명해왔습니다.
+                  데이터와 AI로 기업의 성장을 도와왔습니다.
                 </p>
                 <p>
-                  이제 VODA(보다)라는 새로운 도약대 위에서,
-                  고도화된 개발 사업(Works)과 선진화된 IT 교육
-                  사업(Campus)을 융합하여 더욱 신뢰할 수 있는
-                  파트너가 되고자 합니다.
+                  이제 개발(Works)과 교육(Campus)을 하나로 잇는
+                  VODA로, 기술과 사람을 함께 성장시키는 파트너가
+                  되겠습니다. 감사합니다.
                 </p>
-                <p>
-                  기술로 기업을 이롭게 하고, 교육으로 사람을
-                  키우는 VODA의 여정에 함께해 주시기 바랍니다.
-                </p>
-                <p>감사합니다.</p>
               </div>
 
               <div
@@ -183,7 +265,14 @@ export default function AboutPage() {
         </div>
       </section>
 
-     
+      {/* Divider */}
+      <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-24">
+        <hr style={{ borderColor: "rgba(26,53,112,0.08)" }} />
+      </div>
+
+      {/* ── 03. OUR GOALS ──────────────────────────────── */}
+      <OurGoals />
+
      {/* ── 04. DIRECTIONS ──────────────────────────────── */}
 <section className="py-24 bg-white px-6 sm:px-10 lg:px-24">
   <div className="max-w-6xl mx-auto">
@@ -204,15 +293,18 @@ export default function AboutPage() {
 
     {/* 지도 (실제 이미지, 말풍선은 이미지 안에 이미 포함되어 있음) */}
 
-<div
-  className="w-full max-w-6xl mx-auto rounded-3xl mb-10 overflow-hidden"
+<a
+  href="https://naver.me/GsBKqXjt"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="block w-full max-w-6xl mx-auto rounded-3xl mb-10 overflow-hidden"
 >
   <img
     src="/voda_map.png"
     alt="VODA 오시는 길 지도"
     className="w-full h-auto object-cover"
   />
-</div>
+</a>
 
     {/* 하단 정보: 지하철 / 버스 / 자차 */}
 <div className="max-w-6xl mx-auto space-y-6">
@@ -226,7 +318,7 @@ export default function AboutPage() {
       ],
     },
     {
-      icon: <MapPin size={20} />,
+      icon: <Bus size={20} />,
       label: "버스 이용 시",
       lines: [
         "142번, 147번 : 신당누리센터.신당동떡볶이타운 하차 후 도보 2분",
@@ -234,7 +326,7 @@ export default function AboutPage() {
       ],
     },
     {
-      icon: <Phone size={20} />,
+      icon: <Car size={20} />,
       label: "자차 이용 시",
       lines: ["네비게이션에 '서울 중구 다산로36길 11' 입력"],
     },
