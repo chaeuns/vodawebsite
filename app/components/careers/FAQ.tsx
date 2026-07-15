@@ -1,20 +1,41 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { faqs } from "./data";
 import FillHeading from "@/app/components/shared/FillHeading";
-import { useScrollReveal } from "@/app/components/shared/useScrollReveal";
+
+function useRepeatingReveal(threshold: number) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [threshold]);
+
+  return { ref, isVisible };
+}
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const { ref, isVisible } = useScrollReveal();
+  const { ref, isVisible } = useRepeatingReveal(0.1);
 
   return (
     <section
       ref={ref}
-      className="bg-[#F9FAFB] py-[80px] relative z-30 -mt-10 shadow-[0_-24px_48px_-12px_rgba(0,0,0,0.1)] transition-all duration-[900ms] ease-out"
+      className="py-[80px] relative z-30 -mt-10 transition-all duration-[900ms] ease-out"
       style={{
+        background:
+          "linear-gradient(to bottom, #ffffff 0%, #E8EDF8 15%, #D6E0F5 50%, #E8EDF8 85%, #ffffff 100%)",
         transform: isVisible ? "translateY(0)" : "translateY(80px)",
         opacity: isVisible ? 1 : 0,
       }}
@@ -51,7 +72,7 @@ export default function FAQ() {
               </button>
               {openIndex === i && (
                 <div className="px-6 pb-5">
-                  <p className="text-[14px] text-[#6B7280] leading-[1.7]">{faq.a}</p>
+                  <p className="text-[14px] text-[#6B7280] leading-[1.7] whitespace-pre-line">{faq.a}</p>
                 </div>
               )}
             </div>

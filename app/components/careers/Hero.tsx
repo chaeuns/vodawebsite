@@ -15,7 +15,7 @@ export default function Hero() {
 
       <section
         className="relative flex items-center pt-16 overflow-hidden bg-[#0D1B40]"
-        style={{ minHeight: 640 }}
+        style={{ minHeight: 420 }}
       >
         <Image
           src="/images/career_hero_image.png"
@@ -32,7 +32,7 @@ export default function Hero() {
           }}
         />
 
-        <div className="relative max-w-[1100px] mx-auto px-6 py-[60px] md:py-[100px]">
+        <div className="relative max-w-[1100px] mx-auto px-6 py-8 md:py-10">
           <p
             style={{ letterSpacing: "2px" }}
             className="hero-fade-1 text-[#60A5FA] text-[12px] font-semibold uppercase"
