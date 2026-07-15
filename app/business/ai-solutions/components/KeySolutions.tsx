@@ -39,16 +39,6 @@ export default function KeySolutions() {
         opacity: isVisible ? 1 : 0,
       }}
     >
-      {/* top-center glow, echoes the Educational Ideology section's tone */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-[420px]"
-        style={{
-          background:
-            "radial-gradient(60% 60% at 50% 0%, rgba(37,99,235,0.12) 0%, rgba(37,99,235,0) 70%)",
-        }}
-      />
-
       <div className="max-w-[1100px] mx-auto px-6 relative">
         <p
           style={{ letterSpacing: "1.5px" }}
