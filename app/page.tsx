@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef} from "react";
+import Link from "next/link";
 import {
   ChevronRight,
   GraduationCap,
@@ -23,6 +24,13 @@ const MISSION_WORDS = [
   "변화를",
   "미래를",
   "인재를",
+];
+
+const MISSION_GRADIENTS = [
+  "bg-gradient-to-r from-[#3566E8] via-[#7C3AED] to-[#C026D3]", // 가능성을 — blue → violet → magenta
+  "bg-gradient-to-r from-[#0EA5E9] via-[#22D3EE] to-[#34D399]", // 변화를 — sky → cyan → emerald
+  "bg-gradient-to-r from-[#8B5CF6] via-[#EC4899] to-[#FB7185]", // 미래를 — violet → pink → rose
+  "bg-gradient-to-r from-[#F59E0B] via-[#F97316] to-[#EF4444]", // 인재를 — amber → orange → red
 ];
 
 const SOLUTIONS = [
@@ -156,6 +164,7 @@ const SERVICES = [
     title: "교육 사업",
     desc: "정부와 기업이 필요로 하는 실무형 AI·데이터 인재를 양성합니다. 정부 지원 교육과정부터 기업 맞춤형 커리큘럼까지 운영합니다.",
     items: ["정부교육", "기업교육"],
+    href: "/business/curriculum",
   },
   {
     num: "02.",
@@ -164,6 +173,7 @@ const SERVICES = [
     title: "AI 솔루션",
     desc: "AI, 메타버스, 블록체인 기술을 기반으로 고객사의 요구에 맞는 웹·앱 플랫폼과 주문형 솔루션을 개발합니다.",
     items: ["주문형 솔루션 개발", "웹·앱 플랫폼", "AI, 메타버스, 블록체인"],
+    href: "/business/ai-solutions",
   },
   {
     num: "03.",
@@ -172,6 +182,7 @@ const SERVICES = [
     title: "AI 자격인증",
     desc: "AI 활용 역량을 객관적으로 평가하고 인증하는 통합 검증 체계를 구축해, 개인과 조직의 AI 역량을 데이터로 증명합니다.",
     items: ["AI 활용 역량 자격인증", "AI 기반 역량평가", "통합 검증 체계"],
+    href: "/business/ai-certification",
   },
   {
     num: "04.",
@@ -180,6 +191,7 @@ const SERVICES = [
     title: "클라우드",
     desc: "안정적인 클라우드 전환과 지속적인 유지보수로 교육·비즈니스 인프라의 신뢰성을 지원합니다.",
     items: ["클라우드 전환", "유지보수"],
+    href: "/services/cloud",
   },
   {
     num: "05.",
@@ -188,6 +200,7 @@ const SERVICES = [
     title: "컨설팅",
     desc: "조직의 AI·AX 전략 수립과 역량 진단을 통해 데이터 기반 의사결정 체계로의 전환을 돕습니다.",
     items: ["AI·AX 전략 수립", "조직 역량 진단"],
+    href: "/business/consulting",
   },
 ];
 
@@ -231,7 +244,60 @@ export default function App() {
   const [missionIdx, setMissionIdx] = useState(0);
   const [missionIn, setMissionIn] = useState(true);
   const [whyTab, setWhyTab] = useState("campus");
-  const [openService, setOpenService] = useState(1);
+
+  /* Services — scroll-driven vertical storytelling list */
+  const svcSectionRef = useRef<HTMLDivElement>(null);
+  const [svcRenderIndex, setSvcRenderIndex] = useState(0);
+  const svcTargetRef = useRef(0);
+  const svcSmoothRef = useRef(0);
+  const svcRafRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    const tick = () => {
+      const target = svcTargetRef.current;
+      const current = svcSmoothRef.current;
+      const next = current + (target - current) * 0.09;
+      svcSmoothRef.current = next;
+      setSvcRenderIndex(next);
+      if (Math.abs(target - next) > 0.001) {
+        svcRafRef.current = requestAnimationFrame(tick);
+      } else {
+        svcSmoothRef.current = target;
+        setSvcRenderIndex(target);
+        svcRafRef.current = null;
+      }
+    };
+
+    const handleScroll = () => {
+      const el = svcSectionRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const scrollable = rect.height - window.innerHeight;
+      if (scrollable <= 0) return;
+      const scrolled = Math.min(Math.max(-rect.top, 0), scrollable);
+      const progress = scrolled / scrollable;
+      svcTargetRef.current = progress * (SERVICES.length - 1);
+      if (svcRafRef.current == null) {
+        svcRafRef.current = requestAnimationFrame(tick);
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (svcRafRef.current) cancelAnimationFrame(svcRafRef.current);
+    };
+  }, []);
+
+  const scrollToServiceIndex = (i: number) => {
+    const el = svcSectionRef.current;
+    if (!el) return;
+    const scrollable = el.offsetHeight - window.innerHeight;
+    const sectionTop = window.scrollY + el.getBoundingClientRect().top;
+    const target =
+      sectionTop + (i / (SERVICES.length - 1)) * scrollable;
+    window.scrollTo({ top: target, behavior: "smooth" });
+  };
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -245,10 +311,10 @@ export default function App() {
   }, []);
 
   return (
-    <div
-      className="min-h-screen bg-white text-[#0e1b52] overflow-x-hidden"
-      style={{ fontFamily: "'Noto Sans KR', sans-serif" }}
-    >
+      <div
+      className="min-h-screen bg-white text-[#0e1b52]"
+       style={{ fontFamily: "'Noto Sans KR', sans-serif" }}
+      >   
       <style>{`
         /* VODA fill: #EDEDED → #3566E8, left → right */
         @keyframes vodaFill {
@@ -272,44 +338,40 @@ export default function App() {
         .mw-out { opacity:0; transform:translateY(10px); }
 
 
-      /* Group glass panel */
+      /* Group glass panel — bright glass */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8px 40px rgba(14, 27, 82, 0.08);
 }
 
-/* Service card: glass, hover fills brand blue glass */
+/* Service card: bright glass, hover fills brand blue */
 .sc {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 18px rgba(14, 27, 82, 0.05);
   transition: background .26s ease, border-color .26s ease, box-shadow .26s ease;
 }
 .sc:hover {
-  background: rgba(53, 102, 232, 0.28);
-  border-color: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 8px 24px rgba(53, 102, 232, 0.25);
+  background: rgba(53, 102, 232, 0.92);
+  border-color: rgba(53, 102, 232, 0.92);
+  box-shadow: 0 10px 30px rgba(53, 102, 232, 0.3);
 }
 .sc .sc-num, .sc .sc-title, .sc .sc-en { transition:color .26s ease; }
-.sc:hover .sc-num   { color:rgba(255,255,255,.4); }
+.sc:hover .sc-num   { color:rgba(255,255,255,.55); }
 .sc:hover .sc-title { color:#fff; }
-.sc:hover .sc-en    { color:rgba(255,255,255,.55); }
-
-        .sc .sc-num, .sc .sc-title, .sc .sc-en { transition:color .26s ease; }
-        .sc:hover .sc-num   { color:rgba(255,255,255,.3); }
-        .sc:hover .sc-title { color:#fff; }
-        .sc:hover .sc-en    { color:rgba(255,255,255,.45); }
-        .sc .sc-desc {
-          max-height:0; opacity:0; overflow:hidden;
-          color:rgba(255,255,255,.75);
-          transition: max-height .32s ease, opacity .28s ease;
-          font-size:.8125rem; line-height:1.65; margin-top:.75rem;
-        }
-        .sc:hover .sc-desc { max-height:5rem; opacity:1; }
+.sc:hover .sc-en    { color:rgba(255,255,255,.7); }
+.sc .sc-desc {
+  max-height:0; opacity:0; overflow:hidden;
+  color:rgba(255,255,255,.9);
+  transition: max-height .32s ease, opacity .28s ease;
+  font-size:.8125rem; line-height:1.65; margin-top:.75rem;
+}
+.sc:hover .sc-desc { max-height:5rem; opacity:1; }
 
         /* Partner pill */
         .pp { transition:border-color .2s, color .2s; }
@@ -324,11 +386,6 @@ export default function App() {
         .nc:hover .nc-title { color:#3566e8; }
         .nc .nc-bar { transform:scaleX(0); transform-origin:left; transition:transform .28s ease; }
         .nc:hover .nc-bar { transform:scaleX(1); }
-
-       .svc-card { min-height: 100%; }
-@media (min-width: 768px) {
-  .svc-card { flex-basis: 0; }
-}
 
         ::-webkit-scrollbar { width:3px; }
         ::-webkit-scrollbar-thumb { background:rgba(14,27,82,.15); border-radius:2px; }
@@ -371,6 +428,25 @@ export default function App() {
 .why-content { animation: fadeSlideUp .3s ease forwards; }
 
 .why-pill { transition: background .22s ease, border-color .22s ease, color .22s ease; }
+
+        /* ── Services — futuristic card carousel ─────────── */
+        @keyframes svcGridDrift {
+          from { background-position: 0 0; }
+          to   { background-position: 48px 48px; }
+        }
+        .svc-grid-bg { animation: svcGridDrift 20s linear infinite; }
+
+        .svc-card {
+          transition: box-shadow .4s ease, border-color .4s ease, background .5s ease;
+        }
+
+        @keyframes svcPulse {
+          0%, 100% { opacity: 1; }
+          50%      { opacity: .3; }
+        }
+        .svc-pulse-dot { animation: svcPulse 1.6s ease-in-out infinite; }
+
+        .svc-dot { transition: width .3s ease, background .3s ease, opacity .3s ease; }
       `}</style>
 
       {/* ══════════════════════════════════════════════
@@ -381,7 +457,7 @@ export default function App() {
     {/* Rotating word + VODA logo */}
     <div className="flex items-center justify-center gap-6 flex-wrap mb-14">
       <span
-        className={`mw ${missionIn ? "mw-in" : "mw-out"} font-black text-[#2d6bff] leading-none`}
+        className={`mw ${missionIn ? "mw-in" : "mw-out"} font-black leading-none ${MISSION_GRADIENTS[missionIdx]} bg-clip-text text-transparent`}
         style={{
           fontFamily: "'Epilogue',sans-serif",
           fontSize: "5.83rem",
@@ -412,7 +488,7 @@ export default function App() {
 </section>
 
       {/* ══════════════════════════════════════════════
-    Services — 넘버링 기반 확장 카드
+    Services — 스크롤 기반 수평 스토리텔링
 ══════════════════════════════════════════════ */}
 <section className="border-b border-[rgba(14,27,82,0.07)]">
   <div className="max-w-[1440px] mx-auto px-10">
@@ -436,132 +512,229 @@ export default function App() {
         </h2>
       </div>
     </div>
+  </div>
 
-    <div className="grid grid-cols-1 md:grid-cols-5 gap-3 py-12">
-      {SERVICES.map((s, i) => {
-        const Icon = s.icon;
-        const isOpen = openService === i;
-        return (
-          <div
-            key={s.num}
-            onMouseEnter={() => setOpenService(i)}
-            className={`svc-card relative rounded-2xl border cursor-default overflow-hidden transition-all duration-500 ease-out ${
-  isOpen
-    ? "md:scale-[1.05] md:z-10 border-[rgba(14,27,82,0.1)] bg-white shadow-[0_16px_44px_rgba(14,27,82,0.14)]"
-    : "border-[rgba(14,27,82,0.08)] bg-white"
-}`}
-          >
-            {/* 확장 상태: 상단 그라디언트 액센트 */}
-            {isOpen && (
-  <div className="px-5 pt-5 md:px-6 md:pt-6">
+  <div
+    ref={svcSectionRef}
+    style={{ height: `${SERVICES.length * 30}vh`, position: "relative" }}
+  >
     <div
-      className="h-28 md:h-32 w-full rounded-xl relative overflow-hidden"
-      style={{
-        background:
-          "linear-gradient(135deg, #EEF2FF 0%, #C9D8FF 50%, #3566E8 100%)",
-      }}
+      className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden"
+      style={{ background: "linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 100%)" }}
     >
-      <svg
-        viewBox="0 0 400 160"
-        className="absolute inset-0 w-full h-full opacity-60"
-        preserveAspectRatio="xMidYMid slice"
+      {/* Futuristic grid backdrop */}
+      <div
+        className="svc-grid-bg absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(53,102,232,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(53,102,232,0.06) 1px, transparent 1px)",
+          backgroundSize: "48px 48px",
+          maskImage:
+            "radial-gradient(ellipse 70% 55% at 50% 48%, black 30%, transparent 100%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 70% 55% at 50% 48%, black 30%, transparent 100%)",
+        }}
+      />
+
+      {/* Card carousel stage — every area stays in one row; the active one is emphasized */}
+      <div
+        className="relative z-10 w-full flex-1 flex items-center justify-center px-6 md:px-10 overflow-x-auto"
+        style={{ perspective: "1400px" }}
       >
-        <path
-          d="M-20,120 C80,60 140,140 220,70 C280,10 340,50 420,10"
-          stroke="#0E1B52"
-          strokeWidth="1.2"
-          fill="none"
-          opacity="0.3"
-        />
-        <path
-          d="M-20,90 C90,130 160,40 240,100 C300,140 360,70 420,110"
-          stroke="#3566E8"
-          strokeWidth="1.2"
-          fill="none"
-          opacity="0.45"
-        />
-      </svg>
-    </div>
-  </div>
-)}
+        <div className="flex flex-nowrap gap-3 md:gap-5 max-w-[1440px] w-full mx-auto">
+          {SERVICES.map((s, i) => {
+            const Icon = s.icon;
+            const diff = i - svcRenderIndex;
+            const absDiff = Math.abs(diff);
+            const active = absDiff < 0.5;
+            const emphasis = Math.max(0, 1 - absDiff); // 1 at active, fades over neighbors
 
-            <div className="p-6 flex flex-col h-full">
-              {!isOpen && (
-  <div className="hidden md:flex flex-col justify-between h-full min-h-[220px] text-left">
-    <span
-      className="font-black text-[#dbe2f5]"
-      style={{
-        fontFamily: "'Epilogue',sans-serif",
-        fontSize: "4rem",
-        letterSpacing: "-0.02em",
-      }}
-    >
-      {s.num}
-    </span>
-    <div className="flex flex-col gap-3">
-      <div className="w-9 h-9 rounded-lg bg-[#EEF2FF] flex items-center justify-center">
-        <Icon size={16} className="text-[#3566e8]" />
-      </div>
-      <span
-        className="text-lg font-bold text-[#0e1b52] leading-snug break-keep"
-        style={{ fontFamily: "'Epilogue',sans-serif" }}
-      >
-        {s.title}
-      </span>
-    </div>
-  </div>
-)}
+            const rotateY = Math.max(-26, Math.min(26, diff * 16));
+            const translateZ = -Math.min(absDiff, 2) * 40;
+            const scale = 1 + emphasis * 0.1 - Math.max(0, absDiff - 1) * 0.04;
+            const translateY = -emphasis * 22;
+            const zIndex = 10 + Math.round(emphasis * 10);
 
-              {/* 모바일: 항상 펼쳐진 형태로 표시 */}
-              <div className={`${isOpen ? "flex" : "md:hidden flex"} flex-col`}>
-                <div className="flex items-center justify-between mb-5">
-                  <span
-                    className="text-xs font-bold tracking-widest text-[#b8c3de]"
-                    style={{ fontFamily: "'Epilogue',sans-serif" }}
-                  >
-                    {s.num}
-                  </span>
-                  <div className="w-9 h-9 rounded-lg bg-[#EEF2FF] flex items-center justify-center">
-                    <Icon size={16} className="text-[#3566e8]" />
-                  </div>
-                </div>
-
-                <p
-                  className="text-[11px] font-bold tracking-[0.2em] text-[#3566e8] uppercase mb-2"
-                  style={{ fontFamily: "'Epilogue',sans-serif" }}
-                >
-                  {s.label}
-                </p>
-                <h3
-                  className="font-black text-[#0e1b52] leading-tight mb-3"
+            return (
+              <Link
+                key={s.num}
+                href={s.href}
+                className="svc-card group relative block rounded-[24px] overflow-hidden"
+                style={{
+                  flex: "1 0 clamp(150px, 18vw, 264px)",
+                  height: "clamp(340px, 32vw, 420px)",
+                  transform: `translateY(${translateY}px) translateZ(${translateZ}px) scale(${scale}) rotateY(${rotateY}deg)`,
+                  zIndex,
+                  background: active
+                    ? "linear-gradient(160deg, rgba(10,20,64,0.98) 0%, rgba(28,48,120,0.95) 100%)"
+                    : "rgba(255,255,255,0.65)",
+                  backdropFilter: "blur(14px)",
+                  WebkitBackdropFilter: "blur(14px)",
+                  border: active
+                    ? "1px solid rgba(130,170,255,0.45)"
+                    : "1px solid rgba(14,27,82,0.08)",
+                  boxShadow: active
+                    ? "0 28px 56px rgba(16,32,110,0.35), 0 0 36px rgba(80,130,255,0.18)"
+                    : "0 8px 24px rgba(14,27,82,0.05)",
+                }}
+              >
+                {/* HUD corner brackets */}
+                <span
+                  className="absolute top-4 left-4 w-3 h-3"
                   style={{
-                    fontFamily: "'Epilogue',sans-serif",
-                    fontSize: "clamp(1.15rem,1.6vw,1.4rem)",
-                    letterSpacing: "-0.02em",
+                    borderTop: `2px solid ${active ? "rgba(150,190,255,0.55)" : "rgba(53,102,232,0.25)"}`,
+                    borderLeft: `2px solid ${active ? "rgba(150,190,255,0.55)" : "rgba(53,102,232,0.25)"}`,
                   }}
-                >
-                  {s.title}
-                </h3>
-                <p className="text-sm text-[#5a6895] leading-relaxed mb-5">
-                  {s.desc}
-                </p>
+                />
+                <span
+                  className="absolute top-4 right-4 w-3 h-3"
+                  style={{
+                    borderTop: `2px solid ${active ? "rgba(150,190,255,0.55)" : "rgba(53,102,232,0.25)"}`,
+                    borderRight: `2px solid ${active ? "rgba(150,190,255,0.55)" : "rgba(53,102,232,0.25)"}`,
+                  }}
+                />
+                <span
+                  className="absolute bottom-4 left-4 w-3 h-3"
+                  style={{
+                    borderBottom: `2px solid ${active ? "rgba(150,190,255,0.55)" : "rgba(53,102,232,0.25)"}`,
+                    borderLeft: `2px solid ${active ? "rgba(150,190,255,0.55)" : "rgba(53,102,232,0.25)"}`,
+                  }}
+                />
+                <span
+                  className="absolute bottom-4 right-4 w-3 h-3"
+                  style={{
+                    borderBottom: `2px solid ${active ? "rgba(150,190,255,0.55)" : "rgba(53,102,232,0.25)"}`,
+                    borderRight: `2px solid ${active ? "rgba(150,190,255,0.55)" : "rgba(53,102,232,0.25)"}`,
+                  }}
+                />
 
-                <ul className="space-y-2 mt-auto">
-                  {s.items.map((item) => (
-                    <li
-                      key={item}
-                      className="text-sm text-[#0e1b52] flex items-center gap-2"
+                <div className="relative h-full flex flex-col p-5 md:p-6">
+                  <div className="flex items-center justify-between mb-5 md:mb-6">
+                    <span
+                      className="text-[11px] font-black tracking-[0.15em]"
+                      style={{
+                        fontFamily: "'Epilogue',sans-serif",
+                        color: active ? "rgba(255,255,255,0.5)" : "rgba(53,102,232,0.4)",
+                      }}
                     >
-                      <span className="w-1 h-1 rounded-full bg-[#3566e8] shrink-0" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        );
-      })}
+                      {s.num}
+                    </span>
+                    <div
+                      className="w-10 h-10 rounded-xl flex items-center justify-center"
+                      style={{
+                        background: active ? "rgba(255,255,255,0.12)" : "rgba(238,242,255,0.9)",
+                        border: active
+                          ? "1px solid rgba(255,255,255,0.22)"
+                          : "1px solid rgba(53,102,232,0.12)",
+                      }}
+                    >
+                      <Icon size={17} className={active ? "text-white" : "text-[#3566e8]"} />
+                    </div>
+                  </div>
+
+                  {active && (
+                    <div className="flex items-center gap-1.5 mb-3">
+                      <span
+                        className="svc-pulse-dot w-1.5 h-1.5 rounded-full"
+                        style={{ background: "#7dd3fc" }}
+                      />
+                      <span
+                        className="text-[9px] font-bold tracking-[0.22em] uppercase"
+                        style={{ color: "rgba(180,205,255,0.85)" }}
+                      >
+                        Active
+                      </span>
+                    </div>
+                  )}
+
+                  <span
+                    className="text-[10px] font-bold tracking-[0.2em] uppercase mb-2"
+                    style={{ color: active ? "rgba(150,180,255,0.9)" : "rgba(53,102,232,0.5)" }}
+                  >
+                    {s.label}
+                  </span>
+                  <h4
+                    className="font-black leading-tight mb-3"
+                    style={{
+                      fontFamily: "'Epilogue',sans-serif",
+                      fontSize: "1.15rem",
+                      letterSpacing: "-0.02em",
+                      color: active ? "#ffffff" : "#0e1b52",
+                    }}
+                  >
+                    {s.title}
+                  </h4>
+                  <p
+                    className="text-[12.5px] leading-relaxed mb-5 line-clamp-4"
+                    style={{ color: active ? "rgba(255,255,255,0.72)" : "#5a6895" }}
+                  >
+                    {s.desc}
+                  </p>
+
+                  <ul className="mt-auto flex flex-wrap gap-1.5">
+                    {s.items.map((item) => (
+                      <li
+                        key={item}
+                        className="text-[10.5px] font-semibold rounded-full px-2.5 py-1"
+                        style={{
+                          color: active ? "rgba(255,255,255,0.92)" : "#3566e8",
+                          background: active ? "rgba(255,255,255,0.1)" : "#EEF2FF",
+                          border: active ? "1px solid rgba(255,255,255,0.15)" : "none",
+                        }}
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="flex items-center gap-1.5 mt-4">
+                    <span
+                      className="text-[11px] font-bold tracking-wide"
+                      style={{ color: active ? "rgba(255,255,255,0.85)" : "rgba(53,102,232,0.7)" }}
+                    >
+                      자세히 보기
+                    </span>
+                    <ChevronRight
+                      size={13}
+                      className="transition-transform group-hover:translate-x-1"
+                      style={{ color: active ? "rgba(255,255,255,0.85)" : "rgba(53,102,232,0.7)" }}
+                    />
+                  </div>
+
+                  {active && (
+                    <span
+                      className="absolute bottom-0 left-6 right-6 h-[2px]"
+                      style={{
+                        background:
+                          "linear-gradient(90deg, transparent, rgba(120,170,255,0.9), transparent)",
+                      }}
+                    />
+                  )}
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Progress dots */}
+      <div className="relative z-10 flex justify-center items-center gap-2.5 mt-8">
+        {SERVICES.map((s, i) => {
+          const isActive = Math.round(svcRenderIndex) === i;
+          return (
+            <button
+              key={s.num}
+              onClick={() => scrollToServiceIndex(i)}
+              aria-label={s.title}
+              className="svc-dot h-2 rounded-full"
+              style={{
+                width: isActive ? 28 : 8,
+                background: isActive ? "#3566e8" : "rgba(53,102,232,0.25)",
+              }}
+            />
+          );
+        })}
+      </div>
     </div>
   </div>
 </section>
@@ -693,7 +866,6 @@ export default function App() {
               href="#"
               className="hidden md:flex items-center gap-1 text-sm font-semibold text-[#5a6895] hover:text-[#0e1b52] transition-colors pb-1"
             >
-              인스타그램 보기 <ChevronRight size={14} />
             </a>
           </div>
 
@@ -747,7 +919,6 @@ export default function App() {
                   href="#"
                   className="text-sm font-semibold text-[#3566e8] hover:text-[#1a4acc] transition-colors"
                 >
-                  바로가기 ↗
                 </a>
               </div>
             ))}
@@ -782,72 +953,90 @@ export default function App() {
               솔루션
             </h2>
           </div>
-
-          <div
-            className="rounded-2xl px-6 sm:px-10 py-16"
-            style={{
-              background:
-                "linear-gradient(135deg, #030818 0%, #0E1B52 30%, #2B5AD1 75%, #4A9FE0 100%)",
-            }}
-          >
-            {SOLUTIONS.map((group, gi) => (
-             <div
-               key={group.groupTitle}
-               className={`glass-panel rounded-2xl px-6 sm:px-10 py-10 sm:py-12 ${gi > 0 ? "mt-8" : ""}`}
-             >
-                {/* 그룹 타이틀 */}
-                <div className="text-center mb-8">
-                  <h3
-                    className="font-black text-white mb-1"
-                    style={{
-                      fontFamily: "'Epilogue',sans-serif",
-                      fontSize: "clamp(1.3rem,2.2vw,1.75rem)",
-                      letterSpacing: "-0.02em",
-                    }}
-                  >
-                    {group.groupTitle}
-                  </h3>
-                  {group.groupSubtitle && (
-                    <p className="text-sm text-white/50">
-                      {group.groupSubtitle}
-                    </p>
-                  )}
-                </div>
-
-                {/* 3열 카드 */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  {group.items.map((s) => (
-                    <div
-                      key={s.num}
-                      className="sc p-8 rounded-xl cursor-default"
-                    >
-                      <span
-                        className="sc-num block text-[11px] font-bold tracking-widest text-white/30 mb-4"
-                        style={{ fontFamily: "'Epilogue',sans-serif" }}
-                      >
-                        {s.num}
-                      </span>
-                      <h3
-                        className="sc-title font-black text-white mb-1 leading-tight"
-                        style={{
-                          fontFamily: "'Epilogue',sans-serif",
-                          fontSize: "clamp(1rem,1.6vw,1.25rem)",
-                          letterSpacing: "-0.02em",
-                        }}
-                      >
-                        {s.title}
-                      </h3>
-                      <p className="sc-en text-xs text-white/50 font-medium tracking-wide">
-                        {s.en}
-                      </p>
-                      <p className="sc-desc">{s.desc}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
+
+        <div
+          className="relative overflow-hidden py-16"
+          style={{
+            background:
+              "linear-gradient(135deg, #F3F6FF 0%, #E7EEFF 45%, #D6E3FF 100%)",
+          }}
+        >
+          {/* 배경 데코 블롭 */}
+          <div
+            className="absolute top-0 right-0 w-130 h-130 rounded-full pointer-events-none"
+            style={{
+              background: "radial-gradient(circle, rgba(53,102,232,0.22), transparent 70%)",
+              transform: "translate(25%, -30%)",
+            }}
+          />
+          <div
+            className="absolute bottom-0 left-0 w-105 h-105 rounded-full pointer-events-none"
+            style={{
+              background: "radial-gradient(circle, rgba(14,27,82,0.16), transparent 70%)",
+              transform: "translate(-25%, 30%)",
+            }}
+          />
+
+          <div className="relative z-10 max-w-[1440px] mx-auto px-6 sm:px-10">
+            {SOLUTIONS.map((group, gi) => (
+               <div
+                 key={group.groupTitle}
+                 className={`glass-panel rounded-2xl px-6 sm:px-10 py-10 sm:py-12 ${gi > 0 ? "mt-8" : ""}`}
+               >
+                  {/* 그룹 타이틀 */}
+                  <div className="text-center mb-8">
+                    <h3
+                      className="font-black text-[#0e1b52] mb-1"
+                      style={{
+                        fontFamily: "'Epilogue',sans-serif",
+                        fontSize: "clamp(1.3rem,2.2vw,1.75rem)",
+                        letterSpacing: "-0.02em",
+                      }}
+                    >
+                      {group.groupTitle}
+                    </h3>
+                    {group.groupSubtitle && (
+                      <p className="text-sm text-[#5a6895]">
+                        {group.groupSubtitle}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* 3열 카드 */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {group.items.map((s) => (
+                      <div
+                        key={s.num}
+                        className="sc p-8 rounded-xl cursor-default"
+                      >
+                        <span
+                          className="sc-num block text-[11px] font-bold tracking-widest text-[#0e1b52]/35 mb-4"
+                          style={{ fontFamily: "'Epilogue',sans-serif" }}
+                        >
+                          {s.num}
+                        </span>
+                        <h3
+                          className="sc-title font-black text-[#0e1b52] mb-1 leading-tight"
+                          style={{
+                            fontFamily: "'Epilogue',sans-serif",
+                            fontSize: "clamp(1rem,1.6vw,1.25rem)",
+                            letterSpacing: "-0.02em",
+                          }}
+                        >
+                          {s.title}
+                        </h3>
+                        <p className="sc-en text-xs text-[#5a6895] font-medium tracking-wide">
+                          {s.en}
+                        </p>
+                        <p className="sc-desc">{s.desc}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
       </section>
 
       {/* ══════════════════════════════════════════════

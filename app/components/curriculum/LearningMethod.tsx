@@ -169,7 +169,7 @@ export default function LearningMethod() {
         className="py-[80px] min-h-[860px] md:min-h-0 md:h-screen md:sticky md:top-0 flex flex-col justify-center relative shadow-[0_-24px_48px_-12px_rgba(0,0,0,0.1)] md:overflow-y-auto transition-all duration-[900ms] ease-out"
         style={{
           background: "linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 50%, #BFDBFE 100%)",
-          transform: isVisible ? "translateY(0)" : "translateY(80px)",
+          transform: isVisible ? undefined : "translateY(80px)",
           opacity: isVisible ? 1 : 0,
         }}
       >
