@@ -21,11 +21,11 @@ const NAV_ITEMS: NavItem[] = [
     columns: 3,
     dropdown: [
       { label: "정부 교육 사업", href: "/business/curriculum" },
-      { label: "기업 교육", href: "/services/corporate" },
-      { label: "AI 자격인증", href: "/services/certification" },
-      { label: "AI 솔루션", href: "/services/ai-solution" },
+      { label: "기업 교육", href: "/business/corporate-education" },
+      { label: "AI 자격인증", href: "/business/ai-certification" },
+      { label: "AI 솔루션", href: "/business/ai-solutions" },
       { label: "클라우드", href: "/services/cloud" },
-      { label: "컨설팅", href: "/services/consulting" },
+      { label: "컨설팅", href: "/business/consulting" },
     ],
   },
   {
@@ -61,7 +61,7 @@ export default function Nav() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/96 backdrop-blur-sm border-b border-[rgba(14,27,82,0.08)]">
-      <div className="max-w-[1440px] mx-auto px-10 h-[68px] relative flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-24 h-[68px] relative flex items-center justify-between">
         <Link href="/" className="shrink-0 flex items-center">
           <img
             src="/voda-logo-color.svg"
@@ -70,25 +70,35 @@ export default function Nav() {
           />
         </Link>
 
-        {/* Center nav links */}
-        <div className="hidden md:flex items-center gap-7 absolute left-1/2 -translate-x-1/2">
-          {NAV_ITEMS.map((item) => (
-            <div
-              key={item.label}
-              className="relative"
-              onMouseEnter={() => handleEnter(item.label)}
-              onMouseLeave={handleLeave}
-            >
-              <Link
-                href={item.href}
-                className={`nl text-sm font-medium transition-colors ${
-                  openMenu === item.label ? "text-[#0e1b52]" : "text-[#5a6895]"
-                }`}
-              >
-                {item.label}
-              </Link>
-            </div>
-          ))}
+      {/* Center nav links */}
+<div className="hidden md:flex items-center gap-7 absolute left-1/2 -translate-x-1/2">
+  {NAV_ITEMS.map((item) => (
+    <div
+      key={item.label}
+      className="relative"
+      onMouseEnter={() => handleEnter(item.label)}
+      onMouseLeave={handleLeave}
+    >
+      {item.dropdown ? (
+        <span
+          className={`nl text-sm font-medium transition-colors ${
+            openMenu === item.label ? "text-[#0e1b52]" : "text-[#5a6895]"
+          }`}
+        >
+          {item.label}
+        </span>
+      ) : (
+        <Link
+          href={item.href}
+          className={`nl text-sm font-medium transition-colors ${
+            openMenu === item.label ? "text-[#0e1b52]" : "text-[#5a6895]"
+          }`}
+        >
+          {item.label}
+        </Link>
+      )}
+    </div>
+  ))}
 
           {/* Dropdown card — centered on the nav's own center, not on any single item */}
           <div

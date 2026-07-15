@@ -15,20 +15,20 @@ export default function CourseList() {
   return (
     <section
       ref={ref}
-      className="bg-white py-[80px] relative z-20 -mt-10 shadow-[0_-24px_48px_-12px_rgba(0,0,0,0.1)] transition-all duration-[900ms] ease-out"
+      className="bg-white pt-[80px] pb-[160px] min-h-[860px] flex flex-col justify-center relative z-20 -mt-10 shadow-[0_-24px_48px_-12px_rgba(0,0,0,0.1)] transition-all duration-[900ms] ease-out"
       style={{
         transform: isVisible ? "translateY(0)" : "translateY(80px)",
         opacity: isVisible ? 1 : 0,
       }}
     >
-      <div className="max-w-[1100px] mx-auto px-6">
+      <div className="w-full max-w-[1100px] mx-auto px-6">
         <p
           style={{ letterSpacing: "1.5px" }}
           className="text-[12px] font-semibold text-[#2563EB] uppercase"
         >
           CURRICULUM
         </p>
-        <FillHeading className="text-[32px] font-bold mt-2 leading-[1.3]">
+        <FillHeading loop className="text-[32px] font-bold mt-2 leading-[1.3]">
           교육 과정
         </FillHeading>
         <p className="text-[15px] text-[#6B7280] mt-2">
