@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef} from "react";
+import Link from "next/link";
 import {
   ChevronRight,
   GraduationCap,
@@ -23,6 +24,13 @@ const MISSION_WORDS = [
   "변화를",
   "미래를",
   "인재를",
+];
+
+const MISSION_GRADIENTS = [
+  "bg-gradient-to-r from-[#3566E8] via-[#7C3AED] to-[#C026D3]", // 가능성을 — blue → violet → magenta
+  "bg-gradient-to-r from-[#0EA5E9] via-[#22D3EE] to-[#34D399]", // 변화를 — sky → cyan → emerald
+  "bg-gradient-to-r from-[#8B5CF6] via-[#EC4899] to-[#FB7185]", // 미래를 — violet → pink → rose
+  "bg-gradient-to-r from-[#F59E0B] via-[#F97316] to-[#EF4444]", // 인재를 — amber → orange → red
 ];
 
 const SOLUTIONS = [
@@ -156,6 +164,7 @@ const SERVICES = [
     title: "교육 사업",
     desc: "정부와 기업이 필요로 하는 실무형 AI·데이터 인재를 양성합니다. 정부 지원 교육과정부터 기업 맞춤형 커리큘럼까지 운영합니다.",
     items: ["정부교육", "기업교육"],
+    href: "/business/curriculum",
   },
   {
     num: "02.",
@@ -164,6 +173,7 @@ const SERVICES = [
     title: "AI 솔루션",
     desc: "AI, 메타버스, 블록체인 기술을 기반으로 고객사의 요구에 맞는 웹·앱 플랫폼과 주문형 솔루션을 개발합니다.",
     items: ["주문형 솔루션 개발", "웹·앱 플랫폼", "AI, 메타버스, 블록체인"],
+    href: "/business/ai-solutions",
   },
   {
     num: "03.",
@@ -172,6 +182,7 @@ const SERVICES = [
     title: "AI 자격인증",
     desc: "AI 활용 역량을 객관적으로 평가하고 인증하는 통합 검증 체계를 구축해, 개인과 조직의 AI 역량을 데이터로 증명합니다.",
     items: ["AI 활용 역량 자격인증", "AI 기반 역량평가", "통합 검증 체계"],
+    href: "/business/ai-certification",
   },
   {
     num: "04.",
@@ -180,6 +191,7 @@ const SERVICES = [
     title: "클라우드",
     desc: "안정적인 클라우드 전환과 지속적인 유지보수로 교육·비즈니스 인프라의 신뢰성을 지원합니다.",
     items: ["클라우드 전환", "유지보수"],
+    href: "/services/cloud",
   },
   {
     num: "05.",
@@ -188,6 +200,7 @@ const SERVICES = [
     title: "컨설팅",
     desc: "조직의 AI·AX 전략 수립과 역량 진단을 통해 데이터 기반 의사결정 체계로의 전환을 돕습니다.",
     items: ["AI·AX 전략 수립", "조직 역량 진단"],
+    href: "/business/consulting",
   },
 ];
 
@@ -415,6 +428,25 @@ export default function App() {
 .why-content { animation: fadeSlideUp .3s ease forwards; }
 
 .why-pill { transition: background .22s ease, border-color .22s ease, color .22s ease; }
+
+        /* ── Services — futuristic card carousel ─────────── */
+        @keyframes svcGridDrift {
+          from { background-position: 0 0; }
+          to   { background-position: 48px 48px; }
+        }
+        .svc-grid-bg { animation: svcGridDrift 20s linear infinite; }
+
+        .svc-card {
+          transition: box-shadow .4s ease, border-color .4s ease, background .5s ease;
+        }
+
+        @keyframes svcPulse {
+          0%, 100% { opacity: 1; }
+          50%      { opacity: .3; }
+        }
+        .svc-pulse-dot { animation: svcPulse 1.6s ease-in-out infinite; }
+
+        .svc-dot { transition: width .3s ease, background .3s ease, opacity .3s ease; }
       `}</style>
 
       {/* ══════════════════════════════════════════════
@@ -425,7 +457,7 @@ export default function App() {
     {/* Rotating word + VODA logo */}
     <div className="flex items-center justify-center gap-6 flex-wrap mb-14">
       <span
-        className={`mw ${missionIn ? "mw-in" : "mw-out"} font-black leading-none bg-gradient-to-r from-[#0E1B52] via-[#1D4ED8] to-[#3566E8] bg-clip-text text-transparent`}
+        className={`mw ${missionIn ? "mw-in" : "mw-out"} font-black leading-none ${MISSION_GRADIENTS[missionIdx]} bg-clip-text text-transparent`}
         style={{
           fontFamily: "'Epilogue',sans-serif",
           fontSize: "5.83rem",
@@ -484,113 +516,224 @@ export default function App() {
 
   <div
     ref={svcSectionRef}
-    style={{ height: `${SERVICES.length * 20}vh`, position: "relative" }}
+    style={{ height: `${SERVICES.length * 30}vh`, position: "relative" }}
   >
     <div
-      className="sticky top-0 h-screen flex items-center overflow-hidden"
+      className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden"
       style={{ background: "linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 100%)" }}
     >
-      <div className="max-w-[1440px] mx-auto px-10 w-full grid md:grid-cols-[340px_1fr] gap-16 items-center">
-        {/* Left — static intro while the list plays out */}
-        <div>
-          <span
-            className="text-[13px] font-black"
-            style={{ fontFamily: "'Epilogue',sans-serif", color: "rgba(53,102,232,0.5)" }}
-          >
-            {`0${Math.min(SERVICES.length, Math.round(svcRenderIndex) + 1)} / 0${SERVICES.length}`}
-          </span>
-          <h3
-            className="font-black text-[#0e1b52] leading-snug mt-4 mb-4"
-            style={{
-              fontFamily: "'Epilogue',sans-serif",
-              fontSize: "clamp(1.5rem,2.4vw,2rem)",
-              letterSpacing: "-0.02em",
-            }}
-          >
-            다섯 가지 사업으로
-            <br />
-            성장을 연결합니다.
-          </h3>
-          <p className="text-sm text-[#5a6895] leading-relaxed max-w-xs">
-            교육부터 AI 솔루션, 자격인증, 클라우드, 컨설팅까지 —
-            VODA가 만들어가는 사업 영역입니다.
-          </p>
-        </div>
+      {/* Futuristic grid backdrop */}
+      <div
+        className="svc-grid-bg absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(53,102,232,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(53,102,232,0.06) 1px, transparent 1px)",
+          backgroundSize: "48px 48px",
+          maskImage:
+            "radial-gradient(ellipse 70% 55% at 50% 48%, black 30%, transparent 100%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 70% 55% at 50% 48%, black 30%, transparent 100%)",
+        }}
+      />
 
-        {/* Right — every title always visible, active one expands */}
-        <div className="flex flex-col gap-1">
+      {/* Card carousel stage — every area stays in one row; the active one is emphasized */}
+      <div
+        className="relative z-10 w-full flex-1 flex items-center justify-center px-6 md:px-10 overflow-x-auto"
+        style={{ perspective: "1400px" }}
+      >
+        <div className="flex flex-nowrap gap-3 md:gap-5 max-w-[1440px] w-full mx-auto">
           {SERVICES.map((s, i) => {
             const Icon = s.icon;
-            const dist = Math.min(Math.abs(i - svcRenderIndex), 1);
-            const activeAmt = 1 - dist; // 0 → 1
+            const diff = i - svcRenderIndex;
+            const absDiff = Math.abs(diff);
+            const active = absDiff < 0.5;
+            const emphasis = Math.max(0, 1 - absDiff); // 1 at active, fades over neighbors
+
+            const rotateY = Math.max(-26, Math.min(26, diff * 16));
+            const translateZ = -Math.min(absDiff, 2) * 40;
+            const scale = 1 + emphasis * 0.1 - Math.max(0, absDiff - 1) * 0.04;
+            const translateY = -emphasis * 22;
+            const zIndex = 10 + Math.round(emphasis * 10);
 
             return (
-              <div
+              <Link
                 key={s.num}
-                onClick={() => scrollToServiceIndex(i)}
-                className="cursor-pointer rounded-2xl"
+                href={s.href}
+                className="svc-card group relative block rounded-[24px] overflow-hidden"
                 style={{
-                  padding: "18px 20px",
-                  borderLeft: `3px solid rgba(53,102,232,${activeAmt})`,
-                  background: `rgba(53,102,232,${0.05 * activeAmt})`,
+                  flex: "1 0 clamp(150px, 18vw, 264px)",
+                  height: "clamp(340px, 32vw, 420px)",
+                  transform: `translateY(${translateY}px) translateZ(${translateZ}px) scale(${scale}) rotateY(${rotateY}deg)`,
+                  zIndex,
+                  background: active
+                    ? "linear-gradient(160deg, rgba(10,20,64,0.98) 0%, rgba(28,48,120,0.95) 100%)"
+                    : "rgba(255,255,255,0.65)",
+                  backdropFilter: "blur(14px)",
+                  WebkitBackdropFilter: "blur(14px)",
+                  border: active
+                    ? "1px solid rgba(130,170,255,0.45)"
+                    : "1px solid rgba(14,27,82,0.08)",
+                  boxShadow: active
+                    ? "0 28px 56px rgba(16,32,110,0.35), 0 0 36px rgba(80,130,255,0.18)"
+                    : "0 8px 24px rgba(14,27,82,0.05)",
                 }}
               >
-                <div className="flex items-center gap-4">
-                  <div
-                    className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
-                    style={{ background: `rgba(238,242,255,${0.5 + 0.5 * activeAmt})` }}
-                  >
-                    <Icon
-                      size={16}
-                      className="text-[#3566e8]"
-                      style={{ opacity: 0.45 + 0.55 * activeAmt }}
-                    />
+                {/* HUD corner brackets */}
+                <span
+                  className="absolute top-4 left-4 w-3 h-3"
+                  style={{
+                    borderTop: `2px solid ${active ? "rgba(150,190,255,0.55)" : "rgba(53,102,232,0.25)"}`,
+                    borderLeft: `2px solid ${active ? "rgba(150,190,255,0.55)" : "rgba(53,102,232,0.25)"}`,
+                  }}
+                />
+                <span
+                  className="absolute top-4 right-4 w-3 h-3"
+                  style={{
+                    borderTop: `2px solid ${active ? "rgba(150,190,255,0.55)" : "rgba(53,102,232,0.25)"}`,
+                    borderRight: `2px solid ${active ? "rgba(150,190,255,0.55)" : "rgba(53,102,232,0.25)"}`,
+                  }}
+                />
+                <span
+                  className="absolute bottom-4 left-4 w-3 h-3"
+                  style={{
+                    borderBottom: `2px solid ${active ? "rgba(150,190,255,0.55)" : "rgba(53,102,232,0.25)"}`,
+                    borderLeft: `2px solid ${active ? "rgba(150,190,255,0.55)" : "rgba(53,102,232,0.25)"}`,
+                  }}
+                />
+                <span
+                  className="absolute bottom-4 right-4 w-3 h-3"
+                  style={{
+                    borderBottom: `2px solid ${active ? "rgba(150,190,255,0.55)" : "rgba(53,102,232,0.25)"}`,
+                    borderRight: `2px solid ${active ? "rgba(150,190,255,0.55)" : "rgba(53,102,232,0.25)"}`,
+                  }}
+                />
+
+                <div className="relative h-full flex flex-col p-5 md:p-6">
+                  <div className="flex items-center justify-between mb-5 md:mb-6">
+                    <span
+                      className="text-[11px] font-black tracking-[0.15em]"
+                      style={{
+                        fontFamily: "'Epilogue',sans-serif",
+                        color: active ? "rgba(255,255,255,0.5)" : "rgba(53,102,232,0.4)",
+                      }}
+                    >
+                      {s.num}
+                    </span>
+                    <div
+                      className="w-10 h-10 rounded-xl flex items-center justify-center"
+                      style={{
+                        background: active ? "rgba(255,255,255,0.12)" : "rgba(238,242,255,0.9)",
+                        border: active
+                          ? "1px solid rgba(255,255,255,0.22)"
+                          : "1px solid rgba(53,102,232,0.12)",
+                      }}
+                    >
+                      <Icon size={17} className={active ? "text-white" : "text-[#3566e8]"} />
+                    </div>
                   </div>
+
+                  {active && (
+                    <div className="flex items-center gap-1.5 mb-3">
+                      <span
+                        className="svc-pulse-dot w-1.5 h-1.5 rounded-full"
+                        style={{ background: "#7dd3fc" }}
+                      />
+                      <span
+                        className="text-[9px] font-bold tracking-[0.22em] uppercase"
+                        style={{ color: "rgba(180,205,255,0.85)" }}
+                      >
+                        Active
+                      </span>
+                    </div>
+                  )}
+
                   <span
-                    className="text-xs font-bold"
-                    style={{ fontFamily: "'Epilogue',sans-serif", color: "rgba(53,102,232,0.4)" }}
+                    className="text-[10px] font-bold tracking-[0.2em] uppercase mb-2"
+                    style={{ color: active ? "rgba(150,180,255,0.9)" : "rgba(53,102,232,0.5)" }}
                   >
-                    {s.num}
+                    {s.label}
                   </span>
-                  <h3
-                    className="leading-tight"
+                  <h4
+                    className="font-black leading-tight mb-3"
                     style={{
                       fontFamily: "'Epilogue',sans-serif",
-                      fontSize: "clamp(1.05rem,1.5vw,1.3rem)",
+                      fontSize: "1.15rem",
                       letterSpacing: "-0.02em",
-                      fontWeight: 900,
-                      color: `rgba(14,27,82,${0.4 + 0.6 * activeAmt})`,
+                      color: active ? "#ffffff" : "#0e1b52",
                     }}
                   >
                     {s.title}
-                  </h3>
-                </div>
-
-                <div
-                  style={{
-                    maxHeight: activeAmt * 170,
-                    opacity: Math.max(0, activeAmt - 0.2) / 0.8,
-                    overflow: "hidden",
-                  }}
-                >
-                  <p className="text-sm text-[#5a6895] leading-relaxed mt-3 mb-3 pl-14">
+                  </h4>
+                  <p
+                    className="text-[12.5px] leading-relaxed mb-5 line-clamp-4"
+                    style={{ color: active ? "rgba(255,255,255,0.72)" : "#5a6895" }}
+                  >
                     {s.desc}
                   </p>
-                  <ul className="flex flex-wrap gap-2 pl-14">
+
+                  <ul className="mt-auto flex flex-wrap gap-1.5">
                     {s.items.map((item) => (
                       <li
                         key={item}
-                        className="text-xs font-semibold text-[#3566e8] bg-[#EEF2FF] rounded-full px-3 py-1"
+                        className="text-[10.5px] font-semibold rounded-full px-2.5 py-1"
+                        style={{
+                          color: active ? "rgba(255,255,255,0.92)" : "#3566e8",
+                          background: active ? "rgba(255,255,255,0.1)" : "#EEF2FF",
+                          border: active ? "1px solid rgba(255,255,255,0.15)" : "none",
+                        }}
                       >
                         {item}
                       </li>
                     ))}
                   </ul>
+
+                  <div className="flex items-center gap-1.5 mt-4">
+                    <span
+                      className="text-[11px] font-bold tracking-wide"
+                      style={{ color: active ? "rgba(255,255,255,0.85)" : "rgba(53,102,232,0.7)" }}
+                    >
+                      자세히 보기
+                    </span>
+                    <ChevronRight
+                      size={13}
+                      className="transition-transform group-hover:translate-x-1"
+                      style={{ color: active ? "rgba(255,255,255,0.85)" : "rgba(53,102,232,0.7)" }}
+                    />
+                  </div>
+
+                  {active && (
+                    <span
+                      className="absolute bottom-0 left-6 right-6 h-[2px]"
+                      style={{
+                        background:
+                          "linear-gradient(90deg, transparent, rgba(120,170,255,0.9), transparent)",
+                      }}
+                    />
+                  )}
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>
+      </div>
+
+      {/* Progress dots */}
+      <div className="relative z-10 flex justify-center items-center gap-2.5 mt-8">
+        {SERVICES.map((s, i) => {
+          const isActive = Math.round(svcRenderIndex) === i;
+          return (
+            <button
+              key={s.num}
+              onClick={() => scrollToServiceIndex(i)}
+              aria-label={s.title}
+              className="svc-dot h-2 rounded-full"
+              style={{
+                width: isActive ? 28 : 8,
+                background: isActive ? "#3566e8" : "rgba(53,102,232,0.25)",
+              }}
+            />
+          );
+        })}
       </div>
     </div>
   </div>
@@ -810,32 +953,33 @@ export default function App() {
               솔루션
             </h2>
           </div>
+        </div>
 
+        <div
+          className="relative overflow-hidden py-16"
+          style={{
+            background:
+              "linear-gradient(135deg, #F3F6FF 0%, #E7EEFF 45%, #D6E3FF 100%)",
+          }}
+        >
+          {/* 배경 데코 블롭 */}
           <div
-            className="relative overflow-hidden rounded-2xl px-6 sm:px-10 py-16"
+            className="absolute top-0 right-0 w-130 h-130 rounded-full pointer-events-none"
             style={{
-              background:
-                "linear-gradient(135deg, #F3F6FF 0%, #E7EEFF 45%, #D6E3FF 100%)",
+              background: "radial-gradient(circle, rgba(53,102,232,0.22), transparent 70%)",
+              transform: "translate(25%, -30%)",
             }}
-          >
-            {/* 배경 데코 블롭 */}
-            <div
-              className="absolute top-0 right-0 w-130 h-130 rounded-full pointer-events-none"
-              style={{
-                background: "radial-gradient(circle, rgba(53,102,232,0.22), transparent 70%)",
-                transform: "translate(25%, -30%)",
-              }}
-            />
-            <div
-              className="absolute bottom-0 left-0 w-105 h-105 rounded-full pointer-events-none"
-              style={{
-                background: "radial-gradient(circle, rgba(14,27,82,0.16), transparent 70%)",
-                transform: "translate(-25%, 30%)",
-              }}
-            />
+          />
+          <div
+            className="absolute bottom-0 left-0 w-105 h-105 rounded-full pointer-events-none"
+            style={{
+              background: "radial-gradient(circle, rgba(14,27,82,0.16), transparent 70%)",
+              transform: "translate(-25%, 30%)",
+            }}
+          />
 
-            <div className="relative z-10">
-              {SOLUTIONS.map((group, gi) => (
+          <div className="relative z-10 max-w-[1440px] mx-auto px-6 sm:px-10">
+            {SOLUTIONS.map((group, gi) => (
                <div
                  key={group.groupTitle}
                  className={`glass-panel rounded-2xl px-6 sm:px-10 py-10 sm:py-12 ${gi > 0 ? "mt-8" : ""}`}
@@ -893,7 +1037,6 @@ export default function App() {
               ))}
             </div>
           </div>
-        </div>
       </section>
 
       {/* ══════════════════════════════════════════════
