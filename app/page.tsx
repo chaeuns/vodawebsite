@@ -197,7 +197,19 @@ const AREA_ICONS: Record<string, (dot: string) => ReactNode> = {
   ),
 };
 
-const AREAS = [
+type AreaLink = { label: string; href: string };
+
+type Area = {
+  eyebrow: string;
+  title: string;
+  icon: string;
+  desc: string;
+  points: string[];
+  href: string;
+  links?: AreaLink[];
+};
+
+const AREAS: Area[] = [
   {
     eyebrow: "EDUCATION",
     title: "교육 사업",
@@ -205,6 +217,10 @@ const AREAS = [
     desc: "정부와 기업이 필요로 하는 실무형 AI·데이터 인재를 양성합니다. 정부 지원 교육과정부터 기업 맞춤형 커리큘럼까지 운영합니다.",
     points: ["정부교육", "기업교육"],
     href: "/business/curriculum",
+    links: [
+      { label: "정부교육", href: "/business/curriculum" },
+      { label: "기업교육", href: "/business/corporate-education" },
+    ],
   },
   {
     eyebrow: "AI SOLUTIONS",
@@ -504,7 +520,7 @@ export default function App() {
         display: "flex",
         flexDirection: "column",
         justifyContent: isAreaMobile ? "center" : "center",
-        padding: isAreaMobile ? "48px 24px" : "45px 0 0",
+        padding: isAreaMobile ? "48px 24px" : "32px 0 0",
         boxSizing: "border-box",
         background: "linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 100%)",
       }}
@@ -538,10 +554,12 @@ export default function App() {
       >
         {AREAS.map((a, i) => {
           const on = i === areaActive;
+          const isMultiLink = !!a.links && a.links.length > 0;
+          const Wrapper: any = isMultiLink ? "div" : Link;
           return (
-            <Link
+            <Wrapper
               key={a.eyebrow}
-              href={a.href}
+              {...(isMultiLink ? {} : { href: a.href })}
               className="biz-vcard group"
               onMouseEnter={() => setAreaHoverIdx(i)}
               onFocus={() => setAreaHoverIdx(i)}
@@ -550,7 +568,7 @@ export default function App() {
                 boxSizing: "border-box",
                 textDecoration: "none",
                 color: "inherit",
-                cursor: "pointer",
+                cursor: isMultiLink ? "default" : "pointer",
                 position: "relative",
                 overflow: "hidden",
                 display: "flex",
@@ -662,36 +680,60 @@ export default function App() {
                 <p style={{ margin: "13px 0 0", fontSize: 13.5, lineHeight: 1.75, color: "rgba(255,255,255,0.78)" }}>
                   {a.desc}
                 </p>
-                <ul style={{ margin: "16px 0 0", padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 8 }}>
-                  {a.points.map((p) => (
-                    <li key={p} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12.5, fontWeight: 500, color: "#C9D4FF" }}>
-                      <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#3566E8", flexShrink: 0 }} />
-                      {p}
-                    </li>
-                  ))}
-                </ul>
-                <span
-                  className="inline-flex items-center gap-1 rounded-full border transition-all duration-200 ease-out group-hover:bg-white group-hover:border-white active:scale-95 mt-4"
-                  style={{
-                    padding: "7px 14px",
-                    fontSize: 11.5,
-                    fontWeight: 700,
-                    letterSpacing: "0.02em",
-                    color: "#FFFFFF",
-                    background: "rgba(255,255,255,0.14)",
-                    borderColor: "rgba(255,255,255,0.28)",
-                  }}
-                >
-                  <span className="transition-colors duration-200 group-hover:text-[#0e1b52]">자세히 보기</span>
-                  <ChevronRight
-                    size={13}
-                    className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-[#0e1b52]"
-                  />
-                </span>
+                {!isMultiLink && (
+                  <ul style={{ margin: "16px 0 0", padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 8 }}>
+                    {a.points.map((p) => (
+                      <li key={p} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12.5, fontWeight: 500, color: "#C9D4FF" }}>
+                        <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#3566E8", flexShrink: 0 }} />
+                        {p}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {isMultiLink ? (
+                  <div style={{ display: "flex", gap: 8, marginTop: 14, flexWrap: "wrap" }}>
+                    {a.links!.map((l) => (
+                      <Link
+                        key={l.href}
+                        href={l.href}
+                        className="inline-flex items-center gap-1 rounded-full border active:scale-95"
+                        style={{
+                          padding: "7px 14px",
+                          fontSize: 11.5,
+                          fontWeight: 700,
+                          letterSpacing: "0.02em",
+                          color: "#FFFFFF",
+                          background: "rgba(255,255,255,0.14)",
+                          borderColor: "rgba(255,255,255,0.28)",
+                          textDecoration: "none",
+                        }}
+                      >
+                        <span>{l.label}</span>
+                        <ChevronRight size={13} />
+                      </Link>
+                    ))}
+                  </div>
+                ) : (
+                  <span
+                    className="inline-flex items-center gap-1 rounded-full border active:scale-95 mt-4"
+                    style={{
+                      padding: "7px 14px",
+                      fontSize: 11.5,
+                      fontWeight: 700,
+                      letterSpacing: "0.02em",
+                      color: "#FFFFFF",
+                      background: "rgba(255,255,255,0.14)",
+                      borderColor: "rgba(255,255,255,0.28)",
+                    }}
+                  >
+                    <span>자세히 보기</span>
+                    <ChevronRight size={13} />
+                  </span>
+                )}
               </div>
 
               <div style={{ flexGrow: on ? 1 : 0, transition: "flex-grow 0.5s ease" }} />
-            </Link>
+            </Wrapper>
           );
         })}
       </div>
