@@ -4,6 +4,7 @@ import { useState, useEffect, useRef} from "react";
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
+import Container from "@/app/components/Container";
 
 
 /* ── Brand tokens ─────────────────────────────────────────
@@ -454,7 +455,7 @@ export default function App() {
           HERO — 미션 기반
       ══════════════════════════════════════════════ */}
      <section className="pt-[68px] min-h-screen flex flex-col items-center justify-center text-center border-b border-[rgba(14,27,82,0.07)] bg-white">
-  <div className="max-w-[1440px] w-full mx-auto px-10 flex flex-col items-center">
+  <Container className="w-full flex flex-col items-center">
     {/* Rotating word + VODA logo */}
     <div className="flex items-center justify-center gap-6 flex-wrap mb-14">
       <span
@@ -484,32 +485,13 @@ export default function App() {
       정부, 기업, 개인 — 각자의 위치에서 AI 시대를 주도할 수
       있도록 함께 나아갑니다.
     </p>
-  </div>
+  </Container>
 </section>
 
       {/* ══════════════════════════════════════════════
     사업 영역 — 세로형 카드, 스크롤에 따라 색상 반전
 ══════════════════════════════════════════════ */}
 <section className="border-b border-[rgba(14,27,82,0.07)]">
-  <div className="max-w-[1440px] mx-auto px-10">
-    <div className="flex items-end justify-between py-6 border-b border-[rgba(14,27,82,0.07)]">
-      <div>
-        <p className="text-[11px] font-bold font-sora tracking-[0.22em] text-[#3566e8] uppercase mb-1.5">
-          What We Do
-        </p>
-        <h2
-          className="font-black font-suit text-[#0e1b52]"
-          style={{
-            fontSize: "clamp(1.7rem,3.2vw,2.8rem)",
-            letterSpacing: "-0.03em",
-          }}
-        >
-          사업 영역
-        </h2>
-      </div>
-    </div>
-  </div>
-
   <div
     ref={areaWrapRef}
     style={{ height: isAreaMobile ? "auto" : `${AREAS.length * 60}vh`, position: "relative" }}
@@ -521,12 +503,29 @@ export default function App() {
         height: isAreaMobile ? "auto" : "100vh",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
-        padding: isAreaMobile ? "48px 24px" : "0 clamp(24px, 5vw, 80px)",
+        justifyContent: isAreaMobile ? "center" : "flex-start",
+        padding: isAreaMobile ? "48px 24px" : "56px 0 0",
         boxSizing: "border-box",
         background: "linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 100%)",
       }}
     >
+      <Container>
+      <div className="flex items-end justify-between py-6">
+        <div>
+          <p className="text-[11px] font-bold font-sora tracking-[0.22em] text-[#3566e8] uppercase mb-1.5">
+            What We Do
+          </p>
+          <h2
+            className="font-black font-suit text-[#0e1b52]"
+            style={{
+              fontSize: "clamp(1.7rem,3.2vw,2.8rem)",
+              letterSpacing: "-0.03em",
+            }}
+          >
+            사업 영역
+          </h2>
+        </div>
+      </div>
       <div
         style={{
           display: "flex",
@@ -711,6 +710,7 @@ export default function App() {
           />
         ))}
       </div>
+      </Container>
     </div>
   </div>
 </section>
@@ -724,10 +724,10 @@ export default function App() {
             "linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 100%)",
         }}
       >
-        <div className="max-w-[1440px] mx-auto px-10 py-14">
+        <Container className="py-14">
           {/* 브랜드 라벨 */}
           <p
-            className="text-center text-[30px] font-semibold font-sora text-[#3566e8] uppercase mb-6"
+            className="text-center text-[30px] font-extrabold font-sora text-[#3566e8] uppercase mb-6"
             style={{
               letterSpacing: "0.32em",
             }}
@@ -803,14 +803,14 @@ export default function App() {
               </div>
             ),
           )}
-        </div>
+        </Container>
       </section>
 
       {/* ══════════════════════════════════════════════
           NOW RECRUITING — 현재 모집 중인 교육과정
       ══════════════════════════════════════════════ */}
       <section className="border-b border-[rgba(14,27,82,0.07)]">
-        <div className="max-w-[1440px] mx-auto px-10 py-12">
+        <Container className="py-12">
           <div className="flex items-end justify-between mb-8">
             <div>
               <p className="text-[11px] font-bold font-sora tracking-[0.22em] text-[#3566e8] uppercase mb-1.5">
@@ -890,14 +890,14 @@ export default function App() {
           <p className="md:hidden mt-2 text-xs text-[#b8c3de]">
             ← 가로 스크롤로 더 보기 →
           </p>
-        </div>
+        </Container>
       </section>
 
       {/* ══════════════════════════════════════════════
           WHAT WE DO — 3×2 점선 카드
       ══════════════════════════════════════════════ */}
       <section>
-        <div className="max-w-[1440px] mx-auto px-10">
+        <Container>
           <div className="py-12">
             <p className="text-[11px] font-bold font-sora tracking-[0.22em] text-[#3566e8] uppercase mb-1.5">
               Solutions
@@ -912,7 +912,7 @@ export default function App() {
               솔루션
             </h2>
           </div>
-        </div>
+        </Container>
 
         <div
           className="relative overflow-hidden py-16"
@@ -937,7 +937,7 @@ export default function App() {
             }}
           />
 
-          <div className="relative z-10 max-w-[1440px] mx-auto px-6 sm:px-10">
+          <Container className="relative z-10">
             {SOLUTIONS.map((group, gi) => (
                <div
                  key={group.groupTitle}
@@ -989,7 +989,7 @@ export default function App() {
                   </div>
                 </div>
               ))}
-            </div>
+            </Container>
           </div>
       </section>
 
@@ -997,7 +997,7 @@ export default function App() {
           PARTNERS — 무한 스크롤 로고
       ══════════════════════════════════════════════ */}
       <section className="py-16 border-b border-[rgba(14,27,82,0.07)]">
-        <div className="max-w-[1440px] mx-auto px-10">
+        <Container>
           <p className="text-[11px] font-bold font-sora tracking-[0.22em] text-[#3566e8] uppercase mb-1.5">
             Partners
           </p>
@@ -1010,7 +1010,7 @@ export default function App() {
           >
             파트너스
           </h2>
-        </div>
+        </Container>
 
         {/* 풀블리드 마퀴 영역 (좌우 fade 포함) */}
         <div className="marquee-fade relative overflow-hidden">
@@ -1033,7 +1033,7 @@ export default function App() {
           NEWS
       ══════════════════════════════════════════════ */}
       <section className="py-16 border-b border-[rgba(14,27,82,0.07)]">
-        <div className="max-w-[1440px] mx-auto px-10">
+        <Container>
           <div className="flex items-end justify-between mb-10">
             <div>
               <p className="text-[11px] font-bold font-sora tracking-[0.22em] text-[#3566e8] uppercase mb-1.5">
@@ -1100,7 +1100,7 @@ export default function App() {
               전체보기 →
             </a>
           </div>
-        </div>
+        </Container>
       </section>
 
     </div>
