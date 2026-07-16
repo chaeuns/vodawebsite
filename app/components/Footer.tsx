@@ -2,11 +2,12 @@
 // VODA Works 푸터 — 화이트 배경, 얇은 구분선, 컴팩트 사이즈
 
 import Image from "next/image";
+import Container from "@/app/components/Container";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-gray-200 bg-white px-6 py-10 sm:px-10 lg:px-24">
-      <div className="mx-auto max-w-6xl">
+    <footer className="border-t border-gray-200 bg-white">
+      <Container className="py-10">
         {/* 로고 + 멘트 */}
         <div className="mb-6">
           <Image
@@ -31,7 +32,7 @@ export default function Footer() {
             서울특별시 중구 · 02-0000-0000 · contact@voda.works
           </p>
         </div>
-      </div>
+     </Container>
     </footer>
   );
 }
