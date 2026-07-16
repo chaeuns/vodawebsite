@@ -674,7 +674,7 @@ export default function App() {
                   overflow: "hidden",
                   transform: on ? "translateY(0)" : "translateY(10px)",
                   transition:
-                    "max-height 0.6s cubic-bezier(0.32,0.72,0,1), opacity 0.4s ease 0.15s, transform 0.5s ease 0.1s",
+                    "max-height 0s linear 0.6s, opacity 0.35s ease 0.6s, transform 0.4s ease 0.6s",
                 }}
               >
                 <p style={{ margin: "13px 0 0", fontSize: 15.5, lineHeight: 1.75, color: "rgba(255,255,255,0.78)" }}>
