@@ -35,7 +35,6 @@ type SceneApp = {
 
 export default function HeroScene() {
   const canvasURef = useRef<HTMLCanvasElement>(null);
-  const canvasCompassRef = useRef<HTMLCanvasElement>(null);
   const canvasEyesRef = useRef<HTMLCanvasElement>(null);
   const [threeReady, setThreeReady] = useState(false);
   const [noWebgl, setNoWebgl] = useState(false);
@@ -172,66 +171,6 @@ export default function HeroScene() {
         mesh.rotation.y = t * 0.9;
         mesh.rotation.x = Math.sin(t * 0.6) * 0.07;
         mesh.position.y = Math.sin(t * 0.8) * 0.04;
-      };
-    });
-
-    // ── A (컴퍼스) ─────────────────────────────────────
-    createApp(canvasCompassRef.current, (app) => {
-      const mat = glassMaterial({ thickness: 1.0 });
-      const group = new THREE.Group();
-
-      const apexY = 1.25, footY = -1.25, spread = 0.92;
-      const legLen = Math.sqrt(Math.pow(apexY - footY, 2) + spread * spread);
-      const legAngle = Math.atan2(spread, apexY - footY);
-
-      function makeLeg(dir: number) {
-        const leg = new THREE.Group();
-        const body = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.28, legLen - 0.42, 24), mat);
-        body.position.y = -(legLen - 0.42) / 2 - 0.06;
-        leg.add(body);
-        const tip = new THREE.Mesh(new THREE.ConeGeometry(0.21, 0.42, 24), mat);
-        tip.rotation.x = Math.PI;
-        tip.position.y = -(legLen - 0.42) - 0.27;
-        leg.add(tip);
-        leg.position.set(0, apexY, 0);
-        leg.rotation.z = dir * legAngle;
-        return leg;
-      }
-      group.add(makeLeg(1));
-      group.add(makeLeg(-1));
-
-      const hinge = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.36, 32), mat);
-      hinge.rotation.x = Math.PI / 2;
-      hinge.position.y = apexY;
-      group.add(hinge);
-
-      const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.11, 0.36, 20), mat);
-      stem.position.y = apexY + 0.34;
-      group.add(stem);
-      const knob = new THREE.Mesh(new THREE.SphereGeometry(0.19, 26, 26), mat);
-      knob.position.y = apexY + 0.6;
-      group.add(knob);
-
-      const barY = -0.14;
-      const barHalf = (spread * (apexY - barY)) / (apexY - footY) + 0.14;
-      const bar = new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.11, barHalf * 2, 20), mat);
-      bar.rotation.z = Math.PI / 2;
-      bar.position.y = barY;
-      group.add(bar);
-      const nutL = new THREE.Mesh(new THREE.SphereGeometry(0.15, 20, 20), mat);
-      nutL.position.set(-barHalf, barY, 0);
-      group.add(nutL);
-      const nutR = new THREE.Mesh(new THREE.SphereGeometry(0.15, 20, 20), mat);
-      nutR.position.set(barHalf, barY, 0);
-      group.add(nutR);
-
-      group.scale.setScalar(0.86);
-      app.scene.add(group);
-
-      app.update = (t: number) => {
-        group.position.y = Math.sin(t * 0.7) * 0.06;
-        group.rotation.z = Math.sin(t * 0.5) * 0.03;
-        group.rotation.y = Math.sin(t * 0.4) * 0.2;
       };
     });
 
@@ -392,11 +331,7 @@ export default function HeroScene() {
               <canvas ref={canvasURef} />
               <span className="fallback">U</span>
             </span>
-            RN DAT
-          <span className="obj-slot compass-slot">
-          <canvas ref={canvasCompassRef} />
-          <span className="fallback">A</span>
-        </span>
+            RN DATA
           </span>
           <span className="line">
             INTO VISI
@@ -426,7 +361,7 @@ export default function HeroScene() {
           }
           .voda-hero-scene h1 {
             font-weight: 600;
-            font-size: clamp(48px, 8.4vw, 116px);
+            font-size: clamp(58px, 10vw, 140px);
             line-height: 1.1;
             letter-spacing: -0.02em;
             color: #ffffff;
@@ -442,9 +377,6 @@ export default function HeroScene() {
             margin: 0 0.02em;
           }
           .voda-hero-scene .obj-slot.wide { width: 1.78em; }
-          .voda-hero-scene .obj-slot.compass-slot {
-            margin-left: -0.14em;
-          }
           .voda-hero-scene .obj-slot canvas {
             position: absolute;
             inset: 0;
