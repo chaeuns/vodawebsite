@@ -591,10 +591,11 @@ export default function App() {
               {/* 아이콘 */}
               <div
                 style={{
-                  width: on ? 40 : 54,
-                  height: on ? 40 : 54,
+                  width: on ? 40 : 68,
+                  height: on ? 40 : 68,
                   color: on ? "#FFFFFF" : "#B4BCD1",
-                  transition: "width 0.45s ease, height 0.45s ease, color 0.4s ease",
+                  opacity: on ? 1 : 0.88,
+                  transition: "width 0.45s ease, height 0.45s ease, color 0.4s ease, opacity 0.4s ease",
                   flexShrink: 0,
                 }}
               >
