@@ -22,13 +22,6 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             {/* Right – Text */}
             <div className="flex flex-col gap-6">
-              <span
-                className="text-xs font-semibold tracking-widest uppercase"
-                style={{ color: BLUE, letterSpacing: "0.15em" }}
-              >
-                CEO 인사말
-              </span>
-
               <h2
                 className="text-3xl md:text-4xl font-black leading-tight"
                 style={{
@@ -50,50 +43,22 @@ export default function AboutPage() {
                   되겠습니다. 감사합니다.
                 </p>
               </div>
-
-              <div
-                className="pt-4 border-t"
-                style={{ borderColor: "rgba(26,53,112,0.1)" }}
-              >
-                <p
-                  className="font-bold text-base"
-                  style={{ color: NAVY }}
-                >
-                  VODA 대표이사 OOO 배상
-                </p>
-              </div>
             </div>
           </div>
         </div>
       </section>
       </FadeInSection>
 
-      {/* Divider */}
-      <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-24">
-        <hr style={{ borderColor: "rgba(26,53,112,0.08)" }} />
-      </div>
-
       {/* ── 03. OUR GOALS ──────────────────────────────── */}
       <FadeInSection>
         <OurGoals />
       </FadeInSection>
-
-      {/* Divider */}
-      <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-24">
-        <hr style={{ borderColor: "rgba(26,53,112,0.08)" }} />
-      </div>
 
      {/* ── 04. DIRECTIONS ──────────────────────────────── */}
      <FadeInSection>
 <section className="py-24 bg-white px-6 sm:px-10 lg:px-24">
   <div className="max-w-6xl mx-auto">
     <div className="mb-12">
-      <span
-        className="text-xs font-semibold tracking-widest uppercase mb-4 block"
-        style={{ color: BLUE, letterSpacing: "0.15em" }}
-      >
-        Location
-      </span>
       <h2
         className="text-3xl md:text-4xl font-black"
         style={{ color: NAVY, letterSpacing: "-0.025em" }}

@@ -86,16 +86,6 @@ export default function OurGoals() {
 
       <div className={CONTAINER}>
         <div className="mb-16">
-          <span
-            className="mb-4 block text-xs font-semibold uppercase"
-            style={{
-              color: ACCENT,
-              letterSpacing: "0.15em",
-              fontFamily: "'Outfit', sans-serif",
-            }}
-          >
-            Our Values
-          </span>
           <h2
             className="text-3xl font-black md:text-4xl"
             style={{ color: INK, letterSpacing: "-0.03em" }}
