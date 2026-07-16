@@ -527,7 +527,7 @@ export default function App() {
     >
       <Container>
       <div className="flex items-end justify-between py-6">
-        <div>
+        <div className="pl-20 pr-20">
           <p className="text-[11px] font-bold font-sora tracking-[0.22em] text-[#3566e8] uppercase mb-1.5">
             What We Do
           </p>
@@ -543,6 +543,7 @@ export default function App() {
         </div>
       </div>
       <div
+        className="pl-20 pr-20"
         style={{
           display: "flex",
           flexDirection: isAreaMobile ? "column" : "row",
@@ -855,7 +856,7 @@ export default function App() {
       <section className="border-b border-[rgba(14,27,82,0.07)]">
         <Container className="py-12">
           <div className="flex items-end justify-between mb-8">
-            <div>
+            <div className="pl-20 pr-20">
               <p className="text-[11px] font-bold font-sora tracking-[0.22em] text-[#3566e8] uppercase mb-1.5">
                 Now Recruiting
               </p>
@@ -877,7 +878,7 @@ export default function App() {
           </div>
 
           {/* 가로 스크롤 카드 */}
-          <div className="flex gap-5 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-hide">
+          <div className="flex gap-5 overflow-x-auto pb-2 pl-20 pr-20 snap-x snap-mandatory scrollbar-hide">
             {PROGRAMS.map((p) => (
               <div
                 key={p.title}
@@ -930,7 +931,7 @@ export default function App() {
             ))}
           </div>
 
-          <p className="md:hidden mt-2 text-xs text-[#b8c3de]">
+          <p className="md:hidden mt-2 pl-20 pr-20 text-xs text-[#b8c3de]">
             ← 가로 스크롤로 더 보기 →
           </p>
         </Container>
@@ -941,7 +942,7 @@ export default function App() {
       ══════════════════════════════════════════════ */}
       <section>
         <Container>
-          <div className="py-12">
+          <div className="py-12 pl-20 pr-20">
             <p className="text-[11px] font-bold font-sora tracking-[0.22em] text-[#3566e8] uppercase mb-1.5">
               Solutions
             </p>
@@ -1041,18 +1042,20 @@ export default function App() {
       ══════════════════════════════════════════════ */}
       <section className="py-16 border-b border-[rgba(14,27,82,0.07)]">
         <Container>
-          <p className="text-[11px] font-bold font-sora tracking-[0.22em] text-[#3566e8] uppercase mb-1.5">
-            Partners
-          </p>
-          <h2
-            className="font-black font-suit text-[#0e1b52] mb-10"
-            style={{
-              fontSize: "clamp(1.7rem,3.2vw,2.8rem)",
-              letterSpacing: "-0.03em",
-            }}
-          >
-            파트너스
-          </h2>
+          <div className="pl-20 pr-20">
+            <p className="text-[11px] font-bold font-sora tracking-[0.22em] text-[#3566e8] uppercase mb-1.5">
+              Partners
+            </p>
+            <h2
+              className="font-black font-suit text-[#0e1b52] mb-10"
+              style={{
+                fontSize: "clamp(1.7rem,3.2vw,2.8rem)",
+                letterSpacing: "-0.03em",
+              }}
+            >
+              파트너스
+            </h2>
+          </div>
         </Container>
 
         {/* 풀블리드 마퀴 영역 (좌우 fade 포함) */}
@@ -1078,7 +1081,7 @@ export default function App() {
       <section className="py-16 border-b border-[rgba(14,27,82,0.07)]">
         <Container>
           <div className="flex items-end justify-between mb-10">
-            <div>
+            <div className="pl-20 pr-20">
               <p className="text-[11px] font-bold font-sora tracking-[0.22em] text-[#3566e8] uppercase mb-1.5">
                 News
               </p>
@@ -1100,7 +1103,7 @@ export default function App() {
             </a>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-5">
+          <div className="grid md:grid-cols-3 gap-5 pl-20 pr-20">
             {NEWS.map((n) => (
               <a
                 key={n.title}
