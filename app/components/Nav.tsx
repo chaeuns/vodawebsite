@@ -3,6 +3,8 @@
 import { useState, useRef } from "react";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
+import Container from "@/app/components/Container";
+
 
 type DropdownItem = { label: string; href: string };
 
@@ -61,8 +63,7 @@ export default function Nav() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/96 backdrop-blur-sm border-b border-[rgba(14,27,82,0.08)]">
-      <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-24 h-[68px] relative flex items-center justify-between">
-        <Link href="/" className="shrink-0 flex items-center">
+        <Container className="h-[68px] relative flex items-center justify-between">        <Link href="/" className="shrink-0 flex items-center">
           <img
             src="/voda-logo-color.svg"
             alt="VODA Works"
