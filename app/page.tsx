@@ -503,8 +503,8 @@ export default function App() {
         height: isAreaMobile ? "auto" : "100vh",
         display: "flex",
         flexDirection: "column",
-        justifyContent: isAreaMobile ? "center" : "flex-start",
-        padding: isAreaMobile ? "48px 24px" : "56px 0 0",
+        justifyContent: isAreaMobile ? "center" : "center",
+        padding: isAreaMobile ? "48px 24px" : "45px 0 0",
         boxSizing: "border-box",
         background: "linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 100%)",
       }}
