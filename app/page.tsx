@@ -548,7 +548,7 @@ export default function App() {
           flexDirection: isAreaMobile ? "column" : "row",
           gap: 12,
           alignItems: "stretch",
-          height: isAreaMobile ? "auto" : "min(62vh, 560px)",
+          height: isAreaMobile ? "auto" : "min(62vh, 510px)",
         }}
         onMouseLeave={() => setAreaHoverIdx(null)}
       >
@@ -576,7 +576,7 @@ export default function App() {
                 flexGrow: isAreaMobile ? 0 : on ? 1.9 : 1,
                 flexBasis: 0,
                 minWidth: 0,
-                minHeight: isAreaMobile ? (on ? 340 : 120) : "auto",
+                minHeight: isAreaMobile ? (on ? 290 : 120) : "auto",
                 padding: "26px 22px",
                 borderRadius: 20,
                 background: on
@@ -620,7 +620,7 @@ export default function App() {
                 {AREA_ICONS[a.icon](on ? "#7C93FF" : "#3566E8")}
               </div>
 
-              <div style={{ flexGrow: 1 }} />
+              <div style={{ flexGrow: on ? 1 : 0.8, transition: "flex-grow 0.45s ease" }} />
 
               <span
                 className="font-sora"
@@ -642,8 +642,8 @@ export default function App() {
                   className="font-suit"
                   style={{
                     margin: 0,
-                    fontSize: on ? (isAreaMobile ? 27 : 31) : isAreaMobile ? 20 : 22,
-                    fontWeight: 700,
+                    fontSize: on ? (isAreaMobile ? 27 : 31) : isAreaMobile ? 25 : 28,
+                    fontWeight: 800,
                     letterSpacing: "-0.02em",
                     lineHeight: 1.25,
                     whiteSpace: "nowrap",
@@ -677,13 +677,13 @@ export default function App() {
                     "max-height 0.6s cubic-bezier(0.32,0.72,0,1), opacity 0.4s ease 0.15s, transform 0.5s ease 0.1s",
                 }}
               >
-                <p style={{ margin: "13px 0 0", fontSize: 13.5, lineHeight: 1.75, color: "rgba(255,255,255,0.78)" }}>
+                <p style={{ margin: "13px 0 0", fontSize: 15.5, lineHeight: 1.75, color: "rgba(255,255,255,0.78)" }}>
                   {a.desc}
                 </p>
                 {!isMultiLink && (
                   <ul style={{ margin: "16px 0 0", padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 8 }}>
                     {a.points.map((p) => (
-                      <li key={p} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12.5, fontWeight: 500, color: "#C9D4FF" }}>
+                      <li key={p} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13.5, fontWeight: 700, color: "#C9D4FF" }}>
                         <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#3566E8", flexShrink: 0 }} />
                         {p}
                       </li>
