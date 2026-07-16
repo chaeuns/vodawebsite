@@ -152,7 +152,7 @@ export default function Nav() {
         >
           {mobileOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
-      </div>
+     </Container>
 
       {/* Mobile menu */}
       {mobileOpen && (
