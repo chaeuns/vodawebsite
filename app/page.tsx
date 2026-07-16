@@ -512,7 +512,7 @@ export default function App() {
 
   <div
     ref={areaWrapRef}
-    style={{ height: isAreaMobile ? "auto" : `${AREAS.length * 20}vh`, position: "relative" }}
+    style={{ height: isAreaMobile ? "auto" : `${AREAS.length * 60}vh`, position: "relative" }}
   >
     <div
       style={{
