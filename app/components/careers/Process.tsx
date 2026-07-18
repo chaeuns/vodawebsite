@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ChevronRight, FileText, MessageCircle, CheckCircle2 } from "lucide-react";
-import FillHeading from "@/app/components/shared/FillHeading";
+import Container from "@/app/components/Container";
 
 function useRepeatingReveal(threshold: number) {
   const ref = useRef<HTMLDivElement>(null);
@@ -31,7 +31,7 @@ const steps = [
     duration: "약 3~5일 소요",
     body: "서류를 넣어주시면\n검토 후 안내드립니다.",
     Icon: FileText,
-    color: "#0D1B40",
+    color: "#60A5FA",
   },
   {
     number: "02",
@@ -39,7 +39,7 @@ const steps = [
     duration: "약 1주 이내 안내",
     body: "역할 수행 능력과\n팀 적합성을 확인합니다.",
     Icon: MessageCircle,
-    color: "#0D1B40",
+    color: "#3B82F6",
   },
   {
     number: "03",
@@ -110,23 +110,19 @@ export default function Process() {
   return (
     <section
       ref={ref}
-      className="bg-white py-[80px] relative -mt-6 transition-all duration-[900ms] ease-out"
-      style={{
-        transform: isVisible ? "translateY(0)" : "translateY(100px)",
-        opacity: isVisible ? 1 : 0,
-      }}
+      className="bg-white py-[80px] relative -mt-6"
     >
-      <div className="max-w-[1200px] mx-auto px-6">
-        <p
-          style={{ letterSpacing: "1.5px" }}
-          className="text-[12px] font-semibold text-[#2563EB] uppercase"
-        >
-          PROCESS
-        </p>
-        <FillHeading className="text-[32px] font-bold mt-2 leading-[1.3]">
+      <Container
+        className="transition-all duration-[900ms] ease-out"
+        style={{
+          transform: isVisible ? "translateY(0)" : "translateY(100px)",
+          opacity: isVisible ? 1 : 0,
+        }}
+      >
+        <h2 className="text-[32px] font-bold leading-[1.3] text-[#111827]">
           채용 프로세스
-        </FillHeading>
-        <p className="text-[15px] text-[#6B7280] mt-2">
+        </h2>
+        <p className="text-[15px] text-[#6B7280] mt-5">
           최종 합격까지의 과정을 명확하게 안내하며,
           <br />
           투명하고 신뢰할 수 있는 절차를 통해 가장 적합한 인재와 함께 성장해 나가고자 합니다.
@@ -172,12 +168,12 @@ export default function Process() {
               </div>
 
               {i < steps.length - 1 && (
-                <ChevronRight className="hidden md:block w-6 h-6 text-[#D1D5DB] flex-shrink-0 mx-2" />
+                <ChevronRight className="hidden md:block w-[35px] h-[35px] text-[#D1D5DB] flex-shrink-0 mx-2" />
               )}
             </div>
           ))}
         </div>
-      </div>
+      </Container>
     </section>
   );
 }
