@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { jobsByTeam, teams, type TeamTab } from "./data";
-import FillHeading from "@/app/components/shared/FillHeading";
+import Container from "@/app/components/Container";
 
 function useRepeatingReveal(threshold: number) {
   const ref = useRef<HTMLDivElement>(null);
@@ -132,17 +132,11 @@ export default function Hiring() {
           opacity: isVisible ? 1 : 0,
         }}
       >
-        <div className="max-w-[1100px] mx-auto px-6">
-          <p
-            style={{ letterSpacing: "1.5px" }}
-            className="text-[12px] font-semibold text-[#2563EB] uppercase"
-          >
-            HIRING
-          </p>
-          <FillHeading className="text-[32px] font-bold mt-2 leading-[1.3]">
+        <Container>
+          <h2 className="text-[32px] font-bold leading-[1.3] text-[#111827]">
             함께할 팀원을 찾습니다
-          </FillHeading>
-          <p className="text-[15px] text-[#6B7280] mt-2">
+          </h2>
+          <p className="text-[15px] text-[#6B7280] mt-5">
             현재 모집 중인 포지션을 확인하고 지원해 보세요.
           </p>
 
@@ -191,7 +185,7 @@ export default function Hiring() {
               </div>
             </div>
           </div>
-        </div>
+        </Container>
       </section>
     </div>
   );
