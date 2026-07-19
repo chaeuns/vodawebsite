@@ -480,7 +480,7 @@ export default function App() {
           HERO — 미션 기반
       ══════════════════════════════════════════════ */}
      <section
-  className="relative pt-[68px] min-h-screen flex flex-col items-center justify-center text-center border-b border-[rgba(14,27,82,0.07)] bg-white overflow-hidden"
+  className="relative pt-17 pb-17 min-h-screen flex flex-col items-center justify-center text-center border-b border-[rgba(14,27,82,0.07)] bg-white overflow-hidden"
   style={{
     backgroundImage:
       "linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.35) 65%, #ffffff 100%), url('/images/mainpage/bg-2_ver2.png')",
@@ -512,7 +512,7 @@ export default function App() {
 
     {/* Supporting text — 20pt */}
     <p
-      className="text-[#5a6895] leading-relaxed max-w-3xl"
+      className="text-[#3d4a75] font-semibold leading-relaxed max-w-3xl"
       style={{ fontSize: "1rem", lineHeight: 1.65 }}
     >
       VODA는 데이터와 AI 기술이 교육의 언어로 번역될 수
