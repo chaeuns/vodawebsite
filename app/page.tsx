@@ -294,14 +294,11 @@ const NEWS = [
 ];
 
 const PARTNERS = [
-  { name: "Partner 1" },
-  { name: "Partner 2" },
-  { name: "Partner 3" },
-  { name: "Partner 4" },
-  { name: "Partner 5" },
-  { name: "Partner 6" },
-  { name: "Partner 7" },
-  { name: "Partner 8" },
+  { name: "SK쉴더스", logo: "/images/mainpage/partners/skshieldus.logo.png" },
+  { name: "LG CNS", logo: "/images/mainpage/partners/lgcns.jpg" },
+  { name: "새싹(SeSAC)", logo: "/images/mainpage/partners/sesac.png" },
+  { name: "신세계아이앤씨", logo: "/images/mainpage/partners/ssg.jpg" },
+  { name: "더존비즈온", logo: "/images/mainpage/partners/douzone.png" },
 ];
 
 export default function App() {
@@ -419,9 +416,6 @@ export default function App() {
 }
 .sc:hover .sc-desc { max-height:5rem; opacity:1; }
 
-        /* Partner pill */
-        .pp { transition:border-color .2s, color .2s; }
-        .pp:hover { border-color:rgba(14,27,82,.3); color:#0e1b52; }
 
         /* News card */
         .nc { transition:box-shadow .22s ease; }
@@ -1111,9 +1105,13 @@ export default function App() {
               {[...PARTNERS, ...PARTNERS].map((p, i) => (
                 <div
                   key={`${p.name}-${i}`}
-                  className="pp shrink-0 w-[260px] h-[110px] mx-2.5 flex items-center justify-center border border-dashed border-[rgba(14,27,82,0.15)] rounded text-sm text-[#b8c3de]"
+                  className="pp shrink-0 w-[260px] h-[110px] mx-2.5 flex items-center justify-center"
                 >
-                  로고 자리
+                  <img
+                    src={p.logo}
+                    alt={p.name}
+                    className="max-w-[85%] max-h-[65%] object-contain"
+                  />
                 </div>
               ))}
             </div>
@@ -1139,12 +1137,12 @@ export default function App() {
                 최신 소식
               </h2>
             </div>
-            <a
-              href="#"
+            <Link
+              href="/news"
               className="hidden md:flex items-center gap-1 text-sm font-semibold text-[#5a6895] hover:text-[#0e1b52] transition-colors pb-1"
             >
               더보기 <ChevronRight size={14} />
-            </a>
+            </Link>
           </div>
 
           <div className="grid md:grid-cols-3 gap-5 pl-20 pr-20">
