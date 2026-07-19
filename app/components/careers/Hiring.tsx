@@ -126,66 +126,70 @@ export default function Hiring() {
     >
       <section
         ref={ref}
-        className="sticky top-0 bg-white py-[80px] shadow-[0_-24px_48px_-12px_rgba(0,0,0,0.1)] transition-all duration-[900ms] ease-out"
-        style={{
-          transform: isVisible ? "translateY(0)" : "translateY(80px)",
-          opacity: isVisible ? 1 : 0,
-        }}
+        className="sticky top-0 bg-white pt-[130px] pb-[80px] shadow-[0_-24px_48px_-12px_rgba(0,0,0,0.1)]"
       >
-        <Container>
-          <h2 className="text-[32px] font-bold leading-[1.3] text-[#111827]">
-            함께할 팀원을 찾습니다
-          </h2>
-          <p className="text-[15px] text-[#6B7280] mt-5">
-            현재 모집 중인 포지션을 확인하고 지원해 보세요.
-          </p>
+        <div
+          className="transition-all duration-[900ms] ease-out"
+          style={{
+            transform: isVisible ? "translateY(0)" : "translateY(80px)",
+            opacity: isVisible ? 1 : 0,
+          }}
+        >
+          <Container>
+            <h2 className="text-[32px] font-bold leading-[1.3] text-[#111827]">
+              함께할 팀원을 찾습니다
+            </h2>
+            <p className="text-[15px] text-[#6B7280] mt-5">
+              현재 모집 중인 포지션을 확인하고 지원해 보세요.
+            </p>
 
-          <div className="grid grid-cols-[220px_1fr] gap-8 mt-8 max-[720px]:grid-cols-1 max-[720px]:gap-4">
-            <div className="sticky top-[84px] self-start flex flex-col gap-1 max-[720px]:static max-[720px]:flex-row max-[720px]:overflow-x-auto max-[720px]:gap-2 max-[720px]:pb-1">
-              {teams.map((team) => (
-                <button
-                  key={team}
-                  onClick={() => handleSelect(team)}
-                  className={`text-left px-4 py-3 rounded-md text-[14px] font-medium transition-colors border-l-[3px] whitespace-nowrap max-[720px]:rounded-full max-[720px]:border-l-0 max-[720px]:border ${
-                    activeTeam === team
-                      ? "bg-[#EEF3FE] border-l-[#2563EB] text-[#111827] max-[720px]:border-[#2563EB]"
-                      : "border-l-transparent text-[#6B7280] hover:bg-[#F9FAFB] max-[720px]:border-[#E5E7EB]"
-                  }`}
-                >
-                  {team}
-                </button>
-              ))}
-            </div>
-
-            <div
-              className="relative"
-              style={{ height: frameHeight !== null ? `${frameHeight}px` : undefined }}
-            >
-              <div
-                className="absolute inset-0 top-0"
-                style={{
-                  opacity: visible ? 1 : 0,
-                  transitionProperty: "opacity",
-                  transitionDuration: "280ms",
-                  transitionTimingFunction: "ease-out",
-                }}
-              >
-                <JobList team={displayTeam} />
-              </div>
-
-              <div
-                className="invisible absolute left-0 top-0 w-full pointer-events-none"
-                aria-hidden="true"
-              >
+            <div className="grid grid-cols-[220px_1fr] gap-8 mt-8 max-[720px]:grid-cols-1 max-[720px]:gap-4">
+              <div className="self-start flex flex-col gap-1 max-[720px]:static max-[720px]:flex-row max-[720px]:overflow-x-auto max-[720px]:gap-2 max-[720px]:pb-1">
                 {teams.map((team) => (
-                  <div key={team} ref={(el) => { measureRefs.current[team] = el; }}>
-                    <JobList team={team} />
-                  </div>
+                  <button
+                    key={team}
+                    onClick={() => handleSelect(team)}
+                    className={`text-left px-4 py-3 rounded-md text-[14px] font-medium transition-colors border-l-[3px] whitespace-nowrap max-[720px]:rounded-full max-[720px]:border-l-0 max-[720px]:border ${
+                      activeTeam === team
+                        ? "bg-[#EEF3FE] border-l-[#2563EB] text-[#111827] max-[720px]:border-[#2563EB]"
+                        : "border-l-transparent text-[#6B7280] hover:bg-[#F9FAFB] max-[720px]:border-[#E5E7EB]"
+                    }`}
+                  >
+                    {team}
+                  </button>
                 ))}
               </div>
+
+              <div
+                className="relative"
+                style={{ height: frameHeight !== null ? `${frameHeight}px` : undefined }}
+              >
+                <div
+                  className="absolute inset-0 top-0"
+                  style={{
+                    opacity: visible ? 1 : 0,
+                    transitionProperty: "opacity",
+                    transitionDuration: "280ms",
+                    transitionTimingFunction: "ease-out",
+                  }}
+                >
+                  <JobList team={displayTeam} />
+                </div>
+
+                <div
+                  className="invisible absolute left-0 top-0 w-full pointer-events-none"
+                  aria-hidden="true"
+                >
+                  {teams.map((team) => (
+                    <div key={team} ref={(el) => { measureRefs.current[team] = el; }}>
+                      <JobList team={team} />
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-          </div>
-        </Container>
+          </Container>
+        </div>
       </section>
     </div>
   );
