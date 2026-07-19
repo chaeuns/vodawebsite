@@ -20,7 +20,7 @@ export default function HeroScene() {
           WE T
           <span className="obj-slot glass-slot">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/u-text.gif" alt="U" className="glass-gif" />
+            <img src="/u-text.gif" alt="U" className="glass-gif glass-u" />
           </span>
           RN DATA
         </span>
@@ -65,6 +65,7 @@ export default function HeroScene() {
           margin: 0 0.02em;
         }
         .voda-hero-scene .obj-slot.wide { width: 1.4em; }
+        .voda-hero-scene .obj-slot.glass-slot { margin: 0; }
         .voda-hero-scene .obj-slot .glass-gif,
         .voda-hero-scene .obj-slot .eyes-img {
           position: absolute;
@@ -78,6 +79,9 @@ export default function HeroScene() {
           width: calc(100% + 5px);
           height: calc(100% + 5px);
           margin: auto;
+        }
+        .glass-u {
+          transform: scale(1.15); /* 원하는 배율로 조절 */
         }
         .voda-hero-scene .obj-slot .eyes-img {
           width: calc(100% - 10px);
