@@ -34,8 +34,8 @@ export default function AboutPage() {
 
               <div className="space-y-4 text-gray-600 leading-relaxed text-base">
                 <p>
-                  안녕하세요, VODA 대표 OOO입니다. 우리는
-                  데이터와 AI로 기업의 성장을 도와왔습니다.
+                 안녕하세요, VODA 대표 OOO입니다. 우리는 데이터와 AI로 기업의 새로운 가능성을 만들어왔습니다.
+이제 개발(Works)과 교육(Campus)을 하나로 잇는 VODA로, 기술과 사람을 함께 성장시키는 파트너가 되겠습니다. 감사합니다.
                 </p>
               </div>
             </div>
