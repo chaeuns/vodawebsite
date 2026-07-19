@@ -23,24 +23,19 @@ export default function AboutPage() {
             {/* Right – Text */}
             <div className="flex flex-col gap-6">
               <h2
-                className="text-3xl md:text-4xl font-black leading-tight"
+                className="text-3xl md:text-4xl font-black leading-tight whitespace-nowrap"
                 style={{
                   color: NAVY,
                   letterSpacing: "-0.025em",
                 }}
               >
-                "고객과 함께 성장하는 VODA."
+                "기술과 사람이 함께 성장하는 곳, VODA."
               </h2>
 
               <div className="space-y-4 text-gray-600 leading-relaxed text-base">
                 <p>
                   안녕하세요, VODA 대표 OOO입니다. 우리는
                   데이터와 AI로 기업의 성장을 도와왔습니다.
-                </p>
-                <p>
-                  이제 개발(Works)과 교육(Campus)을 하나로 잇는
-                  VODA로, 기술과 사람을 함께 성장시키는 파트너가
-                  되겠습니다. 감사합니다.
                 </p>
               </div>
             </div>

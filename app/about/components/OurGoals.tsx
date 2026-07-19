@@ -88,7 +88,7 @@ export default function OurGoals() {
         <div className="mb-16">
           <h2
             className="text-3xl font-black md:text-4xl"
-            style={{ color: INK, letterSpacing: "-0.03em" }}
+            style={{ color: "#1a3570", letterSpacing: "-0.03em" }}
           >
             VODA가 지켜온 세 가지 가치
           </h2>
