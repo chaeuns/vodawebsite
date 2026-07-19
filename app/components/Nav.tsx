@@ -141,7 +141,7 @@ export default function Nav() {
         <div className="hidden md:flex items-center gap-4">
           <Link
             href="/contact"
-            className="text-sm font-semibold px-5 py-2.5 border border-[rgba(14,27,82,0.2)] rounded text-[#0e1b52] hover:bg-[#eef2ff] transition-colors"
+            className="text-sm font-semibold px-5 py-2.5 border border-[rgba(53,102,232,0.35)] rounded text-[#3566e8] hover:bg-[#eef2ff] transition-colors"
           >
             사업문의
           </Link>
@@ -164,7 +164,7 @@ export default function Nav() {
           <div className="pt-3 border-t border-[rgba(14,27,82,0.08)] flex items-center gap-4">
             <Link
               href="/contact"
-              className="text-sm font-semibold px-4 py-2 border border-[rgba(14,27,82,0.2)] rounded"
+              className="text-sm font-semibold px-4 py-2 border border-[rgba(53,102,232,0.35)] rounded text-[#3566e8]"
             >
               사업문의
             </Link>
