@@ -111,6 +111,12 @@ const PROGRAMS = [
     title: "AI 자격인증 과정",
     meta: "2개월",
   },
+  {
+    status: "예정",
+    deadline: "모집 예정",
+    title: "빅데이터 분석 전문가 과정",
+    meta: "3개월 · 정부지원",
+  },
 ];
 
 const WHY_VODA_TABS = [
@@ -900,7 +906,8 @@ export default function App() {
             {PROGRAMS.map((p) => (
               <div
                 key={p.title}
-                className="shrink-0 w-50 snap-start"
+                className="shrink-0 snap-start"
+                style={{ width: "clamp(8rem, 5.7rem + 9.9vw, 12rem)" }}
               >
                 {/* 상태 뱃지 + 마감일 */}
                 <div className="flex items-center justify-between mb-3">
@@ -932,7 +939,7 @@ export default function App() {
                           src={p.img}
                           alt={p.title}
                           fill
-                          sizes="350px"
+                          sizes="calc(5.7rem + 9.9vw)"
                           className="object-cover"
                         />
                       </a>
@@ -941,7 +948,7 @@ export default function App() {
                         src={p.img}
                         alt={p.title}
                         fill
-                        sizes="350px"
+                        sizes="calc(5.7rem + 9.9vw)"
                         className="object-cover"
                       />
                     )
