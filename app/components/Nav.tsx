@@ -63,7 +63,8 @@ export default function Nav() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/96 backdrop-blur-sm border-b border-[rgba(14,27,82,0.08)]">
-        <Container className="h-[68px] relative flex items-center justify-between">        <Link href="/" className="shrink-0 flex items-center">
+        <Container className="h-[68px] relative flex items-center justify-between">
+          <Link href="/" className="shrink-0 flex items-center">
           <img
             src="/voda-logo-color.svg"
             alt="VODA Works"
@@ -71,8 +72,8 @@ export default function Nav() {
           />
         </Link>
 
-      {/* Center nav links */}
-<div className="hidden md:flex items-center gap-7 absolute left-1/2 -translate-x-1/2">
+      {/* Center nav links — absolutely centered on the nav's true center so logo/button width differences don't skew it */}
+<div className="hidden md:flex items-center gap-11 absolute left-1/2 -translate-x-1/2">
   {NAV_ITEMS.map((item) => (
     <div
       key={item.label}
