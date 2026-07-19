@@ -18,9 +18,9 @@ export default function HeroScene() {
       <h1>
         <span className="line">
           WE T
-          <span className="obj-slot">
+          <span className="obj-slot glass-slot">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/u_glass_turntable.gif" alt="U" className="glass-gif" />
+            <img src="/u-text.gif" alt="U" className="glass-gif" />
           </span>
           RN DATA
         </span>
@@ -44,10 +44,7 @@ export default function HeroScene() {
           text-align: center;
           padding: 0 4vw;
           overflow: hidden;
-          background:
-            radial-gradient(1200px 700px at 50% 8%, rgba(120, 140, 190, 0.10), transparent 60%),
-            radial-gradient(900px 600px at 50% 110%, rgba(70, 90, 140, 0.08), transparent 60%),
-            linear-gradient(180deg, #0A1330 0%, #05091A 100%);
+          background: #0F1224;
           color: #ffffff;
         }
         .voda-hero-scene h1 {
@@ -75,16 +72,23 @@ export default function HeroScene() {
           width: 100%;
           height: 100%;
           object-fit: contain;
-          filter: drop-shadow(0 0 26px rgba(210, 225, 255, 0.20));
+          z-index: 1;
+        }
+        .voda-hero-scene .obj-slot .glass-gif {
+          width: calc(100% + 5px);
+          height: calc(100% + 5px);
+          margin: auto;
         }
         .voda-hero-scene .obj-slot .eyes-img {
-          transform: scale(1.2);
+          width: calc(100% - 10px);
+          height: calc(100% - 10px);
+          margin: auto;
           animation: eyes-float 4.5s ease-in-out infinite;
         }
         @keyframes eyes-float {
-          0%   { transform: scale(1.2) translateY(0) rotate(0deg); }
-          50%  { transform: scale(1.2) translateY(-0.02em) rotate(-0.4deg); }
-          100% { transform: scale(1.2) translateY(0) rotate(0deg); }
+          0%   { transform: translateY(0) rotate(0deg); }
+          50%  { transform: translateY(-0.02em) rotate(-0.4deg); }
+          100% { transform: translateY(0) rotate(0deg); }
         }
         @media (prefers-reduced-motion: reduce) {
           .voda-hero-scene .obj-slot .eyes-img { animation: none; }
