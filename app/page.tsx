@@ -548,12 +548,14 @@ export default function App() {
           </div>
 
           {/* 가로 스크롤 카드 */}
-          <div className="flex gap-5 overflow-x-auto pb-2 pl-20 pr-20 snap-x snap-mandatory scrollbar-hide">
+          <div className="flex gap-5 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-thin">
+            {/* 스크롤 컨테이너의 padding은 오버플로 시 잘려나가므로 spacer로 대체 */}
+            <div className="shrink-0 w-20" aria-hidden="true" />
             {PROGRAMS.map((p) => (
               <div
                 key={p.title}
                 className="shrink-0 snap-start"
-                style={{ width: "clamp(8rem, 5.7rem + 9.9vw, 12rem)" }}
+                style={{ width: "clamp(12rem, 8rem + 14vw, 17rem)" }}
               >
                 {/* 상태 뱃지 + 마감일 */}
                 <div className="flex items-center justify-between mb-3">
@@ -566,7 +568,7 @@ export default function App() {
                   >
                     {p.status}
                   </span>
-                  <span className="text-xs text-[#b8c3de]">
+                  <span className="text-xs font-bold text-[#5a6895]">
                     {p.deadline}
                   </span>
                 </div>
@@ -585,7 +587,7 @@ export default function App() {
                           src={p.img}
                           alt={p.title}
                           fill
-                          sizes="calc(5.7rem + 9.9vw)"
+                          sizes="calc(8rem + 14vw)"
                           className="object-cover"
                         />
                       </a>
@@ -594,7 +596,7 @@ export default function App() {
                         src={p.img}
                         alt={p.title}
                         fill
-                        sizes="calc(5.7rem + 9.9vw)"
+                        sizes="calc(8rem + 14vw)"
                         className="object-cover"
                       />
                     )
@@ -613,13 +615,13 @@ export default function App() {
                 <h3
                   className="font-black font-suit text-[#0e1b52] mb-1"
                   style={{
-                    fontSize: "1.15rem",
+                    fontSize: "1.4rem",
                     letterSpacing: "-0.02em",
                   }}
                 >
                   {p.title}
                 </h3>
-                <p className="text-sm text-[#5a6895] mb-2">
+                <p className="text-base text-[#5a6895] mb-2">
                   {p.meta}
                 </p>
                 <a
@@ -629,6 +631,7 @@ export default function App() {
                 </a>
               </div>
             ))}
+            <div className="shrink-0 w-20" aria-hidden="true" />
           </div>
 
           <p className="md:hidden mt-2 pl-20 pr-20 text-xs text-[#b8c3de]">
