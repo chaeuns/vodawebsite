@@ -32,15 +32,19 @@ export default function FAQ() {
   return (
     <section
       ref={ref}
-      className="py-[80px] relative z-30 -mt-10 transition-all duration-[900ms] ease-out"
+      className="py-[80px] relative z-30 -mt-10"
       style={{
         background:
           "linear-gradient(to bottom, #ffffff 0%, #E8EDF8 15%, #D6E0F5 50%, #E8EDF8 85%, #ffffff 100%)",
-        transform: isVisible ? "translateY(0)" : "translateY(80px)",
-        opacity: isVisible ? 1 : 0,
       }}
     >
-      <div className="max-w-[1100px] mx-auto px-6">
+      <div
+        className="max-w-[1100px] mx-auto px-6 transition-all duration-[900ms] ease-out"
+        style={{
+          transform: isVisible ? "translateY(0)" : "translateY(80px)",
+          opacity: isVisible ? 1 : 0,
+        }}
+      >
         <p
           style={{ letterSpacing: "1.5px" }}
           className="text-[12px] font-semibold text-[#2563EB] uppercase"
