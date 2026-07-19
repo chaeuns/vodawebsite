@@ -110,7 +110,7 @@ export default function Process() {
   return (
     <section
       ref={ref}
-      className="bg-white py-[80px] relative -mt-6"
+      className="bg-white py-[80px] relative"
     >
       <Container
         className="transition-all duration-[900ms] ease-out"
