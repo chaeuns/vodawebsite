@@ -470,8 +470,17 @@ export default function App() {
       {/* ══════════════════════════════════════════════
           HERO — 미션 기반
       ══════════════════════════════════════════════ */}
-     <section className="pt-[68px] min-h-screen flex flex-col items-center justify-center text-center border-b border-[rgba(14,27,82,0.07)] bg-white">
-  <Container className="w-full flex flex-col items-center">
+     <section
+  className="relative pt-[68px] min-h-screen flex flex-col items-center justify-center text-center border-b border-[rgba(14,27,82,0.07)] bg-white overflow-hidden"
+  style={{
+    backgroundImage:
+      "linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.35) 65%, #ffffff 100%), url('/images/mainpage/bg-2_ver2.png')",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+  }}
+>
+  <Container className="relative z-10 w-full flex flex-col items-center">
     {/* Rotating word + VODA logo */}
     <div className="flex items-center justify-center gap-6 flex-wrap mb-14">
       <span
