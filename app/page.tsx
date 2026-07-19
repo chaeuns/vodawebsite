@@ -552,9 +552,7 @@ export default function App() {
       <Container>
       <div className="flex items-end justify-between py-6">
         <div className="pl-20 pr-20">
-          <p className="text-[11px] font-bold font-sora tracking-[0.22em] text-[#3566e8] uppercase mb-1.5">
-            What We Do
-          </p>
+          <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
           <h2
             className="font-black font-suit text-[#0e1b52]"
             style={{
@@ -881,9 +879,7 @@ export default function App() {
         <Container className="py-12">
           <div className="flex items-end justify-between mb-8">
             <div className="pl-20 pr-20">
-              <p className="text-[11px] font-bold font-sora tracking-[0.22em] text-[#3566e8] uppercase mb-1.5">
-                Now Recruiting
-              </p>
+              <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
               <h2
                 className="font-black font-suit text-[#0e1b52]"
                 style={{
@@ -997,9 +993,7 @@ export default function App() {
       <section>
         <Container>
           <div className="py-12 pl-14 sm:pl-18 pr-14 sm:pr-18">
-            <p className="text-[11px] font-bold font-sora tracking-[0.22em] text-[#3566e8] uppercase mb-1.5">
-              Solutions
-            </p>
+            <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
             <h2
               className="font-black font-suit text-[#0e1b52]"
               style={{
@@ -1097,9 +1091,7 @@ export default function App() {
       <section className="py-16 border-b border-[rgba(14,27,82,0.07)]">
         <Container>
           <div className="pl-20 pr-20">
-            <p className="text-[11px] font-bold font-sora tracking-[0.22em] text-[#3566e8] uppercase mb-1.5">
-              Partners
-            </p>
+            <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
             <h2
               className="font-black font-suit text-[#0e1b52] mb-10"
               style={{
@@ -1136,9 +1128,7 @@ export default function App() {
         <Container>
           <div className="flex items-end justify-between mb-10">
             <div className="pl-20 pr-20">
-              <p className="text-[11px] font-bold font-sora tracking-[0.22em] text-[#3566e8] uppercase mb-1.5">
-                News
-              </p>
+              <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
               <h2
                 className="font-black font-suit text-[#0e1b52]"
                 style={{
