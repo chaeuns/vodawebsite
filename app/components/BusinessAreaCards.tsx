@@ -170,7 +170,7 @@ export default function BusinessAreaCards() {
         }
         .biz-card__name {
           margin: 0;
-          font-size: clamp(20px, 13cqi, 30px); font-weight: 800;
+          font-size: clamp(20px, 13cqi, 30px); font-weight: 700;
           letter-spacing: -0.01em;
           color: #4C5AAE;
         }
@@ -255,7 +255,7 @@ export default function BusinessAreaCards() {
         <div className="voda-biz__head pl-20 pr-20">
           <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
           <h2
-            className="font-black font-suit text-[#0e1b52]"
+            className="font-extrabold font-suit text-[#0e1b52]"
             style={{
               fontSize: "clamp(1.7rem,3.2vw,2.8rem)",
               letterSpacing: "-0.03em",

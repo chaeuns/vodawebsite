@@ -433,7 +433,7 @@ export default function App() {
           <div className="pl-20 pr-20 mb-12">
             <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
             <h2
-              className="font-black font-suit text-[#0e1b52]"
+              className="font-extrabold font-suit text-[#0e1b52]"
               style={{
                 fontSize: "clamp(1.7rem,3.2vw,2.8rem)",
                 letterSpacing: "-0.03em",
@@ -525,13 +525,13 @@ export default function App() {
       {/* ══════════════════════════════════════════════
           NOW RECRUITING — 현재 모집 중인 교육과정
       ══════════════════════════════════════════════ */}
-      <section className="border-b border-[rgba(14,27,82,0.07)]">
-        <Container className="py-12">
+      <section>
+        <Container className="py-20">
           <div className="flex items-end justify-between mb-8">
             <div className="pl-20 pr-20">
               <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
               <h2
-                className="font-black font-suit text-[#0e1b52]"
+                className="font-extrabold font-suit text-[#0e1b52]"
                 style={{
                   fontSize: "clamp(1.7rem,3.2vw,2.8rem)",
                   letterSpacing: "-0.03em",
@@ -642,10 +642,10 @@ export default function App() {
       ══════════════════════════════════════════════ */}
       <section>
         <Container>
-          <div className="py-12 pl-14 sm:pl-18 pr-14 sm:pr-18">
+          <div className="py-20 pl-14 sm:pl-18 pr-14 sm:pr-18">
             <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
             <h2
-              className="font-black font-suit text-[#0e1b52]"
+              className="font-extrabold font-suit text-[#0e1b52]"
               style={{
                 fontSize: "clamp(1.7rem,3.2vw,2.8rem)",
                 letterSpacing: "-0.03em",
@@ -657,7 +657,7 @@ export default function App() {
         </Container>
 
         <div
-          className="relative overflow-hidden py-16"
+          className="relative overflow-hidden py-24"
           style={{
             background:
               "linear-gradient(135deg, #F3F6FF 0%, #E7EEFF 45%, #D6E3FF 100%)",
@@ -740,12 +740,12 @@ export default function App() {
       {/* ══════════════════════════════════════════════
           PARTNERS — 무한 스크롤 로고
       ══════════════════════════════════════════════ */}
-      <section className="py-16 border-b border-[rgba(14,27,82,0.07)]">
+      <section className="py-24">
         <Container>
           <div className="pl-20 pr-20">
             <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
             <h2
-              className="font-black font-suit text-[#0e1b52] mb-10"
+              className="font-extrabold font-suit text-[#0e1b52] mb-10"
               style={{
                 fontSize: "clamp(1.7rem,3.2vw,2.8rem)",
                 letterSpacing: "-0.03em",
@@ -780,13 +780,13 @@ export default function App() {
       {/* ══════════════════════════════════════════════
           NEWS
       ══════════════════════════════════════════════ */}
-      <section className="py-16 border-b border-[rgba(14,27,82,0.07)]">
+      <section className="py-24">
         <Container>
           <div className="flex items-end justify-between mb-10">
             <div className="pl-20 pr-20">
               <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
               <h2
-                className="font-black font-suit text-[#0e1b52]"
+                className="font-extrabold font-suit text-[#0e1b52]"
                 style={{
                   fontSize: "clamp(1.7rem,3.2vw,2.8rem)",
                   letterSpacing: "-0.03em",
