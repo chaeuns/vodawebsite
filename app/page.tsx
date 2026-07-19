@@ -488,7 +488,7 @@ export default function App() {
                       {tab.kicker}
                     </p>
                     <h3
-                      className="font-black font-suit text-[#0e1b52] leading-snug mb-6"
+                      className="font-extrabold font-suit text-[#0e1b52] leading-snug mb-6"
                       style={{
                         fontSize: "clamp(1.4rem,2.4vw,1.9rem)",
                         letterSpacing: "-0.02em",
