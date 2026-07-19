@@ -24,24 +24,35 @@ export const ideologies: Ideology[] = [
   },
 ];
 
-export type CourseCategory = "AI/AX 과정" | "보안 과정" | "클라우드 과정";
+export type CourseCategory = "AI/AX 과정" | "보안 과정" | "클라우드 과정" | "생성형AI 과정";
 
-export const courseFilters = ["전체", "AI/AX 과정", "보안 과정", "클라우드 과정"] as const;
-export type CourseFilter = (typeof courseFilters)[number];
+export const categoryColors: Record<CourseCategory, { color: string; bg: string }> = {
+  "AI/AX 과정": { color: "#2563EB", bg: "#EFF4FE" },
+  "보안 과정": { color: "#1E40AF", bg: "#EAF0FC" },
+  "클라우드 과정": { color: "#0EA5E9", bg: "#E8F6FE" },
+  "생성형AI 과정": { color: "#6366F1", bg: "#EEF0FE" },
+};
 
 export type Course = {
+  number: string;
   title: string;
   duration: string;
+  badge: string;
   category: CourseCategory;
-  curriculum: string[];
+  description: string;
+  tags: string[];
 };
 
 export const courses: Course[] = [
   {
+    number: "01",
     title: "AI/AX 개발자 과정",
-    duration: "6개월 · 정부지원 KDT",
+    duration: "6개월",
+    badge: "정부지원 KDT",
     category: "AI/AX 과정",
-    curriculum: [
+    description:
+      "AI 기반 UX/UI 설계부터 풀스택 개발, 클라우드 배포까지\n실무형 AI 개발자를 양성합니다.",
+    tags: [
       "AI 기반 UX/UI 설계",
       "풀스택(React/Java) 개발",
       "AI 활용 개발",
@@ -50,10 +61,14 @@ export const courses: Course[] = [
     ],
   },
   {
+    number: "02",
     title: "보안-AI 전문가 과정",
-    duration: "6개월 · 정부지원 KDT",
+    duration: "6개월",
+    badge: "정부지원 KDT",
     category: "보안 과정",
-    curriculum: [
+    description:
+      "AI 보안 기술과 클라우드 보안을 결합해 \n위협에 선제 대응하는 보안 전문가를 키웁니다.",
+    tags: [
       "보안 인프라 구성",
       "AI 보안 기술",
       "클라우드 보안",
@@ -62,11 +77,15 @@ export const courses: Course[] = [
     ],
   },
   {
+    number: "03",
     title: "클라우드 인프라 과정",
-    duration: "4개월 · 정부지원 KDT",
+    duration: "4개월",
+    badge: "정부지원 KDT",
     category: "클라우드 과정",
-    curriculum: [
-      "클라우드 배포 및 운영",
+    description:
+      "인프라 구성부터 AI·AX 솔루션 설계까지,\n클라우드 환경을 직접 운영하는 역량을 기릅니다.",
+    tags: [
+      "클라우드 배포·운영",
       "인프라 구성·관리",
       "AI·AX 솔루션 설계",
       "데이터 파이프라인",
@@ -74,10 +93,14 @@ export const courses: Course[] = [
     ],
   },
   {
+    number: "04",
     title: "생성형 AI 활용 과정",
-    duration: "2개월 · AI 자격인증 연계",
-    category: "AI/AX 과정",
-    curriculum: [
+    duration: "2개월",
+    badge: "AI 자격인증 연계",
+    category: "생성형AI 과정",
+    description:
+      "프롬프트 엔지니어링부터 업무 자동화까지,\n생성형 AI를 실무에 바로 적용하는 법을 배웁니다.",
+    tags: [
       "생성형 AI 기초·활용",
       "프롬프트 엔지니어링",
       "AI 업무 자동화",
@@ -94,22 +117,27 @@ export const fields: Field[] = [
   { number: "03", title: "AI·보안", body: "AI 보안 기술로 데이터 보호 및 위협 대응" },
   { number: "04", title: "풀스택", body: "프론트엔드·백엔드 통합 기술 역량 구축" },
   { number: "05", title: "클라우드", body: "클라우드 네이티브 환경 운영 인프라 설계" },
-  { number: "06", title: "인프라", body: "서버·네트워크 등 물리 인프라 구축 및 안정적 운영" },
+  { number: "06", title: "인프라", body: "서버·네트워크 등 물리 인프라 구축 및  운영" },
 ];
 
-export type Partner = { name: string; description: string };
+export type Partner = {
+  title: string;
+  description: string;
+  link: string;
+  image: string;
+};
 
 export const partners: Partner[] = [
   {
-    name: "협력 기업명 A",
-    description: "AI/AX 개발자 양성과정 협력 — 실무 프로젝트 및 취업 연계",
+    title: "LG CNS · AM INSPIRE CAMP",
+    description: "AI 시대의 실무 융합형 엔지니어 양성 — LG CNS 채용 가산점, 현직자 멘토링 연계",
+    link: "https://lgcnscamp.kr/",
+    image: "/images/curriculum/partner-lgcns.png",
   },
   {
-    name: "협력 기업명 B",
-    description: "보안·AI 전문가 양성과정 협력 — 현장 실습 및 인턴십 연계",
-  },
-  {
-    name: "협력 기업명 C",
-    description: "생성형 AI 활용 과정 협력 — 사이버보안 전문인력 양성",
+    title: "SK쉴더스 · Rookies",
+    description: "개발에서 보안까지 실무 역량 완성 — 취업 연계형 지능형 애플리케이션 개발자 양성과정",
+    link: "https://ssra.kr/info/security-solution-developer",
+    image: "/images/curriculum/partner-skshieldus.jpg",
   },
 ];

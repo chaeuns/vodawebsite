@@ -1,19 +1,6 @@
-"use client";
-
-import { useScrollReveal } from "@/app/components/shared/useScrollReveal";
-
 export default function CTA() {
-  const { ref, isVisible } = useScrollReveal();
-
   return (
-    <section
-      ref={ref}
-      className="bg-[#0D1B40] py-[80px] relative z-50 -mt-10 shadow-[0_-24px_48px_-12px_rgba(0,0,0,0.1)] transition-all duration-[900ms] ease-out"
-      style={{
-        transform: isVisible ? "translateY(0)" : "translateY(80px)",
-        opacity: isVisible ? 1 : 0,
-      }}
-    >
+    <section className="bg-[#0D1B40] py-[80px] relative z-50 -mt-10 shadow-[0_-24px_48px_-12px_rgba(0,0,0,0.1)]">
       <div className="max-w-[1100px] mx-auto px-6 text-center">
         <p className="text-white text-[26px] md:text-[30px] font-bold leading-[1.4]">
           지금 교육과정을 확인해보세요
