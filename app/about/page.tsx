@@ -17,28 +17,25 @@ export default function AboutPage() {
 
       {/* ── 02. CEO GREETING ────────────────────────────── */}
       <FadeInSection>
-      <section className="py-24 bg-white px-6 sm:px-10 lg:px-24">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            {/* Right – Text */}
-            <div className="flex flex-col gap-6">
-              <h2
-                className="text-3xl md:text-4xl font-black leading-tight whitespace-nowrap"
-                style={{
-                  color: NAVY,
-                  letterSpacing: "-0.025em",
-                }}
-              >
-                "기술과 사람이 함께 성장하는 곳, VODA."
-              </h2>
+      <section className="pt-36 pb-24 bg-white px-6 sm:px-10 lg:px-24">
+        <div className="max-w-4xl mx-auto flex flex-col items-center gap-8 text-center">
+          <h2
+            className="text-3xl md:text-5xl font-black leading-tight md:whitespace-nowrap"
+            style={{
+              color: NAVY,
+              letterSpacing: "-0.025em",
+            }}
+          >
+            "기술과 사람이 함께 성장하는 곳, VODA."
+          </h2>
 
-              <div className="space-y-4 text-gray-600 leading-relaxed text-base">
-                <p>
-                 안녕하세요, VODA 대표 OOO입니다. 우리는 데이터와 AI로 기업의 새로운 가능성을 만들어왔습니다.
-이제 개발(Works)과 교육(Campus)을 하나로 잇는 VODA로, 기술과 사람을 함께 성장시키는 파트너가 되겠습니다. 감사합니다.
-                </p>
-              </div>
-            </div>
+          <div className="space-y-1 text-gray-600 leading-relaxed text-base md:text-lg">
+            <p className="md:whitespace-nowrap">
+              안녕하세요, VODA 대표 OOO입니다. 우리는 데이터와 AI로 기업의 새로운 가능성을 만들어왔습니다.
+            </p>
+            <p className="md:whitespace-nowrap">
+              이제 개발(Works)과 교육(Campus)을 하나로 잇는 VODA로, 기술과 사람을 함께 성장시키는 파트너가 되겠습니다.
+            </p>
           </div>
         </div>
       </section>
