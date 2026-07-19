@@ -15,17 +15,19 @@ import Container from "@/app/components/Container";
 ───────────────────────────────────────────────────────── */
 
 const MISSION_WORDS = [
-  "가능성을",
+  "가치를",
   "변화를",
   "미래를",
   "인재를",
+  "성장을",
 ];
 
 const MISSION_GRADIENTS = [
-  "bg-gradient-to-r from-[#3566E8] via-[#7C3AED] to-[#C026D3]", // 가능성을 — blue → violet → magenta
+  "bg-gradient-to-r from-[#3566E8] via-[#7C3AED] to-[#C026D3]", // 가치를 — blue → violet → magenta
   "bg-gradient-to-r from-[#0EA5E9] via-[#22D3EE] to-[#34D399]", // 변화를 — sky → cyan → emerald
   "bg-gradient-to-r from-[#8B5CF6] via-[#EC4899] to-[#FB7185]", // 미래를 — violet → pink → rose
   "bg-gradient-to-r from-[#F59E0B] via-[#F97316] to-[#EF4444]", // 인재를 — amber → orange → red
+  "bg-gradient-to-r from-[#84CC16] via-[#22C55E] to-[#10B981]", // 성장을 — lime → green → teal
 ];
 
 const SOLUTIONS = [
@@ -482,11 +484,13 @@ export default function App() {
 >
   <Container className="relative z-10 w-full flex flex-col items-center">
     {/* Rotating word + VODA logo */}
-    <div className="flex items-center justify-center gap-6 flex-wrap mb-14">
+    <div className="flex items-center justify-center gap-3 flex-wrap mb-14">
       <span
         className={`mw ${missionIn ? "mw-in" : "mw-out"} font-suit font-extrabold leading-none ${MISSION_GRADIENTS[missionIdx]} bg-clip-text text-transparent`}
         style={{
           fontSize: "5.83rem",
+          width: "3.2em",
+          whiteSpace: "nowrap",
         }}
       >
         {MISSION_WORDS[missionIdx]}
@@ -495,7 +499,7 @@ export default function App() {
         src="/voda-logo-hero.svg"
         alt="VODA"
         className="object-contain"
-        style={{ height: "4.85rem", width: "auto" }}
+        style={{ height: "5.1rem", width: "auto" }}
       />
     </div>
 
@@ -789,7 +793,7 @@ export default function App() {
           </p>
 
           {/* Pill 탭 */}
-          <div className="flex items-center justify-center gap-3 mb-12 flex-wrap">
+          <div className="flex items-center justify-center gap-6 mb-12 flex-wrap">
             {WHY_VODA_TABS.map((tab) => (
               <button
                 key={tab.id}
