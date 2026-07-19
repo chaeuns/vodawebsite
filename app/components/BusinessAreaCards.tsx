@@ -72,7 +72,7 @@ export default function BusinessAreaCards() {
           --text-primary: #0E1B52;
           --text-secondary: #5A6895;
           background: #FFFFFF;
-          padding: 64px 24px;
+          padding: 112px 24px;
         }
 
         .voda-biz__head { margin: 0 0 48px; }

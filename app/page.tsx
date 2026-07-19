@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronRight } from "lucide-react";
@@ -133,6 +133,7 @@ const WHY_VODA_TABS = [
       "학습 라운지",
     ],
     cta: "Campus 둘러보기",
+    href: "/about",
   },
   {
     id: "metaverse",
@@ -147,6 +148,7 @@ const WHY_VODA_TABS = [
       "몰입형 학습 경험",
     ],
     cta: "Metaverse 둘러보기",
+    href: "#",
   },
   {
     id: "ailab",
@@ -161,6 +163,7 @@ const WHY_VODA_TABS = [
       "프로젝트 기반 교육",
     ],
     cta: "AI Lab 둘러보기",
+    href: "#",
   },
 ];
 
@@ -200,7 +203,35 @@ export default function App() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [missionIdx, setMissionIdx] = useState(0);
   const [missionIn, setMissionIn] = useState(true);
-  const [whyTab, setWhyTab] = useState("campus");
+  const [whyTab, setWhyTab] = useState(WHY_VODA_TABS[0].id);
+  const whyWrapperRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const el = whyWrapperRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const scrollable = rect.height - window.innerHeight;
+      if (scrollable <= 0) return;
+      const progress = Math.min(Math.max(-rect.top / scrollable, 0), 1);
+      const idx = Math.min(
+        WHY_VODA_TABS.length - 1,
+        Math.floor(progress * WHY_VODA_TABS.length),
+      );
+      setWhyTab(WHY_VODA_TABS[idx].id);
+    };
+    const handleScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    update();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -326,14 +357,14 @@ export default function App() {
 }
 .why-content { animation: fadeSlideUp .3s ease forwards; }
 
-.why-pill { transition: background .22s ease, border-color .22s ease, color .22s ease; }
+.why-tab { transition: color .22s ease; }
       `}</style>
 
       {/* ══════════════════════════════════════════════
           HERO — 미션 기반
       ══════════════════════════════════════════════ */}
      <section
-  className="relative pt-17 pb-17 min-h-screen flex flex-col items-center justify-center text-center border-b border-[rgba(14,27,82,0.07)] bg-white overflow-hidden"
+  className="relative pt-17 pb-17 min-h-screen flex flex-col items-center justify-center text-center bg-white overflow-hidden"
   style={{
     backgroundImage:
       "linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.35) 65%, #ffffff 100%), url('/images/mainpage/bg-2_ver2.png')",
@@ -385,93 +416,111 @@ export default function App() {
       {/* ══════════════════════════════════════════════
     WHY VODA — 탭 기반 소개
 ══════════════════════════════════════════════ */}
-      <section
-        style={{
-          background:
-            "linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 100%)",
-        }}
+      <div
+        ref={whyWrapperRef}
+        className="relative"
+        style={{ height: `${WHY_VODA_TABS.length * 100}vh` }}
       >
+        <section
+          className="sticky top-0 z-10 min-h-screen flex items-center"
+          style={{
+            background:
+              "linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 100%)",
+          }}
+        >
         <Container className="py-20">
           {/* 브랜드 라벨 */}
-          <p
-            className="text-center text-[30px] font-extrabold font-sora text-[#3566e8] uppercase mb-6"
-            style={{
-              letterSpacing: "0.32em",
-            }}
-          >
-            Why VODA?
-          </p>
-
-          {/* Pill 탭 */}
-          <div className="flex items-center justify-center gap-6 mb-12 flex-wrap">
-            {WHY_VODA_TABS.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setWhyTab(tab.id)}
-                className={`why-pill font-sora rounded-full px-6 py-2.5 text-sm font-semibold border ${
-                  whyTab === tab.id
-                    ? "bg-[#3566e8] border-[#3566e8] text-white"
-                    : "bg-white border-[rgba(14,27,82,0.15)] text-[#5a6895] hover:border-[rgba(14,27,82,0.3)]"
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
+          <div className="pl-20 pr-20 mb-12">
+            <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
+            <h2
+              className="font-black font-suit text-[#0e1b52]"
+              style={{
+                fontSize: "clamp(1.7rem,3.2vw,2.8rem)",
+                letterSpacing: "-0.03em",
+              }}
+            >
+              WHY VODA?
+            </h2>
           </div>
 
-          {/* 콘텐츠 — key를 바꿔서 리마운트 → fade-slide-up 재생 */}
-          {WHY_VODA_TABS.filter((t) => t.id === whyTab).map(
-            (tab) => (
-              <div
-                key={tab.id}
-                className="why-content grid md:grid-cols-2 gap-12 items-center"
-              >
-                {/* 이미지 */}
-                <div className="rounded-2xl overflow-hidden aspect-4/2.5 max-w-md mx-auto w-full">
-                  <img
-                    src={tab.img}
-                    alt={tab.label}
-                    className={`w-full h-full ${tab.img.endsWith(".svg") ? "object-contain" : "object-cover"}`}
+          <div className="grid md:grid-cols-[140px_1fr] gap-8 md:gap-16 pl-20 pr-20">
+            {/* 언더라인 텍스트 탭 */}
+            <div className="flex md:flex-col md:justify-center gap-6 md:gap-7">
+              {WHY_VODA_TABS.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setWhyTab(tab.id)}
+                  className={`why-tab relative text-left font-sora text-sm font-semibold pb-2 transition-colors ${
+                    whyTab === tab.id
+                      ? "text-[#3566e8]"
+                      : "text-[#0e1b52]/35 hover:text-[#0e1b52]/60"
+                  }`}
+                >
+                  {tab.label}
+                  <span
+                    className={`absolute left-0 bottom-0 h-0.5 w-6 rounded-full bg-[#3566e8] transition-opacity ${
+                      whyTab === tab.id ? "opacity-100" : "opacity-0"
+                    }`}
                   />
-                </div>
+                </button>
+              ))}
+            </div>
 
-                {/* 텍스트 */}
-                <div>
-                  <p className="text-[11px] font-bold font-sora tracking-[0.2em] text-[#3566e8] uppercase mb-2">
-                    {tab.kicker}
-                  </p>
-                  <h3
-                    className="font-black font-suit text-[#0e1b52] leading-snug mb-6"
-                    style={{
-                      fontSize: "clamp(1.4rem,2.4vw,1.9rem)",
-                      letterSpacing: "-0.02em",
-                    }}
-                  >
-                    {tab.title}
-                  </h3>
-                  <ul className="space-y-3 mb-8">
-                    {tab.bullets.map((b) => (
-                      <li
-                        key={b}
-                        className="flex items-center gap-2.5 text-sm text-[#5a6895]"
-                      >
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#3566e8] shrink-0" />
-                        {b}
-                      </li>
-                    ))}
-                  </ul>
-                  <a
-                    href="#"
-                    className="inline-flex items-center gap-1 text-sm font-semibold text-[#3566e8] hover:text-[#1a4acc] transition-colors"
-                  >
-                    {tab.cta} <ChevronRight size={14} />
-                  </a>
+            {/* 콘텐츠 — key를 바꿔서 리마운트 → fade-slide-up 재생 */}
+            {WHY_VODA_TABS.filter((t) => t.id === whyTab).map(
+              (tab) => (
+                <div
+                  key={tab.id}
+                  className="why-content grid md:grid-cols-2 gap-12 items-center"
+                >
+                  {/* 이미지 */}
+                  <div className="rounded-2xl overflow-hidden aspect-4/2.5 max-w-md mx-auto w-full">
+                    <img
+                      src={tab.img}
+                      alt={tab.label}
+                      className={`w-full h-full ${tab.img.endsWith(".svg") ? "object-contain" : "object-cover"}`}
+                    />
+                  </div>
+
+                  {/* 텍스트 */}
+                  <div>
+                    <p className="text-[11px] font-bold font-sora tracking-[0.2em] text-[#3566e8] uppercase mb-2">
+                      {tab.kicker}
+                    </p>
+                    <h3
+                      className="font-black font-suit text-[#0e1b52] leading-snug mb-6"
+                      style={{
+                        fontSize: "clamp(1.4rem,2.4vw,1.9rem)",
+                        letterSpacing: "-0.02em",
+                      }}
+                    >
+                      {tab.title}
+                    </h3>
+                    <ul className="space-y-3 mb-8">
+                      {tab.bullets.map((b) => (
+                        <li
+                          key={b}
+                          className="flex items-center gap-2.5 text-sm text-[#5a6895]"
+                        >
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#3566e8] shrink-0" />
+                          {b}
+                        </li>
+                      ))}
+                    </ul>
+                    <Link
+                      href={tab.href}
+                      className="inline-flex items-center gap-1 text-sm font-semibold text-[#3566e8] hover:text-[#1a4acc] transition-colors"
+                    >
+                      {tab.cta} <ChevronRight size={14} />
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            ),
-          )}
+              ),
+            )}
+          </div>
         </Container>
-      </section>
+        </section>
+      </div>
 
       {/* ══════════════════════════════════════════════
           NOW RECRUITING — 현재 모집 중인 교육과정
