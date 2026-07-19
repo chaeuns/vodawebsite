@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef} from "react";
 import type { ReactNode } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ChevronRight } from "lucide-react";
 import Container from "@/app/components/Container";
 
@@ -84,15 +85,19 @@ const SOLUTIONS = [
 const PROGRAMS = [
   {
     status: "모집중",
-    deadline: "~ 07.31",
-    title: "AI·ML 트랙 3기",
+    deadline: "~ 07.19",
+    title: "지능형 앱 개발자 6기",
     meta: "6개월 · 정부지원",
+    img: "/images/mainpage/now_recruiting/sk-rookies-dev-06.jpg",
+    link: "https://www.ssra.kr/",
   },
   {
     status: "모집중",
-    deadline: "~ 08.15",
-    title: "클라우드 트랙 2기",
-    meta: "4개월 · 정부지원",
+    deadline: "~ 07.23",
+    title: "AI·클라우드 엔지니어 6기",
+    meta: "6개월 · 정부지원",
+    img: "/images/mainpage/now_recruiting/lgcns-am-06.png",
+    link: "https://lgcnscamp.kr/",
   },
   {
     status: "예정",
@@ -895,7 +900,7 @@ export default function App() {
             {PROGRAMS.map((p) => (
               <div
                 key={p.title}
-                className="shrink-0 w-[260px] snap-start"
+                className="shrink-0 w-50 snap-start"
               >
                 {/* 상태 뱃지 + 마감일 */}
                 <div className="flex items-center justify-between mb-3">
@@ -913,13 +918,42 @@ export default function App() {
                   </span>
                 </div>
 
-                {/* 포스터 이미지 자리 (세로형) */}
-                <div className="w-full aspect-[3/4] bg-[#EEF2FF] rounded-lg flex items-center justify-center mb-4">
-                  <span className="text-xs text-[#b8c3de] text-center leading-relaxed">
-                    포스터 이미지
-                    <br />
-                    (세로형)
-                  </span>
+                {/* 포스터 이미지 자리 (세로형, A4 비율) */}
+                <div className="relative w-full aspect-210/297 bg-[#EEF2FF] rounded-lg overflow-hidden mb-4">
+                  {p.img ? (
+                    p.link ? (
+                      <a
+                        href={p.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block w-full h-full"
+                      >
+                        <Image
+                          src={p.img}
+                          alt={p.title}
+                          fill
+                          sizes="350px"
+                          className="object-cover"
+                        />
+                      </a>
+                    ) : (
+                      <Image
+                        src={p.img}
+                        alt={p.title}
+                        fill
+                        sizes="350px"
+                        className="object-cover"
+                      />
+                    )
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <span className="text-xs text-[#b8c3de] text-center leading-relaxed">
+                        포스터 이미지
+                        <br />
+                        (세로형)
+                      </span>
+                    </div>
+                  )}
                 </div>
 
                 {/* 제목 + 메타 */}
