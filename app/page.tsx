@@ -383,18 +383,20 @@ export default function App() {
 
       /* Group glass panel — bright glass */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  box-shadow: 0 8px 40px rgba(14, 27, 82, 0.08);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow:
+    0 8px 35px rgba(14, 27, 82, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
 /* Service card: bright glass, hover fills brand blue */
 .sc {
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
   border: 1px solid rgba(255, 255, 255, 0.8);
   box-shadow: 0 4px 18px rgba(14, 27, 82, 0.05);
   transition: background .26s ease, border-color .26s ease, box-shadow .26s ease;
@@ -1009,17 +1011,19 @@ export default function App() {
         >
           {/* 배경 데코 블롭 */}
           <div
-            className="absolute top-0 right-0 w-130 h-130 rounded-full pointer-events-none"
+            className="absolute inset-y-0 left-0 pointer-events-none"
             style={{
-              background: "radial-gradient(circle, rgba(53,102,232,0.22), transparent 70%)",
-              transform: "translate(25%, -30%)",
+              width: "55%",
+              background: "radial-gradient(ellipse 100% 80% at 0% 50%, rgba(53,102,232,0.20) 0%, transparent 75%)",
+              filter: "blur(60px)",
             }}
           />
           <div
-            className="absolute bottom-0 left-0 w-105 h-105 rounded-full pointer-events-none"
+            className="absolute inset-y-0 right-0 pointer-events-none"
             style={{
-              background: "radial-gradient(circle, rgba(14,27,82,0.16), transparent 70%)",
-              transform: "translate(-25%, 30%)",
+              width: "55%",
+              background: "radial-gradient(ellipse 100% 80% at 100% 50%, rgba(53,102,232,0.18) 0%, transparent 75%)",
+              filter: "blur(60px)",
             }}
           />
 
@@ -1027,7 +1031,7 @@ export default function App() {
             {SOLUTIONS.map((group, gi) => (
                <div
                  key={group.groupTitle}
-                 className={`glass-panel rounded-2xl px-14 sm:px-18 py-10 sm:py-12 ${gi > 0 ? "mt-8" : ""}`}
+                 className={`glass-panel rounded-[28px] px-14 sm:px-18 py-10 sm:py-12 ${gi > 0 ? "mt-8" : ""}`}
                >
                   {/* 그룹 타이틀 */}
                   <div className="text-center mb-8">
