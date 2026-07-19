@@ -2,34 +2,35 @@
 
 import { fields } from "./data";
 import { useScrollReveal } from "@/app/components/shared/useScrollReveal";
-import FillHeading from "@/app/components/shared/FillHeading";
 
 export default function FieldOfEducation() {
   const { ref, isVisible } = useScrollReveal();
 
   return (
     <section
-      ref={ref}
-      className="py-[80px] min-h-[860px] flex flex-col justify-center relative z-30 -mt-10 shadow-[0_-24px_48px_-12px_rgba(37,99,235,0.25)] transition-all duration-[900ms] ease-out"
+      className="py-[80px] min-h-[860px] flex flex-col justify-center relative z-30 -mt-10 shadow-[0_-24px_48px_-12px_rgba(37,99,235,0.25)]"
       style={{
         background: "linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 50%, #BFDBFE 100%)",
-        transform: isVisible ? "translateY(0)" : "translateY(80px)",
-        opacity: isVisible ? 1 : 0,
       }}
     >
-      <div className="w-full max-w-[1100px] mx-auto px-6">
-        <p
-          style={{ letterSpacing: "1.5px" }}
-          className="text-[12px] font-semibold text-[#2563EB] uppercase"
-        >
-          FIELD OF EDUCATION
-        </p>
-        <FillHeading loop className="text-[32px] font-bold mt-2 leading-[1.3]">
+      <div
+        ref={ref}
+        className="transition-all duration-[900ms] ease-out"
+        style={{
+          transform: isVisible ? "translateY(0)" : "translateY(80px)",
+          opacity: isVisible ? 1 : 0,
+        }}
+      >
+      <div className="max-w-[1100px] px-6 sm:px-10 lg:px-16 xl:px-20 2xl:px-24 -mt-20">
+        <h2 className="text-[32px] font-bold leading-[1.3] text-[#111827]">
           핵심 기술 분야
-        </FillHeading>
-        <p className="text-[15px] text-[#6B7280] mt-2">
+        </h2>
+        <p className="text-[15px] text-[#6B7280] mt-5">
           디지털 전환 시대에 필요한 핵심 기술을 교육합니다.
         </p>
+      </div>
+
+      <div className="w-full max-w-[1100px] mx-auto px-6">
 
         <div
           className="rounded-[32px] p-6 sm:p-8 md:p-12 mt-10 border border-white/60 shadow-[0_8px_32px_rgba(31,41,55,0.08)]"
@@ -52,15 +53,16 @@ export default function FieldOfEducation() {
                   opacity: isVisible ? 1 : 0,
                 }}
               >
-                <div className="h-full flex flex-col items-center justify-center bg-white border border-[#E5E7EB] rounded-xl p-8 text-center transition-all duration-300 hover:shadow-lg hover:border-[#2563EB]/30">
-                  <p className="text-[14px] font-bold text-[#2563EB]">{field.number}</p>
-                  <p className="text-[18px] font-bold text-[#111827] mt-2">{field.title}</p>
-                  <p className="text-[14px] text-[#6B7280] mt-2.5 leading-[1.7]">{field.body}</p>
+                <div className="group h-full flex flex-col items-center justify-start bg-white border border-[#E5E7EB] rounded-xl p-8 text-center transition-all duration-300 hover:bg-[#2563EB] hover:border-[#2563EB] hover:shadow-[0_10px_30px_rgba(37,99,235,0.3)]">
+                  <p className="text-[14px] font-bold text-[#2563EB] transition-colors duration-300 group-hover:text-white/60">{field.number}</p>
+                  <p className="text-[18px] font-bold text-[#111827] mt-2 transition-colors duration-300 group-hover:text-white">{field.title}</p>
+                  <p className="text-[14px] text-[#6B7280] mt-2.5 leading-[1.7] transition-colors duration-300 group-hover:text-white/90">{field.body}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
+      </div>
       </div>
     </section>
   );

@@ -22,44 +22,20 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             {/* Right – Text */}
             <div className="flex flex-col gap-6">
-              <span
-                className="text-xs font-semibold tracking-widest uppercase"
-                style={{ color: BLUE, letterSpacing: "0.15em" }}
-              >
-                CEO 인사말
-              </span>
-
               <h2
-                className="text-3xl md:text-4xl font-black leading-tight"
+                className="text-3xl md:text-4xl font-black leading-tight whitespace-nowrap"
                 style={{
                   color: NAVY,
                   letterSpacing: "-0.025em",
                 }}
               >
-                "고객과 함께 성장하는 VODA."
+                "기술과 사람이 함께 성장하는 곳, VODA."
               </h2>
 
               <div className="space-y-4 text-gray-600 leading-relaxed text-base">
                 <p>
-                  안녕하세요, VODA 대표 OOO입니다. 우리는
-                  데이터와 AI로 기업의 성장을 도와왔습니다.
-                </p>
-                <p>
-                  이제 개발(Works)과 교육(Campus)을 하나로 잇는
-                  VODA로, 기술과 사람을 함께 성장시키는 파트너가
-                  되겠습니다. 감사합니다.
-                </p>
-              </div>
-
-              <div
-                className="pt-4 border-t"
-                style={{ borderColor: "rgba(26,53,112,0.1)" }}
-              >
-                <p
-                  className="font-bold text-base"
-                  style={{ color: NAVY }}
-                >
-                  VODA 대표이사 OOO 배상
+                 안녕하세요, VODA 대표 OOO입니다. 우리는 데이터와 AI로 기업의 새로운 가능성을 만들어왔습니다.
+이제 개발(Works)과 교육(Campus)을 하나로 잇는 VODA로, 기술과 사람을 함께 성장시키는 파트너가 되겠습니다. 감사합니다.
                 </p>
               </div>
             </div>
@@ -68,32 +44,16 @@ export default function AboutPage() {
       </section>
       </FadeInSection>
 
-      {/* Divider */}
-      <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-24">
-        <hr style={{ borderColor: "rgba(26,53,112,0.08)" }} />
-      </div>
-
       {/* ── 03. OUR GOALS ──────────────────────────────── */}
       <FadeInSection>
         <OurGoals />
       </FadeInSection>
-
-      {/* Divider */}
-      <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-24">
-        <hr style={{ borderColor: "rgba(26,53,112,0.08)" }} />
-      </div>
 
      {/* ── 04. DIRECTIONS ──────────────────────────────── */}
      <FadeInSection>
 <section className="py-24 bg-white px-6 sm:px-10 lg:px-24">
   <div className="max-w-6xl mx-auto">
     <div className="mb-12">
-      <span
-        className="text-xs font-semibold tracking-widest uppercase mb-4 block"
-        style={{ color: BLUE, letterSpacing: "0.15em" }}
-      >
-        Location
-      </span>
       <h2
         className="text-3xl md:text-4xl font-black"
         style={{ color: NAVY, letterSpacing: "-0.025em" }}

@@ -1,99 +1,286 @@
 "use client";
 
-import { useScrollReveal } from "@/app/components/shared/useScrollReveal";
+import { useEffect, useRef, useState } from "react";
+import { Lightbulb, TrendingUp, Users } from "lucide-react";
 import FillHeading from "@/app/components/shared/FillHeading";
+import Container from "@/app/components/Container";
 
-type Value = { icon: string; bg: string; title: string; body: string };
+function useRepeatingReveal(threshold: number) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [threshold]);
+
+  return { ref, isVisible };
+}
+
+function useScrollDraw() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (media.matches) {
+      setProgress(1);
+      return;
+    }
+
+    let raf = 0;
+    const update = () => {
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const total = vh + rect.height;
+      const p = (vh - rect.top) / total;
+      setProgress(Math.min(1, Math.max(0, p)));
+    };
+
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
+  return { ref, progress };
+}
+
+type Value = {
+  word: string;
+  title: string;
+  body: string;
+  align: "left" | "right";
+  contentAlign: "left" | "right";
+  wordAlign: "left" | "center";
+  Icon: typeof Lightbulb;
+};
 
 const values: Value[] = [
   {
-    icon: "💡",
-    bg: "#FEF9C3",
+    word: "INNOVATION",
     title: "혁신과 도전",
-    body: "새로운 기술과 아이디어로 교육의 미래를 만들어 나갑니다. 실패를 두려워하지 않고 끊임없이 도전합니다.",
+    body: "새로운 기술과 아이디어로 미래를\n만들어 나갑니다. 실패를 두려워하지 않고\n끊임없이 도전합니다.",
+    align: "right",
+    contentAlign: "left",
+    wordAlign: "left",
+    Icon: Lightbulb,
   },
   {
-    icon: "💬",
-    bg: "#DBEAFE",
+    word: "TOGETHER",
     title: "소통과 협업",
-    body: "팀원 소통과 상호 존중을 바탕으로 협력합니다. 다양한 배경의 동료들과 함께 성장하며 시너지를 만들어 냅니다.",
+    body: "팀원 소통과 상호 존중을 바탕으로\n협력합니다.다양한 배경의 동료들과 함께\n성장하며 시너지를 만들어 냅니다.",
+    align: "left",
+    contentAlign: "left",
+    wordAlign: "center",
+    Icon: Users,
   },
   {
-    icon: "✅",
-    bg: "#DCFCE7",
+    word: "GROWTH",
     title: "학습과 성장",
-    body: "지속적인 학습을 장려하고 개인의 성장을 위해 회사가 함께합니다. 교육비 지원, 컨퍼런스 참여 등을 제공합니다.",
+    body: "지속적인 학습을 장려하고 개인의 성장을\n위해 회사가 함께합니다. 교육비 지원,\n컨퍼런스 참여와 사내 스터디 운영 등을\n통해 배우고 발전할 기회를 제공합니다.",
+    align: "right",
+    contentAlign: "left",
+    wordAlign: "center",
+    Icon: TrendingUp,
   },
 ];
 
-function ValueCard({ v, index }: { v: Value; index: number }) {
-  const { ref, isVisible } = useScrollReveal();
+function useBlockReveal() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (media.matches) {
+      setIsVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.35 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return { ref, isVisible };
+}
+
+function ValueBlock({ v }: { v: Value }) {
+  const { ref, isVisible } = useBlockReveal();
+  const isRight = v.align === "right";
+  const isContentRight = v.contentAlign === "right";
 
   return (
     <div
       ref={ref}
-      className="ease-out"
+      className={`relative flex ${isRight ? "justify-end" : "justify-start"} max-[780px]:justify-start`}
       style={{
-        transitionProperty: "transform, opacity",
-        transitionDuration: "700ms",
-        transitionDelay: isVisible ? `${index * 0.35}s` : "0s",
-        transform: isVisible ? "translateY(0)" : "translateY(64px)",
+        transitionProperty: "opacity, transform",
+        transitionDuration: "1.2s",
+        transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)",
         opacity: isVisible ? 1 : 0,
+        transform: isVisible ? "scale(1)" : "scale(0.82)",
       }}
     >
-      <div
-        className="rounded-xl p-10 border border-white/60 shadow-[0_8px_32px_rgba(31,41,55,0.08)] transition-all duration-300 ease-out hover:scale-105 hover:shadow-[0_20px_40px_rgba(37,99,235,0.18)] hover:border-white/80"
-        style={{
-          background: "rgba(255,255,255,0.55)",
-          backdropFilter: "blur(16px)",
-          WebkitBackdropFilter: "blur(16px)",
-        }}
-      >
-        <div
-          className="w-14 h-14 rounded-lg flex items-center justify-center text-2xl"
-          style={{ backgroundColor: v.bg }}
+      <div className="relative max-w-[352px] w-full">
+        <span
+          aria-hidden="true"
+          style={{ letterSpacing: "2px", color: "rgba(37,99,235,0.16)" }}
+          className={`pointer-events-none select-none absolute top-0 whitespace-nowrap text-[44px] font-black uppercase leading-none max-[780px]:hidden ${
+            v.wordAlign === "center" ? "left-1/2 -translate-x-1/2" : "left-0"
+          }`}
         >
-          {v.icon}
+          {v.word}
+        </span>
+
+        <div
+          className={`relative mt-[60px] flex flex-col p-[35px] ${
+            isContentRight ? "items-end text-right" : "items-start text-left"
+          } max-[780px]:items-start max-[780px]:text-left max-[780px]:mt-0`}
+          style={{
+            background: "rgba(255,255,255,0.62)",
+            backdropFilter: "blur(14px)",
+            WebkitBackdropFilter: "blur(14px)",
+            border: "1px solid rgba(255,255,255,0.8)",
+            borderRadius: 24,
+            boxShadow: "0 12px 32px rgba(13,27,64,0.14)",
+          }}
+        >
+          <div
+            className="flex h-11 w-11 items-center justify-center"
+            style={{
+              borderRadius: 13,
+              background:
+                "linear-gradient(135deg, rgba(37,99,235,0.16), rgba(37,99,235,0.06))",
+            }}
+          >
+            <v.Icon className="h-[22px] w-[22px] text-[#2563EB]" />
+          </div>
+
+          <p className="text-[31px] font-extrabold text-[#0D1B40] mt-[22px]">{v.title}</p>
+          <p className="text-[16.5px] text-[#6B7280] mt-[13px] leading-[1.7] whitespace-pre-line">{v.body}</p>
         </div>
-        <p className="text-[22px] font-bold text-[#111827] mt-5">{v.title}</p>
-        <p className="text-[15px] text-[#6B7280] mt-2.5 leading-[1.7]">{v.body}</p>
       </div>
     </div>
   );
 }
 
 export default function OurValues() {
-  const { ref, isVisible } = useScrollReveal();
+  const { ref, isVisible } = useRepeatingReveal(0.1);
+  const { ref: lineRef, progress: lineProgress } = useScrollDraw();
 
   return (
     <section
       ref={ref}
-      className="bg-[#F9FAFB] py-[80px] relative z-10 -mt-10 shadow-[0_-24px_48px_-12px_rgba(0,0,0,0.1)] transition-all duration-[900ms] ease-out"
+      className="relative z-10 -mt-10 py-[200px] transition-all duration-[900ms] ease-out"
       style={{
+        background:
+          "linear-gradient(to bottom, #ffffff 0%, #E8EDF8 15%, #D6E0F5 50%, #E8EDF8 85%, #ffffff 100%)",
         transform: isVisible ? "translateY(0)" : "translateY(80px)",
         opacity: isVisible ? 1 : 0,
       }}
     >
-      <div className="max-w-[1100px] mx-auto px-6">
-        <p
-          style={{ letterSpacing: "1.5px" }}
-          className="text-[12px] font-semibold text-[#2563EB] uppercase"
-        >
-          OUR VALUES
-        </p>
-        <FillHeading className="text-[32px] font-bold mt-2 leading-[1.3]">
+      <Container>
+        <FillHeading className="text-[32px] font-bold leading-[1.3]">
           우리 팀을 움직이는 가치
         </FillHeading>
-        <p className="text-[16px] text-[#6B7280] mt-3">
+        <p className="text-[16px] text-[#6B7280] mt-5">
           VODA는 도전과 협업, 성장을 움직이는 문화를 지향합니다.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-12">
-          {values.map((v, i) => (
-            <ValueCard key={v.title} v={v} index={i} />
-          ))}
+        <div ref={lineRef} className="relative mt-16 max-w-[861px] mx-auto">
+          <svg
+            className="pointer-events-none absolute top-0 left-0 w-full max-[780px]:hidden"
+            style={{ height: "calc(100% + 100px)" }}
+            viewBox="0 0 320 1240"
+            preserveAspectRatio="none"
+            fill="none"
+            aria-hidden="true"
+          >
+            <defs>
+              <linearGradient id="valuesGlassLine" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.9" />
+                <stop offset="50%" stopColor="#93C5FD" stopOpacity="0.55" />
+                <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0.9" />
+              </linearGradient>
+              <filter id="valuesGlassGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="6" />
+              </filter>
+            </defs>
+            <path
+              d="M 280 0 C 280 140, 40 140, 40 320 C 40 500, 280 500, 280 680 C 280 860, 40 860, 40 1040 C 40 1120, 160 1160, 160 1240"
+              stroke="url(#valuesGlassLine)"
+              strokeWidth={10}
+              strokeLinecap="round"
+              opacity={0.4}
+              filter="url(#valuesGlassGlow)"
+              style={{
+                strokeDasharray: 2000,
+                strokeDashoffset: 2000 * (1 - lineProgress),
+                transition: "stroke-dashoffset 80ms linear",
+              }}
+            />
+            <path
+              d="M 280 0 C 280 140, 40 140, 40 320 C 40 500, 280 500, 280 680 C 280 860, 40 860, 40 1040 C 40 1120, 160 1160, 160 1240"
+              stroke="url(#valuesGlassLine)"
+              strokeWidth={2.5}
+              strokeLinecap="round"
+              style={{
+                strokeDasharray: 2000,
+                strokeDashoffset: 2000 * (1 - lineProgress),
+                transition: "stroke-dashoffset 80ms linear",
+              }}
+            />
+          </svg>
+
+          <div className="relative flex flex-col gap-[244px]">
+            {values.map((v, i) => (
+              <div
+                key={v.title}
+                className={i === 0 ? "mt-6" : undefined}
+                style={
+                  v.word === "TOGETHER"
+                    ? { transform: "translateX(-40px)" }
+                    : v.word === "INNOVATION"
+                    ? { transform: "translateX(80px)" }
+                    : v.word === "GROWTH"
+                    ? { transform: "translate(80px, -30px)" }
+                    : undefined
+                }
+              >
+                <ValueBlock v={v} />
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

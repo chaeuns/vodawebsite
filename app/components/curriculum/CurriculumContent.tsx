@@ -1,4 +1,3 @@
-import SubNav from "./SubNav";
 import Ideology from "./Ideology";
 import LearningMethod from "./LearningMethod";
 import CourseList from "./CourseList";
@@ -9,7 +8,6 @@ import CTA from "./CTA";
 export default function CurriculumContent() {
   return (
     <>
-      <SubNav />
       <Ideology />
       <LearningMethod />
       <CourseList />
