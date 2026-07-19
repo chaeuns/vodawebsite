@@ -1033,7 +1033,7 @@ export default function App() {
             {SOLUTIONS.map((group, gi) => (
                <div
                  key={group.groupTitle}
-                 className={`glass-panel rounded-2xl px-6 sm:px-10 py-10 sm:py-12 ${gi > 0 ? "mt-8" : ""}`}
+                 className={`glass-panel rounded-2xl px-14 sm:px-18 py-10 sm:py-12 ${gi > 0 ? "mt-8" : ""}`}
                >
                   {/* 그룹 타이틀 */}
                   <div className="text-center mb-8">
@@ -1143,7 +1143,7 @@ export default function App() {
               href="#"
               className="hidden md:flex items-center gap-1 text-sm font-semibold text-[#5a6895] hover:text-[#0e1b52] transition-colors pb-1"
             >
-              전체보기 <ChevronRight size={14} />
+              더보기 <ChevronRight size={14} />
             </a>
           </div>
 
