@@ -112,7 +112,7 @@ const WHY_VODA_TABS = [
   {
     id: "campus",
     label: "Campus",
-    img: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=900&h=700&fit=crop&auto=format",
+    img: "/campus-3d.svg",
     kicker: "New Campus",
     title: "최적의 학습 환경에서 시작하는 교육",
     bullets: [
@@ -126,7 +126,7 @@ const WHY_VODA_TABS = [
   {
     id: "metaverse",
     label: "Metaverse",
-    img: "https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?w=900&h=700&fit=crop&auto=format",
+    img: "https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?w=1200&h=750&fit=crop&auto=format",
     kicker: "Immersive Learning",
     title: "시공간 제약 없는 몰입형 협업 교육",
     bullets: [
@@ -140,7 +140,7 @@ const WHY_VODA_TABS = [
   {
     id: "ailab",
     label: "AI Lab",
-    img: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=900&h=700&fit=crop&auto=format",
+    img: "/images/mainpage/ai.jpeg",
     kicker: "AI Practice Environment",
     title: "실무 그대로의 AI 실습 환경",
     bullets: [
@@ -781,7 +781,7 @@ export default function App() {
             "linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 100%)",
         }}
       >
-        <Container className="py-14">
+        <Container className="py-20">
           {/* 브랜드 라벨 */}
           <p
             className="text-center text-[30px] font-extrabold font-sora text-[#3566e8] uppercase mb-6"
@@ -817,11 +817,11 @@ export default function App() {
                 className="why-content grid md:grid-cols-2 gap-12 items-center"
               >
                 {/* 이미지 */}
-                <div className="rounded-2xl overflow-hidden aspect-[4/3]">
+                <div className="rounded-2xl overflow-hidden aspect-4/2.5 max-w-md mx-auto w-full">
                   <img
                     src={tab.img}
                     alt={tab.label}
-                    className="w-full h-full object-cover"
+                    className={`w-full h-full ${tab.img.endsWith(".svg") ? "object-contain" : "object-cover"}`}
                   />
                 </div>
 
@@ -955,7 +955,7 @@ export default function App() {
       ══════════════════════════════════════════════ */}
       <section>
         <Container>
-          <div className="py-12 pl-20 pr-20">
+          <div className="py-12 pl-14 sm:pl-18 pr-14 sm:pr-18">
             <p className="text-[11px] font-bold font-sora tracking-[0.22em] text-[#3566e8] uppercase mb-1.5">
               Solutions
             </p>
