@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Cloud, Cpu, ShieldCheck, Sparkles } from "lucide-react";
 import { courses, categoryColors, type Course, type CourseCategory } from "./data";
 import { useScrollReveal } from "@/app/components/shared/useScrollReveal";
+import Container from "@/app/components/Container";
 
 // Unlike useScrollReveal (one-shot), this re-triggers every time the row re-enters the viewport.
 function useRepeatingReveal(threshold = 0.15) {
@@ -142,22 +143,30 @@ export default function CourseList() {
           opacity: isVisible ? 1 : 0,
         }}
       >
-        <div className="max-w-[1100px] px-6 sm:px-10 lg:px-16 xl:px-20 2xl:px-24">
-          <h2 className="text-[32px] font-bold leading-[1.3] text-[#111827]">
-            교육 과정
-          </h2>
-          <p className="text-[15px] text-[#6B7280] mt-5">
-            다양한 기업 협력 과정을 운영합니다.
-          </p>
-        </div>
-
-        <div className="w-full max-w-[1100px] mx-auto px-6">
-          <div className="flex flex-col mt-16" style={{ gap: "110px" }}>
-            {courses.map((course, i) => (
-              <CourseRow key={course.title} course={course} index={i} />
-            ))}
+        <Container>
+          <div className="pl-20 pr-20">
+            <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
+            <h2
+              className="font-extrabold font-suit text-[#0e1b52]"
+              style={{ fontSize: "clamp(1.7rem,3.2vw,2.8rem)", letterSpacing: "-0.03em" }}
+            >
+              교육 과정
+            </h2>
+            <p className="text-[15px] text-[#5a6895] mt-3">
+              다양한 기업 협력 과정을 운영합니다.
+            </p>
           </div>
-        </div>
+        </Container>
+
+        <Container>
+          <div className="pl-20 pr-20">
+            <div className="flex flex-col mt-16" style={{ gap: "110px" }}>
+              {courses.map((course, i) => (
+                <CourseRow key={course.title} course={course} index={i} />
+              ))}
+            </div>
+          </div>
+        </Container>
       </div>
     </section>
   );

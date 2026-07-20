@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { ideologies } from "./data";
 import { useScrollReveal } from "@/app/components/shared/useScrollReveal";
+import Container from "@/app/components/Container";
 
 const positionClasses = [
   "left-[50%] top-[14%]", // top vertex
@@ -32,14 +33,20 @@ export default function Ideology() {
           opacity: isVisible ? 1 : 0,
         }}
       >
-        <div className="max-w-[1100px] px-6 sm:px-10 lg:px-16 xl:px-20 2xl:px-24">
-          <h2 className="text-[32px] font-bold leading-[1.3] text-[#111827]">
-            교육 이념
-          </h2>
-          <p className="text-[15px] text-[#6B7280] mt-5">
-            VODA는 세 가지 핵심 가치를 바탕으로 교육을 설계합니다.
-          </p>
-        </div>
+        <Container>
+          <div className="pl-20 pr-20">
+            <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
+            <h2
+              className="font-extrabold font-suit text-[#0e1b52]"
+              style={{ fontSize: "clamp(1.7rem,3.2vw,2.8rem)", letterSpacing: "-0.03em" }}
+            >
+              교육 이념
+            </h2>
+            <p className="text-[15px] text-[#5a6895] mt-3">
+              VODA는 세 가지 핵심 가치를 바탕으로 교육을 설계합니다.
+            </p>
+          </div>
+        </Container>
 
         <div className="max-w-[1100px] mx-auto px-6">
         <div className="relative w-[340px] h-[460px] sm:w-[520px] sm:h-[480px] md:w-[680px] md:h-[520px] lg:w-[920px] lg:h-[640px] mx-auto mt-12 mb-6">

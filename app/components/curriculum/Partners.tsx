@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { partners } from "./data";
 import { useScrollReveal } from "@/app/components/shared/useScrollReveal";
+import Container from "@/app/components/Container";
 
 export default function Partners() {
   const { ref, isVisible } = useScrollReveal();
@@ -19,14 +20,20 @@ export default function Partners() {
           opacity: isVisible ? 1 : 0,
         }}
       >
-      <div className="w-full max-w-[1100px] px-6 sm:px-10 lg:px-16 xl:px-20 2xl:px-24">
-        <h2 className="text-[32px] font-bold leading-[1.3] text-[#111827]">
-          함께 만드는 교육
-        </h2>
-        <p className="text-[15px] text-[#6B7280] mt-5">
-          VODA는 주요 기업과 협력하여 현장 중심의 교육 과정을 운영합니다.
-        </p>
-      </div>
+      <Container>
+        <div className="pl-20 pr-20">
+          <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
+          <h2
+            className="font-extrabold font-suit text-[#0e1b52]"
+            style={{ fontSize: "clamp(1.7rem,3.2vw,2.8rem)", letterSpacing: "-0.03em" }}
+          >
+            함께 만드는 교육
+          </h2>
+          <p className="text-[15px] text-[#5a6895] mt-3">
+            VODA는 주요 기업과 협력하여 현장 중심의 교육 과정을 운영합니다.
+          </p>
+        </div>
+      </Container>
 
       <div className="w-full max-w-[1100px] mx-auto px-6">
         <div className="grid grid-cols-1 min-[801px]:grid-cols-2 gap-7 mt-10">

@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Check } from "lucide-react";
 import { useScrollReveal } from "@/app/components/shared/useScrollReveal";
+import Container from "@/app/components/Container";
 
 const tabs = [
   {
@@ -189,6 +190,7 @@ export default function LearningMethod() {
   const TITLE_WIPE_FEATHER = 18; // % width of the soft leading edge, softer than a hard clip-path cut
   const titleWipeGradient = `linear-gradient(to right, black 0%, black calc(var(--title-wipe) - ${TITLE_WIPE_FEATHER}%), transparent var(--title-wipe))`;
   const titleStyle = {
+    fontSize: "clamp(1.7rem,3.2vw,2.8rem)",
     color: "#2563EB",
     textShadow: "2px 3px 0 rgba(37,99,235,0.16), 5px 7px 14px rgba(13,27,64,0.12)",
     "--title-wipe": titleRevealed ? `${100 + TITLE_WIPE_FEATHER}%` : "0%",
@@ -234,23 +236,29 @@ export default function LearningMethod() {
           }}
         />
 
-        <div className="relative z-10 max-w-[1100px] px-6 sm:px-10 lg:px-16 xl:px-20 2xl:px-24 mb-10">
-          <style>{`
-            @property --title-wipe {
-              syntax: '<percentage>';
-              inherits: false;
-              initial-value: 0%;
-            }
-          `}</style>
-          <h2
-            style={titleStyle}
-            className="text-[32px] font-bold leading-[1.3]"
-          >
-            {stage.label}
-          </h2>
+        <div className="relative z-10 mb-10">
+          <Container>
+            <div className="pl-20 pr-20">
+              <style>{`
+                @property --title-wipe {
+                  syntax: '<percentage>';
+                  inherits: false;
+                  initial-value: 0%;
+                }
+              `}</style>
+              <h2
+                style={titleStyle}
+                className="font-bold leading-[1.3]"
+              >
+                {stage.label}
+              </h2>
+            </div>
+          </Container>
         </div>
 
-        <div className="relative z-10 w-full max-w-[1100px] mx-auto px-6">
+        <div className="relative z-10 w-full">
+          <Container>
+            <div className="pl-20 pr-20">
           <div style={contentStyle} className="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-8 mt-10 items-stretch">
             <div className="relative w-full">
               <div
@@ -365,6 +373,8 @@ export default function LearningMethod() {
               </div>
             </div>
           </div>
+            </div>
+          </Container>
         </div>
       </section>
     </div>
