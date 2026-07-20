@@ -3,7 +3,18 @@
 // 구조: 01 히어로 → 02 4대 컨설팅 영역(겹치는 원형 다이어그램) → 03 프로세스 → 04 Bottom CTA
 // 컬러: 히어로/프로세스는 네이비(#0B1130) + 블루(#3D5AFE), 02번 섹션만 밝은 그라데이션
 
+import Image from "next/image";
+import Container from "@/app/components/Container";
+
 const heroTags = ["AI·AX 전략 수립", "공공·정부 사업", "교육 체계 설계", "기술 도입 지원"];
+
+// public/4_consulting_areas.png 내 4개 원의 중심 좌표(이미지 700×191 기준 %) — 아이콘 정렬용
+const circlePositions = [
+  { left: "12.9%", top: "47.1%" },
+  { left: "37.1%", top: "52.9%" },
+  { left: "62.9%", top: "48.2%" },
+  { left: "87.1%", top: "52.9%" },
+];
 
 const consultingAreas = [
   {
@@ -13,6 +24,17 @@ const consultingAreas = [
     rgb: "61,90,254", // #3D5AFE — 프로세스 STEP 01과 동일 계열
     accent: "#3D5AFE",
     glow: "rgba(61,90,254,0.5)",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="h-7 w-7 sm:h-8 sm:w-8">
+        <path
+          d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"
+          stroke="currentColor"
+          strokeWidth="1.7"
+          strokeLinejoin="round"
+          strokeLinecap="round"
+        />
+      </svg>
+    ),
   },
   {
     no: "02",
@@ -21,6 +43,23 @@ const consultingAreas = [
     rgb: "43,63,224", // #2B3FE0 — 프로세스 STEP 02와 동일 계열
     accent: "#2B3FE0",
     glow: "rgba(43,63,224,0.5)",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="h-7 w-7 sm:h-8 sm:w-8">
+        <path
+          d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3z"
+          stroke="currentColor"
+          strokeWidth="1.7"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M9 12l2 2 4-4"
+          stroke="currentColor"
+          strokeWidth="1.7"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    ),
   },
   {
     no: "03",
@@ -29,6 +68,17 @@ const consultingAreas = [
     rgb: "123,63,228", // #7B3FE4 — 프로세스 STEP 03과 동일 계열
     accent: "#7B3FE4",
     glow: "rgba(123,63,228,0.5)",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="h-7 w-7 sm:h-8 sm:w-8">
+        <path
+          d="M4 5c2-1 5-1 8 1 3-2 6-2 8-1v13c-2-1-5-1-8 1-3-2-6-2-8-1V5z"
+          stroke="currentColor"
+          strokeWidth="1.7"
+          strokeLinejoin="round"
+        />
+        <path d="M12 6v13" stroke="currentColor" strokeWidth="1.7" />
+      </svg>
+    ),
   },
   {
     no: "04",
@@ -37,6 +87,24 @@ const consultingAreas = [
     rgb: "14,165,183", // #0EA5B7 — 프로세스 STEP 04와 동일 계열
     accent: "#0B7F8C",
     glow: "rgba(14,165,183,0.5)",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="h-7 w-7 sm:h-8 sm:w-8">
+        <path
+          d="M12 2c2.8 1.4 4.6 4 5 7.5-.4 3.5-2.2 6.1-5 7.5-2.8-1.4-4.6-4-5-7.5.4-3.5 2.2-6.1 5-7.5z"
+          stroke="currentColor"
+          strokeWidth="1.7"
+          strokeLinejoin="round"
+        />
+        <circle cx="12" cy="9.5" r="1.6" stroke="currentColor" strokeWidth="1.7" />
+        <path
+          d="M9 16.5 7 21l3.5-1.8M15 16.5l2 4.5-3.5-1.8"
+          stroke="currentColor"
+          strokeWidth="1.7"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    ),
   },
 ];
 
@@ -109,7 +177,7 @@ export default function ConsultingPage() {
   return (
     <main className="bg-white">
       {/* 01. Hero */}
-      <section className="relative overflow-hidden bg-[#0B1130] px-6 pt-20 pb-16 sm:px-10 lg:px-24">
+      <section className="relative overflow-hidden bg-[#0B1130] pt-20 pb-16">
         <div
           className="pointer-events-none absolute inset-0 opacity-40"
           style={{
@@ -117,77 +185,104 @@ export default function ConsultingPage() {
               "radial-gradient(60% 60% at 20% 0%, rgba(61,90,254,0.35) 0%, rgba(11,17,48,0) 60%)",
           }}
         />
-        <div className="relative mx-auto max-w-5xl text-center">
-          <p className="mb-4 text-sm font-semibold tracking-widest text-[#8FA6FF]">
-            CONSULTING <span className="text-white/40">—</span> 컨설팅
-          </p>
-          <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl">
-            컨설팅{" "}
-            <span className="bg-gradient-to-r from-[#8FA6FF] to-white bg-clip-text text-transparent">
-              (Consulting)
-            </span>
-          </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-white/70">
-            전략 수립부터 시스템 도입, 인재 양성까지. 성공적인 AI 전환(AX)을 위한
-            토탈 솔루션
-          </p>
-          <div className="mt-7 flex flex-wrap justify-center gap-2">
-            {heroTags.map((tag) => (
-              <span
-                key={tag}
-                className="rounded-full bg-white/10 px-4 py-1.5 text-xs font-medium text-[#8FA6FF]"
-              >
-                {tag}
+        <Container className="relative">
+          <div className="pl-20 pr-20">
+            <p className="mb-4 text-sm font-semibold tracking-widest text-[#8FA6FF]">
+              CONSULTING <span className="text-white/40">—</span> 컨설팅
+            </p>
+            <span className="mb-3 block h-1 w-9 rounded-full bg-[#3566e8]" />
+            <h1
+              className="font-extrabold font-suit leading-tight text-white"
+              style={{ fontSize: "clamp(1.7rem,3.2vw,2.8rem)", letterSpacing: "-0.03em" }}
+            >
+              컨설팅{" "}
+              <span className="bg-gradient-to-r from-[#8FA6FF] to-white bg-clip-text text-transparent">
+                (Consulting)
               </span>
-            ))}
+            </h1>
+            <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/70">
+              전략 수립부터 시스템 도입, 인재 양성까지. 성공적인 AI 전환(AX)을 위한
+              토탈 솔루션
+            </p>
+            <div className="mt-7 flex flex-wrap gap-2">
+              {heroTags.map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-full bg-white/10 px-4 py-1.5 text-xs font-medium text-[#8FA6FF]"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
           </div>
-        </div>
+        </Container>
       </section>
 
-      {/* 02. 4대 컨설팅 영역 — 겹치는 원형 다이어그램 */}
-      <section className="bg-white px-6 py-24 sm:px-10 lg:px-24">
-        <div className="mx-auto mb-16 max-w-3xl text-center">
-          <p className="text-xs font-semibold tracking-widest text-[#3D5AFE]">
-            4 CONSULTING AREAS
-          </p>
-          <h2 className="mt-2 text-2xl font-bold text-[#0F1B4C] sm:text-3xl">
-            4대 컨설팅 영역
-          </h2>
-        </div>
-
-        <div className="relative mx-auto max-w-5xl px-4 py-20 sm:px-10 sm:py-24">
-          <div className="flex items-center justify-between gap-3 sm:gap-8 lg:gap-10">
-            {consultingAreas.map((area, i) => (
-              <div
-                key={area.no}
-                className={`flex h-24 w-24 flex-none flex-col items-center justify-center rounded-full bg-white text-center transition-transform duration-300 hover:scale-105 sm:h-40 sm:w-40 lg:h-52 lg:w-52 ${
-                  i % 2 === 0
-                    ? "-translate-y-4 sm:-translate-y-8 lg:-translate-y-10"
-                    : "translate-y-4 sm:translate-y-8 lg:translate-y-10"
-                }`}
-                style={{
-                  boxShadow: `0 24px 48px -16px ${area.glow}, 0 8px 20px -10px ${area.glow}`,
-                }}
-              >
-                <p className="px-2 text-[11px] font-bold leading-tight text-[#0F1B4C] sm:px-4 sm:text-sm lg:text-base">
-                  {area.title}
-                </p>
-                <p
-                  className="mt-1.5 hidden px-4 text-xs leading-relaxed sm:block"
-                  style={{ color: area.accent }}
-                >
-                  {area.desc[0]}
-                  <br />
-                  {area.desc[1]}
-                </p>
-              </div>
-            ))}
+      {/* 02. 4대 컨설팅 영역 — 겹치는 원형 이미지 + 아이콘/텍스트 */}
+      <section className="bg-linear-to-b from-[#EEF2FF] to-white py-24">
+        <Container>
+          <div className="mb-16 pl-20 pr-20">
+            <span className="mb-3 block h-1 w-9 rounded-full bg-[#3566e8]" />
+            <h2
+              className="font-extrabold font-suit text-[#0e1b52]"
+              style={{ fontSize: "clamp(1.7rem,3.2vw,2.8rem)", letterSpacing: "-0.03em" }}
+            >
+              4대 컨설팅 영역
+            </h2>
           </div>
-        </div>
+
+          <div className="mx-auto max-w-4xl px-4 sm:px-10">
+            {/* 원 이미지 + 아이콘 오버레이 */}
+            <div className="relative w-full" style={{ aspectRatio: "700 / 191" }}>
+              <Image
+                src="/4_consulting_areas.png"
+                alt=""
+                fill
+                className="object-contain"
+                sizes="(min-width: 768px) 800px, 100vw"
+              />
+              {consultingAreas.map((area, i) => (
+                <div
+                  key={area.no}
+                  className="absolute text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.35)]"
+                  style={{
+                    left: circlePositions[i].left,
+                    top: circlePositions[i].top,
+                    transform: "translate(-50%, -50%)",
+                  }}
+                >
+                  {area.icon}
+                </div>
+              ))}
+            </div>
+
+            {/* 아이콘 하단 텍스트 */}
+            <div className="mt-8 grid grid-cols-4 gap-x-2 gap-y-8 sm:mt-10 sm:gap-x-4">
+              {consultingAreas.map((area) => (
+                <div key={area.no} className="text-center">
+                  <p
+                    className="text-[10px] font-bold tracking-widest sm:text-xs"
+                    style={{ color: area.accent }}
+                  >
+                    STEP {area.no}
+                  </p>
+                  <p className="mt-1.5 text-xs font-bold text-[#0F1B4C] sm:text-base">
+                    {area.title}
+                  </p>
+                  <p className="mt-1.5 hidden text-xs leading-relaxed text-gray-500 sm:block">
+                    {area.desc[0]}
+                    <br />
+                    {area.desc[1]}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Container>
       </section>
 
       {/* 03. 프로세스 */}
-      <section className="relative overflow-hidden bg-[#080C24] px-6 py-24 sm:px-10 lg:px-24">
+      <section className="relative overflow-hidden bg-[#080C24] py-24">
         <div
           className="pointer-events-none absolute inset-0 opacity-50"
           style={{
@@ -195,155 +290,78 @@ export default function ConsultingPage() {
               "radial-gradient(50% 50% at 85% 10%, rgba(123,63,228,0.25) 0%, rgba(8,12,36,0) 60%), radial-gradient(50% 50% at 10% 90%, rgba(14,165,183,0.2) 0%, rgba(8,12,36,0) 60%)",
           }}
         />
-        <div className="relative mx-auto max-w-5xl text-center">
-          <p className="text-xs font-semibold tracking-widest text-[#8FA6FF]">PROCESS</p>
-          <h2 className="mt-2 text-2xl font-bold text-white sm:text-3xl">프로세스</h2>
-        </div>
-
-        <div className="relative mx-auto mt-14 grid max-w-5xl gap-6 sm:grid-cols-4">
-          {/* connecting line behind cards */}
-          <div className="pointer-events-none absolute left-0 right-0 top-14 hidden h-px bg-linear-to-r from-transparent via-[#3D5AFE]/50 to-transparent sm:block" />
-
-          {process.map((p, i) => (
-            <div key={p.step} className="group relative">
-              <div
-                className="relative rounded-3xl border border-white/10 bg-white/4 px-6 py-8 text-center backdrop-blur transition-transform duration-300 hover:-translate-y-2"
-                style={{
-                  boxShadow: `0 24px 48px -20px ${p.glow}, inset 0 1px 0 rgba(255,255,255,0.06)`,
-                }}
-              >
-                <span
-                  className="pointer-events-none absolute -top-6 right-3 select-none text-6xl font-black leading-none text-white/6"
-                  aria-hidden
-                >
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-
-                <div
-                  className="relative z-10 mx-auto flex h-14 w-14 items-center justify-center rounded-2xl text-white shadow-lg"
-                  style={{
-                    background: `linear-gradient(135deg, ${p.from}, ${p.to})`,
-                    boxShadow: `0 10px 24px -8px ${p.glow}`,
-                  }}
-                >
-                  {p.icon}
-                </div>
-
-                <p
-                  className="relative z-10 mt-5 text-xs font-semibold tracking-widest"
-                  style={{ color: p.to }}
-                >
-                  {p.step}
-                </p>
-                <p className="relative z-10 mt-2 text-base font-bold text-white">{p.title}</p>
-                <p className="relative z-10 mt-1.5 text-xs leading-relaxed text-white/50">
-                  {p.desc}
-                </p>
-              </div>
-
-              {i < process.length - 1 && (
-                <span
-                  className="absolute -right-5.5 top-14 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-[#0B1130] text-sm text-[#8FA6FF] sm:flex"
-                  aria-hidden
-                >
-                  →
-                </span>
-              )}
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 04. Bottom CTA — 기업 정보 입력 폼 */}
-      <section className="relative overflow-hidden bg-white px-6 py-20 sm:px-10 lg:px-24">
-        <div
-          className="pointer-events-none absolute inset-0 opacity-40"
-          style={{
-            background:
-              "radial-gradient(50% 50% at 85% 0%, rgba(123,63,228,0.16) 0%, rgba(255,255,255,0) 60%), radial-gradient(50% 50% at 8% 100%, rgba(14,165,183,0.14) 0%, rgba(255,255,255,0) 60%)",
-          }}
-        />
-
-        <div
-          className="relative mx-auto max-w-4xl rounded-4xl border border-[#E7EAF6] bg-white p-10 sm:p-14"
-          style={{
-            boxShadow:
-              "0 32px 64px -28px rgba(61,90,254,0.3), 0 8px 24px -12px rgba(15,27,76,0.08)",
-          }}
-        >
-          <div
-            className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl text-white"
-            style={{
-              background: "linear-gradient(135deg, #3D5AFE, #6C8CFF)",
-              boxShadow: "0 10px 24px -8px rgba(61,90,254,0.55)",
-            }}
-          >
-            <svg viewBox="0 0 24 24" fill="none" className="h-7 w-7">
-              <path
-                d="M4 6h16v12H4z"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M4 7l8 6 8-6"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+        <Container className="relative">
+          <div className="pl-20 pr-20">
+            <span className="mb-3 block h-1 w-9 rounded-full bg-[#3566e8]" />
+            <h2
+              className="font-extrabold font-suit text-white"
+              style={{ fontSize: "clamp(1.7rem,3.2vw,2.8rem)", letterSpacing: "-0.03em" }}
+            >
+              프로세스
+            </h2>
           </div>
 
-          <p className="mt-5 text-center text-xs font-semibold tracking-widest text-[#3D5AFE]">
-            CONTACT US
+          <div className="relative mt-14 grid gap-6 sm:grid-cols-4">
+            {/* connecting line behind cards */}
+            <div className="pointer-events-none absolute left-0 right-0 top-14 hidden h-px bg-linear-to-r from-transparent via-[#3D5AFE]/50 to-transparent sm:block" />
+
+            {process.map((p, i) => (
+              <div key={p.step} className="group relative">
+                <div
+                  className="relative rounded-3xl border border-white/10 bg-white/4 px-6 py-8 text-center backdrop-blur transition-transform duration-300 hover:-translate-y-2"
+                  style={{
+                    boxShadow: `0 24px 48px -20px ${p.glow}, inset 0 1px 0 rgba(255,255,255,0.06)`,
+                  }}
+                >
+                  <div
+                    className="relative z-10 mx-auto flex h-14 w-14 items-center justify-center rounded-2xl text-white shadow-lg"
+                    style={{
+                      background: `linear-gradient(135deg, ${p.from}, ${p.to})`,
+                      boxShadow: `0 10px 24px -8px ${p.glow}`,
+                    }}
+                  >
+                    {p.icon}
+                  </div>
+
+                  <p
+                    className="relative z-10 mt-5 text-xs font-semibold tracking-widest"
+                    style={{ color: p.to }}
+                  >
+                    {p.step}
+                  </p>
+                  <p className="relative z-10 mt-2 text-base font-bold text-white">{p.title}</p>
+                  <p className="relative z-10 mt-1.5 text-xs leading-relaxed text-white/50">
+                    {p.desc}
+                  </p>
+                </div>
+
+                {i < process.length - 1 && (
+                  <span
+                    className="absolute -right-5.5 top-14 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-[#0B1130] text-sm text-[#8FA6FF] sm:flex"
+                    aria-hidden
+                  >
+                    →
+                  </span>
+                )}
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* 04. Bottom CTA */}
+      <section className="bg-[#0D1B40] py-[80px] relative z-50 -mt-10 shadow-[0_-24px_48px_-12px_rgba(0,0,0,0.1)]">
+        <div className="max-w-[1100px] mx-auto px-6 text-center">
+          <p className="text-white text-[26px] md:text-[30px] font-bold leading-[1.4]">
+            지금 무료 컨설팅을 신청해보세요
           </p>
-          <h2 className="mt-2 text-center text-2xl font-bold text-[#0F1B4C] sm:text-3xl">
-            무료 컨설팅, 지금 신청하세요
-          </h2>
-          <p className="mt-3 text-center text-sm text-[#6A7290]">
-            간단한 정보만 남겨주시면 담당자가 빠르게 연락드립니다.
+          <p className="text-[#93C5FD] text-[14px] md:text-[15px] mt-3">
+            VODA는 전략 수립부터 시스템 도입, 인재 양성까지 성공적인 AI 전환(AX)을 위한 컨설팅을 제공합니다.
           </p>
 
-          <form className="mt-10 space-y-4">
-            <div className="grid gap-4 sm:grid-cols-2">
-              <input
-                type="text"
-                placeholder="기업명"
-                className="rounded-2xl border border-[#E7EAF6] px-4 py-3 text-sm text-[#0F1B4C] outline-none transition focus:border-[#3D5AFE] focus:ring-4 focus:ring-[#3D5AFE]/10"
-              />
-              <input
-                type="text"
-                placeholder="담당자명"
-                className="rounded-2xl border border-[#E7EAF6] px-4 py-3 text-sm text-[#0F1B4C] outline-none transition focus:border-[#3D5AFE] focus:ring-4 focus:ring-[#3D5AFE]/10"
-              />
-              <input
-                type="tel"
-                placeholder="연락처"
-                className="rounded-2xl border border-[#E7EAF6] px-4 py-3 text-sm text-[#0F1B4C] outline-none transition focus:border-[#3D5AFE] focus:ring-4 focus:ring-[#3D5AFE]/10"
-              />
-              <input
-                type="email"
-                placeholder="이메일"
-                className="rounded-2xl border border-[#E7EAF6] px-4 py-3 text-sm text-[#0F1B4C] outline-none transition focus:border-[#3D5AFE] focus:ring-4 focus:ring-[#3D5AFE]/10"
-              />
-            </div>
-            <textarea
-              placeholder="문의 내용을 남겨주세요"
-              rows={4}
-              className="w-full rounded-2xl border border-[#E7EAF6] px-4 py-3 text-sm text-[#0F1B4C] outline-none transition focus:border-[#3D5AFE] focus:ring-4 focus:ring-[#3D5AFE]/10"
-            />
-            <button
-              type="submit"
-              className="mx-auto block rounded-full px-8 py-3 text-sm font-semibold text-white transition duration-300 hover:-translate-y-0.5"
-              style={{
-                background: "linear-gradient(135deg, #3D5AFE, #6C8CFF)",
-                boxShadow: "0 16px 32px -12px rgba(61,90,254,0.55)",
-              }}
-            >
-              무료 컨설팅 상담 신청하기 →
-            </button>
-          </form>
+          <button className="mt-7 bg-[#2563EB] text-white text-[14px] font-semibold px-6 py-3 rounded-lg hover:bg-[#1d4ed8] transition-colors">
+            컨설팅 상담 신청하기 →
+          </button>
         </div>
       </section>
     </main>
