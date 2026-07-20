@@ -29,7 +29,7 @@ export default function Footer() {
         <div className="mt-6 flex flex-col gap-2 text-xs text-gray-400 sm:flex-row sm:items-center sm:justify-between">
           <p>© 2026 VODA Works Inc. All rights reserved.</p>
           <p>
-            서울특별시 중구 · 02-0000-0000 · contact@voda.works
+            서울 중구 다산로36길 11 동산빌딩 4층 · 02-0000-0000 · contact@voda.works
           </p>
         </div>
      </Container>
