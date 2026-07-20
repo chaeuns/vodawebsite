@@ -7,11 +7,11 @@ export const badges: Record<string, { bg: string; color: string }> = {
   "수료 소식": { bg: "#FFF7ED", color: "#EA580C" },
 };
 
-export const cards = [
-  { id: 1, badge: "파트너십", date: "2026.05.30", title: "VODA Campus 2기 수강생 1,200명 돌파" },
-  { id: 2, badge: "교육 현장", date: "2026.05.10", title: "VODA × LG CNS, 기업 DX 교육 MOU 체결" },
-  { id: 3, badge: "수료 소식", date: "2026.04.22", title: "AI·ML 트랙 1기 수료식 성황리에 마무리" },
-  { id: 4, badge: "공지", date: "2026.04.10", title: "2026 하반기 KDT 교육과정 모집 시작" },
-  { id: 5, badge: "파트너십", date: "2026.03.28", title: "VODA, NIA와 AI 교육 혁신 MOU 체결" },
-  { id: 6, badge: "교육 현장", date: "2026.03.15", title: "클라우드 트랙 현장 실습 현장을 소개합니다" },
-];
+export { getNewsList as getCards } from "@/app/lib/notion";
+
+// cards are already sorted by date (descending) via the Notion query, so no re-sort is needed here.
+export function getFeaturedCard(cards: any[]) {
+  if (!cards || cards.length === 0) return null;
+  const featuredCards = cards.filter((card) => card.featured);
+  return featuredCards[0] ?? cards[0];
+}
