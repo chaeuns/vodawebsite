@@ -2,14 +2,14 @@
 
 import { ClipboardList, GraduationCap, BarChart3, Layers } from "lucide-react";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
-import { useScrollReveal } from "@/app/components/shared/useScrollReveal";
-import FillHeading from "@/app/components/shared/FillHeading";
+import { useRepeatingReveal } from "../useRepeatingReveal";
+import Container from "@/app/components/Container";
 import { strengths } from "../data";
 
 const ICONS = [ClipboardList, GraduationCap, BarChart3, Layers];
 
 export default function WhyVoda() {
-  const { ref, isVisible } = useScrollReveal();
+  const { ref, isVisible } = useRepeatingReveal();
   const shouldReduceMotion = useReducedMotion();
 
   const rowVariants = (direction: "left" | "right"): Variants =>
@@ -50,21 +50,23 @@ export default function WhyVoda() {
         opacity: isVisible ? 1 : 0,
       }}
     >
-      <div className="max-w-[1100px] mx-auto px-6">
-        <p
-          style={{ letterSpacing: "1.5px" }}
-          className="text-[12px] font-semibold text-[#2563EB] uppercase"
-        >
-          WHY VODA
-        </p>
-        <FillHeading className="text-[32px] font-bold mt-2 leading-[1.3]">
-          왜 VODA 기업교육인가
-        </FillHeading>
-        <p className="text-[15px] text-[#6B7280] mt-2">
-          기업 교육에 필요한 네 가지 핵심 경쟁력을 갖췄습니다.
-        </p>
+      <Container>
+        <div className="pl-20 pr-20">
+          <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
+          <h2
+            className="font-extrabold font-suit text-[#0e1b52]"
+            style={{ fontSize: "clamp(1.7rem,3.2vw,2.8rem)", letterSpacing: "-0.03em" }}
+          >
+            왜 VODA 기업교육인가
+          </h2>
+          <p className="text-[15px] text-[#5a6895] mt-3">
+            기업 교육에 필요한 네 가지 핵심 경쟁력을 갖췄습니다.
+          </p>
+        </div>
+      </Container>
 
-        <div className="mt-6">
+      <Container>
+        <div className="pl-20 pr-20 mt-6">
           {strengths.map((strength, i) => {
             const Icon = ICONS[i];
             const isReversed = i % 2 === 1;
@@ -78,11 +80,13 @@ export default function WhyVoda() {
                 variants={rowVariants(isReversed ? "right" : "left")}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
+                viewport={{ once: false, amount: 0.3 }}
               >
                 <motion.span
                   variants={numberVariants}
-                  className="shrink-0 md:w-[160px] text-center text-[40px] md:text-[92px] font-extrabold leading-none"
+                  className={`shrink-0 md:w-[160px] text-center text-[40px] md:text-[92px] font-extrabold leading-none ${
+                    isReversed ? "" : "md:text-left"
+                  }`}
                   style={{
                     backgroundImage: "linear-gradient(135deg, #2563EB, #6EA0F5)",
                     WebkitBackgroundClip: "text",
@@ -114,14 +118,16 @@ export default function WhyVoda() {
                   <motion.div
                     variants={borderVariants}
                     style={{ transformOrigin: "left" }}
-                    className="absolute bottom-0 left-0 w-full h-px bg-[#E5E7EB]"
+                    className={`absolute bottom-0 left-0 w-full h-px bg-[#E5E7EB] ${
+                      isReversed ? "md:w-[calc(100%-200px)]" : "md:left-[200px] md:w-[calc(100%-200px)]"
+                    }`}
                   />
                 )}
               </motion.div>
             );
           })}
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import "./corporate-education.css";
-import SubNav from "./components/SubNav";
 import Hero from "./components/Hero";
 import WhyVoda from "./components/WhyVoda";
 import Programs from "./components/Programs";
 import Audience from "./components/Audience";
 import Process from "./components/Process";
 import FieldTags from "./components/FieldTags";
-import InquiryForm from "./components/InquiryForm";
 import CTA from "./components/CTA";
 
 export const metadata: Metadata = {
@@ -19,13 +17,11 @@ export default function CorporateEducationPage() {
   return (
     <div className="corporate-education-page">
       <Hero />
-      <SubNav />
       <WhyVoda />
       <Programs />
       <Audience />
       <Process />
       <FieldTags />
-      <InquiryForm />
       <CTA />
     </div>
   );
