@@ -14,11 +14,14 @@ export const metadata: Metadata = {
 export default function LmsPage() {
   return (
     <div>
-      <Hero />
-      <ValueProps />
+      <div className="relative">
+        <Hero />
+        <ValueProps />
+      </div>
       <Features />
       <AdminDashboard />
       <CTA />
     </div>
   );
 }
+
