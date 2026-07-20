@@ -9,7 +9,7 @@ export default function FeaturedNews({
   activeCategory: string;
   cards: any[];
 }) {
-  if (activeCategory !== "전체" && activeCategory !== "공지") return null;
+  if (activeCategory !== "전체") return null;
 
   const featuredCard = getFeaturedCard(cards);
   if (!featuredCard) return null;
@@ -32,7 +32,7 @@ export default function FeaturedNews({
             <img
               src={featuredCard.thumbnail}
               alt={featuredCard.title}
-              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "contain" }}
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
             />
           ) : (
             <div

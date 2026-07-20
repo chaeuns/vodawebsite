@@ -30,8 +30,8 @@ export default async function NewsDetailPage({
               fontSize: 13,
               color: "#6B7280",
               textDecoration: "none",
-              display: "inline-block",
-              marginBottom: 64,
+              display: "block",
+              marginBottom: 40,
             }}
           >
             ← 목록으로
@@ -39,7 +39,7 @@ export default async function NewsDetailPage({
 
           <Badge label={badge} />
 
-          <p style={{ fontSize: 14, color: "#9CA3AF", marginTop: 16 }}>{date}</p>
+          <p style={{ fontSize: 14, color: "#6B7280", fontWeight: 500, marginTop: 16 }}>{date}</p>
 
           <h1
             style={{
