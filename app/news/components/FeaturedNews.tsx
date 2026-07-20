@@ -1,6 +1,19 @@
+import Link from "next/link";
 import Badge from "./Badge";
+import { getFeaturedCard } from "../data";
 
-export default function FeaturedNews() {
+export default function FeaturedNews({
+  activeCategory,
+  cards,
+}: {
+  activeCategory: string;
+  cards: any[];
+}) {
+  if (activeCategory !== "전체") return null;
+
+  const featuredCard = getFeaturedCard(cards);
+  if (!featuredCard) return null;
+
   return (
     <section style={{ marginBottom: 40 }}>
       <div
@@ -15,29 +28,34 @@ export default function FeaturedNews() {
         }}
       >
         <div style={{ position: "relative", width: "45%", background: "#E9EAEC", flexShrink: 0 }}>
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: 13,
-              color: "#9CA3AF",
-            }}
-          >
-            이미지 자리
-          </div>
+          {featuredCard.thumbnail ? (
+            <img
+              src={featuredCard.thumbnail}
+              alt={featuredCard.title}
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+            />
+          ) : (
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: 13,
+                color: "#9CA3AF",
+              }}
+            >
+              이미지 자리
+            </div>
+          )}
           <div style={{ position: "absolute", top: 16, left: 16 }}>
-            <Badge label="공지" />
+            <Badge label={featuredCard.badge} />
           </div>
         </div>
 
         <div style={{ padding: 36, display: "flex", flexDirection: "column", justifyContent: "center", flex: 1 }}>
-          <p style={{ fontSize: 11, fontWeight: 600, color: "#2563EB", letterSpacing: "1px", margin: 0 }}>
-            FEATURED
-          </p>
-          <p style={{ fontSize: 13, color: "#9CA3AF", marginTop: 6, marginBottom: 0 }}>2026.06.20</p>
+          <p style={{ fontSize: 13, color: "#9CA3AF", margin: 0 }}>{featuredCard.date}</p>
           <h3
             style={{
               fontSize: 22,
@@ -48,24 +66,10 @@ export default function FeaturedNews() {
               marginBottom: 0,
             }}
           >
-            VODA, 과학기술정보통신부 AI 교육 혁신 과제 선정
+            {featuredCard.title}
           </h3>
-          <p
-            style={{
-              fontSize: 15,
-              color: "#6B7280",
-              marginTop: 12,
-              lineHeight: 1.6,
-              display: "-webkit-box",
-              WebkitLineClamp: 2,
-              WebkitBoxOrient: "vertical",
-              overflow: "hidden",
-            }}
-          >
-            짧은 설명 텍스트 자리 (1~2줄). VODA가 정부 주도 AI 교육 혁신 프로젝트의 핵심 파트너로 선정되어 국내 AI 인재 양성에 기여합니다.
-          </p>
-          <a
-            href="#"
+          <Link
+            href={`/news/${featuredCard.id}`}
             style={{
               fontSize: 14,
               fontWeight: 600,
@@ -76,7 +80,7 @@ export default function FeaturedNews() {
             }}
           >
             자세히 보기 →
-          </a>
+          </Link>
         </div>
       </div>
     </section>
