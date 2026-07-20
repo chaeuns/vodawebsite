@@ -55,10 +55,7 @@ export default function FeaturedNews({
         </div>
 
         <div style={{ padding: 36, display: "flex", flexDirection: "column", justifyContent: "center", flex: 1 }}>
-          <p style={{ fontSize: 11, fontWeight: 600, color: "#2563EB", letterSpacing: "1px", margin: 0 }}>
-            FEATURED
-          </p>
-          <p style={{ fontSize: 13, color: "#9CA3AF", marginTop: 6, marginBottom: 0 }}>{featuredCard.date}</p>
+          <p style={{ fontSize: 13, color: "#9CA3AF", margin: 0 }}>{featuredCard.date}</p>
           <h3
             style={{
               fontSize: 22,
