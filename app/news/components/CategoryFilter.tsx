@@ -8,7 +8,7 @@ export default function CategoryFilter({
   setActiveCategory: (cat: string) => void;
 }) {
   return (
-    <section style={{ padding: "24px 0", display: "flex", alignItems: "center", gap: 8 }}>
+    <section style={{ padding: "8px 0 24px", display: "flex", alignItems: "center", gap: 8 }}>
       <span style={{ fontSize: 13, color: "#9CA3AF", fontWeight: 500, marginRight: 4 }}>카테고리</span>
       {categories.map((cat) => {
         const isActive = cat === activeCategory;

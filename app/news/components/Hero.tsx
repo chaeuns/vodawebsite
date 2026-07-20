@@ -1,6 +1,6 @@
 export default function Hero() {
   return (
-    <section style={{ paddingTop: 120, paddingBottom: 48 }}>
+    <section style={{ paddingTop: 120, paddingBottom: 24 }}>
       <p
         style={{
           fontSize: 12,
