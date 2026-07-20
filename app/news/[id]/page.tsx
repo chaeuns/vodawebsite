@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getNewsById } from "@/app/lib/notion";
 import NotionBlocks from "../components/NotionBlocks";
+import Badge from "../components/Badge";
 
 export default async function NewsDetailPage({
   params,
@@ -17,53 +18,53 @@ export default async function NewsDetailPage({
     notFound();
   }
 
-  const { title, date, badge, blocks } = news;
+  const { title, date, badge, thumbnail, blocks } = news;
 
   return (
     <div>
-      <section style={{ background: "#0B1130", padding: "120px 40px 64px" }}>
+      <section style={{ padding: "120px 40px 0" }}>
         <div style={{ maxWidth: 800, margin: "0 auto" }}>
           <Link
             href="/news"
             style={{
               fontSize: 13,
-              color: "#8FA6FF",
+              color: "#6B7280",
               textDecoration: "none",
               display: "inline-block",
-              marginBottom: 24,
+              marginBottom: 64,
             }}
           >
             ← 목록으로
           </Link>
 
-          <span
-            style={{
-              fontSize: 12,
-              fontWeight: 600,
-              color: "#3D5AFE",
-              background: "rgba(61,90,254,0.12)",
-              border: "1px solid rgba(61,90,254,0.3)",
-              padding: "4px 12px",
-              borderRadius: 20,
-              letterSpacing: "0.2px",
-              display: "inline-block",
-            }}
-          >
-            {badge}
-          </span>
+          <Badge label={badge} />
+
+          <p style={{ fontSize: 14, color: "#9CA3AF", marginTop: 16 }}>{date}</p>
 
           <h1
             style={{
               fontSize: 36,
               fontWeight: 700,
-              color: "#fff",
+              color: "#111827",
               lineHeight: 1.35,
-              margin: "16px 0 0",
+              margin: "12px 0 0",
             }}
           >
             {title}
           </h1>
-          <p style={{ fontSize: 14, color: "#9CA3AF", marginTop: 16 }}>{date}</p>
+
+          {thumbnail && (
+            <img
+              src={thumbnail}
+              alt={title}
+              style={{
+                width: "100%",
+                borderRadius: 16,
+                marginTop: 32,
+                display: "block",
+              }}
+            />
+          )}
         </div>
       </section>
 
