@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { faqs } from "./data";
-import FillHeading from "@/app/components/shared/FillHeading";
+import Container from "@/app/components/Container";
 
 function useRepeatingReveal(threshold: number) {
   const ref = useRef<HTMLDivElement>(null);
@@ -38,24 +38,24 @@ export default function FAQ() {
           "linear-gradient(to bottom, #ffffff 0%, #E8EDF8 15%, #D6E0F5 50%, #E8EDF8 85%, #ffffff 100%)",
       }}
     >
-      <div
-        className="max-w-[1100px] mx-auto px-6 transition-all duration-[900ms] ease-out"
+      <Container
+        className="transition-all duration-[900ms] ease-out"
         style={{
           transform: isVisible ? "translateY(0)" : "translateY(80px)",
           opacity: isVisible ? 1 : 0,
         }}
       >
-        <p
-          style={{ letterSpacing: "1.5px" }}
-          className="text-[12px] font-semibold text-[#2563EB] uppercase"
-        >
-          FAQ
-        </p>
-        <FillHeading className="text-[32px] font-bold mt-2 leading-[1.3]">
-          자주 묻는 질문
-        </FillHeading>
+        <div className="pl-20 pr-20">
+          <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
+          <h2
+            className="font-extrabold font-suit text-[#0e1b52]"
+            style={{ fontSize: "clamp(1.7rem,3.2vw,2.8rem)", letterSpacing: "-0.03em" }}
+          >
+            자주 묻는 질문
+          </h2>
+        </div>
 
-        <div className="mt-10 border border-[#E5E7EB] rounded-xl overflow-hidden bg-white">
+        <div className="max-w-[1100px] mx-auto mt-10 border border-[#E5E7EB] rounded-xl overflow-hidden bg-white">
           {faqs.map((faq, i) => (
             <div
               key={i}
@@ -82,7 +82,7 @@ export default function FAQ() {
             </div>
           ))}
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

@@ -119,18 +119,24 @@ export default function Process() {
           opacity: isVisible ? 1 : 0,
         }}
       >
-        <h2 className="text-[32px] font-bold leading-[1.3] text-[#111827]">
-          채용 프로세스
-        </h2>
-        <p className="text-[15px] text-[#6B7280] mt-5">
-          최종 합격까지의 과정을 명확하게 안내하며,
-          <br />
-          투명하고 신뢰할 수 있는 절차를 통해 가장 적합한 인재와 함께 성장해 나가고자 합니다.
-        </p>
+        <div className="pl-20 pr-20">
+          <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
+          <h2
+            className="font-extrabold font-suit text-[#0e1b52]"
+            style={{ fontSize: "clamp(1.7rem,3.2vw,2.8rem)", letterSpacing: "-0.03em" }}
+          >
+            채용 프로세스
+          </h2>
+          <p className="text-[15px] text-[#5a6895] mt-3">
+            최종 합격까지의 과정을 명확하게 안내하며,
+            <br />
+            투명하고 신뢰할 수 있는 절차를 통해 가장 적합한 인재와 함께 성장해 나가고자 합니다.
+          </p>
+        </div>
 
         <div
           ref={stepsRef}
-          className="mt-16 flex flex-col md:flex-row items-stretch md:items-center gap-10 md:gap-4"
+          className="pl-20 pr-20 mt-16 flex flex-col md:flex-row items-stretch md:items-center gap-10 md:gap-4"
         >
           {steps.map((s, i) => (
             <div key={s.number} className="flex-1 flex flex-col md:flex-row items-center w-full">

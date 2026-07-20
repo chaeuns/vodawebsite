@@ -208,12 +208,16 @@ export default function OurValues() {
       }}
     >
       <Container>
-        <FillHeading className="text-[32px] font-bold leading-[1.3]">
-          우리 팀을 움직이는 가치
-        </FillHeading>
-        <p className="text-[16px] text-[#6B7280] mt-5">
-          VODA는 도전과 협업, 성장을 움직이는 문화를 지향합니다.
-        </p>
+        <div className="pl-20 pr-20">
+          <div style={{ fontSize: "clamp(1.7rem,3.2vw,2.8rem)" }}>
+            <FillHeading className="font-bold leading-[1.3]">
+              우리 팀을 움직이는 가치
+            </FillHeading>
+          </div>
+          <p className="text-[16px] text-[#6B7280] mt-5">
+            VODA는 도전과 협업, 성장을 움직이는 문화를 지향합니다.
+          </p>
+        </div>
 
         <div ref={lineRef} className="relative mt-16 max-w-[861px] mx-auto">
           <svg
