@@ -1,8 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { Sparkles, BarChart3, LayoutGrid, Shield } from "lucide-react";
-import { useScrollReveal } from "@/app/components/shared/useScrollReveal";
-import FillHeading from "@/app/components/shared/FillHeading";
+import { useRepeatingReveal } from "../useRepeatingReveal";
+import Container from "@/app/components/Container";
 
 const FIELD_CATEGORIES = [
   {
@@ -40,7 +41,7 @@ const FIELD_CATEGORIES = [
 ];
 
 export default function FieldTags() {
-  const { ref, isVisible } = useScrollReveal();
+  const { ref, isVisible } = useRepeatingReveal();
 
   return (
     <section
@@ -51,58 +52,80 @@ export default function FieldTags() {
         opacity: isVisible ? 1 : 0,
       }}
     >
-      <div className="max-w-[1100px] mx-auto px-6">
-        <p
-          style={{ letterSpacing: "1.5px" }}
-          className="text-[12px] font-semibold text-[#2563EB] uppercase"
-        >
-          FIELDS
-        </p>
-        <FillHeading className="text-[32px] font-bold mt-2 leading-[1.3]">
-          운영 가능한 교육 분야
-        </FillHeading>
-        <p className="text-[15px] text-[#6B7280] mt-2 mb-16">
-          아래 항목 외에도 기업 요청에 맞춰 새로운 주제를 구성할 수 있습니다.
-        </p>
+      <Container>
+        <div className="pl-20 pr-20">
+          <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
+          <h2
+            className="font-extrabold font-suit text-[#0e1b52]"
+            style={{ fontSize: "clamp(1.7rem,3.2vw,2.8rem)", letterSpacing: "-0.03em" }}
+          >
+            운영 가능한 교육 분야
+          </h2>
+          <p className="text-[15px] text-[#5a6895] mt-3 mb-16">
+            아래 항목 외에도 기업 요청에 맞춰 새로운 주제를 구성할 수 있습니다.
+          </p>
+        </div>
+      </Container>
 
+      <Container>
+        <div className="pl-20 pr-20">
         <div className="fields-map">
           <svg className="fields-connector" viewBox="0 0 880 460" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
             <path
+              id="field-path-1"
               d="M440,230 Q440,150 262,150"
               fill="none"
-              stroke="#8FA6D4"
-              strokeWidth="2"
+              stroke="#BFD3F0"
+              strokeWidth="1.5"
               strokeLinecap="round"
-              strokeDasharray="2 8"
             />
             <path
+              id="field-path-2"
               d="M440,230 Q440,150 618,150"
               fill="none"
-              stroke="#8FA6D4"
-              strokeWidth="2"
+              stroke="#BFD3F0"
+              strokeWidth="1.5"
               strokeLinecap="round"
-              strokeDasharray="2 8"
             />
             <path
+              id="field-path-3"
               d="M440,230 Q440,310 262,310"
               fill="none"
-              stroke="#8FA6D4"
-              strokeWidth="2"
+              stroke="#BFD3F0"
+              strokeWidth="1.5"
               strokeLinecap="round"
-              strokeDasharray="2 8"
             />
             <path
+              id="field-path-4"
               d="M440,230 Q440,310 618,310"
               fill="none"
-              stroke="#8FA6D4"
-              strokeWidth="2"
+              stroke="#BFD3F0"
+              strokeWidth="1.5"
               strokeLinecap="round"
-              strokeDasharray="2 8"
             />
+
+            {["field-path-1", "field-path-2", "field-path-3", "field-path-4"].map((id, i) => (
+              <circle key={id} className="fields-flow-dot" r="3.5" fill="#b7d2fc">
+                <animateMotion
+                  dur="2.2s"
+                  begin={`${i * 0.45}s`}
+                  repeatCount="indefinite"
+                  rotate="auto"
+                >
+                  <mpath href={`#${id}`} />
+                </animateMotion>
+              </circle>
+            ))}
           </svg>
 
           <div className="fields-hub">
-            <span>교육 분야</span>
+            <Image
+              src="/images/corporate-education/field-hub.png"
+              alt="교육 분야"
+              width={136}
+              height={136}
+              className="w-full h-full object-cover rounded-full"
+            />
           </div>
 
           {FIELD_CATEGORIES.map((cat) => {
@@ -110,7 +133,7 @@ export default function FieldTags() {
             return (
               <div key={cat.title} className={`fields-node fields-${cat.position}`}>
                 <div className="fields-node-icon" style={{ background: cat.iconBg }}>
-                  <Icon size={18} color={cat.iconColor} strokeWidth={1.7} />
+                  <Icon size={22} color={cat.iconColor} strokeWidth={1.7} />
                 </div>
                 <p className="fields-node-title">{cat.title}</p>
                 <div className="fields-node-divider" />
@@ -126,14 +149,15 @@ export default function FieldTags() {
             );
           })}
         </div>
-      </div>
+        </div>
+      </Container>
 
       <style>{`
         .fields-map {
           position: relative;
           width: 100%;
-          max-width: 880px;
-          height: 460px;
+          max-width: 960px;
+          height: 500px;
           margin: 0 auto;
         }
         .fields-connector {
@@ -147,9 +171,10 @@ export default function FieldTags() {
           left: 50%;
           top: 50%;
           transform: translate(-50%, -50%);
-          width: 118px;
-          height: 118px;
+          width: 136px;
+          height: 136px;
           border-radius: 50%;
+          overflow: hidden;
           background: rgba(219, 234, 254, 0.55);
           backdrop-filter: blur(10px);
           -webkit-backdrop-filter: blur(10px);
@@ -161,48 +186,41 @@ export default function FieldTags() {
           animation: fields-float-hub 6.4s ease-in-out infinite 0.2s;
           z-index: 2;
         }
-        .fields-hub span {
-          font-size: 17px;
-          font-weight: 700;
-          color: #111827;
-          text-align: center;
-          padding: 0 8px;
-        }
         .fields-node {
           position: absolute;
-          width: 232px;
+          width: 270px;
           text-align: center;
           background: #fff;
-          border: 1px solid #E7EAF1;
-          border-radius: 16px;
-          padding: 18px 18px 16px;
+          border: 1px solid #BAE6FD;
+          border-radius: 18px;
+          padding: 22px 20px 20px;
           box-shadow: 0 8px 20px rgba(13, 27, 64, 0.06);
           z-index: 2;
         }
         .fields-node-icon {
-          width: 36px;
-          height: 36px;
+          width: 44px;
+          height: 44px;
           flex-shrink: 0;
-          border-radius: 10px;
+          border-radius: 12px;
           display: flex;
           align-items: center;
           justify-content: center;
-          margin: 0 auto 12px;
+          margin: 0 auto 14px;
         }
         .fields-node-title {
-          font-size: 15px;
+          font-size: 18px;
           font-weight: 700;
           color: #0D1B40;
-          margin-bottom: 8px;
+          margin-bottom: 10px;
         }
         .fields-node-divider {
           height: 1px;
           background: #E7EAF1;
-          margin: 0 auto 8px;
+          margin: 0 auto 10px;
           width: 100%;
         }
         .fields-node-tags {
-          font-size: 12px;
+          font-size: 14px;
           color: #6B7280;
           line-height: 1.7;
         }
@@ -218,8 +236,13 @@ export default function FieldTags() {
         @keyframes fields-float-c   { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
         @keyframes fields-float-d   { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 
+        .fields-flow-dot {
+          filter: drop-shadow(0 0 3px rgba(59, 130, 246, 0.7));
+        }
+
         @media (prefers-reduced-motion: reduce) {
           .fields-hub, .fields-n1, .fields-n2, .fields-n3, .fields-n4 { animation: none !important; }
+          .fields-flow-dot { display: none; }
         }
 
         @media (max-width: 768px) {

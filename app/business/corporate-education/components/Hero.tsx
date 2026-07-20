@@ -1,27 +1,51 @@
-"use client";
-
-import { useScrollReveal } from "@/app/components/shared/useScrollReveal";
+import Image from "next/image";
 
 export default function Hero() {
-  const { ref, isVisible } = useScrollReveal();
-
   return (
-    <section
-      className="relative flex min-h-[420px] items-center justify-center overflow-hidden py-20 px-6 sm:px-10 lg:px-16"
-      style={{ background: "linear-gradient(135deg, #E8EDF8 0%, #D6E0F5 100%)" }}
-    >
-      <h1
-        ref={ref}
-        className="font-bold leading-[1.35] text-[26px] md:text-[38px] text-[#111827] text-center break-keep transition-all duration-[900ms] ease-out"
-        style={{
-          transform: isVisible ? "translateY(0)" : "translateY(40px)",
-          opacity: isVisible ? 1 : 0,
-        }}
+    <>
+      <style>{`
+        @keyframes heroFadeUp {
+          from { opacity: 0; transform: translateY(16px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-fade-1 { opacity: 0; animation: heroFadeUp 0.7s ease-out 0.1s forwards; }
+        .hero-fade-2 { opacity: 0; animation: heroFadeUp 0.7s ease-out 0.3s forwards; }
+        .hero-fade-3 { opacity: 0; animation: heroFadeUp 0.7s ease-out 0.5s forwards; }
+      `}</style>
+
+      <section
+        className="relative flex items-center pt-16 overflow-hidden bg-[#0D1B40]"
+        style={{ minHeight: 420 }}
       >
-        기업의 성장과 개인의 역량 강화를 위한
-        <br />
-        최적의 교육 솔루션
-      </h1>
-    </section>
+        <Image
+          src="/images/Frame%205.jpg"
+          alt=""
+          fill
+          priority
+          className="object-cover"
+        />
+        <div className="relative max-w-[1100px] px-6 sm:px-10 lg:px-16 xl:px-20 2xl:px-24 py-6 md:py-8">
+          <div className="-translate-y-5">
+            <p
+              className="hero-fade-1 text-[#0064DB] text-[13px] md:text-[15px] font-medium"
+            >
+              <span className="text-[#00163A]">사업 영역 &gt;</span> 기업 교육 사업
+            </p>
+
+            <h1 className="hero-fade-2 font-bold mt-4 leading-[1.3] text-[18px] sm:text-[22px] md:text-[29px] lg:text-[43px] whitespace-normal md:whitespace-nowrap break-keep">
+              <span className="text-[#00163A]">
+                기업의 성장과 개인의 역량 강화
+              </span>
+            </h1>
+          </div>
+
+          <p className="hero-fade-3 text-[#486C98] mt-4 leading-[1.6] text-[13px] md:text-[15px] max-w-[90%] md:max-w-[520px]">
+            기업의 성장과 개인의 역량 강화를 위한 VODA의 맞춤형 교육 솔루션입니다.
+            <br />
+            현장 실무 중심의 커리큘럼으로 조직의 경쟁력을 함께 만들어갑니다.
+          </p>
+        </div>
+      </section>
+    </>
   );
 }
