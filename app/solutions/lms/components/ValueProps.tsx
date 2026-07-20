@@ -8,9 +8,14 @@ import { valueProps } from "../data";
 
 const ICONS = [Layers, Sparkles, Globe2];
 const QUERY = "왜 VODA LMS인가요?";
-const TYPE_INTERVAL_MS = 110;
 const SUBMIT_DELAY_MS = 700;
 const REVEAL_DELAY_MS = 600;
+
+function nextTypeDelay(prevChar: string) {
+  const jitter = Math.random() * 90;
+  const pauseAfterSpace = prevChar === " " ? 90 : 0;
+  return 70 + jitter + pauseAfterSpace;
+}
 
 type Phase = "idle" | "typing" | "submitted" | "revealed";
 
@@ -29,7 +34,8 @@ export default function ValueProps() {
       const t = setTimeout(() => setPhase("submitted"), SUBMIT_DELAY_MS);
       return () => clearTimeout(t);
     }
-    const t = setTimeout(() => setCharCount((c) => c + 1), TYPE_INTERVAL_MS);
+    const delay = nextTypeDelay(QUERY[charCount - 1] ?? "");
+    const t = setTimeout(() => setCharCount((c) => c + 1), delay);
     return () => clearTimeout(t);
   }, [phase, charCount]);
 
@@ -58,7 +64,17 @@ export default function ValueProps() {
           >
             <Search size={18} className="shrink-0 text-[#93C5FD]" />
             <p className="flex-1 min-w-0 truncate text-left text-[15px] sm:text-[18px] font-bold text-[#00163A]">
-              {typedText}
+              {typedText.split("").map((ch, i) => (
+                <motion.span
+                  key={i}
+                  initial={{ opacity: 0, y: 6, scale: 0.7 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ duration: 0.16, ease: "easeOut" }}
+                  className="inline-block"
+                >
+                  {ch === " " ? " " : ch}
+                </motion.span>
+              ))}
               <motion.span
                 aria-hidden
                 className="ml-0.5 inline-block h-[1.1em] w-0.5 translate-y-0.5 bg-[#2563EB] align-middle"
