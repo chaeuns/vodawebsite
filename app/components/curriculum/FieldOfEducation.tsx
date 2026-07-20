@@ -2,6 +2,7 @@
 
 import { fields } from "./data";
 import { useScrollReveal } from "@/app/components/shared/useScrollReveal";
+import Container from "@/app/components/Container";
 
 export default function FieldOfEducation() {
   const { ref, isVisible } = useScrollReveal();
@@ -21,14 +22,20 @@ export default function FieldOfEducation() {
           opacity: isVisible ? 1 : 0,
         }}
       >
-      <div className="max-w-[1100px] px-6 sm:px-10 lg:px-16 xl:px-20 2xl:px-24 -mt-20">
-        <h2 className="text-[32px] font-bold leading-[1.3] text-[#111827]">
-          핵심 기술 분야
-        </h2>
-        <p className="text-[15px] text-[#6B7280] mt-5">
-          디지털 전환 시대에 필요한 핵심 기술을 교육합니다.
-        </p>
-      </div>
+      <Container className="-mt-20">
+        <div className="pl-20 pr-20">
+          <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
+          <h2
+            className="font-extrabold font-suit text-[#0e1b52]"
+            style={{ fontSize: "clamp(1.7rem,3.2vw,2.8rem)", letterSpacing: "-0.03em" }}
+          >
+            핵심 기술 분야
+          </h2>
+          <p className="text-[15px] text-[#5a6895] mt-3">
+            디지털 전환 시대에 필요한 핵심 기술을 교육합니다.
+          </p>
+        </div>
+      </Container>
 
       <div className="w-full max-w-[1100px] mx-auto px-6">
 
