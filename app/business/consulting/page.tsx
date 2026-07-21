@@ -1,26 +1,29 @@
 // app/business/consulting/page.tsx
 // VODA · 컨설팅(Consulting) 페이지
 // 구조: 01 히어로 → 02 4대 컨설팅 영역(계단형 스택 카드) → 03 프로세스 → 04 Bottom CTA
-// 컬러: 히어로/프로세스는 네이비(#0B1130) + 블루(#3D5AFE), 02번 섹션만 밝은 그라데이션
+// 컬러: 히어로는 네이비(#0B1130) + 블루(#3D5AFE), 02·03번 섹션은 화이트
 
+import Image from "next/image";
 import Container from "@/app/components/Container";
-
-const heroTags = ["AI·AX 전략 수립", "공공·정부 사업", "교육 체계 설계", "기술 도입 지원"];
 
 const consultingAreas = [
   {
     no: "01",
     title: "AI·AX 전략 수립",
     desc: ["현황 진단 후", "로드맵 설계"],
-    rgb: "61,90,254", // #3D5AFE — 프로세스 STEP 01과 동일 계열
-    accent: "#3D5AFE",
-    glow: "rgba(61,90,254,0.5)",
+    subtext: [
+      "기업의 AI 도입 현황과 데이터 역량을 진단해 맞춤형 전략을 수립합니다.",
+      "산업 특성을 반영한 단계별 실행 로드맵으로 AI 전환을 이끕니다.",
+    ],
+    rgb: "130,157,235",
+    accent: "#5B7FE0",
+    glow: "rgba(91,127,224,0.3)",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="h-10 w-10 sm:h-14 sm:w-14">
         <path
           d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"
           stroke="currentColor"
-          strokeWidth="1.7"
+          strokeWidth="2.1"
           strokeLinejoin="round"
           strokeLinecap="round"
         />
@@ -31,21 +34,25 @@ const consultingAreas = [
     no: "02",
     title: "공공·정부 사업",
     desc: ["기획·제안·", "수행 지원"],
-    rgb: "43,63,224", // #2B3FE0 — 프로세스 STEP 02와 동일 계열
-    accent: "#2B3FE0",
-    glow: "rgba(43,63,224,0.5)",
+    subtext: [
+      "정부 부처와 공공기관 사업을 기획부터 제안까지 함께합니다.",
+      "다수의 국책과제 수행 경험을 바탕으로 성공적인 사업화를 돕습니다.",
+    ],
+    rgb: "150,138,224",
+    accent: "#6B5FC7",
+    glow: "rgba(107,95,199,0.3)",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="h-10 w-10 sm:h-14 sm:w-14">
         <path
           d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3z"
           stroke="currentColor"
-          strokeWidth="1.7"
+          strokeWidth="2.1"
           strokeLinejoin="round"
         />
         <path
           d="M9 12l2 2 4-4"
           stroke="currentColor"
-          strokeWidth="1.7"
+          strokeWidth="2.1"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
@@ -56,18 +63,22 @@ const consultingAreas = [
     no: "03",
     title: "교육 체계 설계",
     desc: ["인재 양성 계획·", "커리큘럼"],
-    rgb: "123,63,228", // #7B3FE4 — 프로세스 STEP 03과 동일 계열
-    accent: "#7B3FE4",
-    glow: "rgba(123,63,228,0.5)",
+    subtext: [
+      "조직의 성장 단계와 직무별 역량 요구를 분석해 맞춤형 인재 양성 전략을 수립합니다.",
+      "AI 리터러시부터 실무 역량까지 아우르는 교육 커리큘럼과 운영 체계를 함께 설계합니다.",
+    ],
+    rgb: "179,148,224",
+    accent: "#9169C9",
+    glow: "rgba(145,105,201,0.3)",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="h-10 w-10 sm:h-14 sm:w-14">
         <path
           d="M4 5c2-1 5-1 8 1 3-2 6-2 8-1v13c-2-1-5-1-8 1-3-2-6-2-8-1V5z"
           stroke="currentColor"
-          strokeWidth="1.7"
+          strokeWidth="2.1"
           strokeLinejoin="round"
         />
-        <path d="M12 6v13" stroke="currentColor" strokeWidth="1.7" />
+        <path d="M12 6v13" stroke="currentColor" strokeWidth="2.1" />
       </svg>
     ),
   },
@@ -75,22 +86,26 @@ const consultingAreas = [
     no: "04",
     title: "기술 도입 지원",
     desc: ["AI·클라우드·LMS", "도입 지원"],
-    rgb: "14,165,183", // #0EA5B7 — 프로세스 STEP 04와 동일 계열
-    accent: "#0B7F8C",
-    glow: "rgba(14,165,183,0.5)",
+    subtext: [
+      "AI, 클라우드, LMS 등 최신 기술 도입에 필요한 설계를 지원합니다.",
+      "안정적인 구축부터 운영 정착까지 성공적인 도입을 책임집니다.",
+    ],
+    rgb: "196,150,209",
+    accent: "#A869B8",
+    glow: "rgba(168,105,184,0.3)",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="h-10 w-10 sm:h-14 sm:w-14">
         <path
           d="M12 2c2.8 1.4 4.6 4 5 7.5-.4 3.5-2.2 6.1-5 7.5-2.8-1.4-4.6-4-5-7.5.4-3.5 2.2-6.1 5-7.5z"
           stroke="currentColor"
-          strokeWidth="1.7"
+          strokeWidth="2.1"
           strokeLinejoin="round"
         />
-        <circle cx="12" cy="9.5" r="1.6" stroke="currentColor" strokeWidth="1.7" />
+        <circle cx="12" cy="9.5" r="1.6" stroke="currentColor" strokeWidth="2.1" />
         <path
           d="M9 16.5 7 21l3.5-1.8M15 16.5l2 4.5-3.5-1.8"
           stroke="currentColor"
-          strokeWidth="1.7"
+          strokeWidth="2.1"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
@@ -167,52 +182,45 @@ const process = [
 export default function ConsultingPage() {
   return (
     <main className="bg-white">
-      {/* 01. Hero */}
-      <section className="relative overflow-hidden bg-[#0B1130] pt-20 pb-16">
-        <div
-          className="pointer-events-none absolute inset-0 opacity-40"
-          style={{
-            background:
-              "radial-gradient(60% 60% at 20% 0%, rgba(61,90,254,0.35) 0%, rgba(11,17,48,0) 60%)",
-          }}
-        />
-        <Container className="relative">
-          <div className="pl-20 pr-20">
-            <p className="mb-4 text-sm font-semibold tracking-widest text-[#8FA6FF]">
-              CONSULTING <span className="text-white/40">—</span> 컨설팅
+      {/* 01. Hero — 정부 교육 사업 히어로 디자인 재사용 */}
+      <style>{`
+        @keyframes heroFadeUp {
+          from { opacity: 0; transform: translateY(16px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-fade-1 { opacity: 0; animation: heroFadeUp 0.7s ease-out 0.1s forwards; }
+        .hero-fade-2 { opacity: 0; animation: heroFadeUp 0.7s ease-out 0.3s forwards; }
+        .hero-fade-3 { opacity: 0; animation: heroFadeUp 0.7s ease-out 0.5s forwards; }
+      `}</style>
+
+      <section
+        className="relative flex items-center pt-16 overflow-hidden bg-[#0D1B40]"
+        style={{ minHeight: 420 }}
+      >
+        <Image src="/images/Frame%205.jpg" alt="" fill priority className="object-cover" />
+        <div className="relative max-w-[1100px] px-6 sm:px-10 lg:px-16 xl:px-20 2xl:px-24 py-6 md:py-8">
+          <div className="-translate-y-5">
+            <p className="hero-fade-1 text-[#0064DB] text-[13px] md:text-[15px] font-medium">
+              <span className="text-[#00163A]">사업 영역 &gt;</span> 컨설팅
             </p>
-            <span className="mb-3 block h-1 w-9 rounded-full bg-[#3566e8]" />
-            <h1
-              className="font-extrabold font-suit leading-tight text-white"
-              style={{ fontSize: "clamp(1.7rem,3.2vw,2.8rem)", letterSpacing: "-0.03em" }}
-            >
-              컨설팅{" "}
-              <span className="bg-gradient-to-r from-[#8FA6FF] to-white bg-clip-text text-transparent">
-                (Consulting)
-              </span>
+
+            <h1 className="hero-fade-2 font-bold mt-4 leading-[1.3] text-[18px] sm:text-[22px] md:text-[29px] lg:text-[43px] whitespace-normal md:whitespace-nowrap break-keep">
+              <span className="text-[#00163A]">성공적인 AI 전환을 위한 토탈 솔루션</span>
             </h1>
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/70">
-              전략 수립부터 시스템 도입, 인재 양성까지. 성공적인 AI 전환(AX)을 위한
-              토탈 솔루션
-            </p>
-            <div className="mt-7 flex flex-wrap gap-2">
-              {heroTags.map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full bg-white/10 px-4 py-1.5 text-xs font-medium text-[#8FA6FF]"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
           </div>
-        </Container>
+
+          <p className="hero-fade-3 text-[#486C98] mt-4 leading-[1.6] text-[13px] md:text-[15px] max-w-[90%] md:max-w-[520px]">
+            전략 수립부터 시스템 도입, 인재 양성까지.
+            <br />
+            성공적인 AI 전환(AX)을 위한 컨설팅을 제공합니다.
+          </p>
+        </div>
       </section>
 
       {/* 02. 4대 컨설팅 영역 — 화면 꽉 찬 컬러 밴드가 스크롤에 따라 겹겹이 덮이는 스택 */}
       <section className="bg-white pt-24">
         <Container>
-          <div className="mb-16 pl-20 pr-20">
+          <div className="mb-28 pl-20 pr-20">
             <span className="mb-3 block h-1 w-9 rounded-full bg-[#3566e8]" />
             <h2
               className="font-extrabold font-suit text-[#0e1b52]"
@@ -238,20 +246,32 @@ export default function ConsultingPage() {
               <Container className="w-full">
                 <div className="flex flex-col items-start justify-between gap-6 pl-20 pr-20 sm:flex-row sm:items-center">
                   <div>
-                    <p className="text-sm font-bold tracking-widest text-white/70">
-                      STEP {area.no}
-                    </p>
-                    <h3
-                      className="mt-2 font-extrabold font-suit"
-                      style={{ fontSize: "clamp(1.7rem,3vw,2.6rem)", letterSpacing: "-0.03em" }}
-                    >
-                      {area.title}
+                    <h3 className="flex flex-wrap items-baseline gap-x-4 font-extrabold font-suit">
+                      <span
+                        className="text-white/60"
+                        style={{ fontSize: "clamp(1.6rem,2.6vw,2.2rem)", letterSpacing: "-0.02em" }}
+                      >
+                        {area.no}
+                      </span>
+                      <span
+                        style={{ fontSize: "clamp(1.7rem,3vw,2.6rem)", letterSpacing: "-0.03em" }}
+                      >
+                        {area.title}
+                      </span>
                     </h3>
-                    <p className="mt-3 max-w-md text-sm leading-relaxed text-white/80 sm:text-base">
+                    <p className="mt-4 max-w-lg text-base font-medium leading-relaxed text-white/90 sm:text-lg">
                       {area.desc.join(" ")}
                     </p>
+                    <p className="mt-2 max-w-2xl break-keep text-sm leading-relaxed text-white/75 sm:text-base">
+                      {area.subtext.map((line, idx) => (
+                        <span key={idx}>
+                          {line}
+                          {idx < area.subtext.length - 1 && <br />}
+                        </span>
+                      ))}
+                    </p>
                   </div>
-                  <div className="flex h-20 w-20 flex-none items-center justify-center rounded-full bg-white/10 sm:h-28 sm:w-28">
+                  <div className="flex h-20 w-20 flex-none items-center justify-center rounded-full bg-white/20 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.35)] drop-shadow-[0_2px_6px_rgba(0,0,0,0.15)] sm:h-28 sm:w-28">
                     {area.icon}
                   </div>
                 </div>
@@ -262,19 +282,12 @@ export default function ConsultingPage() {
       </section>
 
       {/* 03. 프로세스 */}
-      <section className="relative overflow-hidden bg-[#080C24] pt-24 pb-34">
-        <div
-          className="pointer-events-none absolute inset-0 opacity-50"
-          style={{
-            background:
-              "radial-gradient(50% 50% at 85% 10%, rgba(123,63,228,0.25) 0%, rgba(8,12,36,0) 60%), radial-gradient(50% 50% at 10% 90%, rgba(14,165,183,0.2) 0%, rgba(8,12,36,0) 60%)",
-          }}
-        />
+      <section className="relative overflow-hidden bg-white pt-24 pb-41.5">
         <Container className="relative">
           <div className="pl-20 pr-20">
             <span className="mb-3 block h-1 w-9 rounded-full bg-[#3566e8]" />
             <h2
-              className="font-extrabold font-suit text-white"
+              className="font-extrabold font-suit text-[#0e1b52]"
               style={{ fontSize: "clamp(1.7rem,3.2vw,2.8rem)", letterSpacing: "-0.03em" }}
             >
               프로세스
@@ -288,9 +301,9 @@ export default function ConsultingPage() {
             {process.map((p, i) => (
               <div key={p.step} className="group relative">
                 <div
-                  className="relative rounded-3xl border border-white/10 bg-white/4 px-6 py-8 text-center backdrop-blur transition-transform duration-300 hover:-translate-y-2"
+                  className="relative rounded-3xl border border-gray-100 bg-white px-6 py-8 text-center transition-transform duration-300 hover:-translate-y-2"
                   style={{
-                    boxShadow: `0 24px 48px -20px ${p.glow}, inset 0 1px 0 rgba(255,255,255,0.06)`,
+                    boxShadow: `0 24px 48px -24px ${p.glow}, 0 2px 10px -2px rgba(15,23,42,0.08)`,
                   }}
                 >
                   <div
@@ -309,15 +322,17 @@ export default function ConsultingPage() {
                   >
                     {p.step}
                   </p>
-                  <p className="relative z-10 mt-2 text-base font-bold text-white">{p.title}</p>
-                  <p className="relative z-10 mt-1.5 text-xs leading-relaxed text-white/50">
+                  <p className="relative z-10 mt-2 text-base font-bold text-[#0F1B4C]">
+                    {p.title}
+                  </p>
+                  <p className="relative z-10 mt-1.5 text-xs leading-relaxed text-gray-500">
                     {p.desc}
                   </p>
                 </div>
 
                 {i < process.length - 1 && (
                   <span
-                    className="absolute -right-5.5 top-14 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-[#0B1130] text-sm text-[#8FA6FF] sm:flex"
+                    className="absolute -right-5.5 top-14 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-gray-200 bg-white text-sm text-[#3D5AFE] shadow-sm sm:flex"
                     aria-hidden
                   >
                     →
