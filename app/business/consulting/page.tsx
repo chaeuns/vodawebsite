@@ -1,20 +1,11 @@
 // app/business/consulting/page.tsx
 // VODA · 컨설팅(Consulting) 페이지
-// 구조: 01 히어로 → 02 4대 컨설팅 영역(겹치는 원형 다이어그램) → 03 프로세스 → 04 Bottom CTA
+// 구조: 01 히어로 → 02 4대 컨설팅 영역(계단형 스택 카드) → 03 프로세스 → 04 Bottom CTA
 // 컬러: 히어로/프로세스는 네이비(#0B1130) + 블루(#3D5AFE), 02번 섹션만 밝은 그라데이션
 
-import Image from "next/image";
 import Container from "@/app/components/Container";
 
 const heroTags = ["AI·AX 전략 수립", "공공·정부 사업", "교육 체계 설계", "기술 도입 지원"];
-
-// public/4_consulting_areas.png 내 4개 원의 중심 좌표(이미지 700×191 기준 %) — 아이콘 정렬용
-const circlePositions = [
-  { left: "12.9%", top: "47.1%" },
-  { left: "37.1%", top: "52.9%" },
-  { left: "62.9%", top: "48.2%" },
-  { left: "87.1%", top: "52.9%" },
-];
 
 const consultingAreas = [
   {
@@ -25,7 +16,7 @@ const consultingAreas = [
     accent: "#3D5AFE",
     glow: "rgba(61,90,254,0.5)",
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="h-7 w-7 sm:h-8 sm:w-8">
+      <svg viewBox="0 0 24 24" fill="none" className="h-10 w-10 sm:h-14 sm:w-14">
         <path
           d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"
           stroke="currentColor"
@@ -44,7 +35,7 @@ const consultingAreas = [
     accent: "#2B3FE0",
     glow: "rgba(43,63,224,0.5)",
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="h-7 w-7 sm:h-8 sm:w-8">
+      <svg viewBox="0 0 24 24" fill="none" className="h-10 w-10 sm:h-14 sm:w-14">
         <path
           d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3z"
           stroke="currentColor"
@@ -69,7 +60,7 @@ const consultingAreas = [
     accent: "#7B3FE4",
     glow: "rgba(123,63,228,0.5)",
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="h-7 w-7 sm:h-8 sm:w-8">
+      <svg viewBox="0 0 24 24" fill="none" className="h-10 w-10 sm:h-14 sm:w-14">
         <path
           d="M4 5c2-1 5-1 8 1 3-2 6-2 8-1v13c-2-1-5-1-8 1-3-2-6-2-8-1V5z"
           stroke="currentColor"
@@ -88,7 +79,7 @@ const consultingAreas = [
     accent: "#0B7F8C",
     glow: "rgba(14,165,183,0.5)",
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="h-7 w-7 sm:h-8 sm:w-8">
+      <svg viewBox="0 0 24 24" fill="none" className="h-10 w-10 sm:h-14 sm:w-14">
         <path
           d="M12 2c2.8 1.4 4.6 4 5 7.5-.4 3.5-2.2 6.1-5 7.5-2.8-1.4-4.6-4-5-7.5.4-3.5 2.2-6.1 5-7.5z"
           stroke="currentColor"
@@ -110,7 +101,7 @@ const consultingAreas = [
 
 const process = [
   {
-    step: "STEP 01",
+    step: "01",
     title: "현황 진단",
     desc: "조직·역량·데이터 분석",
     from: "#3D5AFE",
@@ -124,7 +115,7 @@ const process = [
     ),
   },
   {
-    step: "STEP 02",
+    step: "02",
     title: "전략 및 설계",
     desc: "로드맵·실행 전략 수립",
     from: "#2B3FE0",
@@ -138,7 +129,7 @@ const process = [
     ),
   },
   {
-    step: "STEP 03",
+    step: "03",
     title: "실행·도입",
     desc: "시스템·교육 실행",
     from: "#7B3FE4",
@@ -156,7 +147,7 @@ const process = [
     ),
   },
   {
-    step: "STEP 04",
+    step: "04",
     title: "성과·사후관리",
     desc: "성과 측정·지속 관리",
     from: "#0EA5B7",
@@ -218,8 +209,8 @@ export default function ConsultingPage() {
         </Container>
       </section>
 
-      {/* 02. 4대 컨설팅 영역 — 겹치는 원형 이미지 + 아이콘/텍스트 */}
-      <section className="bg-linear-to-b from-[#EEF2FF] to-white py-24">
+      {/* 02. 4대 컨설팅 영역 — 화면 꽉 찬 컬러 밴드가 스크롤에 따라 겹겹이 덮이는 스택 */}
+      <section className="bg-white pt-24">
         <Container>
           <div className="mb-16 pl-20 pr-20">
             <span className="mb-3 block h-1 w-9 rounded-full bg-[#3566e8]" />
@@ -230,59 +221,48 @@ export default function ConsultingPage() {
               4대 컨설팅 영역
             </h2>
           </div>
-
-          <div className="mx-auto max-w-4xl px-4 sm:px-10">
-            {/* 원 이미지 + 아이콘 오버레이 */}
-            <div className="relative w-full" style={{ aspectRatio: "700 / 191" }}>
-              <Image
-                src="/4_consulting_areas.png"
-                alt=""
-                fill
-                className="object-contain"
-                sizes="(min-width: 768px) 800px, 100vw"
-              />
-              {consultingAreas.map((area, i) => (
-                <div
-                  key={area.no}
-                  className="absolute text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.35)]"
-                  style={{
-                    left: circlePositions[i].left,
-                    top: circlePositions[i].top,
-                    transform: "translate(-50%, -50%)",
-                  }}
-                >
-                  {area.icon}
-                </div>
-              ))}
-            </div>
-
-            {/* 아이콘 하단 텍스트 */}
-            <div className="mt-8 grid grid-cols-4 gap-x-2 gap-y-8 sm:mt-10 sm:gap-x-4">
-              {consultingAreas.map((area) => (
-                <div key={area.no} className="text-center">
-                  <p
-                    className="text-[10px] font-bold tracking-widest sm:text-xs"
-                    style={{ color: area.accent }}
-                  >
-                    STEP {area.no}
-                  </p>
-                  <p className="mt-1.5 text-xs font-bold text-[#0F1B4C] sm:text-base">
-                    {area.title}
-                  </p>
-                  <p className="mt-1.5 hidden text-xs leading-relaxed text-gray-500 sm:block">
-                    {area.desc[0]}
-                    <br />
-                    {area.desc[1]}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
         </Container>
+
+        <div className="relative">
+          {consultingAreas.map((area, i) => (
+            <div
+              key={area.no}
+              id={`area-${area.no}`}
+              className="sticky flex min-h-70 items-start pt-10 text-white sm:min-h-80 sm:pt-12"
+              style={{
+                top: `${68 + i * 108}px`,
+                zIndex: i + 1,
+                background: `linear-gradient(135deg, ${area.accent}, rgb(${area.rgb}))`,
+              }}
+            >
+              <Container className="w-full">
+                <div className="flex flex-col items-start justify-between gap-6 pl-20 pr-20 sm:flex-row sm:items-center">
+                  <div>
+                    <p className="text-sm font-bold tracking-widest text-white/70">
+                      STEP {area.no}
+                    </p>
+                    <h3
+                      className="mt-2 font-extrabold font-suit"
+                      style={{ fontSize: "clamp(1.7rem,3vw,2.6rem)", letterSpacing: "-0.03em" }}
+                    >
+                      {area.title}
+                    </h3>
+                    <p className="mt-3 max-w-md text-sm leading-relaxed text-white/80 sm:text-base">
+                      {area.desc.join(" ")}
+                    </p>
+                  </div>
+                  <div className="flex h-20 w-20 flex-none items-center justify-center rounded-full bg-white/10 sm:h-28 sm:w-28">
+                    {area.icon}
+                  </div>
+                </div>
+              </Container>
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* 03. 프로세스 */}
-      <section className="relative overflow-hidden bg-[#080C24] py-24">
+      <section className="relative overflow-hidden bg-[#080C24] pt-24 pb-34">
         <div
           className="pointer-events-none absolute inset-0 opacity-50"
           style={{
