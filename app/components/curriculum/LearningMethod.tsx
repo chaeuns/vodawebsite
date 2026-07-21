@@ -30,8 +30,8 @@ const tabs = [
     tags: ["실무 역량", "팀 프로젝트"],
   },
   {
-    label: "METVERSE",
-    title: "몰입형 메타버스 교육",
+    label: "METAVERSE",
+    title: "몰입형 메타버스X 교육",
     image: "/images/curriculum/metaverse.png",
     description: [
       "가상현실과 증강현실을 활용한 혁신적인 학습 환경",
@@ -53,7 +53,6 @@ export default function LearningMethod() {
   const [activeTab, setActiveTab] = useState(0);
   const [renderedTab, setRenderedTab] = useState(0);
   const [phase, setPhase] = useState<Phase>("visible");
-  const [titleInView, setTitleInView] = useState(false);
 
   const wrapperRef = useRef<HTMLDivElement>(null);
   const isMobileRef = useRef(false);
@@ -61,20 +60,6 @@ export default function LearningMethod() {
   const transitionTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const enterRafRef = useRef<number | null>(null);
   const directionRef = useRef<1 | -1>(1);
-
-  // Retrigger the title wipe every time this section re-enters the viewport
-  // (unlike useScrollReveal's isVisible, which only fires once).
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => setTitleInView(entry.isIntersecting),
-      { threshold: 0.1 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [ref]);
 
   // Track mobile breakpoint so scroll-linking only runs on desktop.
   useEffect(() => {
@@ -185,20 +170,6 @@ export default function LearningMethod() {
     transition: `opacity ${TRANSITION_MS}ms ease-out, transform ${TRANSITION_MS}ms ease-out`,
   };
 
-  // Top title (stage label) wipe reveal: replays every time the section re-enters view and on every tab switch.
-  const titleRevealed = titleInView && phase === "visible";
-  const TITLE_WIPE_FEATHER = 18; // % width of the soft leading edge, softer than a hard clip-path cut
-  const titleWipeGradient = `linear-gradient(to right, black 0%, black calc(var(--title-wipe) - ${TITLE_WIPE_FEATHER}%), transparent var(--title-wipe))`;
-  const titleStyle = {
-    fontSize: "clamp(1.7rem,3.2vw,2.8rem)",
-    color: "#2563EB",
-    textShadow: "2px 3px 0 rgba(37,99,235,0.16), 5px 7px 14px rgba(13,27,64,0.12)",
-    "--title-wipe": titleRevealed ? `${100 + TITLE_WIPE_FEATHER}%` : "0%",
-    WebkitMaskImage: titleWipeGradient,
-    maskImage: titleWipeGradient,
-    transition: `--title-wipe ${Math.round(TRANSITION_MS * 1.3)}ms cubic-bezier(.65,0,.35,1)`,
-  } as React.CSSProperties;
-
   // Image-only motion: direction-aware 30px slide + fade, independent of contentStyle.
   const IMAGE_SLIDE_PX = 30;
   const dir = directionRef.current;
@@ -217,41 +188,25 @@ export default function LearningMethod() {
     <div ref={wrapperRef} className="relative z-10 -mt-10 md:h-[400vh]">
       <section
         ref={ref}
-        className="py-[80px] min-h-[860px] md:min-h-0 md:h-screen md:sticky md:top-0 flex flex-col justify-center relative md:overflow-y-auto transition-all duration-[900ms] ease-out"
+        className="py-[80px] min-h-[860px] md:min-h-0 md:h-screen md:sticky md:top-0 flex flex-col justify-center relative md:overflow-y-auto transition-all duration-[900ms] ease-out bg-white"
         style={{
           transform: isVisible ? undefined : "translateY(80px)",
           opacity: isVisible ? 1 : 0,
         }}
       >
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage:
-              "radial-gradient(rgba(37,99,235,0.22) 1px, transparent 1px)",
-            backgroundSize: "26px 26px",
-            WebkitMaskImage:
-              "linear-gradient(to bottom, transparent 0px, black 220px)",
-            maskImage:
-              "linear-gradient(to bottom, transparent 0px, black 220px)",
-          }}
-        />
-
         <div className="relative z-10 mb-10">
           <Container>
             <div className="pl-20 pr-20">
-              <style>{`
-                @property --title-wipe {
-                  syntax: '<percentage>';
-                  inherits: false;
-                  initial-value: 0%;
-                }
-              `}</style>
+              <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
               <h2
-                style={titleStyle}
-                className="font-bold leading-[1.3]"
+                className="font-extrabold font-suit text-[#0e1b52]"
+                style={{ fontSize: "clamp(1.7rem,3.2vw,2.8rem)", letterSpacing: "-0.03em" }}
               >
-                {stage.label}
+                SMART LEARNING JOURNEY
               </h2>
+              <p className="text-[15px] text-[#5a6895] mt-3">
+                AI 맞춤학습부터 실전 프로젝트, 몰입형 메타버스까지
+              </p>
             </div>
           </Container>
         </div>
@@ -345,27 +300,11 @@ export default function LearningMethod() {
                 ))}
               </ul>
 
-              <style>{`
-                @keyframes lm-tag-pop {
-                  from {
-                    opacity: 0;
-                    transform: translateX(-26px) rotate(-10deg) scale(0.85);
-                  }
-                  to {
-                    opacity: 1;
-                    transform: translateX(0) rotate(0deg) scale(1);
-                  }
-                }
-              `}</style>
-              <div key={renderedTab} className="flex flex-wrap gap-2 mt-6">
-                {stage.tags.map((tag, i) => (
+              <div className="flex flex-wrap gap-2 mt-6">
+                {stage.tags.map((tag) => (
                   <span
                     key={tag}
                     className="text-[13px] font-semibold px-4 py-2 rounded-full bg-white border border-[#E5E7EB] text-[#374151]"
-                    style={{
-                      animation: "lm-tag-pop 0.5s cubic-bezier(.34,1.56,.64,1) both",
-                      animationDelay: `${TRANSITION_MS + i * 100}ms`,
-                    }}
                   >
                     {tag}
                   </span>
