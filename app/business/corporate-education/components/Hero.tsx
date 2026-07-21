@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ChevronRight } from "lucide-react";
 
 export default function Hero() {
   return (
@@ -29,7 +30,11 @@ export default function Hero() {
             <p
               className="hero-fade-1 text-[#0064DB] text-[13px] md:text-[15px] font-medium"
             >
-              <span className="text-[#00163A]">사업 영역 &gt;</span> 기업 교육 사업
+              <span className="inline-flex items-center gap-1 align-middle text-[#00163A]">
+                사업 영역
+                <ChevronRight className="w-[13px] h-[13px] md:w-[15px] md:h-[15px]" strokeWidth={2.5} />
+              </span>{" "}
+              기업 교육
             </p>
 
             <h1 className="hero-fade-2 font-bold mt-4 leading-[1.3] text-[18px] sm:text-[22px] md:text-[29px] lg:text-[43px] whitespace-normal md:whitespace-nowrap break-keep">
@@ -39,7 +44,7 @@ export default function Hero() {
             </h1>
           </div>
 
-          <p className="hero-fade-3 text-[#486C98] mt-4 leading-[1.6] text-[13px] md:text-[15px] max-w-[90%] md:max-w-[520px]">
+          <p className="hero-fade-3 text-[#111827] mt-4 leading-[1.6] text-[13px] md:text-[15px] max-w-[90%] md:max-w-[520px]">
             기업의 성장과 개인의 역량 강화를 위한 VODA의 맞춤형 교육 솔루션입니다.
             <br />
             현장 실무 중심의 커리큘럼으로 조직의 경쟁력을 함께 만들어갑니다.

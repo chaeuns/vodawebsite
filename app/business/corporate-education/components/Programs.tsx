@@ -16,7 +16,7 @@ export default function Programs() {
       ref={ref}
       className="py-16 md:py-[100px] relative scroll-mt-16"
       style={{
-        background: "linear-gradient(160deg, #E8EDF8 0%, #D6E0F5 45%, #EAF0FB 100%)",
+        background: "linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 50%, #BFDBFE 100%)",
       }}
     >
       <div

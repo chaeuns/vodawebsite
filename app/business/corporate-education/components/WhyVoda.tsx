@@ -109,7 +109,7 @@ export default function WhyVoda() {
                   <h3 className="text-[19px] md:text-[22px] font-bold text-[#111827] mt-3">
                     {strength.title}
                   </h3>
-                  <p className="text-[14px] md:text-[15px] text-[#6B7280] mt-2 leading-[1.7]">
+                  <p className="text-[14px] md:text-[15px] text-[#6B7280] mt-2 leading-[1.7] whitespace-pre-line">
                     {strength.body}
                   </p>
                 </motion.div>

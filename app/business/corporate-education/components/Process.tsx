@@ -36,7 +36,7 @@ export default function Process() {
     <section
       className="py-16 md:py-[100px] relative"
       style={{
-        background: "linear-gradient(160deg, #E8EDF8 0%, #D6E0F5 45%, #EAF0FB 100%)",
+        background: "linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 50%, #BFDBFE 100%)",
       }}
     >
       <Container>
@@ -63,12 +63,12 @@ export default function Process() {
             return (
               <Fragment key={step.step}>
                 <motion.div
-                  className="group flex-1 border border-[#E5E7EB] rounded-xl bg-white p-10 min-h-[420px] flex flex-col items-center justify-center text-center shadow-none hover:shadow-[0_8px_20px_rgba(17,24,39,0.08)] hover:border-[#2563EB]/30 transition-[box-shadow,border-color] duration-200 ease-out"
+                  className="group flex-1 border border-[#E5E7EB] rounded-xl bg-white pt-24 pb-10 px-10 min-h-[420px] flex flex-col items-center justify-start text-center shadow-none hover:shadow-xl hover:shadow-blue-500/5 hover:border-[#2563EB]/30 transition-[box-shadow,border-color] duration-300 ease-out"
                   variants={cardVariants(i)}
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: false, amount: 0.3 }}
-                  whileHover={shouldReduceMotion ? undefined : { y: -3, transition: { duration: 0.2 } }}
+                  whileHover={shouldReduceMotion ? undefined : { y: -4, transition: { duration: 0.3 } }}
                 >
                   <div className="w-14 h-14 mx-auto rounded-lg bg-[#EFF6FF] flex items-center justify-center transition-colors duration-200 ease-out group-hover:bg-[#2563EB]">
                     <Icon size={24} className="text-[#2563EB] transition-colors duration-200 ease-out group-hover:text-white" />
@@ -100,12 +100,12 @@ export default function Process() {
             return (
               <motion.div
                 key={step.step}
-                className="group border border-[#E5E7EB] rounded-xl bg-white p-10 min-h-[420px] flex flex-col items-center justify-center text-center shadow-none hover:shadow-[0_8px_20px_rgba(17,24,39,0.08)] hover:border-[#2563EB]/30 transition-[box-shadow,border-color] duration-200 ease-out"
+                className="group border border-[#E5E7EB] rounded-xl bg-white pt-24 pb-10 px-10 min-h-[420px] flex flex-col items-center justify-start text-center shadow-none hover:shadow-xl hover:shadow-blue-500/5 hover:border-[#2563EB]/30 transition-[box-shadow,border-color] duration-300 ease-out"
                 variants={cardVariants(i)}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: false, amount: 0.3 }}
-                whileHover={shouldReduceMotion ? undefined : { y: -3, transition: { duration: 0.2 } }}
+                whileHover={shouldReduceMotion ? undefined : { y: -4, transition: { duration: 0.3 } }}
               >
                 <div className="w-14 h-14 mx-auto rounded-lg bg-[#EFF6FF] flex items-center justify-center transition-colors duration-200 ease-out group-hover:bg-[#2563EB]">
                   <Icon size={24} className="text-[#2563EB] transition-colors duration-200 ease-out group-hover:text-white" />
