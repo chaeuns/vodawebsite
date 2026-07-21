@@ -63,7 +63,8 @@ export default function Audience() {
               <motion.div
                 key={audience.title}
                 variants={cardVariants}
-                className={`border border-[#E5E7EB] border-t-[3px] rounded-2xl p-10 min-h-[420px] flex flex-col items-center justify-center text-center transition-[transform,box-shadow,border-top-color] duration-200 ease-out hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)] ${ACCENT_CLASSES[i]}`}
+                whileHover={{ y: -4, transition: { duration: 0.3 } }}
+                className={`border border-[#E5E7EB] border-t-[3px] rounded-2xl p-10 min-h-[360px] flex flex-col items-center justify-center text-center transition-[box-shadow,border-top-color] duration-300 ease-out hover:shadow-xl hover:shadow-blue-500/5 ${ACCENT_CLASSES[i]}`}
               >
                 <div className="w-14 h-14 mx-auto rounded-full flex items-center justify-center" style={{ background: accent.bg }}>
                   <Icon size={24} style={{ color: accent.color }} />
