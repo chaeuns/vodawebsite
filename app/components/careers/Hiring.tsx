@@ -44,11 +44,11 @@ function JobList({ team }: { team: TeamTab }) {
           </span>
           {job.open ? (
             <span className="text-[12px] font-semibold bg-[#ECFDF5] text-[#16A34A] px-2.5 py-0.5 rounded-full">
-              모집 중
+              채용 중
             </span>
           ) : (
             <span className="text-[12px] font-semibold bg-[#F9FAFB] text-[#9CA3AF] px-2.5 py-0.5 rounded-full border border-[#E5E7EB]">
-              모집 마감
+              채용 마감
             </span>
           )}
         </a>
@@ -57,15 +57,12 @@ function JobList({ team }: { team: TeamTab }) {
   );
 }
 
-const PX_PER_STEP = 600;
-
 export default function Hiring() {
   const [activeTeam, setActiveTeam] = useState<TeamTab>(teams[0]);
   const [displayTeam, setDisplayTeam] = useState<TeamTab>(teams[0]);
   const [visible, setVisible] = useState(true);
   const { ref, isVisible } = useRepeatingReveal(0.1);
 
-  const spacerRef = useRef<HTMLDivElement>(null);
   const measureRefs = useRef<Partial<Record<TeamTab, HTMLDivElement | null>>>({});
   const [frameHeight, setFrameHeight] = useState<number | null>(null);
   const switchTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -88,45 +85,11 @@ export default function Hiring() {
     });
   }, []);
 
-  useEffect(() => {
-    const spacer = spacerRef.current;
-    if (!spacer) return;
-
-    const onScroll = () => {
-      const rect = spacer.getBoundingClientRect();
-      const total = rect.height - window.innerHeight;
-      if (total <= 0) return;
-      const scrolled = -rect.top;
-      const progress = Math.min(1, Math.max(0, scrolled / total));
-      const index = Math.min(teams.length - 1, Math.floor(progress * teams.length));
-      goTo(teams[index]);
-    };
-
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [goTo]);
-
-  const handleSelect = (team: TeamTab) => {
-    const spacer = spacerRef.current;
-    if (!spacer) return;
-
-    const index = teams.indexOf(team);
-    const total = spacer.getBoundingClientRect().height - window.innerHeight;
-    const spacerTop = spacer.getBoundingClientRect().top + window.scrollY;
-    const targetProgress = (index + 0.5) / teams.length;
-    window.scrollTo({ top: spacerTop + targetProgress * total, behavior: "smooth" });
-  };
-
   return (
-    <div
-      ref={spacerRef}
-      className="relative z-20 -mt-10"
-      style={{ height: `calc(100vh + ${(teams.length - 1) * PX_PER_STEP}px)` }}
-    >
+    <div className="relative z-20 -mt-40">
       <section
         ref={ref}
-        className="sticky top-0 bg-white pt-[130px] pb-[80px] shadow-[0_-24px_48px_-12px_rgba(0,0,0,0.1)]"
+        className="bg-white py-[80px]"
       >
         <div
           className="transition-all duration-[900ms] ease-out"
@@ -154,7 +117,7 @@ export default function Hiring() {
                 {teams.map((team) => (
                   <button
                     key={team}
-                    onClick={() => handleSelect(team)}
+                    onClick={() => goTo(team)}
                     className={`text-left px-4 py-3 rounded-md text-[14px] font-medium transition-colors border-l-[3px] whitespace-nowrap max-[720px]:rounded-full max-[720px]:border-l-0 max-[720px]:border ${
                       activeTeam === team
                         ? "bg-[#EEF3FE] border-l-[#2563EB] text-[#111827] max-[720px]:border-[#2563EB]"

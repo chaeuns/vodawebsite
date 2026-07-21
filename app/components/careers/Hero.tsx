@@ -39,7 +39,7 @@ export default function Hero() {
             </h1>
           </div>
 
-          <p className="hero-fade-3 text-[#486C98] mt-4 leading-[1.6] text-[13px] md:text-[15px] max-w-[90%] md:max-w-[520px]">
+          <p className="hero-fade-3 text-[#111827] mt-4 leading-[1.6] text-[13px] md:text-[15px] max-w-[90%] md:max-w-[520px]">
             AI와 교육 기술로 세상을 변화시키는
             <br />
             VODA에서 당신의 역량을 발휘해보세요.
