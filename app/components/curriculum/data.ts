@@ -54,7 +54,7 @@ export const courses: Course[] = [
       "AI 기반 UX/UI 설계부터 풀스택 개발, 클라우드 배포까지\n실무형 AI 개발자를 양성합니다.",
     tags: [
       "AI 기반 UX/UI 설계",
-      "풀스택(React/Java) 개발",
+      "풀스택 개발",
       "AI 활용 개발",
       "클라우드 배포 및 운영",
       "데이터베이스 설계",
@@ -132,12 +132,12 @@ export const partners: Partner[] = [
     title: "LG CNS · AM INSPIRE CAMP",
     description: "AI 시대의 실무 융합형 엔지니어 양성 — LG CNS 채용 가산점, 현직자 멘토링 연계",
     link: "https://lgcnscamp.kr/",
-    image: "/images/curriculum/partner-lgcns.png",
+    image: "/images/curriculum/partner-lgcns-v2.png",
   },
   {
     title: "SK쉴더스 · Rookies",
     description: "개발에서 보안까지 실무 역량 완성 — 취업 연계형 지능형 애플리케이션 개발자 양성과정",
     link: "https://ssra.kr/info/security-solution-developer",
-    image: "/images/curriculum/partner-skshieldus.jpg",
+    image: "/images/curriculum/partner-skshieldus.png",
   },
 ];

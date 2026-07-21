@@ -10,7 +10,7 @@ export default function Partners() {
 
   return (
     <section
-      className="bg-white py-[80px] min-h-[860px] flex flex-col justify-center relative z-40 -mt-10 shadow-[0_-24px_48px_-12px_rgba(0,0,0,0.1)]"
+      className="bg-white py-[80px] min-h-[860px] flex flex-col justify-center relative z-40 -mt-10"
     >
       <div
         ref={ref}
@@ -43,7 +43,7 @@ export default function Partners() {
               href={partner.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="group block rounded-xl overflow-hidden border border-[#E5E7EB] bg-white transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_40px_-12px_rgba(17,24,39,0.18)]"
+              className="group block rounded-xl overflow-hidden border border-[#E5E7EB] bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-500/5"
             >
               <div className="relative w-full aspect-[520/300] overflow-hidden bg-[#F3F4F6]">
                 <Image

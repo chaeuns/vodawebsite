@@ -87,14 +87,17 @@ export default function Ideology() {
               key={item.ko}
               onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex(null)}
-              className={`absolute ${positionClasses[i]} w-[150px] sm:w-[190px] md:w-[210px] lg:w-[315px] rounded-[24px] lg:rounded-[32px] flex flex-col items-center justify-center text-center px-3 sm:px-4 py-4 sm:py-5 lg:px-6 lg:py-7 border border-white/70 shadow-[0_8px_32px_rgba(31,41,55,0.1)] transition-all ease-out`}
+              className={`absolute ${positionClasses[i]} w-[150px] sm:w-[190px] md:w-[210px] lg:w-[315px] rounded-[24px] lg:rounded-[32px] flex flex-col items-center justify-center text-center px-3 sm:px-4 py-4 sm:py-5 lg:px-6 lg:py-7 border border-white/70 shadow-[0_8px_32px_rgba(31,41,55,0.1)] hover:shadow-xl hover:shadow-blue-500/5 ease-out`}
               style={{
                 transform: isVisible
-                  ? `translate(-50%, -50%) scale(${hoveredIndex === i ? 1.05 : 1})`
+                  ? `translate(-50%, calc(-50% - ${hoveredIndex === i ? 4 : 0}px)) scale(${hoveredIndex === i ? 1.05 : 1})`
                   : "translate(-50%, -50%) scale(0.7)",
                 opacity: isVisible ? 1 : 0,
-                transitionDuration: "700ms",
-                transitionDelay: isVisible && !entranceDone ? `${0.2 + i * 0.15}s` : "0s",
+                transition: `transform ${
+                  isVisible && !entranceDone ? "700ms" : "300ms"
+                } ease-out ${isVisible && !entranceDone ? `${0.2 + i * 0.15}s` : "0s"}, opacity 700ms ease-out ${
+                  isVisible && !entranceDone ? `${0.2 + i * 0.15}s` : "0s"
+                }, box-shadow 300ms ease-out`,
                 background: "rgba(255,255,255,0.6)",
                 backdropFilter: "blur(16px)",
                 WebkitBackdropFilter: "blur(16px)",
