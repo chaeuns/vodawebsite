@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Lightbulb, TrendingUp, Users } from "lucide-react";
-import FillHeading from "@/app/components/shared/FillHeading";
+import { Lightbulb, User, Users } from "lucide-react";
 import Container from "@/app/components/Container";
 
 function useRepeatingReveal(threshold: number) {
@@ -71,9 +70,8 @@ type Value = {
   title: string;
   body: string;
   align: "left" | "right";
-  contentAlign: "left" | "right";
   wordAlign: "left" | "center";
-  Icon: typeof Lightbulb;
+  badgeSide: "left" | "right";
 };
 
 const values: Value[] = [
@@ -82,29 +80,97 @@ const values: Value[] = [
     title: "혁신과 도전",
     body: "새로운 기술과 아이디어로 미래를\n만들어 나갑니다. 실패를 두려워하지 않고\n끊임없이 도전합니다.",
     align: "right",
-    contentAlign: "left",
-    wordAlign: "left",
-    Icon: Lightbulb,
+    wordAlign: "center",
+    badgeSide: "right",
   },
   {
     word: "TOGETHER",
     title: "소통과 협업",
     body: "팀원 소통과 상호 존중을 바탕으로\n협력합니다.다양한 배경의 동료들과 함께\n성장하며 시너지를 만들어 냅니다.",
     align: "left",
-    contentAlign: "left",
     wordAlign: "center",
-    Icon: Users,
+    badgeSide: "left",
   },
   {
     word: "GROWTH",
     title: "학습과 성장",
     body: "지속적인 학습을 장려하고 개인의 성장을\n위해 회사가 함께합니다. 교육비 지원,\n컨퍼런스 참여와 사내 스터디 운영 등을\n통해 배우고 발전할 기회를 제공합니다.",
     align: "right",
-    contentAlign: "left",
     wordAlign: "center",
-    Icon: TrendingUp,
+    badgeSide: "right",
   },
 ];
+
+const BADGE_STYLE: React.CSSProperties = {
+  top: "50%",
+  transform: "translateY(-50%)",
+  background: "#EAF0FC",
+  boxShadow: "0 4px 14px rgba(37,99,235,0.25)",
+};
+
+function ValueBadge({ v }: { v: Value }) {
+  const sideStyle =
+    v.badgeSide === "left" ? { right: "calc(100% + 20px)" } : { left: "calc(100% + 20px)" };
+
+  if (v.word === "INNOVATION") {
+    return (
+      <div
+        className="absolute z-[2] flex h-24 w-24 items-center justify-center rounded-full"
+        style={{ ...BADGE_STYLE, ...sideStyle }}
+      >
+        <span
+          className="absolute inset-0 rounded-full"
+          style={{ border: "1px solid #2563EB", animation: "ov-ring1 2s ease-out infinite" }}
+        />
+        <span
+          className="absolute inset-0 rounded-full"
+          style={{ border: "1px solid #2563EB", animation: "ov-ring1 2s ease-out infinite", animationDelay: "1s" }}
+        />
+        <Lightbulb className="relative z-[1] h-9 w-9 text-[#2563EB]" />
+      </div>
+    );
+  }
+
+  if (v.word === "TOGETHER") {
+    return (
+      <div className="absolute z-[2] h-24 w-24 rounded-full" style={{ ...BADGE_STYLE, ...sideStyle }}>
+        <span className="absolute inset-0 flex items-center justify-center">
+          <User className="h-9 w-9 text-[#2563EB]" style={{ animation: "ov-userSolo 3s ease-in-out infinite" }} />
+        </span>
+        <span className="absolute inset-0 flex items-center justify-center">
+          <Users className="h-[42px] w-[42px] text-[#2563EB]" style={{ animation: "ov-usersJoin 3s ease-in-out infinite" }} />
+        </span>
+      </div>
+    );
+  }
+
+  return (
+    <div className="absolute z-[2] h-24 w-24 rounded-full" style={{ ...BADGE_STYLE, ...sideStyle }}>
+      <span
+        className="absolute rounded-full"
+        style={{ left: 30, top: 51, width: 9, height: 9, background: "#2563EB", animation: "ov-startDot 3s ease-in-out infinite" }}
+      />
+      <svg className="absolute" style={{ left: 30, top: 30 }} width={36} height={36} viewBox="0 0 24 24" fill="none">
+        <path
+          d="M3 17L9 11L13 15L21 7"
+          stroke="#2563EB"
+          strokeWidth={2.2}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          style={{ strokeDasharray: 25.46, animation: "ov-drawLine 3s ease-in-out infinite" }}
+        />
+        <path
+          d="M14 7L21 7L21 14"
+          stroke="#2563EB"
+          strokeWidth={2.2}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          style={{ strokeDasharray: 14, animation: "ov-drawHead 3s ease-in-out infinite" }}
+        />
+      </svg>
+    </div>
+  );
+}
 
 function useBlockReveal() {
   const ref = useRef<HTMLDivElement>(null);
@@ -135,7 +201,6 @@ function useBlockReveal() {
 function ValueBlock({ v }: { v: Value }) {
   const { ref, isVisible } = useBlockReveal();
   const isRight = v.align === "right";
-  const isContentRight = v.contentAlign === "right";
 
   return (
     <div
@@ -161,9 +226,7 @@ function ValueBlock({ v }: { v: Value }) {
         </span>
 
         <div
-          className={`relative mt-[60px] flex flex-col p-[35px] ${
-            isContentRight ? "items-end text-right" : "items-start text-left"
-          } max-[780px]:items-start max-[780px]:text-left max-[780px]:mt-0`}
+          className="relative mt-[60px] flex flex-col items-center text-center p-[35px] max-[780px]:mt-0"
           style={{
             background: "rgba(255,255,255,0.62)",
             backdropFilter: "blur(14px)",
@@ -173,18 +236,9 @@ function ValueBlock({ v }: { v: Value }) {
             boxShadow: "0 12px 32px rgba(13,27,64,0.14)",
           }}
         >
-          <div
-            className="flex h-11 w-11 items-center justify-center"
-            style={{
-              borderRadius: 13,
-              background:
-                "linear-gradient(135deg, rgba(37,99,235,0.16), rgba(37,99,235,0.06))",
-            }}
-          >
-            <v.Icon className="h-[22px] w-[22px] text-[#2563EB]" />
-          </div>
+          <ValueBadge v={v} />
 
-          <p className="text-[31px] font-extrabold text-[#0D1B40] mt-[22px]">{v.title}</p>
+          <p className="text-[31px] font-extrabold text-[#0D1B40]">{v.title}</p>
           <p className="text-[16.5px] text-[#6B7280] mt-[13px] leading-[1.7] whitespace-pre-line">{v.body}</p>
         </div>
       </div>
@@ -197,23 +251,45 @@ export default function OurValues() {
   const { ref: lineRef, progress: lineProgress } = useScrollDraw();
 
   return (
-    <section
-      ref={ref}
-      className="relative z-10 -mt-10 py-[200px] transition-all duration-[900ms] ease-out"
-      style={{
-        background:
-          "linear-gradient(to bottom, #ffffff 0%, #E8EDF8 15%, #D6E0F5 50%, #E8EDF8 85%, #ffffff 100%)",
-        transform: isVisible ? "translateY(0)" : "translateY(80px)",
-        opacity: isVisible ? 1 : 0,
-      }}
-    >
-      <Container>
+    <>
+      <style>{`
+        @keyframes ov-ring1 { 0%{transform:scale(1); opacity:0.55;} 100%{transform:scale(1.7); opacity:0;} }
+        @keyframes ov-userSolo {
+          0% { opacity:1; transform:scale(1); }
+          25% { opacity:0; transform:scale(0.7); }
+          100% { opacity:0; transform:scale(0.7); }
+        }
+        @keyframes ov-usersJoin {
+          0% { opacity:0; transform:scale(0.6); }
+          25% { opacity:0; transform:scale(0.6); }
+          45% { opacity:1; transform:scale(1.12); }
+          60% { opacity:1; transform:scale(1); }
+          100% { opacity:1; transform:scale(1); }
+        }
+        @keyframes ov-startDot { 0%{opacity:1;transform:scale(1);} 15%{opacity:1;transform:scale(1);} 30%{opacity:0;transform:scale(.5);} 100%{opacity:0;transform:scale(.5);} }
+        @keyframes ov-drawLine { 0%{stroke-dashoffset:25.46;opacity:0;} 15%{stroke-dashoffset:25.46;opacity:1;} 65%{stroke-dashoffset:0;opacity:1;} 90%{stroke-dashoffset:0;opacity:1;} 100%{stroke-dashoffset:0;opacity:0;} }
+        @keyframes ov-drawHead { 0%{stroke-dashoffset:14;opacity:0;} 60%{stroke-dashoffset:14;opacity:0;} 85%{stroke-dashoffset:0;opacity:1;} 92%{stroke-dashoffset:0;opacity:1;} 100%{stroke-dashoffset:0;opacity:0;} }
+      `}</style>
+
+      <section
+        ref={ref}
+        className="relative z-10 -mt-10 py-[200px] transition-all duration-[900ms] ease-out"
+        style={{
+          background:
+            "linear-gradient(to bottom, #ffffff 0%, #E8EDF8 15%, #D6E0F5 50%, #E8EDF8 85%, #ffffff 100%)",
+          transform: isVisible ? "translateY(0)" : "translateY(80px)",
+          opacity: isVisible ? 1 : 0,
+        }}
+      >
+        <Container>
         <div className="pl-20 pr-20">
-          <div style={{ fontSize: "clamp(1.7rem,3.2vw,2.8rem)" }}>
-            <FillHeading className="font-bold leading-[1.3]">
-              우리 팀을 움직이는 가치
-            </FillHeading>
-          </div>
+          <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
+          <h2
+            className="font-extrabold font-suit text-[#0e1b52]"
+            style={{ fontSize: "clamp(1.7rem,3.2vw,2.8rem)", letterSpacing: "-0.03em" }}
+          >
+            우리 팀을 움직이는 가치
+          </h2>
           <p className="text-[16px] text-[#6B7280] mt-5">
             VODA는 도전과 협업, 성장을 움직이는 문화를 지향합니다.
           </p>
@@ -285,6 +361,7 @@ export default function OurValues() {
           </div>
         </div>
       </Container>
-    </section>
+      </section>
+    </>
   );
 }

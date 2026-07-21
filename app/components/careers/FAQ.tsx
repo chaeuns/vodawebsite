@@ -1,50 +1,21 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { faqs } from "./data";
 import Container from "@/app/components/Container";
 
-function useRepeatingReveal(threshold: number) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsVisible(entry.isIntersecting),
-      { threshold }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [threshold]);
-
-  return { ref, isVisible };
-}
-
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const { ref, isVisible } = useRepeatingReveal(0.1);
 
   return (
     <section
-      ref={ref}
       className="py-[80px] relative z-30 -mt-10"
       style={{
-        background:
-          "linear-gradient(to bottom, #ffffff 0%, #E8EDF8 15%, #D6E0F5 50%, #E8EDF8 85%, #ffffff 100%)",
+        background: "linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 50%, #BFDBFE 100%)",
       }}
     >
-      <Container
-        className="transition-all duration-[900ms] ease-out"
-        style={{
-          transform: isVisible ? "translateY(0)" : "translateY(80px)",
-          opacity: isVisible ? 1 : 0,
-        }}
-      >
+      <Container>
         <div className="pl-20 pr-20">
           <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
           <h2
