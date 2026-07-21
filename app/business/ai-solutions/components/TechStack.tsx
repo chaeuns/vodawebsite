@@ -2,7 +2,6 @@
 
 import { Monitor, Server, Sparkles, Cloud, Database } from "lucide-react";
 import { useScrollReveal } from "@/app/components/shared/useScrollReveal";
-import FillHeading from "@/app/components/shared/FillHeading";
 import { techStack } from "../data";
 
 const ICONS = [Monitor, Server, Sparkles, Cloud, Database];
@@ -28,15 +27,16 @@ export default function TechStack() {
       }}
     >
       <div className="max-w-[1100px] mx-auto px-6">
-        <p
-          style={{ letterSpacing: "1.5px" }}
-          className="text-[12px] font-semibold text-[#2563EB] uppercase"
+        <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
+        <h2
+          className="font-extrabold font-suit text-[#0e1b52]"
+          style={{ fontSize: "clamp(1.7rem,3.2vw,2.8rem)", letterSpacing: "-0.03em" }}
         >
-          TECH STACK
-        </p>
-        <FillHeading className="text-[32px] font-bold mt-2 leading-[1.3]">
           기술 스택
-        </FillHeading>
+        </h2>
+        <p className="text-[15px] text-[#5a6895] mt-3">
+          다양한 산업 도메인에서 검증된 기술 스택으로 안정적인 서비스를 구축합니다.
+        </p>
 
         <div className="flex max-[900px]:flex-col h-[320px] max-[900px]:h-auto gap-2 rounded-[24px] overflow-hidden mt-10">
           {techStack.map((group, i) => {
@@ -70,7 +70,7 @@ export default function TechStack() {
                   >
                     <Icon size={16} style={{ color: style.accent }} />
                   </div>
-                  <p className="text-[15px] font-bold tracking-[0.03em] text-[#0D1B40] whitespace-nowrap">
+                  <p className="text-[19px] font-bold tracking-[0.03em] text-[#0D1B40] whitespace-nowrap">
                     {group.label}
                   </p>
                 </div>

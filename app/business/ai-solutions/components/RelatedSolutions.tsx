@@ -1,58 +1,102 @@
 "use client";
 
+import Link from "next/link";
 import { BookOpen, BarChart3, Cloud } from "lucide-react";
-import { useScrollReveal } from "@/app/components/shared/useScrollReveal";
-import FillHeading from "@/app/components/shared/FillHeading";
 import { relatedSolutions } from "../data";
 
 const ICONS = [BookOpen, BarChart3, Cloud];
 
 export default function RelatedSolutions() {
-  const { ref, isVisible } = useScrollReveal();
-
   return (
     <section
-      ref={ref}
-      className="bg-[#F9FAFB] py-[80px] relative transition-all duration-[900ms] ease-out"
+      className="py-[80px] relative"
       style={{
-        transform: isVisible ? "translateY(0)" : "translateY(80px)",
-        opacity: isVisible ? 1 : 0,
+        background: "linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 50%, #BFDBFE 100%)",
       }}
     >
       <div className="max-w-[1100px] mx-auto px-6">
-        <p
-          style={{ letterSpacing: "1.5px" }}
-          className="text-[12px] font-semibold text-[#2563EB] uppercase"
+        <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
+        <h2
+          className="font-extrabold font-suit text-[#0e1b52]"
+          style={{ fontSize: "clamp(1.7rem,3.2vw,2.8rem)", letterSpacing: "-0.03em" }}
         >
-          RELATED SOLUTIONS
-        </p>
-        <FillHeading className="text-[32px] font-bold mt-2 leading-[1.3]">
           관련 솔루션 바로가기
-        </FillHeading>
+        </h2>
+        <p className="text-[15px] text-[#5a6895] mt-3">
+          AI 솔루션과 함께 살펴보면 좋은 VODA의 다른 서비스를 확인해보세요.
+        </p>
 
-        <div className="flex flex-col gap-[9px] mt-[23px]">
+        <div className="related-solutions-grid mt-10 bg-white rounded-[20px] shadow-[0_2px_12px_-4px_rgba(13,27,64,0.08)] overflow-hidden">
           {relatedSolutions.map((item, i) => {
             const Icon = ICONS[i];
             return (
-              <div
-                key={item.title}
-                className="border border-[#E5E7EB] rounded-2xl bg-white px-[14px] py-[23px] text-center"
-              >
-                <div className="w-8 h-8 mx-auto rounded-full bg-[#EFF6FF] flex items-center justify-center">
-                  <Icon size={14} className="text-[#2563EB]" />
+              <Link key={item.title} href={item.href} className="related-solutions-col group">
+                <div className="related-solutions-icon">
+                  <Icon
+                    size={22}
+                    strokeWidth={2}
+                    className="text-[#2563EB] transition-colors duration-200 group-hover:text-white"
+                  />
                 </div>
-                <span className="inline-block text-[10px] font-semibold text-[#2563EB] bg-[#EFF6FF] px-[7px] py-[2px] rounded-full mt-[9px]">
+                <span className="inline-block text-[11px] font-bold text-[#2563EB] bg-[rgba(37,99,235,0.08)] px-2 py-0.5 rounded-full">
                   {item.badge}
                 </span>
-                <p className="text-[15px] font-bold text-[#111827] mt-[7px]">{item.title}</p>
-                <p className="text-[12px] text-[#6B7280] mt-[5px] leading-[1.6] max-w-[420px] mx-auto break-keep">
-                  {item.body}
-                </p>
-              </div>
+                <p className="text-[16px] font-bold text-[#0D1B40] mt-3 mb-2 whitespace-pre-line">{item.title}</p>
+                <p className="text-[13px] text-[#8891A5] leading-[1.5] whitespace-pre-line">{item.body}</p>
+              </Link>
             );
           })}
         </div>
       </div>
+
+      <style>{`
+        .related-solutions-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .related-solutions-col {
+          display: block;
+          padding: 40px 24px;
+          text-align: center;
+          cursor: pointer;
+          transition: background 0.25s;
+          border-right: 1px solid #EEF0F4;
+        }
+        .related-solutions-col:last-child {
+          border-right: none;
+        }
+        .related-solutions-col:hover {
+          background: #F5F8FF;
+        }
+        .related-solutions-icon {
+          width: 52px;
+          height: 52px;
+          border-radius: 50%;
+          background: #EAF1FE;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 auto 16px;
+          transition: background 0.25s, transform 0.25s;
+        }
+        .related-solutions-col:hover .related-solutions-icon {
+          background: #2563EB;
+          transform: translateY(-4px);
+        }
+
+        @media (max-width: 720px) {
+          .related-solutions-grid {
+            grid-template-columns: 1fr;
+          }
+          .related-solutions-col {
+            border-right: none;
+            border-bottom: 1px solid #EEF0F4;
+          }
+          .related-solutions-col:last-child {
+            border-bottom: none;
+          }
+        }
+      `}</style>
     </section>
   );
 }

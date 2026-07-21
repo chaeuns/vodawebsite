@@ -1,19 +1,10 @@
 "use client";
 
-import { useScrollReveal } from "@/app/components/shared/useScrollReveal";
+import Link from "next/link";
 
 export default function CTA() {
-  const { ref, isVisible } = useScrollReveal();
-
   return (
-    <section
-      ref={ref}
-      className="bg-[#0D1B40] py-[80px] relative transition-all duration-[900ms] ease-out"
-      style={{
-        transform: isVisible ? "translateY(0)" : "translateY(80px)",
-        opacity: isVisible ? 1 : 0,
-      }}
-    >
+    <section className="bg-[#0D1B40] py-[80px] relative">
       <div className="max-w-[1100px] mx-auto px-6 text-center">
         <p
           style={{ letterSpacing: "1.5px" }}
@@ -29,12 +20,12 @@ export default function CTA() {
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-3 mt-7">
-          <button className="bg-[#2563EB] text-white text-[14px] font-semibold px-6 py-3 rounded-lg hover:bg-[#1d4ed8] transition-colors">
+          <Link
+            href="/contact"
+            className="bg-[#2563EB] text-white text-[14px] font-semibold px-6 py-3 rounded-lg hover:bg-[#1d4ed8] transition-colors"
+          >
             개발 문의하기
-          </button>
-          <button className="border border-white/25 text-white text-[14px] font-semibold px-6 py-3 rounded-lg hover:bg-white/10 transition-colors">
-            포트폴리오 보기
-          </button>
+          </Link>
         </div>
       </div>
     </section>
