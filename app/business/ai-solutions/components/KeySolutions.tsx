@@ -2,8 +2,6 @@
 
 import { Bot, Users, Lock, Cog, FileText, GraduationCap } from "lucide-react";
 import { motion, type Variants } from "framer-motion";
-import { useScrollReveal } from "@/app/components/shared/useScrollReveal";
-import FillHeading from "@/app/components/shared/FillHeading";
 import { solutions } from "../data";
 
 const ICONS = [Bot, Users, Lock, Cog, FileText, GraduationCap];
@@ -28,27 +26,19 @@ const cardVariants: Variants = {
 };
 
 export default function KeySolutions() {
-  const { ref, isVisible } = useScrollReveal();
-
   return (
-    <section
-      ref={ref}
-      className="bg-white py-[80px] relative overflow-hidden transition-all duration-[900ms] ease-out"
-      style={{
-        transform: isVisible ? "translateY(0)" : "translateY(80px)",
-        opacity: isVisible ? 1 : 0,
-      }}
-    >
+    <section className="bg-white py-[80px] relative overflow-hidden">
       <div className="max-w-[1100px] mx-auto px-6 relative">
-        <p
-          style={{ letterSpacing: "1.5px" }}
-          className="text-[12px] font-semibold text-[#2563EB] uppercase"
+        <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
+        <h2
+          className="font-extrabold font-suit text-[#0e1b52]"
+          style={{ fontSize: "clamp(1.7rem,3.2vw,2.8rem)", letterSpacing: "-0.03em" }}
         >
-          KEY SOLUTIONS
-        </p>
-        <FillHeading className="text-[32px] font-bold mt-2 leading-[1.3]">
           주요 솔루션
-        </FillHeading>
+        </h2>
+        <p className="text-[15px] text-[#5a6895] mt-3">
+          산업과 교육 현장에 바로 적용 가능한 VODA의 핵심 AI 솔루션을 소개합니다.
+        </p>
 
         <motion.div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-10"
@@ -98,8 +88,8 @@ export default function KeySolutions() {
                     <Icon size={22} className="text-white" />
                   </div>
 
-                  <p className="text-[17px] font-bold text-[#111827] mt-3">{solution.title}</p>
-                  <p className="text-[14px] text-[#6B7280] mt-1.5 leading-[1.7]">
+                  <p className="text-[17px] font-bold text-[#111827] mt-3 whitespace-pre-line">{solution.title}</p>
+                  <p className="text-[14px] text-[#6B7280] mt-1.5 leading-[1.7] whitespace-pre-line">
                     {solution.body}
                   </p>
                 </div>

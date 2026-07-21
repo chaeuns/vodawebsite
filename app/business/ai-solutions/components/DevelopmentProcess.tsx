@@ -1,10 +1,8 @@
 "use client";
 
 import { Fragment } from "react";
-import { ClipboardList, PenTool, Code2, Search, Rocket, ArrowRight } from "lucide-react";
+import { ClipboardList, PenTool, Code2, Search, Rocket, ChevronRight } from "lucide-react";
 import { motion, type Variants } from "framer-motion";
-import { useScrollReveal } from "@/app/components/shared/useScrollReveal";
-import FillHeading from "@/app/components/shared/FillHeading";
 import { processSteps } from "../data";
 
 const ICONS = [ClipboardList, PenTool, Code2, Search, Rocket];
@@ -20,36 +18,29 @@ const cardVariants: Variants = {
 };
 
 export default function DevelopmentProcess() {
-  const { ref, isVisible } = useScrollReveal();
-
   return (
     <section
-      ref={ref}
-      className="py-[80px] relative transition-all duration-[900ms] ease-out"
+      className="py-[80px] relative"
       style={{
         background: "linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 50%, #BFDBFE 100%)",
-        transform: isVisible ? "translateY(0)" : "translateY(80px)",
-        opacity: isVisible ? 1 : 0,
       }}
     >
       <div className="max-w-[1100px] mx-auto px-6">
-        <p
-          style={{ letterSpacing: "1.5px" }}
-          className="text-[12px] font-semibold text-[#2563EB] uppercase"
+        <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
+        <h2
+          className="font-extrabold font-suit text-[#0e1b52]"
+          style={{ fontSize: "clamp(1.7rem,3.2vw,2.8rem)", letterSpacing: "-0.03em" }}
         >
-          DEVELOPMENT PROCESS
-        </p>
-        <FillHeading className="text-[32px] font-bold mt-2 leading-[1.3]">
           개발 프로세스
-        </FillHeading>
-        <p className="text-[15px] text-[#6B7280] mt-2">
+        </h2>
+        <p className="text-[15px] text-[#5a6895] mt-3">
           체계적이고 투명한 개발 프로세스로 고객의 요구사항을 정확히 반영한 맞춤형 솔루션을
           제공합니다.
         </p>
 
         {/* Desktop: steps connected with arrows */}
         <motion.div
-          className="hidden md:flex items-stretch gap-3 mt-10"
+          className="hidden md:flex items-stretch gap-1.5 mt-10"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -61,18 +52,18 @@ export default function DevelopmentProcess() {
               <Fragment key={step.step}>
                 <motion.div
                   variants={cardVariants}
-                  className="relative flex-1 flex flex-col min-h-[210px] border border-[#E5E7EB] rounded-xl bg-white p-5 text-center"
+                  className="group flex-1 border border-[#E5E7EB] rounded-xl bg-white p-10 min-h-[200px] flex flex-col items-center justify-start text-center shadow-none hover:shadow-[0_8px_20px_rgba(17,24,39,0.08)] hover:border-[#2563EB]/30 transition-[box-shadow,border-color] duration-200 ease-out"
+                  whileHover={{ y: -3, transition: { duration: 0.2 } }}
                 >
-                  <div className="w-11 h-11 mx-auto rounded-lg bg-[#EFF6FF] flex items-center justify-center">
-                    <Icon size={20} className="text-[#2563EB]" />
+                  <div className="w-14 h-14 mx-auto rounded-lg bg-[#EFF6FF] flex items-center justify-center transition-colors duration-200 ease-out group-hover:bg-[#2563EB]">
+                    <Icon size={24} className="text-[#2563EB] transition-colors duration-200 ease-out group-hover:text-white" />
                   </div>
-                  <p className="text-[11px] font-bold text-[#2563EB] mt-3">{step.step}</p>
-                  <p className="text-[15px] font-bold text-[#111827] mt-1">{step.title}</p>
-                  <p className="text-[12px] text-[#6B7280] mt-2 leading-[1.6]">{step.body}</p>
+                  <p className="text-[13px] font-bold text-[#2563EB] mt-3 whitespace-pre-line">{step.step}</p>
+                  <p className="text-[19px] font-bold text-[#111827] mt-1 whitespace-pre-line">{step.title}</p>
                 </motion.div>
                 {i < processSteps.length - 1 && (
-                  <div className="flex items-center justify-center text-[#93C5FD] shrink-0">
-                    <ArrowRight size={16} />
+                  <div className="flex items-center justify-center text-[#2563EB] shrink-0">
+                    <ChevronRight className="w-[35px] h-[35px]" />
                   </div>
                 )}
               </Fragment>
@@ -94,14 +85,13 @@ export default function DevelopmentProcess() {
               <motion.div
                 key={step.step}
                 variants={cardVariants}
-                className="border border-[#E5E7EB] rounded-xl bg-white p-6 text-center"
+                className="group border border-[#E5E7EB] rounded-xl bg-white p-10 min-h-[200px] flex flex-col items-center justify-start text-center shadow-none hover:shadow-[0_8px_20px_rgba(17,24,39,0.08)] hover:border-[#2563EB]/30 transition-[box-shadow,border-color] duration-200 ease-out"
               >
-                <div className="w-11 h-11 mx-auto rounded-lg bg-[#EFF6FF] flex items-center justify-center">
-                  <Icon size={20} className="text-[#2563EB]" />
+                <div className="w-14 h-14 mx-auto rounded-lg bg-[#EFF6FF] flex items-center justify-center transition-colors duration-200 ease-out group-hover:bg-[#2563EB]">
+                  <Icon size={24} className="text-[#2563EB] transition-colors duration-200 ease-out group-hover:text-white" />
                 </div>
-                <p className="text-[11px] font-bold text-[#2563EB] mt-3">{step.step}</p>
-                <p className="text-[15px] font-bold text-[#111827] mt-1">{step.title}</p>
-                <p className="text-[13px] text-[#6B7280] mt-2 leading-[1.6]">{step.body}</p>
+                <p className="text-[13px] font-bold text-[#2563EB] mt-3 whitespace-pre-line">{step.step}</p>
+                <p className="text-[19px] font-bold text-[#111827] mt-1 whitespace-pre-line">{step.title}</p>
               </motion.div>
             );
           })}
