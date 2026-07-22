@@ -333,7 +333,7 @@ export default function App() {
         /* Partners marquee — infinite scroll left */
         @keyframes marquee {
           from { transform: translateX(0); }
-          to   { transform: translateX(-50%); }
+          to   { transform: translateX(-25%); }
         }
         .marquee-track {
           display: flex;
@@ -814,7 +814,7 @@ export default function App() {
         <div className="marquee-fade relative overflow-hidden">
           <div className="marquee-wrap overflow-hidden">
             <div className="marquee-track">
-              {[...PARTNERS, ...PARTNERS].map((p, i) => (
+              {[...PARTNERS, ...PARTNERS, ...PARTNERS, ...PARTNERS].map((p, i) => (
                 <div
                   key={`${p.name}-${i}`}
                   className="pp shrink-0 w-[260px] h-[110px] mx-2.5 flex items-center justify-center"
