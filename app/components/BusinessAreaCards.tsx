@@ -17,7 +17,7 @@ const AREAS = [
     title: "교육 사업",
     eng: "Education",
     desc: "정부·기업 대상 AI 및 디지털 역량 강화 교육 설계·운영합니다",
-    image: "/images/mainpage/business_area/education.png",
+    image: "/images/mainpage/business_area/edu.png",
     buttons: [
       { label: "정부교육", href: "/business/curriculum" },
       { label: "기업교육", href: "/business/corporate-education" },
@@ -28,7 +28,7 @@ const AREAS = [
     title: "AI 솔루션",
     eng: "AI Solution",
     desc: "VODA AI 기반의 학습·업무 솔루션을 개발하고 공급합니다.",
-    image: "/images/mainpage/business_area/ai-solution.png",
+    image: "/images/mainpage/business_area/ai-sol.png",
     buttons: [{ label: "자세히 보기", href: "/business/ai-solutions" }],
   },
   {
@@ -36,7 +36,7 @@ const AREAS = [
     title: "AI 자격인증",
     eng: "AI Certification",
     desc: "AI 실무 역량을 검증하는 자격 인증 과정을 운영합니다.",
-    image: "/images/mainpage/business_area/ai-cert.png",
+    image: "/images/mainpage/business_area/cert.png",
     buttons: [{ label: "자세히 보기", href: "/business/ai-certification" }],
   },
   {

@@ -2,6 +2,7 @@
 
 import { BookOpen, MessageSquareText, UserCheck, CheckSquare, Video, Check } from "lucide-react";
 import Container from "@/app/components/Container";
+import GlassCard from "@/app/components/shared/GlassCards";
 import { useScrollReveal } from "@/app/components/shared/useScrollReveal";
 import { features } from "../data";
 
@@ -12,14 +13,33 @@ export default function Features() {
 
   return (
     <section
-      className="py-[80px] relative"
+      className="py-[80px] relative overflow-hidden"
       style={{
-        background: "linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 50%, #BFDBFE 100%)",
+        background:
+          "linear-gradient(135deg, #F3F6FF 0%, #E7EEFF 45%, #D6E3FF 100%)",
       }}
     >
+      {/* 배경 데코 블롭 (메인페이지 솔루션 섹션과 동일) */}
+      <div
+        className="absolute inset-y-0 left-0 pointer-events-none"
+        style={{
+          width: "55%",
+          background: "radial-gradient(ellipse 100% 80% at 0% 50%, rgba(53,102,232,0.20) 0%, transparent 75%)",
+          filter: "blur(60px)",
+        }}
+      />
+      <div
+        className="absolute inset-y-0 right-0 pointer-events-none"
+        style={{
+          width: "55%",
+          background: "radial-gradient(ellipse 100% 80% at 100% 50%, rgba(53,102,232,0.18) 0%, transparent 75%)",
+          filter: "blur(60px)",
+        }}
+      />
+
       <div
         ref={ref}
-        className="transition-all duration-500 ease-out"
+        className="relative transition-all duration-500 ease-out"
         style={{
           transform: isVisible ? "translateY(0)" : "translateY(12px)",
           opacity: isVisible ? 1 : 0,
@@ -36,35 +56,28 @@ export default function Features() {
             </h2>
           </div>
 
-          <div className="pl-20 pr-20 grid grid-cols-1 md:grid-cols-2 gap-5">
-            {features.map((f, i) => {
+            <div className="pl-20 pr-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">            {features.map((f, i) => {
               const Icon = ICONS[i];
               return (
-                <div
+                <GlassCard
                   key={f.titleEn}
-                  className={`bg-white rounded-[20px] border border-[#E5E7EB] p-6 ${
-                    i === features.length - 1 ? "md:col-span-2" : ""
-                  }`}
-                >
-                  <div className="w-11 h-11 rounded-xl bg-[#EFF6FF] flex items-center justify-center">
-                    <Icon size={20} className="text-[#2563EB]" />
+                  className="p-6"                >
+                  <div className="w-11 h-11 rounded-xl bg-[#3566e8]/10 flex items-center justify-center">
+                    <Icon size={20} className="text-[#3566e8]" />
                   </div>
-                  <p className="text-[12px] font-semibold text-[#2563EB] uppercase tracking-wide mt-4">
+                  <p className="text-[12px] font-semibold text-[#5a6895] uppercase tracking-wide mt-4">
                     {f.titleEn}
                   </p>
-                  <p className="text-[18px] font-bold text-[#111827] mt-1">{f.titleKo}</p>
+                  <p className="text-[18px] font-bold text-[#0e1b52] mt-1">{f.titleKo}</p>
                   <ul className="mt-3 space-y-1.5">
                     {f.points.map((point) => (
-                      <li
-                        key={point}
-                        className="flex items-start gap-2 text-[13px] text-[#4B5563] leading-[1.6]"
-                      >
-                        <Check size={14} className="text-[#2563EB] mt-[3px] shrink-0" />
+                      <li key={point} className="flex items-start gap-2 text-[13px] text-[#0e1b52]/70 leading-[1.6]">
+                        <Check size={14} className="text-[#3566e8] mt-[3px] shrink-0" />
                         <span>{point}</span>
                       </li>
                     ))}
                   </ul>
-                </div>
+                </GlassCard>
               );
             })}
           </div>
