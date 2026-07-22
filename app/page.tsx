@@ -596,7 +596,7 @@ export default function App() {
                           <span
                             className={`text-xs font-bold px-3 py-1 rounded-full ${
                               p.status === "모집중"
-                                ? "bg-[#3566e8] text-white"
+                                ? "bg-[#DCFCE7] text-[#15803D]"
                                 : "border border-[rgba(14,27,82,0.2)] text-[#5a6895]"
                             }`}
                           >
