@@ -54,7 +54,7 @@ export default function ValueProps() {
       <div ref={ref} className="sticky top-0 h-screen overflow-hidden">
         <div className="absolute inset-0 z-20 flex items-center justify-center px-6">
           <motion.div
-            className="mx-auto flex max-w-[90%] sm:max-w-[520px] items-center gap-3 rounded-full border border-[#E5E7EB] bg-white px-5 py-2.5 sm:py-3 shadow-[0_8px_30px_rgba(0,0,0,0.06)]"
+            className="mx-auto flex max-w-[95%] sm:max-w-[680px] items-center gap-4 rounded-full border border-[#E5E7EB] bg-white px-7 py-4 sm:py-5 shadow-[0_8px_30px_rgba(0,0,0,0.06)]"
             animate={
               isRevealed
                 ? { opacity: 0, y: -24, scale: 0.94 }
@@ -62,8 +62,8 @@ export default function ValueProps() {
             }
             transition={{ duration: 0.6, ease: "easeInOut" }}
           >
-            <Search size={18} className="shrink-0 text-[#93C5FD]" />
-            <p className="flex-1 min-w-0 truncate text-left text-[15px] sm:text-[18px] font-bold text-[#00163A]">
+            <Search size={24} className="shrink-0 text-[#93C5FD]" />
+            <p className="flex-1 min-w-0 truncate text-left text-[19px] sm:text-[24px] font-bold text-[#00163A]">
               {typedText.split("").map((ch, i) => (
                 <motion.span
                   key={i}
@@ -91,7 +91,7 @@ export default function ValueProps() {
               />
             </p>
             <motion.div
-              className="flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-full bg-[#EFF6FF] text-[#2563EB]"
+              className="flex h-9 w-9 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-full bg-[#EFF6FF] text-[#2563EB]"
               animate={
                 isSubmitted
                   ? { scale: [1, 1.15, 1], backgroundColor: "#2563EB", color: "#FFFFFF" }
@@ -99,7 +99,7 @@ export default function ValueProps() {
               }
               transition={{ duration: 0.4 }}
             >
-              <Search size={14} />
+              <Search size={18} />
             </motion.div>
           </motion.div>
         </div>

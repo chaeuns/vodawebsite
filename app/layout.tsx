@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Sora } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+import GlassFilterDefs from "@/app/components/shared/GlassFilterDefs";
 import Nav from "@/app/components/Nav";
 import Footer from "@/app/components/Footer";
 
@@ -30,6 +31,7 @@ export default function RootLayout({
   return (
     <html lang="ko" className={`${sora.variable} ${suit.variable} antialiased`}>
   <body className="flex flex-col font-suit">
+    <GlassFilterDefs/>
         <Nav />
         <main>{children}</main>
         <Footer />
