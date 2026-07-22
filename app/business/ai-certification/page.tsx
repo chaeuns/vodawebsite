@@ -5,6 +5,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 import type { CSSProperties } from "react";
 import Container from "@/app/components/Container";
 
@@ -356,7 +357,7 @@ export default function AICertificationPage() {
       </section>
 
       {/* 인증 체계 */}
-      <section className="py-10">
+      <section className="pt-24 pb-10">
         <Container>
           <div className="pl-20 pr-20">
             <span className="mb-3 block h-1 w-9 rounded-full bg-[#3566e8]" />
@@ -552,7 +553,6 @@ export default function AICertificationPage() {
             </h2>
 
             <div className="relative mt-10 grid gap-6 sm:grid-cols-4">
-              <div className="pointer-events-none absolute left-0 right-0 top-9 hidden h-px bg-linear-to-r from-transparent via-[#3D5AFE]/50 to-transparent sm:block" />
               {process.map((p, i) => (
                 <div key={p.step} className="group relative text-center">
                   <div
@@ -572,10 +572,10 @@ export default function AICertificationPage() {
 
                   {i < process.length - 1 && (
                     <span
-                      className="absolute -right-5.5 top-7 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-[#0B1130] text-sm text-[#8FA6FF] sm:flex"
+                      className="absolute top-1/2 right-[-29.5px] hidden -translate-y-1/2 items-center justify-center text-white sm:flex"
                       aria-hidden
                     >
-                      →
+                      <ChevronRight className="h-8.75 w-8.75" />
                     </span>
                   )}
                 </div>
