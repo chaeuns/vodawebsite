@@ -379,7 +379,7 @@ export default function HomePageClient({ newsCards }: { newsCards: NewsCardData[
       <span
         className={`mw ${missionIn ? "mw-in" : "mw-out"} font-suit font-extrabold leading-none ${MISSION_GRADIENTS[missionIdx]} bg-clip-text text-transparent`}
         style={{
-          fontSize: "5.83rem",
+          fontSize: "clamp(2.4rem, 15vw, 5.83rem)",
           width: "3.2em",
           whiteSpace: "nowrap",
         }}
@@ -390,13 +390,13 @@ export default function HomePageClient({ newsCards }: { newsCards: NewsCardData[
         src="/voda-logo-hero.svg"
         alt="VODA"
         className="object-contain"
-        style={{ height: "5.1rem", width: "auto" }}
+        style={{ height: "clamp(2.1rem, 13vw, 5.1rem)", width: "auto" }}
       />
     </div>
 
-    {/* Supporting text — 20pt */}
+    {/* Supporting text — 20pt (모바일에서는 짧고 임팩트 있는 한 줄로 축약) */}
     <p
-      className="text-[#3d4a75] font-semibold leading-relaxed max-w-3xl"
+      className="hidden sm:block text-[#3d4a75] font-semibold leading-relaxed max-w-3xl"
       style={{ fontSize: "1rem", lineHeight: 1.65 }}
     >
       VODA는 데이터와 AI 기술이 교육의 언어로 번역될 수
@@ -404,6 +404,12 @@ export default function HomePageClient({ newsCards }: { newsCards: NewsCardData[
       <br />
       정부, 기업, 개인 — 각자의 위치에서 AI 시대를 주도할 수
       있도록 함께 나아갑니다.
+    </p>
+    <p
+      className="sm:hidden text-[#3d4a75] font-semibold leading-relaxed max-w-xs"
+      style={{ fontSize: "1rem", lineHeight: 1.65 }}
+    >
+      데이터와 AI로, AI 시대를 함께 이끕니다.
     </p>
   </Container>
 </section>
