@@ -87,11 +87,11 @@ export default function HeroScene() {
           width: calc(100% - 10px);
           height: calc(100% - 10px);
           margin: auto;
-          animation: eyes-float 4.5s ease-in-out infinite;
+          animation: eyes-float 4.2s ease-in-out infinite;
         }
         @keyframes eyes-float {
           0%   { transform: translateY(0) rotate(0deg); }
-          50%  { transform: translateY(-0.02em) rotate(-0.4deg); }
+          50%  { transform: translateY(-0.045em) rotate(-0.6deg); }
           100% { transform: translateY(0) rotate(0deg); }
         }
         @media (prefers-reduced-motion: reduce) {
