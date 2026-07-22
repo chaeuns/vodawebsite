@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, ChevronLeft } from "lucide-react";
 import Container from "@/app/components/Container";
 import BusinessAreaCards from "@/app/components/BusinessAreaCards";
 
@@ -118,6 +118,9 @@ const PROGRAMS = [
     meta: "3개월 · 정부지원",
   },
 ];
+
+const PROGRAM_CATEGORIES = ["전체", "모집중", "예정"];
+const PROGRAMS_PER_PAGE = 4;
 
 const WHY_VODA_TABS = [
   {
@@ -234,6 +237,10 @@ export default function App() {
     update();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    setProgramPage(0);
+  }, [programCategory]);
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -544,103 +551,142 @@ export default function App() {
                 교육과정
               </h2>
             </div>
-            <a
-              href="#"
-              className="hidden md:flex items-center gap-1 text-sm font-semibold text-[#5a6895] hover:text-[#0e1b52] transition-colors pb-1"
-            >
-            </a>
           </div>
 
-          {/* 가로 스크롤 카드 */}
-          <div className="flex gap-5 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-thin">
-            {/* 스크롤 컨테이너의 padding은 오버플로 시 잘려나가므로 spacer로 대체 */}
-            <div className="shrink-0 w-20" aria-hidden="true" />
-            {PROGRAMS.map((p) => (
-              <div
-                key={p.title}
-                className="shrink-0 snap-start"
-                style={{ width: "clamp(12rem, 8rem + 14vw, 17rem)" }}
-              >
-                {/* 상태 뱃지 + 마감일 */}
-                <div className="flex items-center justify-between mb-3">
-                  <span
-                    className={`text-xs font-bold px-3 py-1 rounded-full ${
-                      p.status === "모집중"
-                        ? "bg-[#3566e8] text-white"
-                        : "border border-[rgba(14,27,82,0.2)] text-[#5a6895]"
-                    }`}
-                  >
-                    {p.status}
-                  </span>
-                  <span className="text-xs font-bold text-[#5a6895]">
-                    {p.deadline}
-                  </span>
-                </div>
-
-                {/* 포스터 이미지 자리 (세로형, A4 비율) */}
-                <div className="relative w-full aspect-210/297 bg-[#EEF2FF] rounded-lg overflow-hidden mb-4">
-                  {p.img ? (
-                    p.link ? (
-                      <a
-                        href={p.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block w-full h-full"
-                      >
-                        <Image
-                          src={p.img}
-                          alt={p.title}
-                          fill
-                          sizes="calc(8rem + 14vw)"
-                          className="object-cover"
-                        />
-                      </a>
-                    ) : (
-                      <Image
-                        src={p.img}
-                        alt={p.title}
-                        fill
-                        sizes="calc(8rem + 14vw)"
-                        className="object-cover"
-                      />
-                    )
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <span className="text-xs text-[#b8c3de] text-center leading-relaxed">
-                        포스터 이미지
-                        <br />
-                        (세로형)
-                      </span>
-                    </div>
-                  )}
-                </div>
-
-                {/* 제목 + 메타 */}
-                <h3
-                  className="font-black font-suit text-[#0e1b52] mb-1"
-                  style={{
-                    fontSize: "1.4rem",
-                    letterSpacing: "-0.02em",
-                  }}
+          {/* 카테고리 필터 */}
+          <div className="flex items-center gap-2 mb-8 pl-20 pr-20">
+            {PROGRAM_CATEGORIES.map((cat) => {
+              const isActive = cat === programCategory;
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setProgramCategory(cat)}
+                  className={`px-5 py-2 rounded-full text-sm font-semibold transition-colors ${
+                    isActive
+                      ? "bg-[#3566e8] text-white"
+                      : "bg-white text-[#5a6895] border border-[rgba(14,27,82,0.12)] hover:border-[#3566e8]/40 hover:text-[#0e1b52]"
+                  }`}
                 >
-                  {p.title}
-                </h3>
-                <p className="text-base text-[#5a6895] mb-2">
-                  {p.meta}
-                </p>
-                <a
-                  href="#"
-                  className="text-sm font-semibold text-[#3566e8] hover:text-[#1a4acc] transition-colors"
-                >
-                </a>
-              </div>
-            ))}
-            <div className="shrink-0 w-20" aria-hidden="true" />
+                  {cat}
+                </button>
+              );
+            })}
           </div>
 
-          <p className="md:hidden mt-2 pl-20 pr-20 text-xs text-[#b8c3de]">
-            ← 가로 스크롤로 더 보기 →
-          </p>
+          {(() => {
+            const filtered =
+              programCategory === "전체"
+                ? PROGRAMS
+                : PROGRAMS.filter((p) => p.status === programCategory);
+            const totalPages = Math.max(1, Math.ceil(filtered.length / PROGRAMS_PER_PAGE));
+            const currentPage = Math.min(programPage, totalPages - 1);
+            const visible = filtered.slice(
+              currentPage * PROGRAMS_PER_PAGE,
+              currentPage * PROGRAMS_PER_PAGE + PROGRAMS_PER_PAGE,
+            );
+
+            return (
+              <>
+                <div className="pl-20 pr-20">
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                    {visible.map((p) => (
+                      <div key={p.title}>
+                        {/* 상태 뱃지 + 마감일 */}
+                        <div className="flex items-center justify-between mb-3">
+                          <span
+                            className={`text-xs font-bold px-3 py-1 rounded-full ${
+                              p.status === "모집중"
+                                ? "bg-[#3566e8] text-white"
+                                : "border border-[rgba(14,27,82,0.2)] text-[#5a6895]"
+                            }`}
+                          >
+                            {p.status}
+                          </span>
+                          <span className="text-xs font-bold text-[#5a6895]">
+                            {p.deadline}
+                          </span>
+                        </div>
+
+                        {/* 포스터 이미지 자리 (세로형, A4 비율) */}
+                        <div className="relative w-full aspect-210/297 bg-[#EEF2FF] rounded-lg overflow-hidden mb-4">
+                          {p.img ? (
+                            p.link ? (
+                              <a
+                                href={p.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="block w-full h-full"
+                              >
+                                <Image
+                                  src={p.img}
+                                  alt={p.title}
+                                  fill
+                                  sizes="(min-width:1024px) 25vw, 50vw"
+                                  className="object-cover"
+                                />
+                              </a>
+                            ) : (
+                              <Image
+                                src={p.img}
+                                alt={p.title}
+                                fill
+                                sizes="(min-width:1024px) 25vw, 50vw"
+                                className="object-cover"
+                              />
+                            )
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center">
+                              <span className="text-xs text-[#b8c3de] text-center leading-relaxed">
+                                포스터 이미지
+                                <br />
+                                (세로형)
+                              </span>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* 제목 + 메타 */}
+                        <h3
+                          className="font-black font-suit text-[#0e1b52] mb-1"
+                          style={{
+                            fontSize: "1.1rem",
+                            letterSpacing: "-0.02em",
+                          }}
+                        >
+                          {p.title}
+                        </h3>
+                        <p className="text-sm text-[#5a6895] mb-2">
+                          {p.meta}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 이전/다음 원형 화살표 버튼 — 포스터 하단 중앙 */}
+                {totalPages > 1 && (
+                  <div className="flex items-center justify-center gap-4 mt-8">
+                    <button
+                      onClick={() =>
+                        setProgramPage((currentPage - 1 + totalPages) % totalPages)
+                      }
+                      aria-label="이전 페이지"
+                      className="flex items-center justify-center w-11 h-11 rounded-full bg-white text-[#3566e8] shadow-[0_1px_4px_rgba(14,27,82,0.1)] ring-1 ring-[rgba(14,27,82,0.08)] hover:text-[#1a4acc] transition-colors"
+                    >
+                      <ChevronLeft size={20} strokeWidth={2.75} />
+                    </button>
+                    <button
+                      onClick={() => setProgramPage((currentPage + 1) % totalPages)}
+                      aria-label="다음 페이지"
+                      className="flex items-center justify-center w-11 h-11 rounded-full bg-white text-[#3566e8] shadow-[0_1px_4px_rgba(14,27,82,0.1)] ring-1 ring-[rgba(14,27,82,0.08)] hover:text-[#1a4acc] transition-colors"
+                    >
+                      <ChevronRight size={20} strokeWidth={2.75} />
+                    </button>
+                  </div>
+                )}
+              </>
+            );
+          })()}
         </Container>
       </section>
 
