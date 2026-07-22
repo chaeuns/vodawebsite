@@ -205,6 +205,8 @@ export default function App() {
   const [missionIn, setMissionIn] = useState(true);
   const [whyTab, setWhyTab] = useState(WHY_VODA_TABS[0].id);
   const whyWrapperRef = useRef<HTMLDivElement>(null);
+  const [programCategory, setProgramCategory] = useState("전체");
+  const [programPage, setProgramPage] = useState(0);
 
   useEffect(() => {
     let ticking = false;
@@ -358,6 +360,12 @@ export default function App() {
 .why-content { animation: fadeSlideUp .3s ease forwards; }
 
 .why-tab { transition: color .22s ease; }
+
+@keyframes arrowNudge {
+  0%, 100% { transform: translateX(0); }
+  50%      { transform: translateX(4px); }
+}
+.why-cta-arrow { animation: arrowNudge 1.3s ease-in-out infinite; }
       `}</style>
 
       {/* ══════════════════════════════════════════════
@@ -457,11 +465,6 @@ export default function App() {
                   }`}
                 >
                   {tab.label}
-                  <span
-                    className={`absolute left-0 bottom-0 h-0.5 w-6 rounded-full bg-[#3566e8] transition-opacity ${
-                      whyTab === tab.id ? "opacity-100" : "opacity-0"
-                    }`}
-                  />
                 </button>
               ))}
             </div>
@@ -511,7 +514,8 @@ export default function App() {
                       href={tab.href}
                       className="inline-flex items-center gap-1 text-sm font-semibold text-[#3566e8] hover:text-[#1a4acc] transition-colors"
                     >
-                      {tab.cta} <ChevronRight size={14} />
+                      {tab.cta}{" "}
+                      <ChevronRight size={14} className="why-cta-arrow" />
                     </Link>
                   </div>
                 </div>
@@ -537,7 +541,7 @@ export default function App() {
                   letterSpacing: "-0.03em",
                 }}
               >
-                현재 모집 중인 교육과정
+                교육과정
               </h2>
             </div>
             <a
