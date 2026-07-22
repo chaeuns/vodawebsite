@@ -172,7 +172,7 @@ export default function BusinessAreaCards() {
           margin: 0;
           font-size: clamp(20px, 13cqi, 30px); font-weight: 800;
           letter-spacing: -0.01em;
-          color: #4C5AAE;
+          color: #449CFF;
         }
         .biz-card__eng {
           margin: 0 0 4px;
