@@ -40,19 +40,19 @@ const SOLUTIONS = [
         num: "01",
         title: "얼굴/음성 인식",
         en: "Face & Voice Recognition",
-        desc: "AI 기반 얼굴·음성 인식으로 응시자 본인 확인 절차를 자동화합니다.",
+        desc: "얼굴·음성 인식으로 본인 확인을 자동화합니다.",
       },
       {
         num: "02",
         title: "외부 프로그램 차단",
         en: "External Program Blocking",
-        desc: "평가 중 부정행위를 방지하기 위해 외부 프로그램 실행을 실시간으로 차단합니다.",
+        desc: "부정행위 방지를 위해 외부 프로그램을 실시간 차단합니다.",
       },
       {
         num: "03",
         title: "학생 취약점 진단",
         en: "Weakness Diagnosis",
-        desc: "응시 데이터를 분석해 학생별 취약 영역을 진단하고 리포트를 제공합니다.",
+        desc: "응시 데이터를 분석해 취약 영역을 진단합니다.",
       },
     ],
   },
@@ -64,19 +64,19 @@ const SOLUTIONS = [
         num: "01",
         title: "LMS",
         en: "Learning Management System",
-        desc: "자체 기술로 구현한 학습 관리 시스템으로 교육 데이터를 측정하고 개선합니다.",
+        desc: "자체 기술로 구현한 학습 관리 시스템입니다.",
       },
       {
         num: "02",
         title: "온라인 교육장",
         en: "Online Classroom",
-        desc: "실시간 온라인 강의와 콘텐츠를 하나의 플랫폼에서 운영합니다.",
+        desc: "실시간 강의와 콘텐츠를 한 플랫폼에서 운영합니다.",
       },
       {
         num: "03",
         title: "학생 출결 관리 시스템",
         en: "Attendance Management",
-        desc: "학생 출결 데이터를 자동으로 기록하고 관리자에게 리포트를 제공합니다.",
+        desc: "출결 데이터를 자동으로 기록하고 관리합니다.",
       },
     ],
   },
@@ -308,12 +308,13 @@ export default function App() {
 .sc:hover .sc-title { color:#fff; }
 .sc:hover .sc-en    { color:rgba(255,255,255,.7); }
 .sc .sc-desc {
-  max-height:0; opacity:0; overflow:hidden;
+  opacity:0;
   color:rgba(255,255,255,.9);
-  transition: max-height .32s ease, opacity .28s ease;
+  transition: opacity .28s ease;
   font-size:.8125rem; line-height:1.65; margin-top:.75rem;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-.sc:hover .sc-desc { max-height:5rem; opacity:1; }
+.sc:hover .sc-desc { opacity:1; }
 
 
         /* News card */
@@ -743,7 +744,7 @@ export default function App() {
                   {/* 그룹 타이틀 */}
                   <div className="text-center mb-8">
                     <h3
-                      className="font-black font-suit text-[#0e1b52] mb-1"
+                      className="break-keep font-black font-suit text-[#0e1b52] mb-1"
                       style={{
                         fontSize: "clamp(1.3rem,2.2vw,1.75rem)",
                         letterSpacing: "-0.02em",
@@ -752,7 +753,7 @@ export default function App() {
                       {group.groupTitle}
                     </h3>
                     {group.groupSubtitle && (
-                      <p className="text-sm text-[#5a6895]">
+                      <p className="break-keep text-sm text-[#5a6895]">
                         {group.groupSubtitle}
                       </p>
                     )}
@@ -769,7 +770,7 @@ export default function App() {
                           {s.num}
                         </span>
                         <h3
-                          className="sc-title font-black font-suit text-[#0e1b52] mb-1 leading-tight"
+                          className="sc-title break-keep font-black font-suit text-[#0e1b52] mb-1 leading-tight"
                           style={{
                             fontSize: "clamp(1rem,1.6vw,1.25rem)",
                             letterSpacing: "-0.02em",
@@ -777,10 +778,10 @@ export default function App() {
                         >
                           {s.title}
                         </h3>
-                        <p className="sc-en text-xs text-[#5a6895] font-medium tracking-wide">
+                        <p className="sc-en break-keep text-xs text-[#5a6895] font-medium tracking-wide">
                           {s.en}
                         </p>
-                        <p className="sc-desc">{s.desc}</p>
+                        <p className="sc-desc break-keep">{s.desc}</p>
                       </div>
                     ))}
                   </div>
