@@ -1,5 +1,6 @@
 "use client";
 
+import Container from "@/app/components/Container";
 import { useScrollReveal } from "@/app/components/shared/useScrollReveal";
 import { techComponents } from "../data";
 
@@ -10,17 +11,25 @@ export default function TechComponents() {
     <section className="bg-[#F9FAFB] py-[80px] relative">
       <div
         ref={ref}
-        className="max-w-[1100px] mx-auto px-6 transition-all duration-500 ease-out"
+        className="transition-all duration-500 ease-out"
         style={{
           transform: isVisible ? "translateY(0)" : "translateY(12px)",
           opacity: isVisible ? 1 : 0,
         }}
       >
-        <h2 className="text-[32px] font-bold leading-[1.3] text-[#00163A]">
-          8가지 핵심 기술 요소
-        </h2>
+        <Container>
+          <div className="mb-10 pl-20 pr-20">
+            <span className="mb-3 block h-1 w-9 rounded-full bg-[#3566e8]" />
+            <h2
+              className="font-extrabold font-suit text-[#0e1b52]"
+              style={{ fontSize: "clamp(1.7rem,3.2vw,2.8rem)", letterSpacing: "-0.03em" }}
+            >
+              솔루션 기술 구성 요소
+            </h2>
+          </div>
+        </Container>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
+        <div className="max-w-[1100px] mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {techComponents.map((t) => (
             <div key={t.code} className="bg-white rounded-[16px] border border-[#E5E7EB] p-5">
               <span className="inline-block rounded-full bg-[#EFF6FF] px-2.5 py-1 text-[11px] font-bold text-[#2563EB]">
