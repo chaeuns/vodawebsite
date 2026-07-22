@@ -264,7 +264,7 @@ export default function ConsultingPage() {
                     <p className="mt-4 max-w-lg text-base font-medium leading-relaxed text-white/90 sm:text-lg">
                       {area.desc.join(" ")}
                     </p>
-                    <p className="mt-2 max-w-2xl break-keep text-sm leading-relaxed text-white/75 sm:text-base">
+                    <p className="mt-2 max-w-2xl break-keep text-sm font-medium leading-relaxed text-white/75 sm:text-base">
                       {area.subtext.map((line, idx) => (
                         <span key={idx}>
                           {line}
@@ -296,7 +296,7 @@ export default function ConsultingPage() {
             </h2>
           </div>
 
-          <div className="relative mt-14 grid gap-6 sm:grid-cols-4">
+          <div className="relative mt-14 grid gap-12 sm:grid-cols-4">
             {process.map((p, i) => (
               <div key={p.step} className="group relative">
                 <div
@@ -317,7 +317,7 @@ export default function ConsultingPage() {
                   </div>
 
                   <p
-                    className="relative z-10 mt-5 text-xs font-semibold tracking-widest"
+                    className="relative z-10 mt-5 text-[13px] font-semibold tracking-wide"
                     style={{ color: p.to }}
                   >
                     {p.step}
@@ -325,14 +325,14 @@ export default function ConsultingPage() {
                   <p className="relative z-10 mt-2 text-base font-bold text-[#0F1B4C]">
                     {p.title}
                   </p>
-                  <p className="relative z-10 mt-1.5 text-xs leading-relaxed text-gray-500">
+                  <p className="relative z-10 mt-1.5 text-sm leading-relaxed text-gray-650">
                     {p.desc}
                   </p>
                 </div>
 
                 {i < process.length - 1 && (
                   <span
-                    className="absolute top-1/2 right-[-29.5px] hidden -translate-y-1/2 items-center justify-center text-[#2563EB] sm:flex"
+                    className="absolute top-1/2 right-[-44px] hidden -translate-y-1/2 items-center justify-center text-[#2563EB] sm:flex"
                     aria-hidden
                   >
                     <ChevronRight className="h-8.75 w-8.75" />
