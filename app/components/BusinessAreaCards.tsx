@@ -170,7 +170,7 @@ export default function BusinessAreaCards() {
         }
         .biz-card__name {
           margin: 0;
-          font-size: clamp(20px, 13cqi, 30px); font-weight: 700;
+          font-size: clamp(20px, 13cqi, 30px); font-weight: 800;
           letter-spacing: -0.01em;
           color: #4C5AAE;
         }
@@ -197,6 +197,8 @@ export default function BusinessAreaCards() {
           font-size: clamp(11px, 6.2cqi, 14.5px); line-height: 1.6;
           font-weight: 400;
           color: var(--text-secondary);
+          word-break: keep-all;
+          overflow-wrap: break-word;
         }
         .biz-card:hover .biz-card__desc,
         .biz-card:focus-within .biz-card__desc {
@@ -205,14 +207,15 @@ export default function BusinessAreaCards() {
 
         /* 버튼 */
         .biz-card__actions {
-          display: flex; flex-direction: column; align-items: center; gap: clamp(5px, 3cqi, 8px);
-          margin-top: clamp(10px, 6cqi, 18px);
+          display: flex; flex-direction: column; align-items: stretch; gap: clamp(5px, 3cqi, 8px);
+          margin-top: clamp(20px, 12cqi, 32px);
         }
         .biz-btn {
           display: inline-flex; align-items: center; justify-content: space-between;
           gap: clamp(6px, 4cqi, 10px);
-          padding: clamp(7px, 4cqi, 11px) clamp(10px, 6cqi, 16px);
-          border-radius: 10px;
+          width: 100%;
+          padding: clamp(7px, 4cqi, 11px) clamp(14px, 8cqi, 22px);
+          border-radius: 999px;
           background: var(--blue);
           color: #FFFFFF;
           font-size: clamp(11px, 5.5cqi, 14px); font-weight: 600;
