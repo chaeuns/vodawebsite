@@ -73,7 +73,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="font-bold leading-[1.35] text-[26px] md:text-[38px] text-[#00163A] break-keep mt-8 sm:mt-24"
+          className="font-extrabold leading-[1.35] text-[26px] md:text-[38px] text-[#00163A] break-keep mt-8 sm:mt-24"
         >
           AI 활용 역량평가 시스템
         </motion.h1>

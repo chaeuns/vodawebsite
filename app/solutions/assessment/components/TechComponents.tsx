@@ -27,19 +27,19 @@ export default function TechComponents() {
               솔루션 기술 구성 요소
             </h2>
           </div>
-        </Container>
 
-        <div className="max-w-[1100px] mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {techComponents.map((t) => (
-            <div key={t.code} className="bg-white rounded-[16px] border border-[#E5E7EB] p-5">
-              <span className="inline-block rounded-full bg-[#EFF6FF] px-2.5 py-1 text-[11px] font-bold text-[#2563EB]">
-                {t.code}
-              </span>
-              <p className="text-[15px] font-bold text-[#111827] mt-3 leading-[1.4]">{t.title}</p>
-              <p className="text-[13px] text-[#6B7280] mt-2 leading-[1.7]">{t.body}</p>
-            </div>
-          ))}
-        </div>
+          <div className="pl-20 pr-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {techComponents.map((t) => (
+              <div key={t.code} className="bg-white rounded-[16px] border border-[#E5E7EB] p-5">
+                <span className="inline-block rounded-full bg-[#EFF6FF] px-2.5 py-1 text-[11px] font-bold text-[#2563EB]">
+                  {t.code}
+                </span>
+                <p className="text-[15px] font-bold text-[#111827] mt-3 leading-[1.4]">{t.title}</p>
+                <p className="text-[13px] text-[#6B7280] mt-2 leading-[1.7]">{t.body}</p>
+              </div>
+            ))}
+          </div>
+        </Container>
       </div>
     </section>
   );

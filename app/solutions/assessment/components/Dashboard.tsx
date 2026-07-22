@@ -32,7 +32,7 @@ function RadarChart() {
 
   return (
     <svg
-      viewBox={`-40 -40 ${RADAR_SIZE + 80} ${RADAR_SIZE + 80}`}
+      viewBox={`-100 -40 ${RADAR_SIZE + 200} ${RADAR_SIZE + 80}`}
       className="w-full max-w-[320px] mx-auto sm:max-w-none"
     >
       <defs>
@@ -270,32 +270,34 @@ export default function Dashboard() {
           </div>
         </Container>
 
-        <div className="max-w-[1100px] mx-auto px-6">
-          <AutoDragReveal onRevealed={() => setRevealed(true)} />
-        </div>
+        <Container>
+          <div className="pl-20 pr-20">
+            <AutoDragReveal onRevealed={() => setRevealed(true)} />
+          </div>
 
-        <div className="max-w-[1100px] mx-auto px-6 grid grid-cols-1 sm:grid-cols-3 gap-5 mt-10">
-          {dashboardFeatures.map((item, i) => {
-            const Icon = ICONS[i];
-            return (
-              <div
-                key={item.title}
-                className="rounded-[20px] border border-[#E5E7EB] bg-[#F9FAFB] p-6 transition-all duration-700 ease-out"
-                style={{
-                  opacity: revealed ? 1 : 0,
-                  transform: revealed ? "translateY(0)" : "translateY(24px)",
-                  transitionDelay: revealed ? "0.2s" : "0s",
-                }}
-              >
-                <div className="w-11 h-11 rounded-xl bg-[#0D1B40] flex items-center justify-center">
-                  <Icon size={20} className="text-white" />
+          <div className="pl-20 pr-20 grid grid-cols-1 sm:grid-cols-3 gap-5 mt-10">
+            {dashboardFeatures.map((item, i) => {
+              const Icon = ICONS[i];
+              return (
+                <div
+                  key={item.title}
+                  className="rounded-[20px] border border-[#E5E7EB] bg-[#F9FAFB] p-6 transition-all duration-700 ease-out"
+                  style={{
+                    opacity: revealed ? 1 : 0,
+                    transform: revealed ? "translateY(0)" : "translateY(24px)",
+                    transitionDelay: revealed ? "0.2s" : "0s",
+                  }}
+                >
+                  <div className="w-11 h-11 rounded-xl bg-[#0D1B40] flex items-center justify-center">
+                    <Icon size={20} className="text-white" />
+                  </div>
+                  <p className="text-[16px] font-bold text-[#111827] mt-4">{item.title}</p>
+                  <p className="text-[13px] text-[#6B7280] mt-2 leading-[1.7]">{item.body}</p>
                 </div>
-                <p className="text-[16px] font-bold text-[#111827] mt-4">{item.title}</p>
-                <p className="text-[13px] text-[#6B7280] mt-2 leading-[1.7]">{item.body}</p>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        </Container>
       </div>
     </section>
   );

@@ -30,34 +30,34 @@ export default function CoreTech() {
               AI가 만드는 새로운 평가 기준
             </h2>
           </div>
-        </Container>
 
-        <div className="max-w-[900px] mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 gap-5">
-          {coreTech.map((item, i) => {
-            const Icon = ICONS[i];
-            return (
-              <div
-                key={item.number}
-                className="rounded-[20px] border border-[#E5E7EB] bg-[#F9FAFB] p-6 sm:p-7"
-              >
-                <div className="flex items-center gap-3">
-                  <span className="text-[13px] font-extrabold text-[#93C5FD]">
-                    {item.number}
-                  </span>
-                  <div className="w-10 h-10 rounded-xl bg-[#EFF6FF] flex items-center justify-center">
-                    <Icon size={18} className="text-[#2563EB]" />
+          <div className="pl-20 pr-20 grid grid-cols-1 sm:grid-cols-2 gap-5">
+            {coreTech.map((item, i) => {
+              const Icon = ICONS[i];
+              return (
+                <div
+                  key={item.number}
+                  className="rounded-[20px] border border-[#E5E7EB] bg-[#F9FAFB] p-6 sm:p-7"
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="text-[13px] font-extrabold text-[#93C5FD]">
+                      {item.number}
+                    </span>
+                    <div className="w-10 h-10 rounded-xl bg-[#EFF6FF] flex items-center justify-center">
+                      <Icon size={18} className="text-[#2563EB]" />
+                    </div>
                   </div>
+                  <p className="text-[16px] sm:text-[17px] font-bold text-[#111827] mt-4">
+                    {item.title}
+                  </p>
+                  <p className="text-[13px] sm:text-[14px] text-[#6B7280] mt-2 leading-[1.7]">
+                    {item.body}
+                  </p>
                 </div>
-                <p className="text-[16px] sm:text-[17px] font-bold text-[#111827] mt-4">
-                  {item.title}
-                </p>
-                <p className="text-[13px] sm:text-[14px] text-[#6B7280] mt-2 leading-[1.7]">
-                  {item.body}
-                </p>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        </Container>
       </div>
     </section>
   );
