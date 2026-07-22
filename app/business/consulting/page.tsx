@@ -4,6 +4,8 @@
 // 컬러: 히어로는 네이비(#0B1130) + 블루(#3D5AFE), 02·03번 섹션은 화이트
 
 import Image from "next/image";
+import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 import Container from "@/app/components/Container";
 
 const consultingAreas = [
@@ -220,7 +222,7 @@ export default function ConsultingPage() {
       {/* 02. 4대 컨설팅 영역 — 화면 꽉 찬 컬러 밴드가 스크롤에 따라 겹겹이 덮이는 스택 */}
       <section className="bg-white pt-24">
         <Container>
-          <div className="mb-28 pl-20 pr-20">
+          <div className="mb-33 pl-20 pr-20">
             <span className="mb-3 block h-1 w-9 rounded-full bg-[#3566e8]" />
             <h2
               className="font-extrabold font-suit text-[#0e1b52]"
@@ -295,22 +297,20 @@ export default function ConsultingPage() {
           </div>
 
           <div className="relative mt-14 grid gap-6 sm:grid-cols-4">
-            {/* connecting line behind cards */}
-            <div className="pointer-events-none absolute left-0 right-0 top-14 hidden h-px bg-linear-to-r from-transparent via-[#3D5AFE]/50 to-transparent sm:block" />
-
             {process.map((p, i) => (
               <div key={p.step} className="group relative">
                 <div
-                  className="relative rounded-3xl border border-gray-100 bg-white px-6 py-8 text-center transition-transform duration-300 hover:-translate-y-2"
+                  className="relative rounded-3xl border px-6 py-8 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-500/5"
                   style={{
-                    boxShadow: `0 24px 48px -24px ${p.glow}, 0 2px 10px -2px rgba(15,23,42,0.08)`,
+                    borderColor: "rgba(22,24,29,0.07)",
+                    background: "#F8F9FC",
                   }}
                 >
                   <div
                     className="relative z-10 mx-auto flex h-14 w-14 items-center justify-center rounded-2xl text-white shadow-lg"
                     style={{
                       background: `linear-gradient(135deg, ${p.from}, ${p.to})`,
-                      boxShadow: `0 10px 24px -8px ${p.glow}`,
+                      boxShadow: `0 4px 10px -4px ${p.glow}`,
                     }}
                   >
                     {p.icon}
@@ -332,10 +332,10 @@ export default function ConsultingPage() {
 
                 {i < process.length - 1 && (
                   <span
-                    className="absolute -right-5.5 top-14 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-gray-200 bg-white text-sm text-[#3D5AFE] shadow-sm sm:flex"
+                    className="absolute top-1/2 right-[-29.5px] hidden -translate-y-1/2 items-center justify-center text-[#2563EB] sm:flex"
                     aria-hidden
                   >
-                    →
+                    <ChevronRight className="h-8.75 w-8.75" />
                   </span>
                 )}
               </div>
@@ -354,9 +354,12 @@ export default function ConsultingPage() {
             VODA는 전략 수립부터 시스템 도입, 인재 양성까지 성공적인 AI 전환(AX)을 위한 컨설팅을 제공합니다.
           </p>
 
-          <button className="mt-7 bg-[#2563EB] text-white text-[14px] font-semibold px-6 py-3 rounded-lg hover:bg-[#1d4ed8] transition-colors">
+          <Link
+            href="/contact"
+            className="mt-8 inline-block rounded-full bg-[#3D5AFE] px-8 py-3 text-sm font-semibold text-white transition hover:bg-[#2c46e0]"
+          >
             컨설팅 상담 신청하기 →
-          </button>
+          </Link>
         </div>
       </section>
     </main>
