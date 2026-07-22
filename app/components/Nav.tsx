@@ -154,11 +154,16 @@ export default function Nav() {
       {mobileOpen && (
         <div className="md:hidden bg-white border-t border-[rgba(14,27,82,0.08)] px-8 py-6 space-y-1 max-h-[calc(100vh-68px)] overflow-y-auto">
           {NAV_ITEMS.map((item) => (
-            <MobileNavGroup key={item.label} item={item} />
+            <MobileNavGroup
+              key={item.label}
+              item={item}
+              onNavigate={() => setMobileOpen(false)}
+            />
           ))}
           <div className="pt-3 border-t border-[rgba(14,27,82,0.08)] flex items-center gap-4">
             <Link
               href="/contact"
+              onClick={() => setMobileOpen(false)}
               className="text-sm font-semibold px-4 py-2 border border-[rgba(53,102,232,0.35)] rounded text-[#3566e8]"
             >
               사업문의
@@ -170,13 +175,20 @@ export default function Nav() {
   );
 }
 
-function MobileNavGroup({ item }: { item: NavItem }) {
+function MobileNavGroup({
+  item,
+  onNavigate,
+}: {
+  item: NavItem;
+  onNavigate: () => void;
+}) {
   const [open, setOpen] = useState(false);
 
   if (!item.dropdown) {
     return (
       <Link
         href={item.href}
+        onClick={onNavigate}
         className="block text-sm font-medium text-[#5a6895] hover:text-[#0e1b52] py-2"
       >
         {item.label}
@@ -205,6 +217,7 @@ function MobileNavGroup({ item }: { item: NavItem }) {
             <Link
               key={sub.label}
               href={sub.href}
+              onClick={onNavigate}
               className="block text-sm text-[#0e1b52]/80 hover:text-[#0e1b52] py-1.5"
             >
               {sub.label}
