@@ -66,8 +66,8 @@ export default function ServiceProcess() {
                     viewport={{ once: false, amount: 0.3 }}
                     whileHover={shouldReduceMotion ? undefined : { y: -4, transition: { duration: 0.3 } }}
                   >
-                    <div className="w-14 h-14 mx-auto rounded-lg bg-[#EFF6FF] flex items-center justify-center transition-colors duration-200 ease-out group-hover:bg-[#2563EB]">
-                      <Icon size={24} className="text-[#2563EB] transition-colors duration-200 ease-out group-hover:text-white" />
+                    <div className="w-14 h-14 mx-auto rounded-lg bg-[#EFF6FF] flex items-center justify-center">
+                      <Icon size={24} className="text-[#2563EB]" />
                     </div>
                     <p className="text-[13px] font-bold text-[#2563EB] mt-3">{step.step}</p>
                     <div className="mt-1 min-h-[50px] flex items-center justify-center">
@@ -109,8 +109,8 @@ export default function ServiceProcess() {
                   viewport={{ once: false, amount: 0.3 }}
                   whileHover={shouldReduceMotion ? undefined : { y: -4, transition: { duration: 0.3 } }}
                 >
-                  <div className="w-14 h-14 mx-auto rounded-lg bg-[#EFF6FF] flex items-center justify-center transition-colors duration-200 ease-out group-hover:bg-[#2563EB]">
-                    <Icon size={24} className="text-[#2563EB] transition-colors duration-200 ease-out group-hover:text-white" />
+                  <div className="w-14 h-14 mx-auto rounded-lg bg-[#EFF6FF] flex items-center justify-center">
+                    <Icon size={24} className="text-[#2563EB]" />
                   </div>
                   <p className="text-[13px] font-bold text-[#2563EB] mt-3">{step.step}</p>
                   <div className="mt-1 min-h-[50px] flex items-center justify-center">

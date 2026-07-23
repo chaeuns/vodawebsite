@@ -46,7 +46,7 @@ export default function TechStack() {
             return (
               <div
                 key={group.category}
-                className="group relative flex-1 max-[900px]:flex-none min-w-[80px] max-[900px]:min-w-0 max-[900px]:h-[60px] max-[900px]:hover:h-auto max-[900px]:hover:min-h-[130px] rounded-[18px] overflow-hidden border border-[#edf1f7] bg-[#F7F9FC] hover:z-10 hover:shadow-[0_20px_40px_rgba(13,27,64,0.1)]"
+                className="group relative flex-1 max-[900px]:flex-none min-w-[80px] max-[900px]:min-w-0 max-[900px]:h-[60px] max-[900px]:hover:h-auto max-[900px]:hover:min-h-[130px] rounded-[18px] overflow-hidden border border-[#edf1f7] bg-[#F7F9FC] hover:z-10"
                 style={{
                   transform: isVisible ? "translateY(0)" : "translateY(16px)",
                   opacity: isVisible ? 1 : 0,
