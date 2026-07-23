@@ -8,7 +8,7 @@ const CHART_BARS = [38, 62, 48, 80, 56, 70];
 function DashboardMockup() {
   return (
     <motion.div
-      className="mx-auto mt-10 w-full max-w-[640px] overflow-hidden rounded-2xl border border-[#E5E7EB] bg-white shadow-[0_20px_60px_rgba(13,27,64,0.12)]"
+      className="mx-auto mt-10 w-full max-w-190 overflow-hidden rounded-2xl border border-[#E5E7EB] bg-white shadow-[0_20px_60px_rgba(13,27,64,0.12)]"
       initial={{ opacity: 0, y: 40, scale: 0.768 }}
       animate={{ opacity: 1, y: 0, scale: 0.8 }}
       transition={{ duration: 0.8, ease: "easeOut", delay: 0.35 }}
@@ -69,7 +69,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="font-extrabold leading-[1.35] text-[26px] md:text-[38px] text-[#00163A] break-keep mt-8 sm:mt-24"
+          className="font-extrabold leading-[1.35] text-[30px] md:text-[44px] text-[#00163A] break-keep mt-8 sm:mt-24"
         >
           VODA LMS
         </motion.h1>
@@ -77,7 +77,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut", delay: 0.12 }}
-          className="text-[15px] md:text-[16px] text-[#4B5563] mt-4 max-w-160 mx-auto break-keep leading-[1.7]"
+          className="text-[16px] md:text-[19px] text-[#4B5563] mt-4 max-w-160 mx-auto break-keep leading-[1.7]"
         >
           K-Digital Training 특화 차세대 LMS. 교육생 선발부터 수료까지 전 과정을
           <br className="hidden md:block" /> 스마트하게 관리하는 AI 기반 올인원 교육 솔루션입니다.

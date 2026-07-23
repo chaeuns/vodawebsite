@@ -72,7 +72,7 @@ function MiniRadar() {
 function ScoreMockup() {
   return (
     <motion.div
-      className="mx-auto mt-10 w-full max-w-[640px] overflow-hidden rounded-2xl border border-[#E5E7EB] bg-white shadow-[0_20px_60px_rgba(13,27,64,0.12)]"
+      className="mx-auto mt-10 w-full max-w-190 overflow-hidden rounded-2xl border border-[#E5E7EB] bg-white shadow-[0_20px_60px_rgba(13,27,64,0.12)]"
       initial={{ opacity: 0, y: 40, scale: 0.768 }}
       animate={{ opacity: 1, y: 0, scale: 0.8 }}
       transition={{ duration: 0.8, ease: "easeOut", delay: 0.35 }}
@@ -137,7 +137,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="font-extrabold leading-[1.35] text-[26px] md:text-[38px] text-[#00163A] break-keep mt-8 sm:mt-24"
+          className="font-extrabold leading-[1.35] text-[30px] md:text-[44px] text-[#00163A] break-keep mt-8 sm:mt-24"
         >
           AI 활용 역량평가 시스템
         </motion.h1>
@@ -145,7 +145,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut", delay: 0.12 }}
-          className="text-[15px] md:text-[16px] text-[#4B5563] mt-4 max-w-160 mx-auto break-keep leading-[1.7]"
+          className="text-[16px] md:text-[19px] text-[#4B5563] mt-4 max-w-160 mx-auto break-keep leading-[1.7]"
         >
           데이터 기반 AI 역량평가 솔루션.
           <br className="hidden md:block" /> 객관적인 평가 체계로 조직의 AI 역량을 정확하게 측정합니다.
