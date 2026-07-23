@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 
 export default function CTA() {
   return (
@@ -22,9 +23,10 @@ export default function CTA() {
         <div className="flex flex-wrap items-center justify-center gap-3 mt-7">
           <Link
             href="/contact"
-            className="bg-[#2563EB] text-white text-[14px] font-semibold px-6 py-3 rounded-lg hover:bg-[#1d4ed8] transition-colors"
+            className="inline-flex items-center justify-center gap-1 bg-[#2563EB] text-white text-[14px] font-semibold px-8 py-3 rounded-full hover:bg-[#1d4ed8] transition-colors"
           >
             개발 문의하기
+            <ChevronRight size={16} />
           </Link>
         </div>
       </div>

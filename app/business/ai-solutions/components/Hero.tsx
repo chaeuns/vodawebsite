@@ -32,10 +32,10 @@ export default function Hero() {
                 사업 영역
                 <ChevronRight className="w-[13px] h-[13px] md:w-[15px] md:h-[15px]" strokeWidth={2.5} />
               </span>{" "}
-              AI 솔루션
+              <span className="align-middle">AI 솔루션</span>
             </p>
 
-            <h1 className="hero-fade-2 font-bold mt-4 leading-[1.3] text-[18px] sm:text-[22px] md:text-[29px] lg:text-[43px] whitespace-normal md:whitespace-nowrap break-keep">
+            <h1 className="hero-fade-2 font-bold mt-4 leading-[1.3] text-[1.7rem] sm:text-[22px] md:text-[29px] lg:text-[43px] whitespace-normal md:whitespace-nowrap break-keep">
               <span className="text-[#00163A]">AI 솔루션 개발</span>
             </h1>
           </div>

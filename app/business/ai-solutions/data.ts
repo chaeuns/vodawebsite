@@ -37,28 +37,33 @@ export const solutions: Solution[] = [
   },
 ];
 
-export type ProcessStep = { step: string; title: string;};
+export type ProcessStep = { step: string; title: string; body: string };
 
 export const processSteps: ProcessStep[] = [
   {
     step: "STEP 1",
     title: "요구사항\n분석",
+    body: "고객의 니즈·목표 파악",
   },
   {
     step: "STEP 2",
-    title: "설계 및 기획",
+    title: "설계·기획",
+    body: "최적의 구조· 사용자 경험 설계",
   },
   {
     step: "STEP 3",
     title: "개발",
+    body: "안정적인\n서비스 구현",
   },
   {
     step: "STEP 4",
     title: "테스트",
+    body: "다양한\n품질 검증",
   },
   {
     step: "STEP 5",
-    title: "배포 및 유지보수",
+    title: "배포·유지보수",
+    body: "안정적인\n배포·개선\n지원",
   },
 ];
 
@@ -97,19 +102,19 @@ export type RelatedSolution = { badge: string; title: string; body: string; href
 export const relatedSolutions: RelatedSolution[] = [
   {
     badge: "LMS",
-    title: "LMS 문의",
+    title: "LMS",
     body: "VODA 스마트 훈련 플랫폼(WSTS)에 대한\n도입과 커스터마이징",
     href: "/solutions/lms",
   },
   {
     badge: "Competency",
-    title: "역량평가 문의",
+    title: "AI 역량평가",
     body: "AI 기반 역량평가 시스템 도입\n파일럿 프로그램 및 데모 체험 신청",
     href: "/solutions/assessment",
   },
   {
     badge: "Cloud",
-    title: "클라우드 문의",
+    title: "클라우드 인프라",
     body: "클라우드 인프라 구축, 마이그레이션,\n운영 유지보수 서비스 문의",
     href: "/business/cloud",
   },

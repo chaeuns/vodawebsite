@@ -3,6 +3,7 @@
 import { Bot, Users, Lock, Cog, FileText, GraduationCap } from "lucide-react";
 import { motion, type Variants } from "framer-motion";
 import { solutions } from "../data";
+import BreakOnDesktop from "./BreakOnDesktop";
 
 const ICONS = [Bot, Users, Lock, Cog, FileText, GraduationCap];
 
@@ -89,8 +90,8 @@ export default function KeySolutions() {
                   </div>
 
                   <p className="text-[17px] font-bold text-[#111827] mt-3 whitespace-pre-line">{solution.title}</p>
-                  <p className="text-[14px] text-[#6B7280] mt-1.5 leading-[1.7] whitespace-pre-line">
-                    {solution.body}
+                  <p className="text-[14px] text-[#6B7280] mt-1.5 leading-[1.7]">
+                    <BreakOnDesktop text={solution.body} />
                   </p>
                 </div>
               </motion.div>

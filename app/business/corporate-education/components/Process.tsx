@@ -70,8 +70,8 @@ export default function Process() {
                   viewport={{ once: false, amount: 0.3 }}
                   whileHover={shouldReduceMotion ? undefined : { y: -4, transition: { duration: 0.3 } }}
                 >
-                  <div className="w-14 h-14 mx-auto rounded-lg bg-[#EFF6FF] flex items-center justify-center transition-colors duration-200 ease-out group-hover:bg-[#2563EB]">
-                    <Icon size={24} className="text-[#2563EB] transition-colors duration-200 ease-out group-hover:text-white" />
+                  <div className="w-14 h-14 mx-auto rounded-lg bg-[#EFF6FF] flex items-center justify-center">
+                    <Icon size={24} className="text-[#2563EB]" />
                   </div>
                   <p className="text-[13px] font-bold text-[#2563EB] mt-3 whitespace-pre-line">{step.step}</p>
                   <p className="text-[19px] font-bold text-[#111827] mt-1 whitespace-pre-line">{step.title}</p>
@@ -107,8 +107,8 @@ export default function Process() {
                 viewport={{ once: false, amount: 0.3 }}
                 whileHover={shouldReduceMotion ? undefined : { y: -4, transition: { duration: 0.3 } }}
               >
-                <div className="w-14 h-14 mx-auto rounded-lg bg-[#EFF6FF] flex items-center justify-center transition-colors duration-200 ease-out group-hover:bg-[#2563EB]">
-                  <Icon size={24} className="text-[#2563EB] transition-colors duration-200 ease-out group-hover:text-white" />
+                <div className="w-14 h-14 mx-auto rounded-lg bg-[#EFF6FF] flex items-center justify-center">
+                  <Icon size={24} className="text-[#2563EB]" />
                 </div>
                 <p className="text-[13px] font-bold text-[#2563EB] mt-3 whitespace-pre-line">{step.step}</p>
                 <p className="text-[19px] font-bold text-[#111827] mt-1 whitespace-pre-line">{step.title}</p>

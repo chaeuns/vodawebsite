@@ -1,15 +1,16 @@
 "use client";
 
-import Link from "next/link";
-import { BookOpen, BarChart3, Cloud } from "lucide-react";
+import { BookOpen, BarChart3, Cloud, ChevronDown } from "lucide-react";
+import { motion } from "framer-motion";
 import { relatedSolutions } from "../data";
+import BreakOnDesktop from "./BreakOnDesktop";
 
 const ICONS = [BookOpen, BarChart3, Cloud];
 
 export default function RelatedSolutions() {
   return (
     <section
-      className="py-[80px] relative"
+      className="pt-[80px] pb-[130px] relative"
       style={{
         background: "linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 50%, #BFDBFE 100%)",
       }}
@@ -30,7 +31,7 @@ export default function RelatedSolutions() {
           {relatedSolutions.map((item, i) => {
             const Icon = ICONS[i];
             return (
-              <Link key={item.title} href={item.href} className="related-solutions-col group">
+              <div key={item.title} className="related-solutions-col group">
                 <div className="related-solutions-icon">
                   <Icon
                     size={22}
@@ -42,12 +43,22 @@ export default function RelatedSolutions() {
                   {item.badge}
                 </span>
                 <p className="text-[16px] font-bold text-[#0D1B40] mt-3 mb-2 whitespace-pre-line">{item.title}</p>
-                <p className="text-[13px] text-[#8891A5] leading-[1.5] whitespace-pre-line">{item.body}</p>
-              </Link>
+                <p className="text-[13px] text-[#8891A5] leading-[1.5]">
+                  <BreakOnDesktop text={item.body} />
+                </p>
+              </div>
             );
           })}
         </div>
       </div>
+
+      <motion.div
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-[#2563EB]"
+        animate={{ y: [0, 6, 0] }}
+        transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <ChevronDown size={28} strokeWidth={2} />
+      </motion.div>
 
       <style>{`
         .related-solutions-grid {
@@ -58,7 +69,6 @@ export default function RelatedSolutions() {
           display: block;
           padding: 40px 24px;
           text-align: center;
-          cursor: pointer;
           transition: background 0.25s;
           border-right: 1px solid #EEF0F4;
         }

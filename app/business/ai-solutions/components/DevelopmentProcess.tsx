@@ -2,22 +2,36 @@
 
 import { Fragment } from "react";
 import { ClipboardList, PenTool, Code2, Search, Rocket, ChevronRight } from "lucide-react";
-import { motion, type Variants } from "framer-motion";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { processSteps } from "../data";
+import BreakOnDesktop from "./BreakOnDesktop";
 
 const ICONS = [ClipboardList, PenTool, Code2, Search, Rocket];
-
-const containerVariants: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.15 } },
-};
-
-const cardVariants: Variants = {
-  hidden: { opacity: 0, x: -40 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeOut" } },
-};
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 export default function DevelopmentProcess() {
+  const shouldReduceMotion = useReducedMotion();
+
+  const cardVariants = (i: number): Variants =>
+    shouldReduceMotion
+      ? { hidden: { opacity: 1, x: 0 }, visible: { opacity: 1, x: 0 } }
+      : {
+          hidden: { opacity: 0, x: -10 },
+          visible: { opacity: 1, x: 0, transition: { duration: 1.8, ease: EASE, delay: i * 0.35 } },
+        };
+
+  const arrowVariants = (i: number): Variants =>
+    shouldReduceMotion
+      ? { hidden: { opacity: 1, x: 0 }, visible: { opacity: 1, x: 0 } }
+      : {
+          hidden: { opacity: 0, x: -6 },
+          visible: {
+            opacity: 1,
+            x: 0,
+            transition: { duration: 1.4, ease: EASE, delay: i * 0.35 + 0.4 },
+          },
+        };
+
   return (
     <section
       className="py-[80px] relative"
@@ -39,63 +53,74 @@ export default function DevelopmentProcess() {
         </p>
 
         {/* Desktop: steps connected with arrows */}
-        <motion.div
-          className="hidden md:flex items-stretch gap-1.5 mt-10"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
+        <div className="hidden md:flex items-stretch gap-4 mt-10">
           {processSteps.map((step, i) => {
             const Icon = ICONS[i];
             return (
               <Fragment key={step.step}>
                 <motion.div
-                  variants={cardVariants}
-                  className="group flex-1 border border-[#E5E7EB] rounded-xl bg-white p-10 min-h-[200px] flex flex-col items-center justify-start text-center shadow-none hover:shadow-[0_8px_20px_rgba(17,24,39,0.08)] hover:border-[#2563EB]/30 transition-[box-shadow,border-color] duration-200 ease-out"
-                  whileHover={{ y: -3, transition: { duration: 0.2 } }}
+                  className="group flex-1 border border-[#E5E7EB] rounded-xl bg-white pt-24 pb-10 px-10 min-h-[420px] flex flex-col items-center justify-start text-center shadow-none hover:shadow-xl hover:shadow-blue-500/5 hover:border-[#2563EB]/30 transition-[box-shadow,border-color] duration-300 ease-out"
+                  variants={cardVariants(i)}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: false, amount: 0.3 }}
+                  whileHover={shouldReduceMotion ? undefined : { y: -4, transition: { duration: 0.3 } }}
                 >
-                  <div className="w-14 h-14 mx-auto rounded-lg bg-[#EFF6FF] flex items-center justify-center transition-colors duration-200 ease-out group-hover:bg-[#2563EB]">
-                    <Icon size={24} className="text-[#2563EB] transition-colors duration-200 ease-out group-hover:text-white" />
+                  <div className="w-14 h-14 mx-auto rounded-lg bg-[#EFF6FF] flex items-center justify-center">
+                    <Icon size={24} className="text-[#2563EB]" />
                   </div>
-                  <p className="text-[13px] font-bold text-[#2563EB] mt-3 whitespace-pre-line">{step.step}</p>
-                  <p className="text-[19px] font-bold text-[#111827] mt-1 whitespace-pre-line">{step.title}</p>
+                  <p className="text-[13px] font-bold text-[#2563EB] mt-3">{step.step}</p>
+                  <p className="text-[19px] font-bold text-[#111827] mt-1 leading-[1.4] min-h-[54px]">
+                    <BreakOnDesktop text={step.title} />
+                  </p>
+                  <p className="text-[15px] text-[#6B7280] mt-2 leading-[1.6]">
+                    <BreakOnDesktop text={step.body} />
+                  </p>
                 </motion.div>
                 {i < processSteps.length - 1 && (
-                  <div className="flex items-center justify-center text-[#2563EB] shrink-0">
+                  <motion.div
+                    className="flex items-center justify-center text-[#2563EB] shrink-0"
+                    variants={arrowVariants(i)}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: false, amount: 0.3 }}
+                  >
                     <ChevronRight className="w-[35px] h-[35px]" />
-                  </div>
+                  </motion.div>
                 )}
               </Fragment>
             );
           })}
-        </motion.div>
+        </div>
 
         {/* Mobile: stacked */}
-        <motion.div
-          className="md:hidden flex flex-col gap-4 mt-10"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
+        <div className="md:hidden flex flex-col gap-4 mt-10">
           {processSteps.map((step, i) => {
             const Icon = ICONS[i];
             return (
               <motion.div
                 key={step.step}
-                variants={cardVariants}
-                className="group border border-[#E5E7EB] rounded-xl bg-white p-10 min-h-[200px] flex flex-col items-center justify-start text-center shadow-none hover:shadow-[0_8px_20px_rgba(17,24,39,0.08)] hover:border-[#2563EB]/30 transition-[box-shadow,border-color] duration-200 ease-out"
+                className="group border border-[#E5E7EB] rounded-xl bg-white pt-6 pb-6 px-8 min-h-[170px] flex flex-col items-center justify-start text-center shadow-none hover:shadow-xl hover:shadow-blue-500/5 hover:border-[#2563EB]/30 transition-[box-shadow,border-color] duration-300 ease-out"
+                variants={cardVariants(i)}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false, amount: 0.3 }}
+                whileHover={shouldReduceMotion ? undefined : { y: -4, transition: { duration: 0.3 } }}
               >
-                <div className="w-14 h-14 mx-auto rounded-lg bg-[#EFF6FF] flex items-center justify-center transition-colors duration-200 ease-out group-hover:bg-[#2563EB]">
-                  <Icon size={24} className="text-[#2563EB] transition-colors duration-200 ease-out group-hover:text-white" />
+                <div className="w-14 h-14 mx-auto rounded-lg bg-[#EFF6FF] flex items-center justify-center">
+                  <Icon size={24} className="text-[#2563EB]" />
                 </div>
-                <p className="text-[13px] font-bold text-[#2563EB] mt-3 whitespace-pre-line">{step.step}</p>
-                <p className="text-[19px] font-bold text-[#111827] mt-1 whitespace-pre-line">{step.title}</p>
+                <p className="text-[13px] font-bold text-[#2563EB] mt-3">{step.step}</p>
+                <p className="text-[19px] font-bold text-[#111827] mt-1 leading-[1.4] min-h-[40px]">
+                  <BreakOnDesktop text={step.title} />
+                </p>
+                <p className="text-[15px] text-[#6B7280] mt-1 leading-[1.6]">
+                  <BreakOnDesktop text={step.body} />
+                </p>
               </motion.div>
             );
           })}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
