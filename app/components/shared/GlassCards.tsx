@@ -19,30 +19,30 @@ export default function GlassCard({ children, className = "" }: GlassCardProps) 
     rest: {
       y: 0,
       scale: 1,
-      boxShadow: "0 24px 60px -12px rgba(10,30,90,0.35), 0 4px 12px rgba(10,30,90,0.15)",
+      boxShadow: "0 24px 60px -16px rgba(10,30,90,0.3), 0 4px 12px rgba(10,30,90,0.12)",
     },
     hover: {
       y: -10,
       scale: 1.015,
-      boxShadow: "0 36px 80px -12px rgba(10,30,90,0.45), 0 8px 20px rgba(10,30,90,0.2)",
+      boxShadow: "0 32px 76px -16px rgba(10,30,90,0.38), 0 8px 20px rgba(10,30,90,0.16)",
     },
   }}
   transition={{ type: "spring", stiffness: 300, damping: 24 }}
 >
-      {/* 1. 블러만 — 채도는 살짝만, 뒷배경 색이 그대로 비쳐야 함 */}
+      {/* 1. 블러만 — 채도는 살짝만, 뒷배경이 투명하게 비쳐야 함 */}
       <div
         className="absolute inset-0 rounded-[24px]"
         style={{
-          backdropFilter: "blur(18px) saturate(140%)",
-          WebkitBackdropFilter: "blur(18px) saturate(140%)",
+          backdropFilter: "blur(16px) saturate(150%)",
+          WebkitBackdropFilter: "blur(16px) saturate(150%)",
         }}
       />
 
-      {/* 2. 채움은 아주 옅게 (거의 없다시피) */}
+      {/* 2. 채움은 아주 옅게 — 뒷배경이 투명하게 비쳐야 함 */}
       <div
         className="absolute inset-0 rounded-[24px] pointer-events-none"
         style={{
-          background: "linear-gradient(160deg, rgba(61,90,254,0.22), rgba(143,166,255,0.06))",
+          background: "linear-gradient(165deg, rgba(255,255,255,0.14) 0%, rgba(61,90,254,0.08) 100%)",
         }}
       />
 
@@ -52,12 +52,12 @@ export default function GlassCard({ children, className = "" }: GlassCardProps) 
         style={{
           background:
             "linear-gradient(transparent, transparent) padding-box, " +
-            "linear-gradient(160deg, rgba(255,255,255,0.95), rgba(255,255,255,0.15) 45%, rgba(255,255,255,0.05)) border-box",
+            "linear-gradient(160deg, rgba(255,255,255,1), rgba(255,255,255,0.25) 40%, rgba(255,255,255,0.05)) border-box",
           border: "1px solid transparent",
         }}
       />
 
-      {/* 4. 실제 유리 단면감을 주는 인셋 라인 — 상단 밝게, 하단 살짝 그림자 */}
+      {/* 4. 실제 유리 단면감을 주는 인셋 라인 — 상단 하이라이트 + 하단 깊은 그림자 */}
       <motion.div
     className="absolute inset-0 rounded-[24px] pointer-events-none"
     variants={{

@@ -62,7 +62,7 @@ export default function Hero() {
   return (
     <section
       className="sticky top-0 z-0 flex min-h-screen items-center justify-center overflow-hidden py-20 px-6 sm:px-10 lg:px-16"
-      style={{ background: "linear-gradient(135deg, #E8EDF8 0%, #D6E0F5 100%)" }}
+      style={{ background: "linear-gradient(135deg, #F2FBFF 0%, #E3F4FD 50%, #D2E9F7 100%)" }}
     >
       <div className="w-full text-center">
         <motion.h1
