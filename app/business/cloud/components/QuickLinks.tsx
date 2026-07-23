@@ -1,16 +1,21 @@
 "use client";
 
-import { ClipboardCheck, RefreshCw, ShieldCheck } from "lucide-react";
+import { ClipboardCheck, RefreshCw, ShieldCheck, ChevronDown } from "lucide-react";
+import { motion } from "framer-motion";
 import { quickLinks } from "../data";
 import Container from "@/app/components/Container";
+import BreakOnDesktop from "./BreakOnDesktop";
 
 const ICONS = [ClipboardCheck, RefreshCw, ShieldCheck];
 
 export default function QuickLinks() {
   return (
-    <section className="bg-white py-[80px] relative">
+    <section
+      className="pt-[80px] pb-[130px] relative"
+      style={{ background: "linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 50%, #BFDBFE 100%)" }}
+    >
       <Container>
-        <div className="pl-20 pr-20">
+        <div className="pl-6 pr-6 md:pl-20 md:pr-20">
           <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
           <h2
             className="font-extrabold font-suit text-[#0e1b52]"
@@ -41,13 +46,23 @@ export default function QuickLinks() {
                 <span className="inline-block text-[11px] font-bold text-[#2563EB] bg-[rgba(37,99,235,0.08)] px-2 py-0.5 rounded-full">
                   {item.badge}
                 </span>
-                <p className="text-[16px] font-bold text-[#0D1B40] mt-3 mb-2 whitespace-pre-line">{item.title}</p>
-                <p className="text-[13px] text-[#8891A5] leading-[1.6] whitespace-pre-line">{item.body}</p>
+                <p className="text-[16px] font-bold text-[#0D1B40] mt-3 mb-2">{item.title}</p>
+                <p className="text-[13px] text-[#8891A5] leading-[1.6]">
+                  <BreakOnDesktop text={item.body} />
+                </p>
               </div>
             );
           })}
         </div>
       </div>
+
+      <motion.div
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-[#2563EB]"
+        animate={{ y: [0, 6, 0] }}
+        transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <ChevronDown size={28} strokeWidth={2} />
+      </motion.div>
 
       <style>{`
         .quick-links-grid {

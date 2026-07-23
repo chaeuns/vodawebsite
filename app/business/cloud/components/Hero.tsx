@@ -32,10 +32,10 @@ export default function Hero() {
                 사업 영역
                 <ChevronRight className="w-[13px] h-[13px] md:w-[15px] md:h-[15px]" strokeWidth={2.5} />
               </span>{" "}
-              클라우드
+              <span className="align-middle">클라우드</span>
             </p>
 
-            <h1 className="hero-fade-2 font-bold mt-4 leading-[1.3] text-[18px] sm:text-[22px] md:text-[29px] lg:text-[43px] whitespace-normal md:whitespace-nowrap break-keep">
+            <h1 className="hero-fade-2 font-bold mt-4 leading-[1.3] text-[1.7rem] sm:text-[22px] md:text-[29px] lg:text-[43px] whitespace-normal md:whitespace-nowrap break-keep">
               <span className="text-[#00163A]">
                 비즈니스의 기반을 견고하게 설계합니다
               </span>
