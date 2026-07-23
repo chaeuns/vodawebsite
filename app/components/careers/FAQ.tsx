@@ -10,13 +10,13 @@ export default function FAQ() {
 
   return (
     <section
-      className="py-[80px] relative z-30 -mt-10"
+      className="py-[80px] relative z-30 mt-16"
       style={{
         background: "linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 50%, #BFDBFE 100%)",
       }}
     >
       <Container>
-        <div className="pl-20 pr-20">
+        <div className="pl-6 pr-6 md:pl-20 md:pr-20">
           <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
           <h2
             className="font-extrabold font-suit text-[#0e1b52]"
@@ -34,7 +34,7 @@ export default function FAQ() {
             >
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                className="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-[#F9FAFB] transition-colors"
+                className="cursor-pointer w-full flex items-center justify-between px-6 py-5 text-left hover:bg-[#F9FAFB] transition-colors"
               >
                 <span className="text-[15px] font-semibold text-[#111827]">
                   {faq.q}

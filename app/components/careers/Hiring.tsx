@@ -99,7 +99,7 @@ export default function Hiring() {
           }}
         >
           <Container>
-            <div className="pl-20 pr-20">
+            <div className="pl-6 pr-6 md:pl-20 md:pr-20">
               <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
               <h2
                 className="font-extrabold font-suit text-[#0e1b52]"
@@ -112,13 +112,13 @@ export default function Hiring() {
               </p>
             </div>
 
-            <div className="pl-20 pr-20 grid grid-cols-[220px_1fr] gap-8 mt-8 max-[720px]:grid-cols-1 max-[720px]:gap-4">
+            <div className="pl-6 pr-6 md:pl-20 md:pr-20 grid grid-cols-[220px_1fr] gap-8 mt-8 max-[720px]:grid-cols-1 max-[720px]:gap-4">
               <div className="self-start flex flex-col gap-1 max-[720px]:static max-[720px]:flex-row max-[720px]:overflow-x-auto max-[720px]:gap-2 max-[720px]:pb-1">
                 {teams.map((team) => (
                   <button
                     key={team}
                     onClick={() => goTo(team)}
-                    className={`text-left px-4 py-3 rounded-md text-[14px] font-medium transition-colors border-l-[3px] whitespace-nowrap max-[720px]:rounded-full max-[720px]:border-l-0 max-[720px]:border ${
+                    className={`cursor-pointer text-left px-4 py-3 rounded-md text-[14px] font-medium transition-colors border-l-[3px] whitespace-nowrap max-[720px]:rounded-full max-[720px]:border-l-0 max-[720px]:border ${
                       activeTeam === team
                         ? "bg-[#EEF3FE] border-l-[#2563EB] text-[#111827] max-[720px]:border-[#2563EB]"
                         : "border-l-transparent text-[#6B7280] hover:bg-[#F9FAFB] max-[720px]:border-[#E5E7EB]"

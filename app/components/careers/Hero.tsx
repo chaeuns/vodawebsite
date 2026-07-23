@@ -32,7 +32,7 @@ export default function Hero() {
               채용
             </p>
 
-            <h1 className="hero-fade-2 font-bold mt-4 leading-[1.3] text-[18px] sm:text-[22px] md:text-[29px] lg:text-[43px] whitespace-normal md:whitespace-nowrap break-keep">
+            <h1 className="hero-fade-2 font-bold mt-4 leading-[1.3] text-[1.7rem] sm:text-[22px] md:text-[29px] lg:text-[43px] whitespace-normal md:whitespace-nowrap break-keep">
               <span className="text-[#00163A]">
                 기술로 배움의 한계를 넘어서는 여정, 당신을 기다립니다
               </span>

@@ -94,7 +94,7 @@ const values: Value[] = [
   {
     word: "GROWTH",
     title: "학습과 성장",
-    body: "지속적인 학습을 장려하고 개인의 성장을\n위해 회사가 함께합니다. 교육비 지원,\n컨퍼런스 참여와 사내 스터디 운영 등을\n통해 배우고 발전할 기회를 제공합니다.",
+    body: "지속적인 학습과 성장을 위해 회사가 \n함께합니다. 교육비 지원, 컨퍼런스 참여,\n사내 스터디 등 다양한 기회를 제공합니다.",
     align: "right",
     wordAlign: "center",
     badgeSide: "right",
@@ -115,7 +115,7 @@ function ValueBadge({ v }: { v: Value }) {
   if (v.word === "INNOVATION") {
     return (
       <div
-        className="absolute z-[2] flex h-24 w-24 items-center justify-center rounded-full"
+        className="absolute z-[2] hidden md:flex h-24 w-24 items-center justify-center rounded-full"
         style={{ ...BADGE_STYLE, ...sideStyle }}
       >
         <span
@@ -133,7 +133,7 @@ function ValueBadge({ v }: { v: Value }) {
 
   if (v.word === "TOGETHER") {
     return (
-      <div className="absolute z-[2] h-24 w-24 rounded-full" style={{ ...BADGE_STYLE, ...sideStyle }}>
+      <div className="absolute z-[2] hidden md:block h-24 w-24 rounded-full" style={{ ...BADGE_STYLE, ...sideStyle }}>
         <span className="absolute inset-0 flex items-center justify-center">
           <User className="h-9 w-9 text-[#2563EB]" style={{ animation: "ov-userSolo 3s ease-in-out infinite" }} />
         </span>
@@ -145,7 +145,7 @@ function ValueBadge({ v }: { v: Value }) {
   }
 
   return (
-    <div className="absolute z-[2] h-24 w-24 rounded-full" style={{ ...BADGE_STYLE, ...sideStyle }}>
+    <div className="absolute z-[2] hidden md:block h-24 w-24 rounded-full" style={{ ...BADGE_STYLE, ...sideStyle }}>
       <span
         className="absolute rounded-full"
         style={{ left: 30, top: 51, width: 9, height: 9, background: "#2563EB", animation: "ov-startDot 3s ease-in-out infinite" }}
@@ -215,18 +215,8 @@ function ValueBlock({ v }: { v: Value }) {
       }}
     >
       <div className="relative max-w-[352px] w-full">
-        <span
-          aria-hidden="true"
-          style={{ letterSpacing: "2px", color: "rgba(37,99,235,0.16)" }}
-          className={`pointer-events-none select-none absolute top-0 whitespace-nowrap text-[44px] font-black uppercase leading-none max-[780px]:hidden ${
-            v.wordAlign === "center" ? "left-1/2 -translate-x-1/2" : "left-0"
-          }`}
-        >
-          {v.word}
-        </span>
-
         <div
-          className="relative mt-[60px] flex flex-col items-center text-center p-[35px] max-[780px]:mt-0"
+          className="relative flex flex-col items-center text-center p-[35px]"
           style={{
             background: "rgba(255,255,255,0.62)",
             backdropFilter: "blur(14px)",
@@ -238,7 +228,7 @@ function ValueBlock({ v }: { v: Value }) {
         >
           <ValueBadge v={v} />
 
-          <p className="text-[31px] font-extrabold text-[#0D1B40]">{v.title}</p>
+          <p className="text-[22px] md:text-[31px] font-extrabold text-[#0D1B40]">{v.title}</p>
           <p className="text-[16.5px] text-[#6B7280] mt-[13px] leading-[1.7] whitespace-pre-line">{v.body}</p>
         </div>
       </div>
@@ -282,7 +272,7 @@ export default function OurValues() {
         }}
       >
         <Container>
-        <div className="pl-20 pr-20">
+        <div className="pl-6 pr-6 md:pl-20 md:pr-20">
           <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
           <h2
             className="font-extrabold font-suit text-[#0e1b52]"
@@ -340,20 +330,19 @@ export default function OurValues() {
             />
           </svg>
 
-          <div className="relative flex flex-col gap-[244px]">
+          <div className="relative flex flex-col gap-16 md:gap-[244px]">
             {values.map((v, i) => (
               <div
                 key={v.title}
-                className={i === 0 ? "mt-6" : undefined}
-                style={
+                className={`${i === 0 ? "mt-6" : ""} ${
                   v.word === "TOGETHER"
-                    ? { transform: "translateX(-40px)" }
+                    ? "md:translate-x-[-40px]"
                     : v.word === "INNOVATION"
-                    ? { transform: "translateX(80px)" }
+                    ? "md:translate-x-[80px]"
                     : v.word === "GROWTH"
-                    ? { transform: "translate(80px, -30px)" }
-                    : undefined
-                }
+                    ? "md:translate-x-[80px] md:-translate-y-[30px]"
+                    : ""
+                }`}
               >
                 <ValueBlock v={v} />
               </div>
