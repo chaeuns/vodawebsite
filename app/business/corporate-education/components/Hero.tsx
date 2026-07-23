@@ -34,7 +34,7 @@ export default function Hero() {
                 사업 영역
                 <ChevronRight className="w-[13px] h-[13px] md:w-[15px] md:h-[15px]" strokeWidth={2.5} />
               </span>{" "}
-              기업 교육
+              <span className="align-middle">기업 교육</span>
             </p>
 
             <h1 className="hero-fade-2 font-bold mt-4 leading-[1.3] text-[18px] sm:text-[22px] md:text-[29px] lg:text-[43px] whitespace-normal md:whitespace-nowrap break-keep">
