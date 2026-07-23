@@ -45,7 +45,7 @@ const AREAS = [
     eng: "Cloud",
     desc: "안정적인 클라우드 인프라 구축과 운영 서비스를 제공합니다.",
     image: "/images/mainpage/business_area/cloud.png",
-    buttons: [{ label: "자세히 보기", href: "/services/cloud" }],
+    buttons: [{ label: "자세히 보기", href: "/business/cloud" }],
   },
   {
     id: "consulting",

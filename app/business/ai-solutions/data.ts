@@ -111,6 +111,6 @@ export const relatedSolutions: RelatedSolution[] = [
     badge: "Cloud",
     title: "클라우드 문의",
     body: "클라우드 인프라 구축, 마이그레이션,\n운영 유지보수 서비스 문의",
-    href: "/services/cloud",
+    href: "/business/cloud",
   },
 ];
