@@ -166,7 +166,7 @@ export default function BusinessAreaCards() {
         }
         .biz-card:hover .biz-card__body,
         .biz-card:focus-within .biz-card__body {
-          transform: translateY(-35px);
+          transform: translateY(-18px);
         }
         .biz-card__name {
           margin: 0;
@@ -219,7 +219,7 @@ export default function BusinessAreaCards() {
         /* 버튼 */
         .biz-card__actions {
           display: flex; flex-direction: column; align-items: stretch; gap: clamp(5px, 3cqi, 8px);
-          margin-top: clamp(20px, 12cqi, 32px);
+          margin-top: clamp(29px, calc(14cqi + 5px), 41px);
         }
         .biz-btn {
           position: relative;
@@ -248,7 +248,7 @@ export default function BusinessAreaCards() {
           .biz-card__body { transform: translateY(-25px); }
           .biz-card:hover .biz-card__body,
           .biz-card:focus-within .biz-card__body {
-            transform: translateY(-10px);
+            transform: translateY(-2px);
           }
         }
         @media (max-width: 640px) {
