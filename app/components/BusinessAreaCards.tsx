@@ -17,7 +17,7 @@ const AREAS = [
     title: "교육 사업",
     eng: "Education",
     desc: "정부·기업 대상 AI 및 디지털 역량 강화 교육 설계·운영합니다",
-    image: "/images/mainpage/business_area/education.png",
+    image: "/images/mainpage/business_area/edu.png",
     buttons: [
       { label: "정부교육", href: "/business/curriculum" },
       { label: "기업교육", href: "/business/corporate-education" },
@@ -28,7 +28,7 @@ const AREAS = [
     title: "AI 솔루션",
     eng: "AI Solution",
     desc: "VODA AI 기반의 학습·업무 솔루션을 개발하고 공급합니다.",
-    image: "/images/mainpage/business_area/ai-solution.png",
+    image: "/images/mainpage/business_area/ai-sol.png",
     buttons: [{ label: "자세히 보기", href: "/business/ai-solutions" }],
   },
   {
@@ -36,7 +36,7 @@ const AREAS = [
     title: "AI 자격인증",
     eng: "AI Certification",
     desc: "AI 실무 역량을 검증하는 자격 인증 과정을 운영합니다.",
-    image: "/images/mainpage/business_area/ai-cert.png",
+    image: "/images/mainpage/business_area/cert.png",
     buttons: [{ label: "자세히 보기", href: "/business/ai-certification" }],
   },
   {
@@ -170,9 +170,9 @@ export default function BusinessAreaCards() {
         }
         .biz-card__name {
           margin: 0;
-          font-size: clamp(20px, 13cqi, 30px); font-weight: 700;
+          font-size: clamp(20px, 13cqi, 30px); font-weight: 800;
           letter-spacing: -0.01em;
-          color: #4C5AAE;
+          color: #449CFF;
         }
         .biz-card__eng {
           margin: 0 0 4px;
@@ -197,6 +197,8 @@ export default function BusinessAreaCards() {
           font-size: clamp(11px, 6.2cqi, 14.5px); line-height: 1.6;
           font-weight: 400;
           color: var(--text-secondary);
+          word-break: keep-all;
+          overflow-wrap: break-word;
         }
         .biz-card:hover .biz-card__desc,
         .biz-card:focus-within .biz-card__desc {
@@ -205,14 +207,15 @@ export default function BusinessAreaCards() {
 
         /* 버튼 */
         .biz-card__actions {
-          display: flex; flex-direction: column; align-items: center; gap: clamp(5px, 3cqi, 8px);
-          margin-top: clamp(10px, 6cqi, 18px);
+          display: flex; flex-direction: column; align-items: stretch; gap: clamp(5px, 3cqi, 8px);
+          margin-top: clamp(20px, 12cqi, 32px);
         }
         .biz-btn {
           display: inline-flex; align-items: center; justify-content: space-between;
           gap: clamp(6px, 4cqi, 10px);
-          padding: clamp(7px, 4cqi, 11px) clamp(10px, 6cqi, 16px);
-          border-radius: 10px;
+          width: 100%;
+          padding: clamp(7px, 4cqi, 11px) clamp(14px, 8cqi, 22px);
+          border-radius: 999px;
           background: var(--blue);
           color: #FFFFFF;
           font-size: clamp(11px, 5.5cqi, 14px); font-weight: 600;

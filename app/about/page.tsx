@@ -26,12 +26,12 @@ export default function AboutPage() {
               letterSpacing: "-0.025em",
             }}
           >
-            "기술과 사람이 함께 성장하는 곳, VODA."
+            "기술과 사람이 함께 성장하는 곳, <span style={{ color: BLUE }}>VODA</span>"
           </h2>
 
           <div className="space-y-1 text-gray-600 leading-relaxed text-base md:text-lg">
             <p className="md:whitespace-nowrap">
-              안녕하세요, VODA 대표 OOO입니다. 우리는 데이터와 AI로 기업의 새로운 가능성을 만들어왔습니다.
+              우리는 데이터와 AI로 기업의 새로운 가능성을 만들어왔습니다.
             </p>
             <p className="md:whitespace-nowrap">
               이제 개발(Works)과 교육(Campus)을 하나로 잇는 VODA로, 기술과 사람을 함께 성장시키는 파트너가 되겠습니다.

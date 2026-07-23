@@ -3,9 +3,11 @@
 // 구조: 첨부 와이어프레임(사업영역 상세) 참고
 // 컬러: VODA Campus 히어로 팔레트(네이비 + 블루) 기반 + 섹션별 의미에 맞춘 컬러 코딩
 
+import Image from "next/image";
 import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 import type { CSSProperties } from "react";
-import FillHeading from "@/app/components/shared/FillHeading";
+import Container from "@/app/components/Container";
 
 const track = [
   {
@@ -308,225 +310,230 @@ const getStarted = [
 
 export default function AICertificationPage() {
   return (
-    <main className="bg-white">
+    <main className="break-keep bg-white">
       {/* Hero */}
-      <section className="relative flex min-h-[420px] items-center overflow-hidden bg-[#0B1130] px-6 py-40 sm:px-10 lg:px-24">
-        <div
-          className="pointer-events-none absolute inset-0 opacity-40"
-          style={{
-            background:
-              "radial-gradient(60% 60% at 20% 0%, rgba(61,90,254,0.35) 0%, rgba(11,17,48,0) 60%)",
-          }}
+      <style>{`
+        @keyframes heroFadeUp {
+          from { opacity: 0; transform: translateY(16px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-fade-1 { opacity: 0; animation: heroFadeUp 0.7s ease-out 0.1s forwards; }
+        .hero-fade-2 { opacity: 0; animation: heroFadeUp 0.7s ease-out 0.3s forwards; }
+        .hero-fade-3 { opacity: 0; animation: heroFadeUp 0.7s ease-out 0.5s forwards; }
+      `}</style>
+
+      <section
+        className="relative flex items-center pt-16 overflow-hidden bg-[#0D1B40]"
+        style={{ minHeight: 420 }}
+      >
+        <Image
+          src="/images/Frame%205.jpg"
+          alt=""
+          fill
+          priority
+          className="object-cover"
         />
-        <div className="relative mx-auto max-w-5xl text-center">
-          <h1 className="text-5xl font-bold leading-tight text-white sm:text-6xl lg:text-7xl">
-            <span className="bg-gradient-to-r from-[#8FA6FF] to-white bg-clip-text text-transparent">
-              AI 역량평가
-            </span>
-          </h1>
+        <div className="relative max-w-[1100px] px-6 sm:px-10 lg:px-16 xl:px-20 2xl:px-24 py-6 md:py-8">
+          <div className="-translate-y-5">
+            <p
+              className="hero-fade-1 text-[#0064DB] text-[13px] md:text-[15px] font-medium"
+            >
+              <span className="text-[#00163A]">사업 영역 &gt;</span> AI 자격인증
+            </p>
+
+            <h1 className="hero-fade-2 font-bold mt-4 leading-[1.3] text-[18px] sm:text-[22px] md:text-[29px] lg:text-[43px] whitespace-normal md:whitespace-nowrap break-keep">
+              <span className="text-[#00163A]">
+                데이터로 증명하는 AI 역량
+              </span>
+            </h1>
+          </div>
+
+          <p className="hero-fade-3 text-[#486C98] mt-4 leading-[1.6] text-[13px] md:text-[15px] max-w-[90%] md:max-w-[520px]">
+            시나리오 기반 평가로 AI 활용 역량을 객관적으로 진단하고 인증합니다.
+            <br />
+            개인과 조직의 성장을 데이터로 추적하며 신뢰할 수 있는 기준을 제시합니다.
+          </p>
         </div>
       </section>
 
-      {/* Breadcrumb */}
-      <div className="mx-auto max-w-5xl px-6 py-6 text-sm text-gray-400 sm:px-10 lg:px-24">
-        사업영역 <span className="mx-1">›</span>{" "}
-        <span className="font-medium text-[#0F1B4C]">AI 자격인증</span>
-      </div>
-
       {/* 인증 체계 */}
-      <section className="mx-auto max-w-5xl px-6 py-10 sm:px-10 lg:px-24">
-        <p className="text-xs font-semibold tracking-widest text-[#3D5AFE]">
-          CERTIFICATION SYSTEM
-        </p>
-        <FillHeading className="mt-2 text-2xl font-bold sm:text-3xl">
-          인증 체계
-        </FillHeading>
-        <p className="mt-3 max-w-2xl text-sm text-gray-500">
-          일률적인 평가 기준에서 벗어나 조직의 비즈니스 목적과 직무 특성에 최적화된
-          평가 방식을 제안합니다.
-        </p>
-
-        <div className="mt-8 grid overflow-hidden rounded-2xl border border-[#E4E9F7] shadow-sm sm:grid-cols-2">
-          <div className="relative flex min-h-[220px] items-center justify-center overflow-hidden bg-[#0B1130] p-8">
-            <div
-              className="pointer-events-none absolute inset-0"
-              style={{
-                background:
-                  "radial-gradient(55% 55% at 15% 15%, rgba(61,90,254,0.45) 0%, rgba(11,17,48,0) 65%), radial-gradient(50% 50% at 90% 85%, rgba(123,63,228,0.35) 0%, rgba(11,17,48,0) 65%)",
-              }}
-              aria-hidden
-            />
-            <div
-              className="relative z-10 flex h-28 w-28 items-center justify-center rounded-full text-[#8FA6FF]"
-              style={{
-                background:
-                  "radial-gradient(closest-side, rgba(61,90,254,0.25), rgba(61,90,254,0.05))",
-                border: "1px solid rgba(143,166,255,0.4)",
-                boxShadow: "0 0 40px rgba(61,90,254,0.35)",
-              }}
+      <section className="pt-24 pb-10">
+        <Container>
+          <div className="pl-20 pr-20">
+            <span className="mb-3 block h-1 w-9 rounded-full bg-[#3566e8]" />
+            <h2
+              className="font-extrabold font-suit text-[#0e1b52]"
+              style={{ fontSize: "clamp(1.7rem,3.2vw,2.8rem)", letterSpacing: "-0.03em" }}
             >
-              <svg viewBox="0 0 24 24" fill="none" className="h-14 w-14">
-                <path
-                  d="M12 2.5L19.5 9L16.5 20.5H7.5L4.5 9L12 2.5Z"
-                  stroke="currentColor"
-                  strokeWidth="1.4"
-                  strokeLinejoin="round"
+              인증 체계
+            </h2>
+            <p className="mt-3 max-w-2xl text-sm text-gray-500">
+              일률적인 평가 기준에서 벗어나 조직의 비즈니스 목적과 직무 특성에 최적화된
+              평가 방식을 제안합니다.
+            </p>
+
+            <div className="mt-8 grid overflow-hidden rounded-2xl border border-[#E4E9F7] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-500/5 sm:grid-cols-2">
+              <div className="relative min-h-[320px] overflow-hidden bg-[#0B1130]">
+                <Image
+                  src="/images/ai-certification/aI-certification.png"
+                  alt="AI 역량 평가 시스템"
+                  fill
+                  className="object-cover"
+                  style={{ objectPosition: "50% -40px" }}
                 />
-                <path
-                  d="M12 12L12 2.5M12 12L19.5 9M12 12L16.5 20.5M12 12L7.5 20.5M12 12L4.5 9"
-                  stroke="currentColor"
-                  strokeWidth="1"
-                  strokeLinecap="round"
-                  opacity="0.55"
-                />
-                <circle cx="12" cy="12" r="1.8" fill="currentColor" />
-              </svg>
+              </div>
+              <div className="flex flex-col justify-center p-10">
+                <p className="text-xs font-semibold tracking-widest text-[#3D5AFE]">
+                  AI CERTIFICATION
+                </p>
+                <h3 className="mt-2 text-xl font-bold text-[#0F1B4C]">
+                  조직에 최적화된
+                  <br />
+                  AI 역량 평가 시스템
+                </h3>
+                <p className="mt-4 text-sm leading-relaxed text-gray-500">
+                  실전 중심의 성과 측정이 필요한 현장부터 전사적 역량 진단이 필요한 의사
+                  결정 단계까지, 귀사의 상황에 가장 전략적인 트랙을 선택하여 AI 전환의
+                  객관적인 기준을 세울 수 있습니다.
+                </p>
+              </div>
             </div>
-            <p className="pointer-events-none absolute bottom-6 left-0 right-0 z-10 text-center text-xs font-semibold tracking-widest text-white/50">
-              AI CERTIFICATION SYSTEM
-            </p>
           </div>
-          <div className="p-8">
-            <p className="text-xs font-semibold tracking-widest text-[#3D5AFE]">
-              AI CERTIFICATION
-            </p>
-            <h3 className="mt-2 text-xl font-bold text-[#0F1B4C]">
-              조직에 최적화된
-              <br />
-              AI 역량 평가 시스템
-            </h3>
-            <p className="mt-4 text-sm leading-relaxed text-gray-500">
-              실전 중심의 성과 측정이 필요한 현장부터 전사적 역량 진단이 필요한 의사
-              결정 단계까지, 귀사의 상황에 가장 전략적인 트랙을 선택하여 AI 전환의
-              객관적인 기준을 세울 수 있습니다.
-            </p>
-          </div>
-        </div>
+        </Container>
       </section>
 
       {/* 두 가지 인증 트랙 */}
-      <section className="mx-auto max-w-5xl px-6 py-10 sm:px-10 lg:px-24">
-        <p className="text-xs font-semibold tracking-widest text-[#3D5AFE]">
-          CERTIFICATION TRACK
-        </p>
-        <FillHeading className="mt-2 text-2xl font-bold sm:text-3xl">
-          두 가지 인증 트랙
-        </FillHeading>
-        <p className="mt-3 text-sm text-gray-500">조직의 목적에 맞는 최적의 평가 방식을 선택하세요.</p>
-
-        <div className="mt-8 grid gap-6 sm:grid-cols-2">
-          {track.map((t) => (
-            <div
-              key={t.title}
-              className="group relative overflow-hidden rounded-2xl border border-[#E4E9F7] bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
-              style={{ boxShadow: `0 18px 36px -24px ${t.glow}` }}
+      <section className="py-10">
+        <Container>
+          <div className="pl-20 pr-20">
+            <span className="mb-3 block h-1 w-9 rounded-full bg-[#3566e8]" />
+            <h2
+              className="font-extrabold font-suit text-[#0e1b52]"
+              style={{ fontSize: "clamp(1.7rem,3.2vw,2.8rem)", letterSpacing: "-0.03em" }}
             >
-              <div
-                className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full opacity-25 blur-2xl transition group-hover:opacity-40"
-                style={{ background: t.hex }}
-                aria-hidden
-              />
-              <div
-                className="relative z-10 flex h-11 w-11 items-center justify-center rounded-xl text-white"
-                style={{
-                  background: `linear-gradient(135deg, ${t.hex}, rgba(${t.rgb},0.7))`,
-                  boxShadow: `0 10px 20px -8px ${t.glow}`,
-                }}
-              >
-                {t.icon}
-              </div>
-              <p className="relative z-10 mt-4 text-xs font-semibold tracking-widest" style={{ color: t.hex }}>
-                {t.eyebrow}
-              </p>
-              <h3 className="relative z-10 mt-2 text-lg font-bold text-[#0F1B4C]">{t.title}</h3>
-              <p className="relative z-10 mt-3 text-sm leading-relaxed text-gray-500">{t.desc}</p>
-              <div className="relative z-10 mt-5 flex flex-wrap gap-2">
-                {t.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full px-3 py-1 text-xs font-medium"
-                    style={{ background: `rgba(${t.rgb},0.1)`, color: t.hex }}
+              두 가지 인증 트랙
+            </h2>
+            <p className="mt-3 text-sm text-gray-500">조직의 목적에 맞는 최적의 평가 방식을 선택하세요.</p>
+
+            <div className="mt-8 grid gap-6 sm:grid-cols-2">
+              {track.map((t) => (
+                <div
+                  key={t.title}
+                  className="group relative min-h-[320px] overflow-hidden rounded-2xl border border-[#E4E9F7] bg-white p-10 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-500/5"
+                >
+                  <div
+                    className="relative z-10 flex h-11 w-11 items-center justify-center rounded-xl text-white"
+                    style={{
+                      background: `linear-gradient(135deg, ${t.hex}, rgba(${t.rgb},0.7))`,
+                      boxShadow: `0 10px 20px -8px ${t.glow}`,
+                    }}
                   >
-                    {tag}
-                  </span>
-                ))}
-              </div>
+                    {t.icon}
+                  </div>
+                  <p className="relative z-10 mt-4 text-xs font-semibold tracking-widest" style={{ color: t.hex }}>
+                    {t.eyebrow}
+                  </p>
+                  <h3 className="relative z-10 mt-2 text-lg font-bold text-[#0F1B4C]">{t.title}</h3>
+                  <p className="relative z-10 mt-3 text-sm leading-relaxed text-gray-500">{t.desc}</p>
+                  <div className="relative z-10 mt-5 flex flex-wrap gap-2">
+                    {t.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full px-3 py-1 text-xs font-medium"
+                        style={{ background: `rgba(${t.rgb},0.1)`, color: t.hex }}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
+        </Container>
       </section>
 
       {/* 5대 핵심 영역 */}
-      <section className="mx-auto max-w-5xl px-6 py-10 sm:px-10 lg:px-24">
-        <p className="text-xs font-semibold tracking-widest text-[#3D5AFE]">5 CORE AREAS</p>
-
-        <FillHeading className="mt-2 text-2xl font-bold sm:text-3xl">
-          AI 활용 5대 핵심 영역
-        </FillHeading>
-        <p className="mt-3 text-sm text-gray-500">AI 역량의 5가지 핵심 영역을 체계적으로 진단합니다.</p>
-
-        <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-          {coreAreas.map((a) => (
-            <div
-              key={a.no}
-              className="group relative overflow-hidden rounded-xl border border-[#E4E9F7] p-5 text-center transition hover:-translate-y-1"
-              style={{ boxShadow: `0 14px 28px -20px rgba(${a.rgb},0.5)` }}
+      <section className="py-10">
+        <Container>
+          <div className="pl-20 pr-20">
+            <span className="mb-3 block h-1 w-9 rounded-full bg-[#3566e8]" />
+            <h2
+              className="font-extrabold font-suit text-[#0e1b52]"
+              style={{ fontSize: "clamp(1.7rem,3.2vw,2.8rem)", letterSpacing: "-0.03em" }}
             >
-              <div
-                className="pointer-events-none absolute inset-x-0 top-0 h-1"
-                style={{ background: a.hex }}
-                aria-hidden
-              />
-              <div
-                className="mx-auto flex h-10 w-10 items-center justify-center rounded-full"
-                style={{ background: `rgba(${a.rgb},0.12)`, color: a.hex }}
-              >
-                {a.icon}
-              </div>
-              <p className="mt-3 text-xs font-semibold" style={{ color: a.hex }}>
-                {a.no}
-              </p>
-              <p className="mt-1 text-sm font-bold text-[#0F1B4C]">{a.title}</p>
-              <p className="mt-2 text-xs leading-relaxed text-gray-400">{a.desc}</p>
+              AI 활용 5대 핵심 영역
+            </h2>
+            <p className="mt-3 text-sm text-gray-500">AI 역량의 5가지 핵심 영역을 체계적으로 진단합니다.</p>
+
+            <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+              {coreAreas.map((a) => (
+                <div
+                  key={a.no}
+                  className="group relative flex min-h-[220px] flex-col items-center justify-center overflow-hidden rounded-xl border border-[#E4E9F7] p-7 text-center transition hover:-translate-y-1"
+                  style={{ boxShadow: `0 14px 28px -20px rgba(${a.rgb},0.5)` }}
+                >
+                  <div
+                    className="pointer-events-none absolute inset-x-0 top-0 h-1"
+                    style={{ background: a.hex }}
+                    aria-hidden
+                  />
+                  <div
+                    className="mx-auto flex h-10 w-10 items-center justify-center rounded-full"
+                    style={{ background: `rgba(${a.rgb},0.12)`, color: a.hex }}
+                  >
+                    {a.icon}
+                  </div>
+                  <p className="mt-3 text-xs font-semibold" style={{ color: a.hex }}>
+                    {a.no}
+                  </p>
+                  <p className="mt-1 text-sm font-bold text-[#0F1B4C]">{a.title}</p>
+                  <p className="mt-2 text-xs leading-relaxed text-gray-400">{a.desc}</p>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
+        </Container>
       </section>
 
       {/* 비즈니스 가치 */}
-      <section className="bg-[#F7F9FC] px-6 py-16 sm:px-10 lg:px-24">
-        <div className="mx-auto max-w-5xl">
-          <p className="text-xs font-semibold tracking-widest text-[#3D5AFE]">BUSINESS VALUE</p>
-          <FillHeading className="mt-2 text-2xl font-bold sm:text-3xl">
-            인증이 만드는 비즈니스 가치
-          </FillHeading>
+      <section className="bg-[#F7F9FC] py-16">
+        <Container>
+          <div className="pl-20 pr-20">
+            <span className="mb-3 block h-1 w-9 rounded-full bg-[#3566e8]" />
+            <h2
+              className="font-extrabold font-suit text-[#0e1b52]"
+              style={{ fontSize: "clamp(1.7rem,3.2vw,2.8rem)", letterSpacing: "-0.03em" }}
+            >
+              인증이 만드는 비즈니스 가치
+            </h2>
 
-          <div className="mt-8 grid gap-6 sm:grid-cols-3">
-            {values.map((v) => (
-              <div
-                key={v.title}
-                className="rounded-2xl bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
-                style={{ boxShadow: `0 16px 32px -22px rgba(${v.rgb},0.45)` }}
-              >
+            <div className="mt-8 grid gap-6 sm:grid-cols-3">
+              {values.map((v) => (
                 <div
-                  className="flex h-10 w-10 items-center justify-center rounded-xl"
-                  style={{ background: `rgba(${v.rgb},0.1)`, color: v.hex }}
+                  key={v.title}
+                  className="min-h-[300px] rounded-2xl bg-white p-10 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-500/5"
                 >
-                  {v.icon}
+                  <div
+                    className="flex h-10 w-10 items-center justify-center rounded-xl"
+                    style={{ background: `rgba(${v.rgb},0.1)`, color: v.hex }}
+                  >
+                    {v.icon}
+                  </div>
+                  <p className="mt-4 text-xs font-semibold tracking-widest" style={{ color: v.hex }}>
+                    {v.label}
+                  </p>
+                  <h3 className="mt-2 text-lg font-bold text-[#0F1B4C]">{v.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-gray-500">{v.desc}</p>
                 </div>
-                <p className="mt-4 text-xs font-semibold tracking-widest" style={{ color: v.hex }}>
-                  {v.label}
-                </p>
-                <h3 className="mt-2 text-lg font-bold text-[#0F1B4C]">{v.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-gray-500">{v.desc}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* 인증 프로세스 */}
-      <section className="relative overflow-hidden bg-[#080C24] px-6 py-16 sm:px-10 lg:px-24">
+      <section className="relative overflow-hidden bg-[#080C24] py-16">
         <div
           className="pointer-events-none absolute inset-0 opacity-50"
           style={{
@@ -535,80 +542,92 @@ export default function AICertificationPage() {
           }}
           aria-hidden
         />
-        <div className="relative mx-auto max-w-5xl">
-          <p className="text-xs font-semibold tracking-widest text-[#8FA6FF]">PROCESS</p>
-          <h2 className="mt-2 text-2xl font-bold text-white sm:text-3xl">인증 프로세스</h2>
+        <Container className="relative">
+          <div className="pl-20 pr-20">
+            <span className="mb-3 block h-1 w-9 rounded-full bg-[#3566e8]" />
+            <h2
+              className="font-extrabold font-suit text-white"
+              style={{ fontSize: "clamp(1.7rem,3.2vw,2.8rem)", letterSpacing: "-0.03em" }}
+            >
+              인증 프로세스
+            </h2>
 
-          <div className="relative mt-10 grid gap-6 sm:grid-cols-4">
-            <div className="pointer-events-none absolute left-0 right-0 top-9 hidden h-px bg-linear-to-r from-transparent via-[#3D5AFE]/50 to-transparent sm:block" />
-            {process.map((p, i) => (
-              <div key={p.step} className="group relative text-center">
-                <div
-                  className="relative mx-auto flex h-14 w-14 items-center justify-center rounded-2xl text-white transition-transform duration-300 group-hover:-translate-y-1"
-                  style={{
-                    background: `linear-gradient(135deg, ${p.from}, ${p.to})`,
-                    boxShadow: `0 12px 26px -10px ${p.from}99`,
-                  }}
-                >
-                  {p.icon}
-                </div>
-                <p className="mt-4 text-xs font-semibold tracking-widest" style={{ color: p.to }}>
-                  {p.step}
-                </p>
-                <p className="mt-2 text-base font-bold text-white">{p.title}</p>
-                <p className="mt-1.5 text-xs leading-relaxed text-white/50">{p.desc}</p>
-
-                {i < process.length - 1 && (
-                  <span
-                    className="absolute -right-5.5 top-7 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-[#0B1130] text-sm text-[#8FA6FF] sm:flex"
-                    aria-hidden
+            <div className="relative mt-10 grid gap-6 sm:grid-cols-4">
+              {process.map((p, i) => (
+                <div key={p.step} className="group relative text-center">
+                  <div
+                    className="relative mx-auto flex h-14 w-14 items-center justify-center rounded-2xl text-white transition-transform duration-300 group-hover:-translate-y-1"
+                    style={{
+                      background: `linear-gradient(135deg, ${p.from}, ${p.to})`,
+                      boxShadow: `0 12px 26px -10px ${p.from}99`,
+                    }}
                   >
-                    →
-                  </span>
-                )}
-              </div>
-            ))}
+                    {p.icon}
+                  </div>
+                  <p className="mt-4 text-xs font-semibold tracking-widest" style={{ color: p.to }}>
+                    {p.step}
+                  </p>
+                  <p className="mt-2 text-base font-bold text-white">{p.title}</p>
+                  <p className="mt-1.5 text-xs leading-relaxed text-white/50">{p.desc}</p>
+
+                  {i < process.length - 1 && (
+                    <span
+                      className="absolute top-1/2 right-[-29.5px] hidden -translate-y-1/2 items-center justify-center text-white sm:flex"
+                      aria-hidden
+                    >
+                      <ChevronRight className="h-8.75 w-8.75" />
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* Get Started */}
-      <section className="mx-auto max-w-5xl px-6 py-16 sm:px-10 lg:px-24">
-        <p className="text-xs font-semibold tracking-widest text-[#3D5AFE]">GET STARTED</p>
-        <h2 className="mt-2 text-2xl font-bold text-[#0F1B4C] sm:text-3xl">
-          우리 조직에 맞는 인증 프로그램이 궁금하신가요?
-        </h2>
-
-        <div className="mt-8 grid gap-6 sm:grid-cols-3">
-          {getStarted.map((g) => (
-            <div
-              key={g.title}
-              className="group flex flex-col items-center rounded-2xl border border-[#E4E9F7] p-7 text-center transition hover:-translate-y-1 hover:shadow-lg"
-              style={{ boxShadow: `0 16px 32px -24px rgba(${g.rgb},0.5)` }}
+      <section className="py-16">
+        <Container>
+          <div className="pl-20 pr-20">
+            <span className="mb-3 block h-1 w-9 rounded-full bg-[#3566e8]" />
+            <h2
+              className="break-keep font-extrabold font-suit text-[#0e1b52]"
+              style={{ fontSize: "clamp(1.7rem,3.2vw,2.8rem)", letterSpacing: "-0.03em" }}
             >
-              <div
-                className="flex h-11 w-11 items-center justify-center rounded-xl text-white"
-                style={{
-                  background: `linear-gradient(135deg, ${g.hex}, rgba(${g.rgb},0.7))`,
-                  boxShadow: `0 10px 20px -8px rgba(${g.rgb},0.5)`,
-                }}
-              >
-                {g.icon}
-              </div>
-              <p className="mt-4 text-xs font-semibold tracking-widest" style={{ color: g.hex }}>
-                {g.label}
-              </p>
-              <h3 className="mt-2 text-lg font-bold text-[#0F1B4C]">{g.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-gray-500">{g.desc}</p>
-              <button
-                className="mt-5 rounded-full border px-5 py-2 text-sm font-medium transition hover:text-white hover:[background-color:var(--btn-color)]"
-                style={{ borderColor: g.hex, color: g.hex, ["--btn-color" as string]: g.hex } as CSSProperties}
-              >
-                자세히 보기 →
-              </button>
+              우리 조직에 맞는 인증 프로그램이 궁금하신가요?
+            </h2>
+
+            <div className="mt-8 grid gap-6 sm:grid-cols-3">
+              {getStarted.map((g) => (
+                <div
+                  key={g.title}
+                  className="group flex min-h-[340px] flex-col items-center justify-center rounded-2xl border border-[#E4E9F7] p-10 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-500/5"
+                >
+                  <div
+                    className="flex h-11 w-11 items-center justify-center rounded-xl text-white"
+                    style={{
+                      background: `linear-gradient(135deg, ${g.hex}, rgba(${g.rgb},0.7))`,
+                      boxShadow: `0 10px 20px -8px rgba(${g.rgb},0.5)`,
+                    }}
+                  >
+                    {g.icon}
+                  </div>
+                  <p className="mt-4 text-xs font-semibold tracking-widest" style={{ color: g.hex }}>
+                    {g.label}
+                  </p>
+                  <h3 className="mt-2 text-lg font-bold text-[#0F1B4C]">{g.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-gray-500">{g.desc}</p>
+                  <button
+                    className="mt-5 rounded-full border px-5 py-2 text-sm font-medium transition hover:text-white hover:[background-color:var(--btn-color)]"
+                    style={{ borderColor: g.hex, color: g.hex, ["--btn-color" as string]: g.hex } as CSSProperties}
+                  >
+                    자세히 보기 →
+                  </button>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
+        </Container>
       </section>
 
       {/* Bottom CTA */}
