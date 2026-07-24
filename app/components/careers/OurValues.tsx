@@ -281,13 +281,15 @@ export default function OurValues() {
             우리 팀을 움직이는 가치
           </h2>
           <p className="text-[16px] text-[#6B7280] mt-5">
-            VODA는 도전과 협업, 성장을 움직이는 문화를 지향합니다.
+            VODA는 도전과 협업, 성장을 움직이는{" "}
+            <br className="md:hidden" />
+            문화를 지향합니다.
           </p>
         </div>
 
         <div ref={lineRef} className="relative mt-16 max-w-[861px] mx-auto">
           <svg
-            className="pointer-events-none absolute top-0 left-0 w-full max-[780px]:hidden"
+            className="pointer-events-none absolute top-0 left-0 w-full"
             style={{ height: "calc(100% + 100px)" }}
             viewBox="0 0 320 1240"
             preserveAspectRatio="none"

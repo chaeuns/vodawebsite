@@ -47,7 +47,35 @@ export default function FAQ() {
               </button>
               {openIndex === i && (
                 <div className="px-6 pb-5">
-                  <p className="text-[14px] text-[#6B7280] leading-[1.7] whitespace-pre-line">{faq.a}</p>
+                  <p className="text-[14px] text-[#6B7280] leading-[1.7] whitespace-pre-line">
+                    {i === 0 ? (
+                      <>
+                        채용 공고 페이지에서 이력서와 포트폴리오를{" "}
+                        <br className="md:hidden" />
+                        자유 형식으로 첨부해 온라인 지원 가능합니다.{" "}
+                        <br className="md:hidden" />
+                        경력 사항과 프로젝트 경험을 구체적으로{" "}
+                        <br className="md:hidden" />
+                        작성하면 검토에 유리합니다.
+                      </>
+                    ) : i === 2 ? (
+                      <>
+                        네, 가능합니다. 공고별로 요구 경력 수준이 다르니{" "}
+                        <br className="md:hidden" />
+                        상세 요건을 확인해 주세요. 실무 경험이 없더라도{" "}
+                        <br className="md:hidden" />
+                        관련 프로젝트나 학습 경험을 어필해 주시면 좋습니다.
+                      </>
+                    ) : i === 3 ? (
+                      <>
+                        대부분의 포지션은 상시 채용으로 운영되며, 채용이{" "}
+                        <br className="md:hidden" />
+                        마감되면 공고에서 자동으로 안내됩니다.
+                      </>
+                    ) : (
+                      faq.a
+                    )}
+                  </p>
                 </div>
               )}
             </div>
