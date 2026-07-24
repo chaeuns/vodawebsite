@@ -14,7 +14,7 @@ const tabs = [
     description: [
       "개인별 학습 수준을 정확히 분석",
       "맞춤형 학습 경로를 제공",
-      "실시간 피드백으로 학습 효율을 극대화",
+      "실시간 피드백으로 학습 효율을| 극대화",
     ],
     tags: ["개인화 분석", "실시간 피드백"],
   },
@@ -34,7 +34,7 @@ const tabs = [
     title: "몰입형 메타버스X 교육",
     image: "/images/curriculum/metaverse.png",
     description: [
-      "가상현실과 증강현실을 활용한 혁신적인 학습 환경",
+      "가상현실과 증강현실을 활용한| 혁신적인 학습 환경",
       "실제와 동일한 몰입감을 경험",
       "협업과 소통의 새로운 차원을 탐험",
     ],
@@ -45,6 +45,16 @@ const tabs = [
 const STAGE_COUNT = tabs.length;
 const MOBILE_QUERY = "(max-width: 767px)";
 const TRANSITION_MS = 260;
+
+// "|" in description strings breaks on mobile only.
+function renderBreaks(text: string, keyPrefix: string) {
+  return text.split("|").map((part, i, arr) => (
+    <span key={`${keyPrefix}-${i}`}>
+      {part}
+      {i < arr.length - 1 && <br className="md:hidden" />}
+    </span>
+  ));
+}
 
 type Phase = "visible" | "hiding" | "entering";
 
@@ -196,7 +206,7 @@ export default function LearningMethod() {
       >
         <div className="relative z-10 mb-10">
           <Container>
-            <div className="pl-20 pr-20">
+            <div className="pl-6 pr-6 md:pl-20 md:pr-20">
               <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
               <h2
                 className="font-extrabold font-suit text-[#0e1b52]"
@@ -205,7 +215,8 @@ export default function LearningMethod() {
                 SMART LEARNING JOURNEY
               </h2>
               <p className="text-[15px] text-[#5a6895] mt-3">
-                AI 맞춤학습부터 실전 프로젝트, 몰입형 메타버스까지
+                AI 맞춤학습부터 실전 프로젝트, <br className="md:hidden" />
+                몰입형 메타버스까지
               </p>
             </div>
           </Container>
@@ -213,7 +224,7 @@ export default function LearningMethod() {
 
         <div className="relative z-10 w-full">
           <Container>
-            <div className="pl-20 pr-20">
+            <div className="pl-6 pr-6 md:pl-20 md:pr-20">
           <div style={contentStyle} className="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-8 mt-10 items-stretch">
             <div className="relative w-full">
               <div
@@ -266,13 +277,13 @@ export default function LearningMethod() {
               </div>
             </div>
 
-            <div className="w-fit ml-auto flex flex-col justify-center rounded-2xl border border-white/50 bg-white/25 backdrop-blur-xl shadow-[0_8px_32px_rgba(31,41,55,0.12)] p-8">
-              <div className="inline-flex items-center gap-1 bg-[#F3F4F6] rounded-full p-1">
+            <div className="w-full md:w-fit md:ml-auto flex flex-col justify-center rounded-2xl border border-white/50 bg-white/25 backdrop-blur-xl shadow-[0_8px_32px_rgba(31,41,55,0.12)] p-8">
+              <div className="flex md:inline-flex items-center gap-1 bg-[#F3F4F6] rounded-full p-1 max-w-full md:max-w-none overflow-x-auto md:overflow-visible scrollbar-thin">
                 {tabs.map((tab, i) => (
                   <button
                     key={tab.label}
                     onClick={() => handleTabClick(i)}
-                    className={`text-[13px] font-semibold px-4 py-2 rounded-full transition-colors whitespace-nowrap ${
+                    className={`shrink-0 text-[13px] font-semibold px-4 py-2 rounded-full transition-colors whitespace-nowrap ${
                       i === renderedTab
                         ? "text-white bg-[#2563EB] shadow-sm"
                         : "text-[#6B7280] hover:text-[#111827]"
@@ -294,7 +305,7 @@ export default function LearningMethod() {
                       <Check className="h-3 w-3" strokeWidth={3} />
                     </span>
                     <span className="text-[15px] text-[#374151] leading-[1.6]">
-                      {line}
+                      {renderBreaks(line, `desc-${idx}`)}
                     </span>
                   </li>
                 ))}

@@ -7,10 +7,19 @@ import { useScrollReveal } from "@/app/components/shared/useScrollReveal";
 import Container from "@/app/components/Container";
 
 const positionClasses = [
-  "left-[50%] top-[14%]", // top vertex
-  "left-[18%] lg:left-[6%] top-[74%]", // bottom-left vertex
-  "left-[82%] lg:left-[94%] top-[74%]", // bottom-right vertex
+  "left-[50%] top-[26%] lg:top-[14%]", // top vertex
+  "left-[27%] lg:left-[6%] top-[74%]", // bottom-left vertex
+  "left-[73%] lg:left-[94%] top-[74%]", // bottom-right vertex
 ];
+
+// "\n" breaks on all breakpoints, "|" breaks on mobile only.
+function renderBreaks(text: string, keyPrefix: string) {
+  return text.split(/(\n|\|)/).map((part, i) => {
+    if (part === "\n") return <br key={`${keyPrefix}-${i}`} />;
+    if (part === "|") return <br key={`${keyPrefix}-${i}`} className="md:hidden" />;
+    return part;
+  });
+}
 
 export default function Ideology() {
   const { ref, isVisible } = useScrollReveal();
@@ -34,7 +43,7 @@ export default function Ideology() {
         }}
       >
         <Container>
-          <div className="pl-20 pr-20">
+          <div className="pl-6 pr-6 md:pl-20 md:pr-20">
             <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
             <h2
               className="font-extrabold font-suit text-[#0e1b52]"
@@ -43,7 +52,8 @@ export default function Ideology() {
               교육 이념
             </h2>
             <p className="text-[15px] text-[#5a6895] mt-3">
-              VODA는 세 가지 핵심 가치를 바탕으로 교육을 설계합니다.
+              VODA는 세 가지 핵심 가치를 바탕으로 <br className="md:hidden" />
+              교육을 설계합니다.
             </p>
           </div>
         </Container>
@@ -106,14 +116,14 @@ export default function Ideology() {
               <p className="text-[15px] sm:text-[17px] lg:text-[22px] font-bold text-[#111827] leading-[1.3]">
                 {item.ko}
               </p>
-              <p className="text-[12px] sm:text-[13px] lg:text-[15px] text-[#6B7280] mt-2 lg:mt-3 leading-[1.6] whitespace-pre-line">
+              <p className="text-[12px] sm:text-[13px] lg:text-[15px] text-[#6B7280] mt-2 lg:mt-3 leading-[1.6]">
                 {(() => {
                   const [before, after] = item.body.split(item.highlight);
                   return (
                     <>
-                      {before}
+                      {renderBreaks(before, "before")}
                       <span className="text-[#1D4ED8]">{item.highlight}</span>
-                      {after}
+                      {renderBreaks(after, "after")}
                     </>
                   );
                 })()}

@@ -21,7 +21,7 @@ export default function Partners() {
         }}
       >
       <Container>
-        <div className="pl-20 pr-20">
+        <div className="pl-6 pr-6 md:pl-20 md:pr-20">
           <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
           <h2
             className="font-extrabold font-suit text-[#0e1b52]"
@@ -30,7 +30,8 @@ export default function Partners() {
             함께 만드는 교육
           </h2>
           <p className="text-[15px] text-[#5a6895] mt-3">
-            VODA는 주요 기업과 협력하여 현장 중심의 교육 과정을 운영합니다.
+            VODA는 주요 기업과 협력하여 현장 중심의 <br className="md:hidden" />
+            교육 과정을 운영합니다.
           </p>
         </div>
       </Container>

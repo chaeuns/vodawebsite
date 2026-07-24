@@ -5,14 +5,14 @@ export const ideologies: Ideology[] = [
     icon: "💡",
     en: "Innovative Thinking",
     ko: "혁신적 사고",
-    body: "새로운 기술과 방법론으로\n문제를 바라보는 시각을 키웁니다.",
+    body: "새로운 기술과 방법론으로\n문제를 바라보는 시각을| 키웁니다.",
     highlight: "문제를 바라보는 시각",
   },
   {
     icon: "🤝",
     en: "Collaborative Learning",
     ko: "협력적 학습",
-    body: "팀 프로젝트와 협업을 통해\n실무 소통 능력을 향상시킵니다.",
+    body: "팀 프로젝트와 협업을 통해\n실무 소통 능력을| 향상시킵니다.",
     highlight: "실무 소통 능력",
   },
   {
@@ -51,7 +51,7 @@ export const courses: Course[] = [
     badge: "정부지원 KDT",
     category: "AI/AX 과정",
     description:
-      "AI 기반 UX/UI 설계부터 풀스택 개발, 클라우드 배포까지\n실무형 AI 개발자를 양성합니다.",
+      "AI 기반 UX/UI 설계부터 풀스택 개발,|클라우드 배포까지^ 실무형 AI 개발자를|양성합니다.",
     tags: [
       "AI 기반 UX/UI 설계",
       "풀스택 개발",
@@ -112,12 +112,12 @@ export const courses: Course[] = [
 export type Field = { number: string; title: string; body: string };
 
 export const fields: Field[] = [
-  { number: "01", title: "AI / AX", body: "AI 기반 서비스 설계 및 지능형 시스템 구축" },
-  { number: "02", title: "Physical AI", body: "센서·로봇과 결합한 물리 지능 시스템" },
-  { number: "03", title: "AI·보안", body: "AI 보안 기술로 데이터 보호 및 위협 대응" },
-  { number: "04", title: "풀스택", body: "프론트엔드·백엔드 통합 기술 역량 구축" },
-  { number: "05", title: "클라우드", body: "클라우드 네이티브 환경 운영 인프라 설계" },
-  { number: "06", title: "인프라", body: "서버·네트워크 등 물리 인프라 구축 및  운영" },
+  { number: "01", title: "AI / AX", body: "AI 기반 서비스 설계 및|지능형 시스템 구축" },
+  { number: "02", title: "Physical AI", body: "센서·로봇과 결합한|물리 지능 시스템" },
+  { number: "03", title: "AI·보안", body: "AI 보안 기술로 데이터 보호 및|위협 대응" },
+  { number: "04", title: "풀스택", body: "프론트엔드·백엔드 통합 기술|역량 구축" },
+  { number: "05", title: "클라우드", body: "클라우드 네이티브 환경 운영|인프라 설계" },
+  { number: "06", title: "인프라", body: "서버·네트워크 등 물리 인프라|구축 및  운영" },
 ];
 
 export type Partner = {

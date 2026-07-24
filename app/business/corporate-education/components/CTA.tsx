@@ -9,7 +9,8 @@ export default function CTA() {
           지금 기업 맞춤 교육을 시작해보세요
         </p>
         <p className="text-[#93C5FD] text-[14px] md:text-[15px] mt-3">
-          VODA의 전문 컨설턴트가 귀사에 최적화된 교육 솔루션을 제안드립니다.
+          VODA의 전문 컨설턴트가 귀사에 최적화된 교육 솔루션을 <br className="md:hidden" />
+          제안드립니다.
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-3 mt-7">
