@@ -53,7 +53,7 @@ export default function FieldTags() {
       }}
     >
       <Container>
-        <div className="pl-20 pr-20">
+        <div className="pl-6 pr-6 md:pl-20 md:pr-20">
           <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
           <h2
             className="font-extrabold font-suit text-[#0e1b52]"
@@ -68,7 +68,7 @@ export default function FieldTags() {
       </Container>
 
       <Container>
-        <div className="pl-20 pr-20">
+        <div className="pl-6 pr-6 md:pl-20 md:pr-20">
         <div className="fields-map">
           <svg className="fields-connector" viewBox="0 0 880 460" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
             <path
@@ -245,7 +245,7 @@ export default function FieldTags() {
 
         @media (max-width: 768px) {
           .fields-map { height: auto; }
-          .fields-hub { position: static; transform: none; margin: 0 auto 24px; }
+          .fields-hub { display: none; }
           .fields-node { position: static; width: 100%; margin-bottom: 14px; animation: none !important; }
           .fields-connector { display: none; }
         }
