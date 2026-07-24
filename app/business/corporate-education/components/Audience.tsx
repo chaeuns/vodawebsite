@@ -33,7 +33,7 @@ export default function Audience() {
   return (
     <section className="bg-white py-16 md:py-[100px] relative">
       <Container>
-        <div className="pl-20 pr-20">
+        <div className="pl-6 pr-6 md:pl-20 md:pr-20">
           <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
           <h2
             className="font-extrabold font-suit text-[#0e1b52]"
@@ -48,7 +48,7 @@ export default function Audience() {
       </Container>
 
       <Container>
-        <div className="pl-20 pr-20">
+        <div className="pl-6 pr-6 md:pl-20 md:pr-20">
         <motion.div
           className="grid grid-cols-1 sm:grid-cols-3 gap-5 mt-10"
           variants={containerVariants}

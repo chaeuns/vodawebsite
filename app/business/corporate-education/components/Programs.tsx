@@ -27,7 +27,7 @@ export default function Programs() {
         }}
       >
       <Container>
-        <div className="pl-20 pr-20">
+        <div className="pl-6 pr-6 md:pl-20 md:pr-20">
           <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
           <h2
             className="font-extrabold font-suit text-[#0e1b52]"
@@ -36,13 +36,14 @@ export default function Programs() {
             교육 프로그램 소개
           </h2>
           <p className="text-[15px] text-[#5a6895] mt-3">
-            기업 상황과 목적에 맞는 4가지 핵심 프로그램을 운영합니다.
+            기업 상황과 목적에 맞는 4가지 핵심 프로그램을
+            <br className="md:hidden" /> 운영합니다.
           </p>
         </div>
       </Container>
 
       <Container>
-        <div className="pl-20 pr-20">
+        <div className="pl-6 pr-6 md:pl-20 md:pr-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-10">
           {programs.map((program, i) => {
             const Icon = ICONS[i];

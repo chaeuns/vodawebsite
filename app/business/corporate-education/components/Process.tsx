@@ -40,7 +40,7 @@ export default function Process() {
       }}
     >
       <Container>
-        <div className="pl-20 pr-20">
+        <div className="pl-6 pr-6 md:pl-20 md:pr-20">
           <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
           <h2
             className="font-extrabold font-suit text-[#0e1b52]"
@@ -55,7 +55,7 @@ export default function Process() {
       </Container>
 
       <Container>
-        <div className="pl-20 pr-20">
+        <div className="pl-6 pr-6 md:pl-20 md:pr-20">
         {/* Desktop: steps connected with arrows */}
         <div className="hidden md:flex items-stretch gap-4 mt-10">
           {processSteps.map((step, i) => {
@@ -100,7 +100,7 @@ export default function Process() {
             return (
               <motion.div
                 key={step.step}
-                className="group border border-[#E5E7EB] rounded-xl bg-white pt-24 pb-10 px-10 min-h-[420px] flex flex-col items-center justify-start text-center shadow-none hover:shadow-xl hover:shadow-blue-500/5 hover:border-[#2563EB]/30 transition-[box-shadow,border-color] duration-300 ease-out"
+                className="group border border-[#E5E7EB] rounded-xl bg-white pt-8 pb-8 px-10 min-h-[220px] flex flex-col items-center justify-start text-center shadow-none hover:shadow-xl hover:shadow-blue-500/5 hover:border-[#2563EB]/30 transition-[box-shadow,border-color] duration-300 ease-out"
                 variants={cardVariants(i)}
                 initial="hidden"
                 whileInView="visible"

@@ -53,7 +53,7 @@ export default function FieldTags() {
       }}
     >
       <Container>
-        <div className="pl-20 pr-20">
+        <div className="pl-6 pr-6 md:pl-20 md:pr-20">
           <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
           <h2
             className="font-extrabold font-suit text-[#0e1b52]"
@@ -68,7 +68,7 @@ export default function FieldTags() {
       </Container>
 
       <Container>
-        <div className="pl-20 pr-20">
+        <div className="pl-6 pr-6 md:pl-20 md:pr-20">
         <div className="fields-map">
           <svg className="fields-connector" viewBox="0 0 880 460" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
             <path
@@ -226,15 +226,13 @@ export default function FieldTags() {
         }
 
         .fields-n1 { left: 1%;  top: 5%;    animation: fields-float-a 6s ease-in-out infinite; }
-        .fields-n2 { right: 1%; top: 5%;    animation: fields-float-b 6.6s ease-in-out infinite 0.4s; }
+        .fields-n2 { right: 1%; top: 5%;    animation: fields-float-a 6s ease-in-out infinite; }
         .fields-n3 { left: 1%;  bottom: 5%; animation: fields-float-c 6.2s ease-in-out infinite 0.8s; }
-        .fields-n4 { right: 1%; bottom: 5%; animation: fields-float-d 6.8s ease-in-out infinite 1.2s; }
+        .fields-n4 { right: 1%; bottom: 5%; animation: fields-float-c 6.2s ease-in-out infinite 0.8s; }
 
         @keyframes fields-float-hub { 0%, 100% { transform: translate(-50%, -50%) translateY(0); } 50% { transform: translate(-50%, -50%) translateY(-7px); } }
         @keyframes fields-float-a   { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
-        @keyframes fields-float-b   { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
         @keyframes fields-float-c   { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-        @keyframes fields-float-d   { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 
         .fields-flow-dot {
           filter: drop-shadow(0 0 3px rgba(59, 130, 246, 0.7));
@@ -247,7 +245,7 @@ export default function FieldTags() {
 
         @media (max-width: 768px) {
           .fields-map { height: auto; }
-          .fields-hub { position: static; transform: none; margin: 0 auto 24px; }
+          .fields-hub { display: none; }
           .fields-node { position: static; width: 100%; margin-bottom: 14px; animation: none !important; }
           .fields-connector { display: none; }
         }

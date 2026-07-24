@@ -51,7 +51,7 @@ export default function WhyVoda() {
       }}
     >
       <Container>
-        <div className="pl-20 pr-20">
+        <div className="pl-6 pr-6 md:pl-20 md:pr-20">
           <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
           <h2
             className="font-extrabold font-suit text-[#0e1b52]"
@@ -60,13 +60,14 @@ export default function WhyVoda() {
             왜 VODA 기업교육인가
           </h2>
           <p className="text-[15px] text-[#5a6895] mt-3">
-            기업 교육에 필요한 네 가지 핵심 경쟁력을 갖췄습니다.
+            기업 교육에 필요한 네 가지 핵심 경쟁력을
+            <br className="md:hidden" /> 갖췄습니다.
           </p>
         </div>
       </Container>
 
       <Container>
-        <div className="pl-20 pr-20 mt-6">
+        <div className="pl-6 pr-6 md:pl-20 md:pr-20 mt-6">
           {strengths.map((strength, i) => {
             const Icon = ICONS[i];
             const isReversed = i % 2 === 1;
@@ -110,7 +111,35 @@ export default function WhyVoda() {
                     {strength.title}
                   </h3>
                   <p className="text-[14px] md:text-[15px] text-[#6B7280] mt-2 leading-[1.7] whitespace-pre-line">
-                    {strength.body}
+                    {i === 0 ? (
+                      <>
+                        기업의 업종, 직무, 수준에 따라 커리큘럼을
+                        <br className="md:hidden" /> 처음부터 맞춤 설계합니다.
+                        <br /> 표준화된 교육이 아닌 귀사만을 위한
+                        <br className="md:hidden" /> 교육을 세팅합니다.
+                      </>
+                    ) : i === 1 ? (
+                      <>
+                        IT 현업 경력 10년 이상의 전문 강사진이
+                        <br className="md:hidden" /> 직접 교육합니다.
+                        <br className="hidden md:inline" /> 이론이 아닌 실무 중심의
+                        <br className="md:hidden" /> 교육으로 즉시 현장 적용이 가능합니다.
+                      </>
+                    ) : i === 2 ? (
+                      <>
+                        교육 전·후 역량 측정 및 수료 후 데이터 기반
+                        <br className="md:hidden" /> 성과 리포트를 제공합니다.
+                        <br /> 교육 ROI를 수치로 확인할 수 있습니다.
+                      </>
+                    ) : i === 3 ? (
+                      <>
+                        집합교육, 원격교육, 메타버스 교육 등
+                        <br className="md:hidden" /> 다양한 방식으로 운영합니다.
+                        <br /> 기업 상황에 맞는 교육 방식을 선택할 수 있습니다.
+                      </>
+                    ) : (
+                      strength.body
+                    )}
                   </p>
                 </motion.div>
 

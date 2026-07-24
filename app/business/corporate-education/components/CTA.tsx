@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 
 export default function CTA() {
   return (
@@ -11,12 +12,15 @@ export default function CTA() {
           VODA의 전문 컨설턴트가 귀사에 최적화된 교육 솔루션을 제안드립니다.
         </p>
 
-        <Link
-          href="/contact"
-          className="inline-block mt-7 bg-[#2563EB] text-white text-[14px] font-semibold px-6 py-3 rounded-lg hover:bg-[#1d4ed8] transition-colors"
-        >
-          교육 상담 신청하기 →
-        </Link>
+        <div className="flex flex-wrap items-center justify-center gap-3 mt-7">
+          <Link
+            href="/contact"
+            className="inline-flex items-center justify-center gap-1 bg-[#2563EB] text-white text-[14px] font-semibold px-8 py-3 rounded-full hover:bg-[#1d4ed8] transition-colors"
+          >
+            교육 상담 신청하기
+            <ChevronRight size={16} />
+          </Link>
+        </div>
       </div>
     </section>
   );
