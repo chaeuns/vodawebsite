@@ -26,6 +26,16 @@ function useRepeatingReveal(threshold = 0.15) {
   return { ref, isVisible };
 }
 
+// "\n" breaks on all breakpoints, "|" breaks on mobile only, "^" breaks on desktop only.
+function renderBreaks(text: string, keyPrefix: string) {
+  return text.split(/(\n|\||\^)/).map((part, i) => {
+    if (part === "\n") return <br key={`${keyPrefix}-${i}`} />;
+    if (part === "|") return <br key={`${keyPrefix}-${i}`} className="md:hidden" />;
+    if (part === "^") return <br key={`${keyPrefix}-${i}`} className="hidden md:block" />;
+    return part;
+  });
+}
+
 function CourseText({ course }: { course: Course }) {
   const colors = categoryColors[course.category];
 
@@ -43,10 +53,10 @@ function CourseText({ course }: { course: Course }) {
       </span>
       <h3 className="text-[30px] font-bold text-[#111827] leading-[1.3]">{course.title}</h3>
       <p
-        className="text-[14.5px] text-[#6B7280] mt-3 leading-[1.6] break-keep whitespace-pre-line"
+        className="text-[14.5px] text-[#6B7280] mt-3 leading-[1.6] break-keep"
         style={{ maxWidth: "340px" }}
       >
-        {course.description}
+        {renderBreaks(course.description, `desc-${course.number}`)}
       </p>
     </div>
   );
@@ -91,7 +101,7 @@ function CourseRow({ course }: { course: Course }) {
       ref={ref}
       className="grid grid-cols-1 min-[821px]:grid-cols-[0.85fr_1.15fr] gap-6 items-start"
     >
-      <div className="min-[821px]:order-1">
+      <div className="min-[821px]:order-1 min-[821px]:pl-12">
         <CourseText course={course} />
       </div>
       <div
@@ -121,7 +131,7 @@ export default function CourseList() {
         }}
       >
         <Container>
-          <div className="pl-20 pr-20">
+          <div className="pl-6 pr-6 md:pl-20 md:pr-20">
             <span className="block w-9 h-1 rounded-full bg-[#3566e8] mb-3" />
             <h2
               className="font-extrabold font-suit text-[#0e1b52]"
@@ -136,8 +146,8 @@ export default function CourseList() {
         </Container>
 
         <Container>
-          <div className="pl-20 pr-20">
-            <div className="flex flex-col mt-16" style={{ gap: "110px" }}>
+          <div className="pl-6 pr-6 md:pl-20 md:pr-20">
+            <div className="flex flex-col mt-16 gap-[64px] md:gap-[110px]">
               {courses.map((course) => (
                 <CourseRow key={course.title} course={course} />
               ))}
