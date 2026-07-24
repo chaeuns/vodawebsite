@@ -130,51 +130,58 @@ export default function Process() {
           <p className="text-[15px] text-[#5a6895] mt-3">
             최종 합격까지의 과정을 명확하게 안내하며,
             <br className="hidden md:inline" />
-            투명한 절차를 통해 가장 적합한 인재와 함께 성장해 나가고자 합니다.
+            <br className="md:hidden" />
+            투명한 절차를 통해 가장 적합한 인재와{" "}
+            <br className="md:hidden" />
+            함께 성장해 나가고자 합니다.
           </p>
         </div>
 
         <div
           ref={stepsRef}
-          className="pl-6 pr-6 md:pl-20 md:pr-20 mt-16 flex flex-col md:flex-row items-stretch md:items-center gap-10 md:gap-4"
+          className="pl-6 pr-6 md:pl-20 md:pr-20 mt-16 flex flex-col md:flex-row items-stretch md:items-center gap-0 md:gap-4"
         >
           {steps.map((s, i) => (
             <div key={s.number} className="flex-1 flex flex-col md:flex-row items-center w-full">
-              <div className="flex-1 flex flex-col items-center text-center w-full">
-                <span
-                  className="font-extrabold leading-none text-[64px] md:text-[70px]"
-                  style={{
-                    color: active[i] ? s.color : NUMBER_GRAY,
-                    opacity: active[i] ? 1 : 0,
-                    transform: active[i]
-                      ? "translateY(0) scale(1)"
-                      : "translateY(24px) scale(0.96)",
-                    transitionProperty: "opacity, transform, color",
-                    transitionDuration: reducedMotion
-                      ? "0ms, 0ms, 0ms"
-                      : "600ms, 600ms, 400ms",
-                    transitionDelay: reducedMotion ? "0ms, 0ms, 0ms" : "0ms, 0ms, 450ms",
-                    transitionTimingFunction: "ease-out",
-                  }}
-                >
-                  {s.number}
-                </span>
-
-                <div className="group mt-5 flex items-center gap-2">
-                  <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-[#EAF1FF] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#2563EB]">
-                    <s.Icon className="h-4 w-4 text-[#2563EB] transition-colors duration-300 group-hover:text-white" />
+              <div className="flex-1 flex flex-col items-start md:items-center text-left md:text-center w-full">
+                <div className="flex flex-row items-start gap-3 md:contents">
+                  <span
+                    className="font-extrabold leading-none text-[32px] md:text-[70px] flex-shrink-0"
+                    style={{
+                      color: active[i] ? s.color : NUMBER_GRAY,
+                      opacity: active[i] ? 1 : 0,
+                      transform: active[i]
+                        ? "translateY(0) scale(1)"
+                        : "translateY(24px) scale(0.96)",
+                      transitionProperty: "opacity, transform, color",
+                      transitionDuration: reducedMotion
+                        ? "0ms, 0ms, 0ms"
+                        : "600ms, 600ms, 400ms",
+                      transitionDelay: reducedMotion ? "0ms, 0ms, 0ms" : "0ms, 0ms, 450ms",
+                      transitionTimingFunction: "ease-out",
+                    }}
+                  >
+                    {s.number}
                   </span>
-                  <span className="text-[13px] text-[#6B7280]">{s.duration}</span>
-                </div>
 
-                <p className="text-[22px] font-bold text-[#111827] mt-4">{s.title}</p>
-                <p className="text-[15px] text-[#6B7280] mt-2.5 leading-[1.7] whitespace-pre-line">
-                  {s.body}
-                </p>
+                  <div className="flex flex-col items-start md:contents">
+                    <div className="group mt-0 md:mt-5 flex items-center gap-2">
+                      <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-[#EAF1FF] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#2563EB]">
+                        <s.Icon className="h-4 w-4 text-[#2563EB] transition-colors duration-300 group-hover:text-white" />
+                      </span>
+                      <span className="text-[13px] text-[#6B7280]">{s.duration}</span>
+                    </div>
+
+                    <p className="text-[22px] font-bold text-[#111827] mt-4">{s.title}</p>
+                    <p className="text-[15px] text-[#6B7280] mt-2.5 leading-[1.7] whitespace-pre-line">
+                      {s.body}
+                    </p>
+                  </div>
+                </div>
               </div>
 
               {i < steps.length - 1 && (
-                <ChevronRight className="hidden md:block w-[35px] h-[35px] text-[#D1D5DB] flex-shrink-0 mx-2" />
+                <ChevronRight className="block w-[35px] h-[35px] text-[#D1D5DB] flex-shrink-0 rotate-90 md:rotate-0 my-6 mx-0 md:my-0 md:mx-2" />
               )}
             </div>
           ))}

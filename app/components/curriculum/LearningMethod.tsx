@@ -278,20 +278,27 @@ export default function LearningMethod() {
             </div>
 
             <div className="w-full md:w-fit md:ml-auto flex flex-col justify-center rounded-2xl border border-white/50 bg-white/25 backdrop-blur-xl shadow-[0_8px_32px_rgba(31,41,55,0.12)] p-8">
-              <div className="flex md:inline-flex items-center gap-1 bg-[#F3F4F6] rounded-full p-1 max-w-full md:max-w-none overflow-x-auto md:overflow-visible scrollbar-thin">
-                {tabs.map((tab, i) => (
-                  <button
-                    key={tab.label}
-                    onClick={() => handleTabClick(i)}
-                    className={`shrink-0 text-[13px] font-semibold px-4 py-2 rounded-full transition-colors whitespace-nowrap ${
-                      i === renderedTab
-                        ? "text-white bg-[#2563EB] shadow-sm"
-                        : "text-[#6B7280] hover:text-[#111827]"
-                    }`}
-                  >
-                    {tab.label}
-                  </button>
-                ))}
+              <div className="relative">
+                <div className="flex md:inline-flex items-center gap-1 bg-[#F3F4F6] rounded-full p-1 max-w-full md:max-w-none overflow-x-auto md:overflow-visible scrollbar-thin">
+                  {tabs.map((tab, i) => (
+                    <button
+                      key={tab.label}
+                      onClick={() => handleTabClick(i)}
+                      className={`shrink-0 text-[13px] font-semibold px-4 py-2 rounded-full transition-colors whitespace-nowrap ${
+                        i === renderedTab
+                          ? "text-white bg-[#2563EB] shadow-sm"
+                          : "text-[#6B7280] hover:text-[#111827]"
+                      }`}
+                    >
+                      {tab.label}
+                    </button>
+                  ))}
+                </div>
+                <div
+                  aria-hidden="true"
+                  className="md:hidden pointer-events-none absolute top-0 right-0 h-full w-8 rounded-full"
+                  style={{ background: "linear-gradient(to left, #F3F4F6, rgba(243,244,246,0))" }}
+                />
               </div>
 
               <p className="text-[24px] font-bold mt-6 leading-[1.3] text-[#2563EB]">
