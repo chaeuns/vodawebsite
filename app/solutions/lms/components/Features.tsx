@@ -15,8 +15,10 @@ export default function Features() {
     <section
       className="py-[80px] relative overflow-hidden"
       style={{
-        background:
-          "linear-gradient(135deg, #F3F6FF 0%, #E7EEFF 45%, #D6E3FF 100%)",
+        backgroundImage: "url('/images/v_lms/background.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
       }}
     >
       {/* 배경 데코 블롭 (메인페이지 솔루션 섹션과 동일) */}
@@ -36,6 +38,9 @@ export default function Features() {
           filter: "blur(60px)",
         }}
       />
+
+      {/* 배경 이미지를 밝게(연하게) 씻어내는 화이트 오버레이 */}
+      <div className="absolute inset-0 bg-white/55 pointer-events-none" />
 
       <div
         ref={ref}

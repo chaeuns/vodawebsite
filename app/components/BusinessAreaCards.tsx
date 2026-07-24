@@ -166,13 +166,24 @@ export default function BusinessAreaCards() {
         }
         .biz-card:hover .biz-card__body,
         .biz-card:focus-within .biz-card__body {
-          transform: translateY(-35px);
+          transform: translateY(-18px);
         }
         .biz-card__name {
           margin: 0;
           font-size: clamp(20px, 13cqi, 30px); font-weight: 800;
           letter-spacing: -0.01em;
           color: #449CFF;
+        }
+        /* 카드 전체를 탭/클릭 가능하게 만드는 스트레치드 링크.
+           개별 버튼(.biz-btn)은 z-index로 위에 떠서 각자의 링크를 유지함 */
+        .biz-card__name-link {
+          color: inherit;
+          text-decoration: none;
+        }
+        .biz-card__name-link::after {
+          content: "";
+          position: absolute;
+          inset: 0;
         }
         .biz-card__eng {
           margin: 0 0 4px;
@@ -208,9 +219,11 @@ export default function BusinessAreaCards() {
         /* 버튼 */
         .biz-card__actions {
           display: flex; flex-direction: column; align-items: stretch; gap: clamp(5px, 3cqi, 8px);
-          margin-top: clamp(20px, 12cqi, 32px);
+          margin-top: clamp(29px, calc(14cqi + 5px), 41px);
         }
         .biz-btn {
+          position: relative;
+          z-index: 2;
           display: inline-flex; align-items: center; justify-content: space-between;
           gap: clamp(6px, 4cqi, 10px);
           width: 100%;
@@ -235,17 +248,58 @@ export default function BusinessAreaCards() {
           .biz-card__body { transform: translateY(-25px); }
           .biz-card:hover .biz-card__body,
           .biz-card:focus-within .biz-card__body {
-            transform: translateY(-10px);
+            transform: translateY(-2px);
           }
         }
         @media (max-width: 640px) {
-          .voda-biz__grid { grid-template-columns: 1fr; }
-          .biz-card { aspect-ratio: auto; min-height: 320px; }
-          .biz-card__reveal { max-height: none; opacity: 1; margin-top: 12px; }
+          /* 모바일은 이미지가 카드 전체를 채우고 제목만 얹는 형태로 단순화.
+             설명/버튼은 숨기고 카드 전체(제목 링크)를 눌러 이동 → 스크롤이 끝없이 길어지지 않음 */
+          .voda-biz { padding: 56px 16px; }
+          .voda-biz__grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+          .biz-card { aspect-ratio: 4 / 5; }
+
           .biz-card__body,
           .biz-card:hover .biz-card__body,
           .biz-card:focus-within .biz-card__body {
             transform: translateY(0);
+            padding: 12px;
+          }
+          .biz-card__eng { display: none; }
+          .biz-card__name { font-size: 17px; }
+          .biz-card__reveal,
+          .biz-card:hover .biz-card__reveal,
+          .biz-card:focus-within .biz-card__reveal {
+            display: none;
+          }
+          .biz-card__desc { display: none; }
+
+          /* 바로가기가 2개인 교육 사업 카드는 예외적으로 가장 크게(전체 폭) 배치하고,
+             연한 스타일의 링크 2개를 함께 노출. 나머지 4개는 그 아래 2x2로 배치 */
+          .biz-card--hero {
+            grid-column: 1 / -1;
+            aspect-ratio: 16 / 8;
+          }
+          .biz-card--hero .biz-card__name { font-size: 21px; }
+          .biz-card--hero .biz-card__reveal,
+          .biz-card--hero.biz-card:hover .biz-card__reveal,
+          .biz-card--hero.biz-card:focus-within .biz-card__reveal {
+            display: block;
+            margin-top: 8px;
+          }
+          .biz-card--hero .biz-card__actions {
+            flex-direction: row;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 0;
+          }
+          .biz-card--hero .biz-btn {
+            width: auto;
+            flex: 0 0 auto;
+            background: rgba(255, 255, 255, .6);
+            color: var(--text-primary);
+            font-weight: 600;
+            padding: 6px 14px;
+            font-size: 12px;
           }
         }
 
@@ -270,7 +324,10 @@ export default function BusinessAreaCards() {
 
         <div className="voda-biz__grid pl-20 pr-20">
           {AREAS.map((area) => (
-            <article className="biz-card" tabIndex={0} key={area.id}>
+            <article
+              className={`biz-card${area.buttons.length > 1 ? " biz-card--hero" : ""}`}
+              key={area.id}
+            >
               <div className="biz-card__art">
                 <img src={area.image} alt="" aria-hidden="true" />
                 <div className="light" />
@@ -289,7 +346,11 @@ function CardBody({ area }: { area: (typeof AREAS)[number] }) {
   return (
     <div className="biz-card__body">
       <p className="biz-card__eng">{area.eng}</p>
-      <h3 className="biz-card__name">{area.title}</h3>
+      <h3 className="biz-card__name">
+        <a className="biz-card__name-link" href={area.buttons[0].href}>
+          {area.title}
+        </a>
+      </h3>
       <div className="biz-card__reveal">
         <p className="biz-card__desc">{area.desc}</p>
         <div className="biz-card__actions">

@@ -57,10 +57,6 @@ export default function Nav() {
     closeTimer.current = setTimeout(() => setOpenMenu(null), 120);
   };
 
-  const activeItem = NAV_ITEMS.find(
-    (item) => item.label === openMenu && item.dropdown
-  );
-
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/96 backdrop-blur-sm border-b border-[rgba(14,27,82,0.08)]">
         <Container className="h-[68px] relative flex items-center justify-between">
@@ -73,11 +69,11 @@ export default function Nav() {
         </Link>
 
       {/* Center nav links — absolutely centered on the nav's true center so logo/button width differences don't skew it */}
-<div className="hidden md:flex items-center gap-11 absolute left-1/2 -translate-x-1/2">
+<div className="hidden md:flex items-center gap-11 absolute left-1/2 -translate-x-1/2 top-0 h-full">
   {NAV_ITEMS.map((item) => (
     <div
       key={item.label}
-      className="relative"
+      className="relative h-full flex items-center"
       onMouseEnter={() => handleEnter(item.label)}
       onMouseLeave={handleLeave}
     >
@@ -99,43 +95,42 @@ export default function Nav() {
           {item.label}
         </Link>
       )}
+
+      {item.dropdown && (
+        <div
+          className={`absolute top-full left-1/2 -translate-x-1/2 pt-4 transition-all duration-200 ease-out ${
+            openMenu === item.label
+              ? "opacity-100 translate-y-0 pointer-events-auto"
+              : "opacity-0 -translate-y-1 pointer-events-none"
+          }`}
+          onMouseEnter={() => handleEnter(item.label)}
+          onMouseLeave={handleLeave}
+        >
+          <div
+            className={`bg-white rounded-[28px] shadow-[0_20px_45px_-12px_rgba(14,27,82,0.22)] py-7 ${
+              item.columns === 3 ? "px-7 w-[440px]" : "px-4 w-[220px]"
+            }`}
+          >
+            <div
+              className={`grid gap-x-8 gap-y-5 text-center ${
+                item.columns === 3 ? "grid-cols-3" : "grid-cols-1"
+              }`}
+            >
+              {item.dropdown.map((sub) => (
+                <Link
+                  key={sub.label}
+                  href={sub.href}
+                  className="text-[15px] font-semibold text-[#0e1b52] hover:text-[#3049c4] transition-colors whitespace-nowrap"
+                >
+                  {sub.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   ))}
-
-          {/* Dropdown card — centered on the nav's own center, not on any single item */}
-          <div
-            className={`absolute top-full left-1/2 -translate-x-1/2 pt-4 transition-all duration-200 ease-out ${
-              activeItem
-                ? "opacity-100 translate-y-0 pointer-events-auto"
-                : "opacity-0 -translate-y-1 pointer-events-none"
-            }`}
-            onMouseEnter={() => activeItem && handleEnter(activeItem.label)}
-            onMouseLeave={handleLeave}
-          >
-            {activeItem?.dropdown && (
-              <div
-                className={`bg-white rounded-[28px] shadow-[0_20px_45px_-12px_rgba(14,27,82,0.22)] p-7 ${
-                  activeItem.columns === 3 ? "w-[440px]" : "w-[300px]"
-                }`}
-              >
-                <div
-                  className={`grid gap-x-8 gap-y-5 ${
-                    activeItem.columns === 3 ? "grid-cols-3" : "grid-cols-1"
-                  }`}
-                >
-                  {activeItem.dropdown.map((sub) => (
-                    <Link
-                      key={sub.label}
-                      href={sub.href}
-                      className="text-[15px] font-semibold text-[#0e1b52] hover:text-[#3049c4] transition-colors whitespace-nowrap"
-                    >
-                      {sub.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
         </div>
 
         <div className="hidden md:flex items-center gap-4">
@@ -159,11 +154,16 @@ export default function Nav() {
       {mobileOpen && (
         <div className="md:hidden bg-white border-t border-[rgba(14,27,82,0.08)] px-8 py-6 space-y-1 max-h-[calc(100vh-68px)] overflow-y-auto">
           {NAV_ITEMS.map((item) => (
-            <MobileNavGroup key={item.label} item={item} />
+            <MobileNavGroup
+              key={item.label}
+              item={item}
+              onNavigate={() => setMobileOpen(false)}
+            />
           ))}
           <div className="pt-3 border-t border-[rgba(14,27,82,0.08)] flex items-center gap-4">
             <Link
               href="/contact"
+              onClick={() => setMobileOpen(false)}
               className="text-sm font-semibold px-4 py-2 border border-[rgba(53,102,232,0.35)] rounded text-[#3566e8]"
             >
               사업문의
@@ -175,13 +175,20 @@ export default function Nav() {
   );
 }
 
-function MobileNavGroup({ item }: { item: NavItem }) {
+function MobileNavGroup({
+  item,
+  onNavigate,
+}: {
+  item: NavItem;
+  onNavigate: () => void;
+}) {
   const [open, setOpen] = useState(false);
 
   if (!item.dropdown) {
     return (
       <Link
         href={item.href}
+        onClick={onNavigate}
         className="block text-sm font-medium text-[#5a6895] hover:text-[#0e1b52] py-2"
       >
         {item.label}
@@ -210,6 +217,7 @@ function MobileNavGroup({ item }: { item: NavItem }) {
             <Link
               key={sub.label}
               href={sub.href}
+              onClick={onNavigate}
               className="block text-sm text-[#0e1b52]/80 hover:text-[#0e1b52] py-1.5"
             >
               {sub.label}

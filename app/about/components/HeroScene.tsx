@@ -20,7 +20,7 @@ export default function HeroScene() {
           WE T
           <span className="obj-slot glass-slot">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/u-text.gif" alt="U" className="glass-gif glass-u" />
+            <img src="/u-text-motion.gif" alt="U" className="glass-gif glass-u" />
           </span>
           RN DATA
         </span>
@@ -65,7 +65,7 @@ export default function HeroScene() {
           margin: 0 0.02em;
         }
         .voda-hero-scene .obj-slot.wide { width: 1.4em; }
-        .voda-hero-scene .obj-slot.glass-slot { margin: 0; }
+        .voda-hero-scene .obj-slot.glass-slot { margin: 0 -0.05em; }
         .voda-hero-scene .obj-slot .glass-gif,
         .voda-hero-scene .obj-slot .eyes-img {
           position: absolute;
@@ -76,12 +76,12 @@ export default function HeroScene() {
           z-index: 1;
         }
         .voda-hero-scene .obj-slot .glass-gif {
-          width: calc(100% + 5px);
-          height: calc(100% + 5px);
+          width: 80%;
+          height: 80%;
           margin: auto;
         }
         .glass-u {
-          transform: scale(1.15); /* 원하는 배율로 조절 */
+          transform: scale(1); /* 원하는 배율로 조절 */
         }
         .voda-hero-scene .obj-slot .eyes-img {
           width: calc(100% - 10px);
@@ -99,6 +99,7 @@ export default function HeroScene() {
         }
         @media (max-width: 680px) {
           .voda-hero-scene { height: auto; min-height: 100vh; overflow: auto; padding: 18vh 6vw; }
+          .voda-hero-scene h1 { font-size: clamp(50px, 9.2vw, 140px); }
           .voda-hero-scene h1 .line { white-space: normal; }
         }
       `}</style>

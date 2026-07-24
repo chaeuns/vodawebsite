@@ -20,7 +20,7 @@ export default function AboutPage() {
       <section className="pt-36 pb-24 bg-white px-6 sm:px-10 lg:px-24">
         <div className="max-w-4xl mx-auto flex flex-col items-center gap-8 text-center">
           <h2
-            className="text-3xl md:text-5xl font-black leading-tight md:whitespace-nowrap"
+            className="hidden md:block md:text-5xl font-black leading-tight md:whitespace-nowrap"
             style={{
               color: NAVY,
               letterSpacing: "-0.025em",
@@ -28,12 +28,23 @@ export default function AboutPage() {
           >
             "기술과 사람이 함께 성장하는 곳, <span style={{ color: BLUE }}>VODA</span>"
           </h2>
+          <h2
+            className="md:hidden font-black leading-tight"
+            style={{
+              color: NAVY,
+              letterSpacing: "-0.025em",
+              fontSize: "clamp(20px, 6.2vw, 30px)",
+            }}
+          >
+            <span className="block whitespace-nowrap">"기술과 사람이 함께 성장하는 곳,</span>
+            <span className="block whitespace-nowrap"><span style={{ color: BLUE }}>VODA</span>"</span>
+          </h2>
 
           <div className="space-y-1 text-gray-600 leading-relaxed text-base md:text-lg">
             <p className="md:whitespace-nowrap">
               우리는 데이터와 AI로 기업의 새로운 가능성을 만들어왔습니다.
             </p>
-            <p className="md:whitespace-nowrap">
+            <p className="hidden md:block md:whitespace-nowrap">
               이제 개발(Works)과 교육(Campus)을 하나로 잇는 VODA로, 기술과 사람을 함께 성장시키는 파트너가 되겠습니다.
             </p>
           </div>
